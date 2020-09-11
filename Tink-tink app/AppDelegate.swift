@@ -10,28 +10,44 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+  
+  
+  var window: UIWindow?
+  // 1) Запускаем приложение по тапу на иконку
+  //  State: Приложение запускается, не активно
+  // 2) Ждем пока приложение загрузится смотрим на LaunchScreen
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    NSLog("Application moved from <Not Running> to <Inactive>: \(#function)")
+    //print("Application moved from <Not Running> to <Inactive>: \(#function)")
     return true
   }
-
-  // MARK: UISceneSession Lifecycle
-
-  func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-    // Called when a new scene session is being created.
-    // Use this method to select a configuration to create the new scene with.
-    return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+  // State: Приложение стало активным
+  // 3) Можем взаимодействовать с ним
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    NSLog("Application moved from <Inactive> to <Active>: \(#function)")
   }
-
-  func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-    // Called when the user discards a scene session.
-    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+  // 4) Свернули приложение
+  // State: Приложение станет не активным
+  func applicationWillResignActive(_ application: UIApplication) {
+    NSLog("Application moved from <Active> to <Inactive>: \(#function)")
+    
   }
-
-
+  // 5) Приложение свернуто, открыли другое приложение
+  //State: Приложение ушло в Background
+  func applicationDidEnterBackground(_ application: UIApplication) {
+    NSLog("Application moved from <Inactive> to <Background>, <Suspended>: \(#function)")
+    
+  }
+  // 6) Снова открываем приложение из background
+  // State: Приложение переходит в Foreground и становится активным applicationDidBecomeActive
+  func applicationWillEnterForeground(_ application: UIApplication) {
+    NSLog("Application moved from <Background> to <Inactive>: \(#function)")
+  }
+  
+  // 7) Закрываем приложение, смахиваем его
+  // State: Приложение закрвается и становится не запущенным
+  func applicationWillTerminate(_ application: UIApplication) {
+    NSLog("Application moved from <Background> to <Suspended> to <Not Running>: \(#function)")
+  }
 }
 
