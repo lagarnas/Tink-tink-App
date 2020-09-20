@@ -8,18 +8,28 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController {
   
   @IBOutlet weak var avatarImageView: AvatarImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var bioLabel: UILabel!
   @IBOutlet weak var avatarNameLabel: UILabel!
   @IBOutlet weak var avatarSecondNameLabel: UILabel!
+  @IBOutlet weak var saveButton: UIButton!
+  
   
   var imageIsChanged = false
   let defaults = UserDefaults.standard
   
   //MARK: - Lifecycle of VC
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    //Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
+    //Приложение упадет,так как на момент вызова init?(coder: NSCoder) кнопка еще не существует, она nil
+    //print(saveButton.frame)
+  }
+  
   // Загрузка вью
   override func loadView() {
     super.loadView()
@@ -30,34 +40,42 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     NSLog(#function)
+    //frame is CGRect(56.0, 597.0, 263.0, 40.0)
     configure()
-    
+    NSLog("\(saveButton.frame)")
+
   }
   // Вью начинает появляться
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    if avatarImageView != nil {
-      avatarNameLabel.isHidden = true
-      avatarSecondNameLabel.isHidden = true
-    }
+    if avatarImageView.image != nil { hideInitials() }
     NSLog(#function)
   }
+  
   // Вот вот у вью изменятся фреймы будь осторожен
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-
     NSLog(#function)
   }
+  
   // Ну вот фреймы изменились, надеюсь ты успел?
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+    //frame changed CGRect(75.5, 792.0, 263.0, 40.0)
+    NSLog("\(saveButton.frame)")
     NSLog(#function)
   }
+  
   // Вью появилась
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     NSLog(#function)
+    //frame отличается потому что в методе viewWillLayoutSubviews() фрейм меняется, если экран повертнут на landscape, у кнопки меняется координаты x,y (76 line)
+    //frame changed CGRect(75.5, 792.0, 263.0, 40.0)
+    NSLog("\(saveButton.frame)")
   }
+
+  
   // Вью вот вот исчезнет
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -72,6 +90,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
   //MARK: -Functions
   
   private func configure() {
+    saveButton.clipsToBounds = true
+    saveButton.layer.cornerRadius = 10
     nameLabel.text = "Anastasia Leonteva"
     bioLabel.text = "iOS developer, QA engineer, Russia, Samara"
     avatarImageView.image = retrieveImage(forKey: "avatarImage")
@@ -85,7 +105,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
   private func setupInitialsOfName() {
     let nameAv = String(nameLabel.text?.first ?? " ")
     let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
-    print(nameAv, secondNameAv)
     avatarNameLabel.text = nameAv
     avatarSecondNameLabel.text = secondNameAv
   }
@@ -112,6 +131,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     let camera = UIAlertAction(title: "Camera", style: .default) { _ in
       self.chooseImagePicker(source: .camera)
+      self.hideInitials()
     }
     
     camera.setValue(cameraIcon, forKey: "image")
@@ -119,6 +139,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     
     let photo = UIAlertAction(title: "Photo", style: .default) { _ in
       self.chooseImagePicker(source: .photoLibrary)
+      self.hideInitials()
     }
     
     photo.setValue(photoIcon, forKey: "image")
@@ -131,6 +152,11 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate {
     actionSheet.addAction(cancel)
     actionSheet.pruneNegativeWidthConstraints()
     present(actionSheet, animated: true)
+  }
+  
+  private func hideInitials() {
+    avatarNameLabel.isHidden = true
+    avatarSecondNameLabel.isHidden = true
   }
   
 

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-//MARK: - Work with image
-extension ProfileViewController: UIImagePickerControllerDelegate {
+//MARK: - Work with image, UINavigationControllerDelegate
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func chooseImagePicker(source: UIImagePickerController.SourceType) {
     
     guard UIImagePickerController.isSourceTypeAvailable(source) else { return }

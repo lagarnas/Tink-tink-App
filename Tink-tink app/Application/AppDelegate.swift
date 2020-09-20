@@ -19,7 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     NSLog("Application moved from <Not Running> to <Inactive>: \(#function)")
     //print("Application moved from <Not Running> to <Inactive>: \(#function)")
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+
+    let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
+
+    let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
+
+    self.window?.rootViewController = initialViewController
+    self.window?.makeKeyAndVisible()
+
     return true
+
   }
   // State: Приложение стало активным
   // 3) Можем взаимодействовать с ним

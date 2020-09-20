@@ -10,9 +10,9 @@
 		88023679251610CA0079FA1B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88023678251610CA0079FA1B /* AvatarImageView.swift */; };
 		8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8802367A2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift */; };
 		8802367E251648E50079FA1B /* UIAlertController + constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8802367D251648E50079FA1B /* UIAlertController + constraints.swift */; };
+		8802368625165BEA0079FA1B /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8802368525165BEA0079FA1B /* ProfileViewController.storyboard */; };
 		8809DADE250B486500E4365A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8809DADD250B486500E4365A /* AppDelegate.swift */; };
 		8809DAE2250B486500E4365A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8809DAE1250B486500E4365A /* ProfileViewController.swift */; };
-		8809DAE5250B486500E4365A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE3250B486500E4365A /* Main.storyboard */; };
 		8809DAE7250B486900E4365A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE6250B486900E4365A /* Assets.xcassets */; };
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -21,10 +21,10 @@
 		88023678251610CA0079FA1B /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		8802367A2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UIImagePickerController.swift"; sourceTree = "<group>"; };
 		8802367D251648E50079FA1B /* UIAlertController + constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + constraints.swift"; sourceTree = "<group>"; };
+		8802368525165BEA0079FA1B /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		8809DADA250B486500E4365A /* Tink-tink app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tink-tink app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8809DADD250B486500E4365A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8809DAE1250B486500E4365A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		8809DAE4250B486500E4365A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8809DAE6250B486900E4365A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8809DAE9250B486900E4365A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8809DAEB250B486900E4365A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +50,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8802368325165B400079FA1B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8809DADD250B486500E4365A /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		8802368425165B6A0079FA1B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8809DAE1250B486500E4365A /* ProfileViewController.swift */,
+				8802368525165BEA0079FA1B /* ProfileViewController.storyboard */,
+				88023678251610CA0079FA1B /* AvatarImageView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		8809DAD1250B486500E4365A = {
 			isa = PBXGroup;
 			children = (
@@ -69,11 +87,9 @@
 		8809DADC250B486500E4365A /* Tink-tink app */ = {
 			isa = PBXGroup;
 			children = (
-				8809DADD250B486500E4365A /* AppDelegate.swift */,
-				8809DAE1250B486500E4365A /* ProfileViewController.swift */,
-				88023678251610CA0079FA1B /* AvatarImageView.swift */,
+				8802368325165B400079FA1B /* Application */,
+				8802368425165B6A0079FA1B /* Profile */,
 				8802367C251648A20079FA1B /* Extensions */,
-				8809DAE3250B486500E4365A /* Main.storyboard */,
 				8809DAE6250B486900E4365A /* Assets.xcassets */,
 				8809DAE8250B486900E4365A /* LaunchScreen.storyboard */,
 				8809DAEB250B486900E4365A /* Info.plist */,
@@ -141,7 +157,7 @@
 			files = (
 				8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */,
 				8809DAE7250B486900E4365A /* Assets.xcassets in Resources */,
-				8809DAE5250B486500E4365A /* Main.storyboard in Resources */,
+				8802368625165BEA0079FA1B /* ProfileViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,14 +179,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8809DAE3250B486500E4365A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8809DAE4250B486500E4365A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8809DAE8250B486900E4365A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

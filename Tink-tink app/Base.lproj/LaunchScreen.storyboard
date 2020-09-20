@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,13 +15,59 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wex-m7-FrJ">
+                                <rect key="frame" x="67.5" y="213.5" width="240" height="240"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speech-bubble" translatesAutoresizingMaskIntoConstraints="NO" id="rPo-U3-0iO">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tink" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTf-yw-Tle">
+                                        <rect key="frame" x="100" y="101.5" width="70.5" height="57"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="40"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tink" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fh-GO-1c4">
+                                        <rect key="frame" x="61" y="66" width="73.5" height="54"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="40"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wex-m7-FrJ" secondAttribute="height" id="0aU-jX-rTI"/>
+                                    <constraint firstItem="9fh-GO-1c4" firstAttribute="top" secondItem="Wex-m7-FrJ" secondAttribute="top" constant="66" id="8q5-2X-PDb"/>
+                                    <constraint firstAttribute="bottom" secondItem="9fh-GO-1c4" secondAttribute="bottom" constant="120" id="9B9-QJ-7cv"/>
+                                    <constraint firstAttribute="trailing" secondItem="rPo-U3-0iO" secondAttribute="trailing" id="B2z-at-HZK"/>
+                                    <constraint firstAttribute="bottom" secondItem="rPo-U3-0iO" secondAttribute="bottom" id="GUj-3G-JBW"/>
+                                    <constraint firstItem="JTf-yw-Tle" firstAttribute="centerY" secondItem="Wex-m7-FrJ" secondAttribute="centerY" constant="10" id="KDm-Pn-bES"/>
+                                    <constraint firstItem="9fh-GO-1c4" firstAttribute="leading" secondItem="Wex-m7-FrJ" secondAttribute="leading" constant="61" id="NwE-Gr-oxL"/>
+                                    <constraint firstItem="rPo-U3-0iO" firstAttribute="leading" secondItem="Wex-m7-FrJ" secondAttribute="leading" id="QAz-aK-WPe"/>
+                                    <constraint firstItem="rPo-U3-0iO" firstAttribute="top" secondItem="Wex-m7-FrJ" secondAttribute="top" id="VYZ-hd-SgB"/>
+                                    <constraint firstItem="JTf-yw-Tle" firstAttribute="leading" secondItem="Wex-m7-FrJ" secondAttribute="centerX" constant="-20" id="tyF-Gg-dLE"/>
+                                    <constraint firstAttribute="width" constant="240" id="u4m-Aa-wRa"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9fh-GO-1c4" secondAttribute="trailing" symbolic="YES" id="vT1-de-eT0"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JTf-yw-Tle" secondAttribute="trailing" constant="20" symbolic="YES" id="xAF-fA-PP5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Wex-m7-FrJ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ZMx-5v-a9Z"/>
+                            <constraint firstItem="Wex-m7-FrJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mS0-wK-cZs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="speech-bubble" width="512" height="512"/>
+    </resources>
 </document>
