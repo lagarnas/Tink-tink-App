@@ -61,8 +61,8 @@
 		8802368425165B6A0079FA1B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8809DAE1250B486500E4365A /* ProfileViewController.swift */,
 				8802368525165BEA0079FA1B /* ProfileViewController.storyboard */,
+				8809DAE1250B486500E4365A /* ProfileViewController.swift */,
 				88023678251610CA0079FA1B /* AvatarImageView.swift */,
 			);
 			path = Profile;

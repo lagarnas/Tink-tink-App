@@ -61,8 +61,6 @@ class ProfileViewController: UIViewController {
   // Ну вот фреймы изменились, надеюсь ты успел?
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    //frame changed CGRect(75.5, 792.0, 263.0, 40.0)
-    NSLog("\(saveButton.frame)")
     NSLog(#function)
   }
   
@@ -70,12 +68,11 @@ class ProfileViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     NSLog(#function)
-    //frame отличается потому что в методе viewWillLayoutSubviews() фрейм меняется, если экран повертнут на landscape, у кнопки меняется координаты x,y (76 line)
+    //frame отличается потому что в методе viewWillLayoutSubviews() фрейм меняется, если экран повертнут на landscape, у кнопки меняются координаты x,y (76 line)
     //frame changed CGRect(75.5, 792.0, 263.0, 40.0)
     NSLog("\(saveButton.frame)")
   }
 
-  
   // Вью вот вот исчезнет
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -96,10 +93,6 @@ class ProfileViewController: UIViewController {
     bioLabel.text = "iOS developer, QA engineer, Russia, Samara"
     avatarImageView.image = retrieveImage(forKey: "avatarImage")
     setupInitialsOfName()
-    
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-    avatarImageView.isUserInteractionEnabled = true
-    avatarImageView.addGestureRecognizer(tapGestureRecognizer)
   }
   
   private func setupInitialsOfName() {
@@ -115,12 +108,7 @@ class ProfileViewController: UIViewController {
   @IBAction func saveButtonTapped(_ sender: UIButton) {
     store(image: avatarImageView.image, forKey: "avatarImage")
   }
-  
-  @objc private func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-    let _ = tapGestureRecognizer.view as! AvatarImageView
-    openAlertAction()
-  }
-  
+    
   private func openAlertAction() {
     // создаем экземпляр класса UIAlertController
     let cameraIcon = #imageLiteral(resourceName: "camera")
