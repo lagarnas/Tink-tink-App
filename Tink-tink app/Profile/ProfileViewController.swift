@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class ProfileViewController: UIViewController {
   
@@ -33,23 +34,23 @@ class ProfileViewController: UIViewController {
   // Загрузка вью
   override func loadView() {
     super.loadView()
-    NSLog(#function)
+    os_log("%@", log: .viewCycle, type: .info, #function)
   }
   
   // Вью загружена
   override func viewDidLoad() {
     super.viewDidLoad()
-    NSLog(#function)
-    //frame is CGRect(56.0, 597.0, 263.0, 40.0)
     configure()
-    NSLog("\(saveButton.frame)")
+    os_log("%@", log: .viewCycle, type: .info, #function)
+    //frame is CGRect(56.0, 597.0, 263.0, 40.0)
+    os_log("%@", log: .frameChanged, type: .info, saveButton.frame as CVarArg)
 
   }
   // Вью начинает появляться
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     if avatarImageView.image != nil { hideInitials() }
-    NSLog(#function)
+    os_log("%@", log: OSLog.viewCycle, type: .info, #function)
   }
   
   // Вот вот у вью изменятся фреймы будь осторожен
@@ -61,27 +62,27 @@ class ProfileViewController: UIViewController {
   // Ну вот фреймы изменились, надеюсь ты успел?
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    NSLog(#function)
+    os_log("%@", log: .viewCycle, type: .info, #function)
   }
   
   // Вью появилась
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    NSLog(#function)
-    //frame отличается потому что в методе viewWillLayoutSubviews() фрейм меняется, если экран повертнут на landscape, у кнопки меняются координаты x,y (76 line)
-    //frame changed CGRect(75.5, 792.0, 263.0, 40.0)
-    NSLog("\(saveButton.frame)")
+    os_log("%@", log: .viewCycle, type: .info, #function)
+    //frame отличается потому что в методе viewWillLayoutSubviews() фрейм меняется так как верстка была на SE(2 generation), а выбран симулятор  11 Pro, у которого отличается координата y
+    //frame changed CGRect(75.5, 708.0, 263.0, 40.0)
+    os_log("%@", log: .frameChanged, type: .info, saveButton.frame as CVarArg)
   }
 
   // Вью вот вот исчезнет
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    NSLog(#function)
+    os_log("%@", log: .viewCycle, type: .info, #function)
   }
   // Вью исчезла =(
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    NSLog(#function)
+    os_log("%@", log: .viewCycle, type: .info, #function)
   }
   
   //MARK: -Functions
