@@ -15,6 +15,7 @@
 		8809DAE2250B486500E4365A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8809DAE1250B486500E4365A /* ProfileViewController.swift */; };
 		8809DAE7250B486900E4365A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE6250B486900E4365A /* Assets.xcassets */; };
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
+		88BCF75F251C702600CA81A7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8809DAE6250B486900E4365A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8809DAE9250B486900E4365A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8809DAEB250B486900E4365A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88BCF75E251C702600CA81A7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				8809DADD250B486500E4365A /* AppDelegate.swift */,
+				88BCF75E251C702600CA81A7 /* Logger.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -61,8 +64,8 @@
 		8802368425165B6A0079FA1B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8809DAE1250B486500E4365A /* ProfileViewController.swift */,
 				8802368525165BEA0079FA1B /* ProfileViewController.storyboard */,
+				8809DAE1250B486500E4365A /* ProfileViewController.swift */,
 				88023678251610CA0079FA1B /* AvatarImageView.swift */,
 			);
 			path = Profile;
@@ -170,6 +173,7 @@
 			files = (
 				8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */,
 				88023679251610CA0079FA1B /* AvatarImageView.swift in Sources */,
+				88BCF75F251C702600CA81A7 /* Logger.swift in Sources */,
 				8809DAE2250B486500E4365A /* ProfileViewController.swift in Sources */,
 				8809DADE250B486500E4365A /* AppDelegate.swift in Sources */,
 				8802367E251648E50079FA1B /* UIAlertController + constraints.swift in Sources */,

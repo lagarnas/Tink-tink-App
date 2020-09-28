@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   //  State: Приложение запускается, не активно
   // 2) Ждем пока приложение загрузится смотрим на LaunchScreen
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    NSLog("Application moved from <Not Running> to <Inactive>: \(#function)")
-    //print("Application moved from <Not Running> to <Inactive>: \(#function)")
+  
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
     let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     self.window?.rootViewController = initialViewController
     self.window?.makeKeyAndVisible()
+    
+    os_log("Application moved from <Not Running> to <Inactive>: didFinishLaunchingWithOptions", log: OSLog.appCycle, type: .info)
 
     return true
 
@@ -34,30 +36,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // State: Приложение стало активным
   // 3) Можем взаимодействовать с ним
   func applicationDidBecomeActive(_ application: UIApplication) {
-    NSLog("Application moved from <Inactive> to <Active>: \(#function)")
+    os_log("Application moved from <Inactive> to <Active>: applicationDidBecomeActive", log: OSLog.appCycle, type: .info)
   }
   // 4) Свернули приложение
   // State: Приложение станет не активным
   func applicationWillResignActive(_ application: UIApplication) {
-    NSLog("Application moved from <Active> to <Inactive>: \(#function)")
-    
+    os_log("Application moved from <Active> to <Inactive>: applicationWillResignActive", log: OSLog.appCycle, type: .info)
   }
   // 5) Приложение свернуто, открыли другое приложение
   //State: Приложение ушло в Background
   func applicationDidEnterBackground(_ application: UIApplication) {
-    NSLog("Application moved from <Inactive> to <Background>, <Suspended>: \(#function)")
-    
+    os_log("Application moved from <Inactive> to <Background>, <Suspended>: applicationDidEnterBackground", log: OSLog.appCycle, type: .info)
   }
   // 6) Снова открываем приложение из background
   // State: Приложение переходит в Foreground и становится активным applicationDidBecomeActive
   func applicationWillEnterForeground(_ application: UIApplication) {
-    NSLog("Application moved from <Background> to <Inactive>: \(#function)")
+    os_log("Application moved from <Background> to <Inactive>: applicationWillEnterForeground", log: OSLog.appCycle, type: .info)
   }
   
   // 7) Закрываем приложение, смахиваем его
   // State: Приложение закрвается и становится не запущенным
   func applicationWillTerminate(_ application: UIApplication) {
-    NSLog("Application moved from <Background> to <Suspended> to <Not Running>: \(#function)")
+    os_log("Application moved from <Background> to <Suspended> to <Not Running>: applicationWillTerminate", log: OSLog.appCycle, type: .info)
   }
 }
 
