@@ -59,12 +59,14 @@ extension ConversationTableViewCell: ConfigurableView {
     self.avatarView.backgroundColor = model.isOnline ? #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1) : .white
     previewMessageLabel.font = model.hasUnreadMessages && model.message != "" ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
     previewMessageLabel.text = model.message == "" ? "No messages yet..." : model.message
+    previewMessageLabel.font = model.message == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
     self.backgroundColor = model.isOnline ? #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1) : .white
     
-    let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm"
     
-    dateLabel.text = formatter.string(from: model.date)
+//    let formatter = DateFormatter()
+//    formatter.dateFormat = "HH:mm"
+    //здесь будет функция которая форматирует дату в строку в зависомости от того какая дата пришла (сегодня, вчера и тд)
+    dateLabel.text = model.date.getFormattingDate()
     nameLabel.text = model.name
     
     guard let avatar = model.avatar else {

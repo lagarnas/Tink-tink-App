@@ -17,15 +17,15 @@ struct TypeSection {
 class ConversationsListViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
-  var displaySecondButton = UIButton()
+  var sections = [TypeSection]()
   
   var chats = [
-    ConversationCellModel(avatar: nil, name: "Alena Иванова", message: "Привет! Как дела? Пошли в кино сегодня вечером?", date: Date(), isOnline:  true, hasUnreadMessages: true),
+    ConversationCellModel(avatar: nil, name: "Alena Иванова", message: "Привет! Как дела? Пошли в кино сегодня вечером?", date: Date(timeIntervalSinceNow: -184000), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Кристина Стоцкая", message:"Нормально, работаю, учусть, поступила вот на курсы", date: Date(), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Aлександр Вермутов", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Данила Козловский", message: "", date: Date(), isOnline:  true, hasUnreadMessages: true),
+    ConversationCellModel(avatar: nil, name: "Данила Козловский", message: "", date: Date(timeIntervalSinceNow: -90000), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Кети Перри", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Арнольд Шварценегер", message: "Нормально", date: Date(),isOnline: true, hasUnreadMessages: true),
+    ConversationCellModel(avatar: nil, name: "Арнольд Шварценегер", message: "Нормально", date: Date(timeIntervalSinceNow: -356000),isOnline: true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Вася Петров", message: "Привет!", date: Date(), isOnline: true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Юлия Поздеева", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Антонина Федорова", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: false),
@@ -49,11 +49,11 @@ class ConversationsListViewController: UIViewController {
     ConversationCellModel(avatar: nil, name: "Сол Гудман", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: true)
   ]
   
-  var sections = [TypeSection]()
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.title = "Chats"
+    self.title = "Tinkoff Chat"
     self.navigationController?.navigationBar.backgroundColor = .white
     self.navigationController?.navigationBar.prefersLargeTitles = true
     setupTableView()
@@ -79,24 +79,17 @@ extension ConversationsListViewController {
   
   fileprivate func setupTableView() {
     self.sections = TypeSection.group(chats: chats)
+    sections[1].chats = filteredMessagesInHistory()
     tableView.rowHeight = 80
     tableView.estimatedRowHeight = 350
     tableView.register(UINib(nibName: ConversationTableViewCell.nibName, bundle: nil),
                        forCellReuseIdentifier: ConversationTableViewCell.reuseIdentifier)
   }
   
-  fileprivate func createDisplaySecondButton() {
-    self.displaySecondButton = UIButton(type: .system)
-    self.displaySecondButton.setTitle("Second VC", for: .normal)
-    self.displaySecondButton.sizeToFit()
-    self.displaySecondButton.center = self.view.center
-    self.displaySecondButton.addTarget(self, action: #selector(performDisplaySecondVC(_:)), for: .touchUpInside)
-    tableView.headerView(forSection: 0)?.addSubview(displaySecondButton)
-  }
-  
-  @objc func performDisplaySecondVC(_ sender: Any) {
-    let secondVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
-    self.navigationController?.pushViewController(secondVC, animated: true)
+  fileprivate func filteredMessagesInHistory() -> [ConversationCellModel] {
+    return sections[1].chats.filter { chat in
+      chat.message != ""
+    }
   }
 }
 

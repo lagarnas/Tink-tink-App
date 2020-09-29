@@ -22,6 +22,6 @@ extension TypeSection {
     return groups.map({ (isOnline, chats) in
       let title = isOnline ? TypeSection.Title.online.rawValue: TypeSection.Title.offline.rawValue
       return TypeSection(title: title, isOnline: isOnline, chats: chats)
-    }).sorted { (online, history) -> Bool in online.isOnline }
+    }).sorted { (section1, section2) -> Bool in section1.isOnline}
   }
 }
