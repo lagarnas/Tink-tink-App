@@ -22,11 +22,6 @@ import os.log
   
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
-//    let storyboard = UIStoryboard(name: "ProfileViewController", bundle: nil)
-//
-//    let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
-//
-//    self.window?.rootViewController = initialViewController
     let convVC: ConversationsListViewController = ConversationsListViewController.loadFromStoryboard()
     self.navController = UINavigationController(rootViewController: convVC)
     

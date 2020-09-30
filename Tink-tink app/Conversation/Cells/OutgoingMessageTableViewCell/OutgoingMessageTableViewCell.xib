@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="169" id="ooX-W6-I8p" userLabel="Outgoing Message Table View Cell" customClass="OutgoingMessageTableViewCell" customModule="Tink_tink_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="291" height="169"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ooX-W6-I8p" id="QCN-fW-hGJ">
+                <rect key="frame" x="0.0" y="0.0" width="291" height="169"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uo3-az-7gq" userLabel="bubbleView">
+                        <rect key="frame" x="67.5" y="10" width="216.5" height="149"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" bvmfgobmngobm gbmtbkm bkm kmbtklmb otmhktym  klbmhtlkm  kjn vkjfngbkjfnbjfnbjgnbfjkbnfgbkjngjbnbkjnkbjfnbkjn" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcW-xr-Wca">
+                                <rect key="frame" x="8" y="5" width="200.5" height="139"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.86274509803921573" green="0.96862745098039216" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="LcW-xr-Wca" firstAttribute="top" secondItem="Uo3-az-7gq" secondAttribute="top" constant="5" id="VEg-jK-pBN"/>
+                            <constraint firstAttribute="bottom" secondItem="LcW-xr-Wca" secondAttribute="bottom" constant="5" id="aNd-7M-lbS"/>
+                            <constraint firstItem="LcW-xr-Wca" firstAttribute="leading" secondItem="Uo3-az-7gq" secondAttribute="leading" constant="8" id="iBX-5N-LMj"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="nUu-nb-bsE"/>
+                            <constraint firstAttribute="trailing" secondItem="LcW-xr-Wca" secondAttribute="trailing" constant="8" id="tn8-Hv-uxQ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="Uo3-az-7gq" firstAttribute="width" relation="lessThanOrEqual" secondItem="QCN-fW-hGJ" secondAttribute="width" multiplier="3/4" id="Sbj-KB-lHc"/>
+                    <constraint firstAttribute="trailing" secondItem="Uo3-az-7gq" secondAttribute="trailing" constant="7" id="n0b-KI-nBk"/>
+                    <constraint firstAttribute="bottom" secondItem="Uo3-az-7gq" secondAttribute="bottom" constant="10" id="uh3-0H-5qW"/>
+                    <constraint firstItem="Uo3-az-7gq" firstAttribute="top" secondItem="QCN-fW-hGJ" secondAttribute="top" constant="10" id="wxO-3G-9Bi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="XZF-fR-ceO"/>
+            <connections>
+                <outlet property="bubbleView" destination="Uo3-az-7gq" id="aME-RY-kdg"/>
+                <outlet property="messageLabel" destination="LcW-xr-Wca" id="vr8-KQ-d5w"/>
+            </connections>
+            <point key="canvasLocation" x="-102" y="-136"/>
+        </tableViewCell>
+    </objects>
+</document>

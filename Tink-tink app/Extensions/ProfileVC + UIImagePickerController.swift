@@ -9,6 +9,7 @@
 import UIKit
 //MARK: - Work with image, UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
   func chooseImagePicker(source: UIImagePickerController.SourceType) {
     
     guard UIImagePickerController.isSourceTypeAvailable(source) else { return }
@@ -20,10 +21,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
   }
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    avatarImageView.image = info[.editedImage] as? UIImage
-    avatarImageView.contentMode = .scaleAspectFill
-    avatarImageView.clipsToBounds = true
+    avatarView.imageView.image = info[.editedImage] as? UIImage
+    avatarView.imageView.contentMode = .scaleAspectFill
+    avatarView.imageView.clipsToBounds = true
     imageIsChanged = true
+    hideInitials()
     dismiss(animated: true)
   }
   

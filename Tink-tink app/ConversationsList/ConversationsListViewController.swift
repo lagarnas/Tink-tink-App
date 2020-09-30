@@ -14,19 +14,19 @@ struct TypeSection {
   var chats: [ConversationCellModel]
 }
 
-class ConversationsListViewController: UIViewController {
+final class ConversationsListViewController: UIViewController {
   
-  @IBOutlet weak var tableView: UITableView!
-  var sections = [TypeSection]()
+  @IBOutlet private weak var tableView: UITableView!
   
-  var chats = [
+  private var sections = [TypeSection]()
+  private var chats = [
     ConversationCellModel(avatar: nil, name: "Alena Иванова", message: "Привет! Как дела? Пошли в кино сегодня вечером?", date: Date(timeIntervalSinceNow: -184000), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Кристина Стоцкая", message:"Нормально, работаю, учусть, поступила вот на курсы", date: Date(), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Aлександр Вермутов", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Данила Козловский", message: "", date: Date(timeIntervalSinceNow: -90000), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Кети Перри", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Арнольд Шварценегер", message: "Нормально", date: Date(timeIntervalSinceNow: -356000),isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Вася Петров", message: "Привет!", date: Date(), isOnline: true, hasUnreadMessages: true),
+    ConversationCellModel(avatar: nil, name: "Вася Петров", message: "", date: Date(), isOnline: true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Юлия Поздеева", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Антонина Федорова", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: false),
     ConversationCellModel(avatar: nil, name: "Кот Лепольд", message: "Привет!", date: Date(), isOnline:  false, hasUnreadMessages: false),
@@ -48,53 +48,74 @@ class ConversationsListViewController: UIViewController {
     ConversationCellModel(avatar: nil, name: "Джесси Пинкман", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Сол Гудман", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: true)
   ]
-  
+  private var searchController = UISearchController(searchResultsController: nil)
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.title = "Tinkoff Chat"
-    self.navigationController?.navigationBar.backgroundColor = .white
-    self.navigationController?.navigationBar.prefersLargeTitles = true
+    setupNavigation()
     setupTableView()
     createRightBar()
+    setupSearchController()
   }
+  
+
 }
 
+//MARK: - Functions
 extension ConversationsListViewController {
   
-  fileprivate func createRightBar() {
+  private func createRightBar() {
     let profileButton = UIButton()
-    profileButton.addTarget(self, action: #selector(perfAdd), for: .touchUpInside)
+    profileButton.addTarget(self, action: #selector(openProfileVC), for: .touchUpInside)
     profileButton.translatesAutoresizingMaskIntoConstraints = false
-    self.navigationItem.title = title
-    let barBurronItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(perfAdd(_sender:)))
+    
+    let barBurronItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(openProfileVC(_sender:)))
     self.navigationItem.rightBarButtonItem = barBurronItem
   }
   
-  @objc func perfAdd(_sender: UIBarButtonItem) {
+  @objc
+  private func openProfileVC(_sender: UIBarButtonItem) {
     let profileVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
     self.present(profileVC, animated: true)
   }
   
-  fileprivate func setupTableView() {
+  @objc
+  private func close() {
+    self.dismiss(animated: true)
+  }
+  
+  private func setupTableView() {
     self.sections = TypeSection.group(chats: chats)
     sections[1].chats = filteredMessagesInHistory()
     tableView.rowHeight = 80
-    tableView.estimatedRowHeight = 350
     tableView.register(UINib(nibName: ConversationTableViewCell.nibName, bundle: nil),
                        forCellReuseIdentifier: ConversationTableViewCell.reuseIdentifier)
   }
   
-  fileprivate func filteredMessagesInHistory() -> [ConversationCellModel] {
+  private func filteredMessagesInHistory() -> [ConversationCellModel] {
     return sections[1].chats.filter { chat in
       chat.message != ""
     }
   }
+  private func setupNavigation() {
+    self.title = "Tinkoff chat"
+    self.navigationController?.navigationBar.backgroundColor = .white
+    self.navigationController?.navigationBar.prefersLargeTitles = true
+  }
+  
+  private func setupSearchController() {
+    //searchController.searchResultsUpdater = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = NSLocalizedString("search", comment: "")
+    navigationItem.searchController = searchController
+    navigationItem.hidesSearchBarWhenScrolling = false
+    definesPresentationContext = true
+  }
 }
 
 
-
+//MARK: - UITableViewDelegate, UITableViewDataSource
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -124,5 +145,9 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     conversationVC.title = section.chats[indexPath.row].name
     self.navigationController?.pushViewController(conversationVC, animated: true)
     
+  }
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    navigationItem.hidesSearchBarWhenScrolling = true
   }
 }
