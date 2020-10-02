@@ -17,6 +17,7 @@ struct TypeSection {
 final class ConversationsListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet private weak var avatarView: MiniAvatarView!
   
   private var sections = [TypeSection]()
   private var chats = [
@@ -53,36 +54,38 @@ final class ConversationsListViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupNavigation()
     setupTableView()
-    createRightBar()
+    // createRightBar()
     setupSearchController()
+    avatarView.miniNameLabel.text = "A"
+    avatarView.miniSecondNameLabel.text = "L"
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
+    avatarView.isUserInteractionEnabled = true
+    avatarView.addGestureRecognizer(tapGestureRecognizer)
   }
   
-
+  
+  
+  
 }
 
 //MARK: - Functions
 extension ConversationsListViewController {
   
-  private func createRightBar() {
-    let profileButton = UIButton()
-    profileButton.addTarget(self, action: #selector(openProfileVC), for: .touchUpInside)
-    profileButton.translatesAutoresizingMaskIntoConstraints = false
-    
-    let barBurronItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(openProfileVC(_sender:)))
-    self.navigationItem.rightBarButtonItem = barBurronItem
-  }
-  
-  @objc
-  private func openProfileVC(_sender: UIBarButtonItem) {
-    let profileVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
-    self.present(profileVC, animated: true)
-  }
-  
   @objc
   private func close() {
     self.dismiss(animated: true)
+  }
+  
+  @objc
+  private func avatarTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    let _ = tapGestureRecognizer.view as! MiniAvatarView
+    openProfileVC()
+  }
+  
+  private func openProfileVC() {
+    let profileVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
+    self.present(profileVC, animated: true)
   }
   
   private func setupTableView() {
@@ -97,11 +100,6 @@ extension ConversationsListViewController {
     return sections[1].chats.filter { chat in
       chat.message != ""
     }
-  }
-  private func setupNavigation() {
-    self.title = "Tinkoff chat"
-    self.navigationController?.navigationBar.backgroundColor = .white
-    self.navigationController?.navigationBar.prefersLargeTitles = true
   }
   
   private func setupSearchController() {

@@ -18,7 +18,6 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var avatarView: AvatarView!
   
   var imageIsChanged = false
-  private let defaults = UserDefaults.standard
   
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {

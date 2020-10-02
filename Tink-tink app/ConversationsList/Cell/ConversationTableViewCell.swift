@@ -66,8 +66,6 @@ extension ConversationTableViewCell: ConfigurableView {
       dateLabel.isHidden = false
     }
     
-    self.backgroundColor = model.isOnline ? #colorLiteral(red: 0.8941176471, green: 0.9098039216, blue: 0.168627451, alpha: 0.3048212757) : .white
-    
     dateLabel.text = model.date.getFormattingDate()
     nameLabel.text = model.name
     

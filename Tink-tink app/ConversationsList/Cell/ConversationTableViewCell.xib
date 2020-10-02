@@ -27,8 +27,12 @@
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="73"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7K-kX-gYI" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="73"/>
+                                                <rect key="frame" x="0.0" y="12.5" width="48" height="48"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="nKT-bM-9as"/>
+                                                    <constraint firstAttribute="width" secondItem="L7K-kX-gYI" secondAttribute="height" id="qDp-u2-vGt"/>
+                                                </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDz-ow-UqA" userLabel="indicator">
                                                 <rect key="frame" x="33" y="12" width="15" height="15"/>
@@ -42,12 +46,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="tDz-ow-UqA" secondAttribute="trailing" id="232-Bw-kzG"/>
-                                            <constraint firstItem="L7K-kX-gYI" firstAttribute="leading" secondItem="OGa-aB-43L" secondAttribute="leading" id="9fA-K1-udi"/>
                                             <constraint firstAttribute="width" constant="48" id="F24-H2-uhs"/>
-                                            <constraint firstAttribute="bottom" secondItem="L7K-kX-gYI" secondAttribute="bottom" id="LbC-1w-2ft"/>
-                                            <constraint firstAttribute="trailing" secondItem="L7K-kX-gYI" secondAttribute="trailing" id="mzq-Lw-U8b"/>
+                                            <constraint firstItem="L7K-kX-gYI" firstAttribute="centerX" secondItem="OGa-aB-43L" secondAttribute="centerX" id="dZo-bw-YRU"/>
+                                            <constraint firstItem="L7K-kX-gYI" firstAttribute="centerY" secondItem="OGa-aB-43L" secondAttribute="centerY" id="nI4-cG-hn1"/>
                                             <constraint firstItem="tDz-ow-UqA" firstAttribute="top" secondItem="OGa-aB-43L" secondAttribute="top" constant="12" id="r4c-P6-GYd"/>
-                                            <constraint firstItem="L7K-kX-gYI" firstAttribute="top" secondItem="OGa-aB-43L" secondAttribute="top" id="rIV-c3-AjO"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-Ep-rzJ">
