@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kiz-td-A8u">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Themes View Controller-->
+        <scene sceneID="tf0-Qu-neg">
+            <objects>
+                <viewController id="kiz-td-A8u" customClass="ThemesViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BZ6-Bm-le8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mYf-Wp-5kL">
+                                <rect key="frame" x="35" y="200" width="305" height="412"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hJV-ac-iZ1">
+                                        <rect key="frame" x="0.0" y="0.0" width="305" height="124"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-lR-6gf" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="57"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="57" id="SxJ-s0-1mM"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="button">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="0bi-ko-1r7"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97s-DJ-jDP">
+                                                <rect key="frame" x="0.0" y="67" width="305" height="57"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="n1k-Zi-l7s">
+                                        <rect key="frame" x="0.0" y="144" width="305" height="124"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l53-1I-3wZ" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="57"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="57" id="ttj-ta-OWV"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="Mzz-sR-EwZ"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y83-4T-fp3">
+                                                <rect key="frame" x="0.0" y="67" width="305" height="57"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tiq-8R-ImL">
+                                        <rect key="frame" x="0.0" y="288" width="305" height="124"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2A-Iz-PkP" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="57"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="57" id="Hju-hc-68r"/>
+                                                </constraints>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="91l-0V-gfq"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1q-ki-G3y">
+                                                <rect key="frame" x="0.0" y="67" width="305" height="57"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kPR-lP-HPy"/>
+                        <color key="backgroundColor" red="0.098039215686274508" green="0.21176470588235294" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="kPR-lP-HPy" firstAttribute="trailing" secondItem="mYf-Wp-5kL" secondAttribute="trailing" constant="35" id="2BS-mC-ddj"/>
+                            <constraint firstItem="mYf-Wp-5kL" firstAttribute="centerY" secondItem="BZ6-Bm-le8" secondAttribute="centerY" id="Ahb-6K-qQH"/>
+                            <constraint firstItem="mYf-Wp-5kL" firstAttribute="leading" secondItem="kPR-lP-HPy" secondAttribute="leading" constant="35" id="pbM-OW-XkE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="classicButton" destination="Nxd-lR-6gf" id="hn2-gF-WD3"/>
+                        <outlet property="classicLabel" destination="97s-DJ-jDP" id="cb2-MF-7EN"/>
+                        <outlet property="dayButton" destination="l53-1I-3wZ" id="hca-Va-vVr"/>
+                        <outlet property="dayLabel" destination="Y83-4T-fp3" id="EGo-zi-I2m"/>
+                        <outlet property="nightButton" destination="p2A-Iz-PkP" id="ov3-zt-4TV"/>
+                        <outlet property="nightLabel" destination="H1q-ki-G3y" id="nKl-Om-BqQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FHC-r1-vO0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="84.975369458128085"/>
+        </scene>
+    </scenes>
+</document>

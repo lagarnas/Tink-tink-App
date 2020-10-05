@@ -36,6 +36,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff chat" id="Szd-t3-0AS">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="lWv-nV-MH4">
+                            <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.34509803921568627" alpha="0.65360124143835618" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="settingsTapped:" destination="0me-a7-DvC" id="3yW-fR-hVA"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="2020-01-23 14.33.44" id="2xc-gI-HDh">
                             <view key="customView" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hle-LC-Dgs">
                                 <rect key="frame" x="276" y="0.0" width="83" height="44"/>

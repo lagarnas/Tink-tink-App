@@ -65,6 +65,14 @@ final class ConversationsListViewController: UIViewController {
   }
   
   
+  @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+    
+    let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
+    themesVC.didTapThemeButton = { color in
+      self.tableView.backgroundColor = color
+    }
+    self.navigationController?.pushViewController(themesVC, animated: true)
+  }
   
   
 }
