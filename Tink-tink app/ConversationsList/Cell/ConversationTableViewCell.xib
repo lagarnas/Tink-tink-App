@@ -55,20 +55,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-Ep-rzJ">
                                         <rect key="frame" x="54" y="0.0" width="305" height="73"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="pSk-3x-rYH">
+                                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="pSk-3x-rYH">
                                                 <rect key="frame" x="8" y="8" width="289" height="25.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" text="Anastasia Leonteva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PsQ-ET-zaG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="180" height="25.5"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="180" id="1v2-3r-kVX"/>
-                                                        </constraints>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Anastasia Leonteva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PsQ-ET-zaG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="139" height="25.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-tv-OlN">
-                                                        <rect key="frame" x="186" y="0.0" width="82" height="25.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-tv-OlN">
+                                                        <rect key="frame" x="145" y="0.0" width="123" height="25.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>

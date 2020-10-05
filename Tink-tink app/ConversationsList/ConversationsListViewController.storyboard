@@ -27,7 +27,6 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JhH-Ub-Cft"/>
-                        <color key="backgroundColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="trailing" secondItem="JhH-Ub-Cft" secondAttribute="trailing" id="2UP-y2-ofW"/>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="bottom" secondItem="2QP-wE-iys" secondAttribute="bottom" id="77t-6s-b2B"/>
@@ -36,7 +35,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff chat" id="Szd-t3-0AS">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="lWv-nV-MH4">
+                        <barButtonItem key="leftBarButtonItem" image="icons8-gear 1" id="lWv-nV-MH4">
                             <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.34509803921568627" alpha="0.65360124143835618" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="settingsTapped:" destination="0me-a7-DvC" id="3yW-fR-hVA"/>
@@ -85,6 +84,7 @@
     </scenes>
     <resources>
         <image name="2020-01-23 14.33.44" width="213.33332824707031" height="213.33332824707031"/>
+        <image name="icons8-gear 1" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

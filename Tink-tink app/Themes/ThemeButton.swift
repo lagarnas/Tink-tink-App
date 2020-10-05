@@ -13,8 +13,6 @@ class ThemeButton: UIButton {
   let bubble = UIView()
   let secondBubble = UIView()
   
-  
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupButton()
@@ -27,7 +25,7 @@ class ThemeButton: UIButton {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    print(#function)
+    //print(#function)
     if isSelected {
       layer.borderWidth = 3
       layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
@@ -40,7 +38,6 @@ class ThemeButton: UIButton {
   private func setupButton() {
     layer.borderWidth = 1
     layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
-    backgroundColor = .white
     layer.cornerRadius = 20
     
     addFirstBubbleView()
@@ -51,16 +48,35 @@ class ThemeButton: UIButton {
   
   
   private func addFirstBubbleView() {
+    switch self.tag {
+    case 0:
+      bubble.backgroundColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
+    case 1:
+      bubble.backgroundColor = #colorLiteral(red: 0.9176470588, green: 0.9215686275, blue: 0.9294117647, alpha: 1)
+    case 2:
+      bubble.backgroundColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1803921569, alpha: 1)
+    default:
+      bubble.backgroundColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
+    }
     bubble.isUserInteractionEnabled = false
-    bubble.backgroundColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
     bubble.layer.cornerRadius = 10
     bubble.layer.zPosition = -1
     self.addSubview(bubble)
   }
   
   private func addSecondBubbleView() {
+    switch self.tag {
+    case 0:
+      secondBubble.backgroundColor = #colorLiteral(red: 0.862745098, green: 0.968627451, blue: 0.7725490196, alpha: 1)
+    case 1:
+      secondBubble.backgroundColor = #colorLiteral(red: 0.262745098, green: 0.537254902, blue: 0.9764705882, alpha: 1)
+    case 2:
+      secondBubble.backgroundColor = #colorLiteral(red: 0.3607843137, green: 0.3607843137, blue: 0.3607843137, alpha: 1)
+    default:
+      bubble.backgroundColor = #colorLiteral(red: 0.3607843137, green: 0.3607843137, blue: 0.3607843137, alpha: 1)
+    }
     secondBubble.isUserInteractionEnabled = false
-    secondBubble.backgroundColor = #colorLiteral(red: 0.862745098, green: 0.968627451, blue: 0.7725490196, alpha: 1)
+    
     secondBubble.layer.cornerRadius = 10
     secondBubble.layer.zPosition = -1
     self.addSubview(secondBubble)

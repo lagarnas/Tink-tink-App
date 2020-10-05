@@ -18,7 +18,7 @@ class ThemesViewController: UIViewController {
   @IBOutlet private weak var dayLabel: UILabel!
   @IBOutlet private weak var nightLabel: UILabel!
   
-  var didTapThemeButton: ((UIColor) -> Void)?
+  var didChangeThemeButton: ((Themeable) -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,6 +28,20 @@ class ThemesViewController: UIViewController {
     setupLabelTapRecognizer(label: classicLabel)
     setupLabelTapRecognizer(label: dayLabel)
     setupLabelTapRecognizer(label: nightLabel)
+    
+    applyTheme()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+
+  }
+  
+  private func applyTheme() {
+    view.backgroundColor = Theme.current.background
+    classicLabel.textColor = Theme.current.mainTextColor
+    dayLabel.textColor = Theme.current.mainTextColor
+    nightLabel.textColor = Theme.current.mainTextColor
   }
   
   private func setupLabelTapRecognizer(label: UILabel) {
@@ -41,7 +55,6 @@ class ThemesViewController: UIViewController {
     switch sender.view {
     case classicLabel:
       themeButtonTapped(classicButton)
-      didTapThemeButton?(UIColor.green)
     case dayLabel:
       themeButtonTapped(dayButton)
     case nightLabel:
@@ -53,24 +66,27 @@ class ThemesViewController: UIViewController {
   
   @IBAction
   private func themeButtonTapped(_ sender: ThemeButton) {
-    switch sender{
+    sender.isSelected = !sender.isSelected
+    switch sender {
     case classicButton:
-      classicButton.isSelected = true
       nightButton.isSelected   = false
       dayButton.isSelected     = false
+      didChangeThemeButton?(ClassicTheme())
     case dayButton:
-      dayButton.isSelected     = true
       classicButton.isSelected = false
       nightButton.isSelected   = false
+      didChangeThemeButton?(DayTheme())
     case nightButton:
-      nightButton.isSelected   = true
       classicButton.isSelected = false
       dayButton.isSelected     = false
+      didChangeThemeButton?(NightTheme())
     default:
       break
     }
     
+    
     sender.shake()
+    applyTheme()
   }
   
   

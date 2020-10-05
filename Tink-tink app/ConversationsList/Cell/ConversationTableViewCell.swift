@@ -29,6 +29,9 @@ final class ConversationTableViewCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     setupOnlineIndicator()
+//    nameLabel.textColor = Theme.current.mainTextColor
+//    previewMessageLabel.textColor = Theme.current.minorTextColor
+//    dateLabel.textColor = Theme.current.minorTextColor
   }
   
   //MARK: Functions

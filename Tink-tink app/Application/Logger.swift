@@ -21,16 +21,4 @@ extension OSLog {
 }
 
 
-@available(iOS 14.0, *)
-extension Logger {
-  private static var subsystem = Bundle.main.bundleIdentifier!
-  //Logs the app cycles
-  static var appCycle = Logger(subsystem: subsystem, category: "appcycle")
-  //Logs the view cycles like viewDidLoad.
-  static let viewCycle = Logger(subsystem: subsystem, category: "viewcycle")
-  // Logs the view frame is changing
-  static let frameChanged = Logger(subsystem: subsystem, category: "frameChanged")
-}
-
-
 

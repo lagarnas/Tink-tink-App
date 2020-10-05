@@ -51,30 +51,27 @@ final class ConversationsListViewController: UIViewController {
   ]
   private var searchController = UISearchController(searchResultsController: nil)
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
-    // createRightBar()
     setupSearchController()
-    avatarView.miniNameLabel.text = "A"
-    avatarView.miniSecondNameLabel.text = "L"
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
-    avatarView.isUserInteractionEnabled = true
-    avatarView.addGestureRecognizer(tapGestureRecognizer)
+    setupMiniature()
+    
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    //self.tableView.backgroundColor = Theme.current.background
+    self.tableView.reloadData()
+  }
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
-    
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
-    themesVC.didTapThemeButton = { color in
-      self.tableView.backgroundColor = color
+    themesVC.didChangeThemeButton = { currentTheme in
+      ThemeHelper.shared.setupCurrentTheme(currentTheme)
     }
     self.navigationController?.pushViewController(themesVC, animated: true)
   }
-  
-  
 }
 
 //MARK: - Functions
@@ -118,6 +115,14 @@ extension ConversationsListViewController {
     navigationItem.hidesSearchBarWhenScrolling = false
     definesPresentationContext = true
   }
+  
+  private func setupMiniature() {
+    avatarView.miniNameLabel.text = "A"
+    avatarView.miniSecondNameLabel.text = "L"
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
+    avatarView.isUserInteractionEnabled = true
+    avatarView.addGestureRecognizer(tapGestureRecognizer)
+  }
 }
 
 
@@ -129,7 +134,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let section = self.sections[section]
-    
     return section.chats.count
   }
   

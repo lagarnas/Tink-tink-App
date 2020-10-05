@@ -49,17 +49,14 @@ final class ConversationViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = false
     self.messageTextField.delegate = self
     setupTableView()
-    
   }
   
-  private func createRightBarCustom() {
-  }
-
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     let indexPath = IndexPath(item: self.allChatMessages.count-1, section: 0)
     self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
+    //self.tableView.backgroundColor = Theme.current.background
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -82,7 +79,7 @@ extension ConversationViewController {
     tableView.register(UINib(nibName: IncomingMessageTableViewCell.nibName, bundle: nil),
                        forCellReuseIdentifier: IncomingMessageTableViewCell.reuseIdentifier)
     tableView.register(UINib(nibName: OutgoingMessageTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: OutgoingMessageTableViewCell.reuseIdentifier)
-    
+    tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
     self.tableView.addGestureRecognizer(tapGesture)
   }
