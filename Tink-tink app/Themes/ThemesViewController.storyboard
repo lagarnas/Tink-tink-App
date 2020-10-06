@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mYf-Wp-5kL">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mYf-Wp-5kL">
                                 <rect key="frame" x="37" y="98" width="246" height="412"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hJV-ac-iZ1">
                                         <rect key="frame" x="0.0" y="0.0" width="246" height="124"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-lR-6gf" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-lR-6gf" userLabel="classic" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="246" height="57"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -37,18 +37,32 @@
                                                     <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="0bi-ko-1r7"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97s-DJ-jDP">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iew-4p-1cd">
                                                 <rect key="frame" x="0.0" y="67" width="246" height="57"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97s-DJ-jDP">
+                                                        <rect key="frame" x="90.5" y="17" width="65.5" height="23"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="97s-DJ-jDP" firstAttribute="centerY" secondItem="Iew-4p-1cd" secondAttribute="centerY" id="eiI-K4-LZq"/>
+                                                    <constraint firstItem="97s-DJ-jDP" firstAttribute="centerX" secondItem="Iew-4p-1cd" secondAttribute="centerX" id="gll-cH-Q1t"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Nxd-lR-6gf" secondAttribute="trailing" id="742-Ve-Na1"/>
+                                            <constraint firstItem="Nxd-lR-6gf" firstAttribute="leading" secondItem="hJV-ac-iZ1" secondAttribute="leading" id="Tx3-uT-Zq5"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="n1k-Zi-l7s">
                                         <rect key="frame" x="0.0" y="144" width="246" height="124"/>
                                         <subviews>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l53-1I-3wZ" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l53-1I-3wZ" userLabel="day" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="246" height="57"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -59,18 +73,28 @@
                                                     <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="Mzz-sR-EwZ"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y83-4T-fp3">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCB-pT-wVD">
                                                 <rect key="frame" x="0.0" y="67" width="246" height="57"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y83-4T-fp3">
+                                                        <rect key="frame" x="105.5" y="17" width="35" height="23"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="Y83-4T-fp3" firstAttribute="centerY" secondItem="nCB-pT-wVD" secondAttribute="centerY" id="7BN-NT-Et0"/>
+                                                    <constraint firstItem="Y83-4T-fp3" firstAttribute="centerX" secondItem="nCB-pT-wVD" secondAttribute="centerX" id="Jdc-zv-Kfv"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tiq-8R-ImL">
                                         <rect key="frame" x="0.0" y="288" width="246" height="124"/>
                                         <subviews>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2A-Iz-PkP" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2A-Iz-PkP" userLabel="night" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="246" height="57"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -81,12 +105,22 @@
                                                     <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="91l-0V-gfq"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1q-ki-G3y">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBI-bj-jFN">
                                                 <rect key="frame" x="0.0" y="67" width="246" height="57"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1q-ki-G3y">
+                                                        <rect key="frame" x="98.5" y="17" width="49.5" height="23"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="H1q-ki-G3y" firstAttribute="centerX" secondItem="DBI-bj-jFN" secondAttribute="centerX" id="Dw1-tv-5uO"/>
+                                                    <constraint firstItem="H1q-ki-G3y" firstAttribute="centerY" secondItem="DBI-bj-jFN" secondAttribute="centerY" id="QSf-E5-nhH"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -102,17 +136,17 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="classicButton" destination="Nxd-lR-6gf" id="hn2-gF-WD3"/>
-                        <outlet property="classicLabel" destination="97s-DJ-jDP" id="cb2-MF-7EN"/>
-                        <outlet property="dayButton" destination="l53-1I-3wZ" id="hca-Va-vVr"/>
-                        <outlet property="dayLabel" destination="Y83-4T-fp3" id="EGo-zi-I2m"/>
-                        <outlet property="nightButton" destination="p2A-Iz-PkP" id="ov3-zt-4TV"/>
-                        <outlet property="nightLabel" destination="H1q-ki-G3y" id="nKl-Om-BqQ"/>
+                        <outletCollection property="themeLabels" destination="97s-DJ-jDP" collectionClass="NSMutableArray" id="l2i-pY-U7T"/>
+                        <outletCollection property="themeLabels" destination="Y83-4T-fp3" collectionClass="NSMutableArray" id="6dB-IM-8Ke"/>
+                        <outletCollection property="themeLabels" destination="H1q-ki-G3y" collectionClass="NSMutableArray" id="nr1-7j-Bxl"/>
+                        <outletCollection property="themeButtons" destination="Nxd-lR-6gf" collectionClass="NSMutableArray" id="pDk-do-rZZ"/>
+                        <outletCollection property="themeButtons" destination="l53-1I-3wZ" collectionClass="NSMutableArray" id="eoP-Hb-PuW"/>
+                        <outletCollection property="themeButtons" destination="p2A-Iz-PkP" collectionClass="NSMutableArray" id="Bsn-5a-jbh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHC-r1-vO0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="84.975369458128085"/>
+            <point key="canvasLocation" x="131.25" y="84.507042253521121"/>
         </scene>
     </scenes>
 </document>

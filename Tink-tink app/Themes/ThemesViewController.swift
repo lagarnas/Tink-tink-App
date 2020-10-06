@@ -10,38 +10,67 @@ import UIKit
 
 class ThemesViewController: UIViewController {
   
-  @IBOutlet private weak var classicButton: ThemeButton!
-  @IBOutlet private weak var dayButton: ThemeButton!
-  @IBOutlet private weak var nightButton: ThemeButton!
+  @IBOutlet private var themeButtons: [ThemeButton]!
+  @IBOutlet private var themeLabels: [UILabel]!
   
-  @IBOutlet private weak var classicLabel: UILabel!
-  @IBOutlet private weak var dayLabel: UILabel!
-  @IBOutlet private weak var nightLabel: UILabel!
-  
-  var didChangeThemeButton: ((Themeable) -> Void)?
+  var didChangeTheme: ((Themeable) -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.title = "Settings"
-    self.navigationController?.navigationBar.prefersLargeTitles = false
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
-    setupLabelTapRecognizer(label: classicLabel)
-    setupLabelTapRecognizer(label: dayLabel)
-    setupLabelTapRecognizer(label: nightLabel)
-    
+    setupNavigation()
+    setupUI()
     applyTheme()
   }
   
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
 
+  @IBAction
+  private func themeButtonTapped(_ sender: ThemeButton) {
+    themeButtons.forEach {
+      $0.isSelected = $0 == sender ? true : false
+    }
+    switch sender {
+    case themeButtons[0]:
+      didChangeTheme?(ClassicTheme())
+    case themeButtons[1]:
+      didChangeTheme?(DayTheme())
+    case themeButtons[2]:
+      didChangeTheme?(NightTheme())
+    default:
+      break
+    }
+    sender.shake()
+    saveStates()
+    applyTheme()
   }
+}
+
+extension ThemesViewController {
   
   private func applyTheme() {
     view.backgroundColor = Theme.current.background
-    classicLabel.textColor = Theme.current.mainTextColor
-    dayLabel.textColor = Theme.current.mainTextColor
-    nightLabel.textColor = Theme.current.mainTextColor
+    themeLabels.forEach {
+      $0.textColor = Theme.current.mainTextColor
+    }
+  }
+  
+  private func setupNavigation() {
+    self.title = "Settings"
+    self.navigationController?.navigationBar.prefersLargeTitles = false
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
+  }
+  
+  private func setupUI() {
+    if  !UserDefaults.standard.bool(forKey: "classicButton") &&
+          !UserDefaults.standard.bool(forKey: "dayButton") &&
+          !UserDefaults.standard.bool(forKey: "nightButton") {
+      themeButtons[0].isSelected = true
+    } else {
+      themeButtons[0].isSelected = UserDefaults.standard.bool(forKey: "classicButton")
+      themeButtons[1].isSelected = UserDefaults.standard.bool(forKey: "dayButton")
+      themeButtons[2].isSelected = UserDefaults.standard.bool(forKey: "nightButton")
+    }
+    
+    themeLabels.forEach { setupLabelTapRecognizer(label: $0) }
   }
   
   private func setupLabelTapRecognizer(label: UILabel) {
@@ -53,55 +82,24 @@ class ThemesViewController: UIViewController {
   @objc
   private func labelTapped(_ sender: UITapGestureRecognizer) {
     switch sender.view {
-    case classicLabel:
-      themeButtonTapped(classicButton)
-    case dayLabel:
-      themeButtonTapped(dayButton)
-    case nightLabel:
-      themeButtonTapped(nightButton)
+    case themeLabels[0]:
+      themeButtonTapped(themeButtons[0])
+    case themeLabels[1]:
+      themeButtonTapped(themeButtons[1])
+    case themeLabels[2]:
+      themeButtonTapped(themeButtons[2])
     default:
       break
     }
   }
-  
-  @IBAction
-  private func themeButtonTapped(_ sender: ThemeButton) {
-    sender.isSelected = !sender.isSelected
-    switch sender {
-    case classicButton:
-      nightButton.isSelected   = false
-      dayButton.isSelected     = false
-      didChangeThemeButton?(ClassicTheme())
-    case dayButton:
-      classicButton.isSelected = false
-      nightButton.isSelected   = false
-      didChangeThemeButton?(DayTheme())
-    case nightButton:
-      classicButton.isSelected = false
-      dayButton.isSelected     = false
-      didChangeThemeButton?(NightTheme())
-    default:
-      break
-    }
-    
-    
-    sender.shake()
-    applyTheme()
-  }
-  
   
   @objc private func dismissVC() {
     self.navigationController?.popViewController(animated: true)
   }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
+  private func saveStates() {
+    UserDefaults.standard.set(themeButtons[0].isSelected, forKey: "classicButton")
+    UserDefaults.standard.set(themeButtons[1].isSelected, forKey: "dayButton")
+    UserDefaults.standard.set(themeButtons[2].isSelected, forKey: "nightButton")
+  }
 }

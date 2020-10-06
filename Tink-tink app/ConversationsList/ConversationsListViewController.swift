@@ -67,7 +67,7 @@ final class ConversationsListViewController: UIViewController {
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
-    themesVC.didChangeThemeButton = { currentTheme in
+    themesVC.didChangeTheme = { currentTheme in
       ThemeHelper.shared.setupCurrentTheme(currentTheme)
     }
     self.navigationController?.pushViewController(themesVC, animated: true)

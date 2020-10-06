@@ -25,7 +25,7 @@ class ThemeButton: UIButton {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    //print(#function)
+
     if isSelected {
       layer.borderWidth = 3
       layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
