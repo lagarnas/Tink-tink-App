@@ -110,7 +110,6 @@ extension ThemesViewController {
   private func setupNavigation() {
     self.title = "Settings"
     self.navigationController?.navigationBar.prefersLargeTitles = false
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissVC))
   }
   
   private func setupUI() {
@@ -151,9 +150,6 @@ extension ThemesViewController {
     }
   }
   
-  @objc private func dismissVC() {
-    self.navigationController?.popViewController(animated: true)
-  }
   
   private func saveStates() {
     ThemeManager.shared.saveStates(themeMode: themeMode)

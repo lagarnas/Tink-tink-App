@@ -49,8 +49,7 @@ extension ProfileViewController {
   }
   
   private func configure() {
-    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.navigationBar.backgroundColor = ThemeManager.shared.current.accent
+    updateTheme()
     self.navigationBar.prefersLargeTitles = true
     saveButton.clipsToBounds = true
     saveButton.layer.cornerRadius = 10
@@ -63,6 +62,16 @@ extension ProfileViewController {
     let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
     avatarView.nameLabel.text = nameAv
     avatarView.secondNameLabel.text = secondNameAv
+
+  }
+  
+  private func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    nameLabel.textColor = ThemeManager.shared.current.mainTextColor
+    bioLabel.textColor = ThemeManager.shared.current.mainTextColor
+    saveButton.backgroundColor = ThemeManager.shared.current.accent
+    saveButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
   }
   
   private func openAlertAction() {
@@ -79,6 +88,7 @@ extension ProfileViewController {
     
     camera.setValue(cameraIcon, forKey: "image")
     camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+   // camera.titleTextColor = .black
     
     let photo = UIAlertAction(title: "Photo", style: .default) { _ in
       self.chooseImagePicker(source: .photoLibrary)
@@ -86,8 +96,10 @@ extension ProfileViewController {
     
     photo.setValue(photoIcon, forKey: "image")
     photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+   // photo.titleTextColor = .black
     
     let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+   // cancel.titleTextColor = .red
     
     actionSheet.addAction(camera)
     actionSheet.addAction(photo)
@@ -95,7 +107,7 @@ extension ProfileViewController {
     actionSheet.pruneNegativeWidthConstraints()
     present(actionSheet, animated: true)
   }
-
+  
 }
 
 
@@ -112,7 +124,7 @@ extension ProfileViewController {
     if avatarView.imageView.image != nil { hideInitials() }
     os_log("%@", log: OSLog.viewCycle, type: .info, #function)
   }
-
+  
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
   }
@@ -142,6 +154,17 @@ extension ProfileViewController {
     super.didReceiveMemoryWarning()
     NSLog(#function)
   }
-
   
+  
+}
+
+extension UIAlertAction {
+
+    var titleTextColor: UIColor? {
+        get {
+            return self.value(forKey: "titleTextColor") as? UIColor
+        } set {
+            self.setValue(newValue, forKey: "titleTextColor")
+        }
+    }
 }

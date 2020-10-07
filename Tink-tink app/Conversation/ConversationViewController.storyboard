@@ -66,6 +66,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dockView" destination="zXk-rP-Avi" id="Psu-9i-45y"/>
                         <outlet property="dockViewHeightConstraint" destination="k0Q-qK-LXE" id="58J-lu-Nfe"/>
                         <outlet property="messageTextField" destination="7WV-mw-tG2" id="2rz-Lb-jJ7"/>
                         <outlet property="sendButton" destination="Fou-k6-orO" id="eic-FA-QNO"/>

@@ -19,6 +19,7 @@ final class ConversationViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView!
   @IBOutlet private weak var sendButton: UIButton!
   @IBOutlet private weak var dockViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var dockView: UIView!
   
   private let allChatMessages = [
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
@@ -49,7 +50,7 @@ final class ConversationViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = false
     self.messageTextField.delegate = self
     setupTableView()
-    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
+    updateTheme()
   }
   
   
@@ -67,6 +68,15 @@ final class ConversationViewController: UIViewController {
   //MARK: - @IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
+  }
+  
+  private func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
+    self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.dockView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+   
   }
 }
 

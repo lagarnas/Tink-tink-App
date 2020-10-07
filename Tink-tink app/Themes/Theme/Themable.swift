@@ -11,6 +11,8 @@ import UIKit
 protocol Themable {
   //navBar, buttons, actionSheet
   var accent: UIColor { get }
+  var tintColor: UIColor { get }
+  var onlineIndicator: UIColor { get }
   var backgroundAppColor: UIColor { get }
   //backgroundChat
   var backgroundChatColor: UIColor { get }

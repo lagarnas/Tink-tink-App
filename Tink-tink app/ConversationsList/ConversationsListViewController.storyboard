@@ -35,7 +35,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tinkoff chat" id="Szd-t3-0AS">
-                        <barButtonItem key="leftBarButtonItem" image="icons8-gear 1" id="lWv-nV-MH4">
+                        <barButtonItem key="leftBarButtonItem" image="Settings_group" id="lWv-nV-MH4">
                             <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.34509803921568627" alpha="0.65360124143835618" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="settingsTapped:" destination="0me-a7-DvC" id="3yW-fR-hVA"/>
@@ -56,6 +56,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="avatarView" destination="phf-zg-dap" id="gGn-Jw-psa"/>
+                        <outlet property="settingsIcon" destination="lWv-nV-MH4" id="bun-Bs-901"/>
                         <outlet property="tableView" destination="JN0-8I-qn3" id="5ua-Yv-SF5"/>
                     </connections>
                 </viewController>
@@ -84,7 +85,7 @@
     </scenes>
     <resources>
         <image name="2020-01-23 14.33.44" width="213.33332824707031" height="213.33332824707031"/>
-        <image name="icons8-gear 1" width="32" height="32"/>
+        <image name="Settings_group" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

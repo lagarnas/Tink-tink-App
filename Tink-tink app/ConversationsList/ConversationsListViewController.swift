@@ -18,6 +18,7 @@ final class ConversationsListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
   @IBOutlet private weak var avatarView: MiniAvatarView!
+  @IBOutlet weak var settingsIcon: UIBarButtonItem!
   
   private var sections = [TypeSection]()
   private var chats = [
@@ -61,8 +62,7 @@ final class ConversationsListViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.tableView.reloadData()
+    updateTheme()
   }
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
@@ -71,12 +71,24 @@ final class ConversationsListViewController: UIViewController {
    // themesVC.delegate = self
     
     //MARK: Closure
-    themesVC.didChangeTheme = {
-      self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.accent
-      self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    themesVC.didChangeTheme = { [weak self] in
+      self?.updateTheme()
     }
     
     self.navigationController?.pushViewController(themesVC, animated: true)
+  }
+  
+  private func updateTheme() {
+      ThemeManager.shared.applyTheme()
+    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.navigationController?.navigationBar.barStyle = ThemeManager.shared.barStyle
+    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
+    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
+    settingsIcon.tintColor = ThemeManager.shared.current.tintColor
+    
+    tableView.reloadData()
+  
   }
   
   deinit {
