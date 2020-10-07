@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NightTheme: Themable {
+struct NightTheme: Themable {
   var tintColor: UIColor = .white
   var onlineIndicator: UIColor = .systemGreen
   var incomingMessageColor: UIColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1803921569, alpha: 1)

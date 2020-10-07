@@ -66,16 +66,10 @@ extension ConversationTableViewCell: ConfigurableView {
     onlineIndicatorView.isHidden = model.isOnline ? false : true
     previewMessageLabel.font = model.hasUnreadMessages && model.message != ""  ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
     
-    if model.message == "" {
-      previewMessageLabel.text =  "No messages yet..."
-      previewMessageLabel.font = UIFont.italicSystemFont(ofSize: 13)
-      dateLabel.isHidden = true
-    } else {
-      previewMessageLabel.text = model.message
-      previewMessageLabel.font = UIFont.systemFont(ofSize: 13)
-      dateLabel.isHidden = false
-    }
-    
+    previewMessageLabel.text = model.message == "" ? "No messages yet..." : model.message
+    previewMessageLabel.font = model.message == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
+    dateLabel.isHidden = model.message == ""
+
     dateLabel.text = model.date.getFormattingDate()
     nameLabel.text = model.name
     

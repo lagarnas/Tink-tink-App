@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClassicTheme: Themable {
+struct ClassicTheme: Themable {
   var onlineIndicator: UIColor = .systemGreen
   var tintColor: UIColor = .black
   var incomingMessageColor: UIColor = .white

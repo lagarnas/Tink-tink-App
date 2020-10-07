@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ThemeButton: UIButton {
+final class ThemeButton: UIButton {
   
-  let bubble = UIView()
-  let secondBubble = UIView()
+  private let bubble = UIView()
+  private let secondBubble = UIView()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -25,14 +25,9 @@ class ThemeButton: UIButton {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-
-    if isSelected {
-      layer.borderWidth = 3
-      layer.borderColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-    } else {
-      layer.borderWidth = 1
-      layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
-    }
+    
+    layer.borderWidth = isSelected ? 3 : 1
+    layer.borderColor = isSelected ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
   }
   
   private func setupButton() {

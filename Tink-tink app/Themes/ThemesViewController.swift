@@ -7,30 +7,35 @@
 //
 
 import UIKit
-
-enum ThemeMode: Int {
-  case classic, day, night
-}
+import os.log
 
 protocol ThemesPickerDelegate: class {
   func didChangeTheme(_ themesViewController: ThemesViewController)
 }
 
-class ThemesViewController: UIViewController {
+final class ThemesViewController: UIViewController {
   
-  @IBOutlet weak var classicButton: ThemeButton!
-  @IBOutlet weak var dayButton: ThemeButton!
-  @IBOutlet weak var nightButton: ThemeButton!
+  @IBOutlet private weak var classicButton: ThemeButton!
+  @IBOutlet private weak var dayButton: ThemeButton!
+  @IBOutlet private weak var nightButton: ThemeButton!
   
-  @IBOutlet weak var classicLabel: UILabel!
-  @IBOutlet weak var dayLabel: UILabel!
-  @IBOutlet weak var nightLabel: UILabel!
+  @IBOutlet private weak var classicLabel: UILabel!
+  @IBOutlet private weak var dayLabel: UILabel!
+  @IBOutlet private weak var nightLabel: UILabel!
   
-  var themeMode: ThemeMode = .classic
+  private var themeMode: ThemeMode = .classic
+  
+  /*
+  Retain cycle возникнет если будет сильная ссылка на этот VC, с другого VC (Наглядно это видно с ProfileVC, так как он закрывается и сразу видно уничтожается ли он или нет) и соответственно сильная ссылка на ProfileVC (vc.delegate = self) Если не сделать одну из этих ссылок weak (разница будет ли в том в каком порядке они будут уничтожаться), то объект не уничтожится и будет висеть в памяти (соответсвеено deinit не вызовится).Поэтому либо делаем переменную delegate weak, либо переменную themesVC. Но обычно delagate делают weak. (Если что, я удалила код связанный с этим из ProfileVC). Аналогичная ситуация если рассматривать ConverationsListVC, просто там не будет видно уничтожены ли объекты или нет, так как ConverationsListVC уничтожается только когда мы закрываем приложение. Там я создаю ссылку на ThemesVC внутри @IBAction settingsTapped() и сразу после отработки этого метода объект уничтожается  и его не держит никто значит на ThemesVC не будет ссылки, поэтому тут и без weak будут уничтожаться VC. Но я тут оставлю weak все равно, так привычно)
+  */
   
   //MARK: Delegate
-  //Retains cycle возникнет если будет сильная ссылка на этот VC, с другого VC (Наглядно это видно с ProfileVC, так как он закрывается и сразу видно уничтожается ли он или нет) и соответственно сильная ссылка на ProfileVC (vc.delegate = self) Если не сделать одну из этих ссылок weak (разница будет ли в том в каком порядке они будут уничтожаться), то объект не уничтожится и будет висеть в памяти (соответсвеено deinit не вызовится).Поэтому либо делаем переменную delegate weak, либо переменную themesVC. Но обычно delagate делают weak. (Если что, я удалила код связанный с этим из ProfileVC). Аналогичная ситуация если рассматривать ConverationsListVC, просто там не будет видно уничтожены ли объекты или нет, так как ConverationsListVC уничтожается только когда мы закрываем приложение. Там я создаю ссылку на ThemesVC внутри @IBAction settingsTapped() и сразу после отработки этого метода объект уничтожается  и его не держит никто значит на ThemesVC не будет ссылки, поэтому тут и без weak будут уничтожаться VC. Но я тут оставлю weak все равно, так привычно)
   //  weak var delegate: ThemesPickerDelegate?
+  
+  /*
+  Аналогично retain cycle возникнет если будут 2 сильных ссылки например ProfileVC будет сильно ссылаться на ThemesVC, а ThemesVC внутри замыкающего выражения будет сильно ссылаться на ProfileVC, таким образом, опять надо одну из ссылок сделать weak, потому что если, например, внутри замыкания не поставить [weak self] будет retain cycle, deinit не вызовется, что приведет к утечки памяти. В ProfileVC закомментирую код, иллюстрирующий retain cycle.
+  */
+  
   //MARK: Closure
   var didChangeTheme: (() -> Void)?
   
@@ -42,7 +47,7 @@ class ThemesViewController: UIViewController {
   }
   
   
-  @IBAction func classicButtonTapped(_ sender: ThemeButton) {
+  @IBAction private func classicButtonTapped(_ sender: ThemeButton) {
     unSelectAll()
     sender.isSelected = true
     themeMode = .classic
@@ -55,7 +60,7 @@ class ThemesViewController: UIViewController {
     
   }
   
-  @IBAction func dayButtonTapped(_ sender: ThemeButton) {
+  @IBAction private func dayButtonTapped(_ sender: ThemeButton) {
     unSelectAll()
     sender.isSelected = true
     themeMode = .day
@@ -68,7 +73,7 @@ class ThemesViewController: UIViewController {
   }
   
   
-  @IBAction func nightButtonTapped(_ sender: ThemeButton) {
+  @IBAction private func nightButtonTapped(_ sender: ThemeButton) {
     unSelectAll()
     sender.isSelected = true
     themeMode = .night
@@ -81,7 +86,7 @@ class ThemesViewController: UIViewController {
   }
   
   deinit {
-    print("deinit: ThemesViewController")
+    os_log("%@", log: .retainCycle, type: .info, self)
   }
   
 }
@@ -96,7 +101,7 @@ extension ThemesViewController {
   
   
   private func updateTheme() {
-    saveStates()
+    saveTheme()
     applyTheme()
   }
   
@@ -150,8 +155,8 @@ extension ThemesViewController {
     }
   }
   
-  
-  private func saveStates() {
-    ThemeManager.shared.saveStates(themeMode: themeMode)
+
+  private func saveTheme() {
+    ThemeManager.shared.save(themeMode: themeMode)
   }
 }

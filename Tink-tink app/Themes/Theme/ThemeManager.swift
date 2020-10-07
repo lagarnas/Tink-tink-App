@@ -8,25 +8,23 @@
 
 import UIKit
 
-class ThemeManager {
+enum ThemeMode: Int {
+  case classic, day, night
+}
+
+final class ThemeManager {
   
   static let shared = ThemeManager()
   private init() {}
   
   func applyTheme() {
-    // 1
     UserDefaults.standard.synchronize()
-    // 2
     let sharedApplication = UIApplication.shared
     sharedApplication.delegate?.window??.tintColor = current.tintColor
     sharedApplication.delegate?.window??.backgroundColor = current.backgroundAppColor
     UINavigationBar.appearance().barStyle = barStyle
     UITextField.appearance().backgroundColor = current.accent
-    if currentMode == .night {
-      UITextField.appearance().keyboardAppearance = UIKeyboardAppearance.dark
-    } else {
-      UITextField.appearance().keyboardAppearance = UIKeyboardAppearance.light
-    }
+    UITextField.appearance().keyboardAppearance = currentMode == .night ? .dark : .light
   }
   
   var current: Themable {
@@ -46,10 +44,9 @@ class ThemeManager {
     return themeMode
   }
   
-  func saveStates(themeMode: ThemeMode) {
+  func save(themeMode: ThemeMode) {
     UserDefaults.standard.set(themeMode.rawValue, forKey: "themeMode")
   }
-  
 }
 
 

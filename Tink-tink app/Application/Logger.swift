@@ -18,6 +18,8 @@ extension OSLog {
   static let viewCycle = OSLog(subsystem: subsystem, category: "viewcycle")
   // Logs the view frame is changing
   static let frameChanged = OSLog(subsystem: subsystem, category: "frameChanged")
+  // Logs the deinit is performing
+  static let retainCycle = OSLog(subsystem: subsystem, category: "retainCycle")
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 struct TypeSection {
   var title: String
@@ -57,7 +58,6 @@ final class ConversationsListViewController: UIViewController {
     setupTableView()
     setupSearchController()
     setupMiniature()
-    
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +68,7 @@ final class ConversationsListViewController: UIViewController {
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
     //MARK: Delegate
-   // themesVC.delegate = self
+    // themesVC.delegate = self
     
     //MARK: Closure
     themesVC.didChangeTheme = { [weak self] in
@@ -78,8 +78,9 @@ final class ConversationsListViewController: UIViewController {
     self.navigationController?.pushViewController(themesVC, animated: true)
   }
   
+  //MARK: - Не получилось поменять цвета для хедеров Online и History
   private func updateTheme() {
-      ThemeManager.shared.applyTheme()
+    ThemeManager.shared.applyTheme()
     self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     self.navigationController?.navigationBar.barStyle = ThemeManager.shared.barStyle
@@ -88,13 +89,20 @@ final class ConversationsListViewController: UIViewController {
     settingsIcon.tintColor = ThemeManager.shared.current.tintColor
     
     tableView.reloadData()
-  
   }
   
   deinit {
-    print("deinit: ConversationsListViewController")
+    os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
+
+//MARK: ThemesPickerDelegate
+//extension ConversationsListViewController: ThemesPickerDelegate {
+//  func didChangeTheme(_ themesViewController: ThemesViewController) {
+//    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
+//  }
+//
+//}
 
 //MARK: - Functions
 extension ConversationsListViewController {
@@ -146,13 +154,6 @@ extension ConversationsListViewController {
     avatarView.addGestureRecognizer(tapGestureRecognizer)
   }
 }
-
-//extension ConversationsListViewController: ThemesPickerDelegate {
-//  func didChangeTheme(_ themesViewController: ThemesViewController) {
-//    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
-//  }
-//
-//}
 
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

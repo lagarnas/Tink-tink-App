@@ -17,11 +17,20 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   @IBOutlet weak var avatarView: AvatarView!
   
+  weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
+  
   var imageIsChanged = false
   
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
+    //MARK: - Retain cycle
+//    themesVC?.didChangeTheme = {
+//      self.updateTheme()
+//    }
+    
     configure()
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, saveButton.frame as CVarArg)
@@ -37,6 +46,10 @@ final class ProfileViewController: UIViewController {
   }
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
+  }
+  
+  deinit {
+    os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
 
@@ -88,7 +101,7 @@ extension ProfileViewController {
     
     camera.setValue(cameraIcon, forKey: "image")
     camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-   // camera.titleTextColor = .black
+    camera.titleTextColor = .black
     
     let photo = UIAlertAction(title: "Photo", style: .default) { _ in
       self.chooseImagePicker(source: .photoLibrary)
@@ -96,10 +109,10 @@ extension ProfileViewController {
     
     photo.setValue(photoIcon, forKey: "image")
     photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-   // photo.titleTextColor = .black
+    photo.titleTextColor = .black
     
     let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-   // cancel.titleTextColor = .red
+    cancel.titleTextColor = .red
     
     actionSheet.addAction(camera)
     actionSheet.addAction(photo)
@@ -154,17 +167,5 @@ extension ProfileViewController {
     super.didReceiveMemoryWarning()
     NSLog(#function)
   }
-  
-  
 }
 
-extension UIAlertAction {
-
-    var titleTextColor: UIColor? {
-        get {
-            return self.value(forKey: "titleTextColor") as? UIColor
-        } set {
-            self.setValue(newValue, forKey: "titleTextColor")
-        }
-    }
-}
