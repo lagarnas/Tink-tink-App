@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol Themeable {
+protocol Themable {
   //navBar, buttons, actionSheet
   var accent: UIColor { get }
-  var background: UIColor { get }
+  var backgroundAppColor: UIColor { get }
   //backgroundChat
   var backgroundChatColor: UIColor { get }
   //main font color

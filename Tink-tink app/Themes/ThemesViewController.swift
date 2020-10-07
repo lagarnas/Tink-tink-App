@@ -8,12 +8,31 @@
 
 import UIKit
 
+enum ThemeMode: Int {
+  case classic, day, night
+}
+
+protocol ThemesPickerDelegate: class {
+  func didChangeTheme(_ themesViewController: ThemesViewController)
+}
+
 class ThemesViewController: UIViewController {
   
-  @IBOutlet private var themeButtons: [ThemeButton]!
-  @IBOutlet private var themeLabels: [UILabel]!
+  @IBOutlet weak var classicButton: ThemeButton!
+  @IBOutlet weak var dayButton: ThemeButton!
+  @IBOutlet weak var nightButton: ThemeButton!
   
-  var didChangeTheme: ((Themeable) -> Void)?
+  @IBOutlet weak var classicLabel: UILabel!
+  @IBOutlet weak var dayLabel: UILabel!
+  @IBOutlet weak var nightLabel: UILabel!
+  
+  var themeMode: ThemeMode = .classic
+  
+  //MARK: Delegate
+  //Retains cycle возникнет если будет сильная ссылка на этот VC, с другого VC (Наглядно это видно с ProfileVC, так как он закрывается и сразу видно уничтожается ли он или нет) и соответственно сильная ссылка на ProfileVC (vc.delegate = self) Если не сделать одну из этих ссылок weak (разница будет ли в том в каком порядке они будут уничтожаться), то объект не уничтожится и будет висеть в памяти (соответсвеено deinit не вызовится).Поэтому либо делаем переменную delegate weak, либо переменную themesVC. Но обычно delagate делают weak. (Если что, я удалила код связанный с этим из ProfileVC). Аналогичная ситуация если рассматривать ConverationsListVC, просто там не будет видно уничтожены ли объекты или нет, так как ConverationsListVC уничтожается только когда мы закрываем приложение. Там я создаю ссылку на ThemesVC внутри @IBAction settingsTapped() и сразу после отработки этого метода объект уничтожается  и его не держит никто значит на ThemesVC не будет ссылки, поэтому тут и без weak будут уничтожаться VC. Но я тут оставлю weak все равно, так привычно)
+  //  weak var delegate: ThemesPickerDelegate?
+  //MARK: Closure
+  var didChangeTheme: (() -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,35 +41,70 @@ class ThemesViewController: UIViewController {
     applyTheme()
   }
   
-
-  @IBAction
-  private func themeButtonTapped(_ sender: ThemeButton) {
-    themeButtons.forEach {
-      $0.isSelected = $0 == sender ? true : false
-    }
-    switch sender {
-    case themeButtons[0]:
-      didChangeTheme?(ClassicTheme())
-    case themeButtons[1]:
-      didChangeTheme?(DayTheme())
-    case themeButtons[2]:
-      didChangeTheme?(NightTheme())
-    default:
-      break
-    }
+  
+  @IBAction func classicButtonTapped(_ sender: ThemeButton) {
+    unSelectAll()
+    sender.isSelected = true
+    themeMode = .classic
+    updateTheme()
     sender.shake()
-    saveStates()
-    applyTheme()
+    
+    //delegate?.didChangeTheme(self)
+    
+    didChangeTheme?()
+    
   }
+  
+  @IBAction func dayButtonTapped(_ sender: ThemeButton) {
+    unSelectAll()
+    sender.isSelected = true
+    themeMode = .day
+    updateTheme()
+    sender.shake()
+    
+    // delegate?.didChangeTheme(self)
+    
+    didChangeTheme?()
+  }
+  
+  
+  @IBAction func nightButtonTapped(_ sender: ThemeButton) {
+    unSelectAll()
+    sender.isSelected = true
+    themeMode = .night
+    updateTheme()
+    sender.shake()
+    
+    //delegate?.didChangeTheme(self)
+    
+    didChangeTheme?()
+  }
+  
+  deinit {
+    print("deinit: ThemesViewController")
+  }
+  
 }
 
 extension ThemesViewController {
   
+  private func unSelectAll() {
+    classicButton.isSelected = false
+    dayButton.isSelected = false
+    nightButton.isSelected = false
+  }
+  
+  
+  private func updateTheme() {
+    saveStates()
+    applyTheme()
+  }
+  
   private func applyTheme() {
-    view.backgroundColor = Theme.current.background
-    themeLabels.forEach {
-      $0.textColor = Theme.current.mainTextColor
-    }
+    view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    classicLabel.textColor = ThemeManager.shared.current.mainTextColor
+    dayLabel.textColor = ThemeManager.shared.current.mainTextColor
+    nightLabel.textColor = ThemeManager.shared.current.mainTextColor
   }
   
   private func setupNavigation() {
@@ -60,17 +114,21 @@ extension ThemesViewController {
   }
   
   private func setupUI() {
-    if  !UserDefaults.standard.bool(forKey: "classicButton") &&
-          !UserDefaults.standard.bool(forKey: "dayButton") &&
-          !UserDefaults.standard.bool(forKey: "nightButton") {
-      themeButtons[0].isSelected = true
-    } else {
-      themeButtons[0].isSelected = UserDefaults.standard.bool(forKey: "classicButton")
-      themeButtons[1].isSelected = UserDefaults.standard.bool(forKey: "dayButton")
-      themeButtons[2].isSelected = UserDefaults.standard.bool(forKey: "nightButton")
+    
+    themeMode = ThemeManager.shared.currentMode
+    
+    switch themeMode {
+    case .classic:
+      classicButton.isSelected = true
+    case .day:
+      dayButton.isSelected = true
+    case .night:
+      nightButton.isSelected = true
     }
     
-    themeLabels.forEach { setupLabelTapRecognizer(label: $0) }
+    setupLabelTapRecognizer(label: classicLabel)
+    setupLabelTapRecognizer(label: dayLabel)
+    setupLabelTapRecognizer(label: nightLabel)
   }
   
   private func setupLabelTapRecognizer(label: UILabel) {
@@ -82,12 +140,12 @@ extension ThemesViewController {
   @objc
   private func labelTapped(_ sender: UITapGestureRecognizer) {
     switch sender.view {
-    case themeLabels[0]:
-      themeButtonTapped(themeButtons[0])
-    case themeLabels[1]:
-      themeButtonTapped(themeButtons[1])
-    case themeLabels[2]:
-      themeButtonTapped(themeButtons[2])
+    case classicLabel:
+      classicButtonTapped(classicButton)
+    case dayLabel:
+      dayButtonTapped(dayButton)
+    case nightLabel:
+      nightButtonTapped(nightButton)
     default:
       break
     }
@@ -98,8 +156,6 @@ extension ThemesViewController {
   }
   
   private func saveStates() {
-    UserDefaults.standard.set(themeButtons[0].isSelected, forKey: "classicButton")
-    UserDefaults.standard.set(themeButtons[1].isSelected, forKey: "dayButton")
-    UserDefaults.standard.set(themeButtons[2].isSelected, forKey: "nightButton")
+    ThemeManager.shared.saveStates(themeMode: themeMode)
   }
 }

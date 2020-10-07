@@ -49,6 +49,7 @@ final class ConversationViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = false
     self.messageTextField.delegate = self
     setupTableView()
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
   }
   
   
@@ -56,7 +57,6 @@ final class ConversationViewController: UIViewController {
     super.viewDidAppear(animated)
     let indexPath = IndexPath(item: self.allChatMessages.count-1, section: 0)
     self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
-    //self.tableView.backgroundColor = Theme.current.background
   }
   
   override func viewWillDisappear(_ animated: Bool) {

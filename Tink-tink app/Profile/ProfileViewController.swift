@@ -49,12 +49,11 @@ extension ProfileViewController {
   }
   
   private func configure() {
-    self.navigationBar.backgroundColor = .white
+    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.navigationBar.backgroundColor = ThemeManager.shared.current.accent
     self.navigationBar.prefersLargeTitles = true
     saveButton.clipsToBounds = true
     saveButton.layer.cornerRadius = 10
-    nameLabel.text = "Anastasia Leonteva"
-    bioLabel.text = "iOS developer, QA engineer, Russia, Samara"
     avatarView.imageView.image = retrieveImage(forKey: "avatarImage")
     setupInitialsOfName()
   }

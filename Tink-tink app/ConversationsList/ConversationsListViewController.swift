@@ -61,16 +61,26 @@ final class ConversationsListViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    //self.tableView.backgroundColor = Theme.current.background
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     self.tableView.reloadData()
   }
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
-    themesVC.didChangeTheme = { currentTheme in
-      ThemeHelper.shared.setupCurrentTheme(currentTheme)
+    //MARK: Delegate
+   // themesVC.delegate = self
+    
+    //MARK: Closure
+    themesVC.didChangeTheme = {
+      self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.accent
+      self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     }
+    
     self.navigationController?.pushViewController(themesVC, animated: true)
+  }
+  
+  deinit {
+    print("deinit: ConversationsListViewController")
   }
 }
 
@@ -124,6 +134,13 @@ extension ConversationsListViewController {
     avatarView.addGestureRecognizer(tapGestureRecognizer)
   }
 }
+
+//extension ConversationsListViewController: ThemesPickerDelegate {
+//  func didChangeTheme(_ themesViewController: ThemesViewController) {
+//    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
+//  }
+//
+//}
 
 
 //MARK: - UITableViewDelegate, UITableViewDataSource

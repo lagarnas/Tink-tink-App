@@ -18,9 +18,8 @@
 		883E54CA252782B300315DAD /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54C9252782B300315DAD /* ThemesViewController.swift */; };
 		883E54CE252782C800315DAD /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883E54CD252782C800315DAD /* ThemesViewController.storyboard */; };
 		883E54D92528DC3A00315DAD /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54D82528DC3A00315DAD /* ThemeButton.swift */; };
-		883E54DE252AFA7E00315DAD /* ThemeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54DD252AFA7D00315DAD /* ThemeHelper.swift */; };
-		883E54E2252B014A00315DAD /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54E1252B014A00315DAD /* Theme.swift */; };
-		883E54EA252B6E1400315DAD /* Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54E9252B6E1400315DAD /* Themeable.swift */; };
+		883E54E2252B014A00315DAD /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54E1252B014A00315DAD /* ThemeManager.swift */; };
+		883E54EA252B6E1400315DAD /* Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54E9252B6E1400315DAD /* Themable.swift */; };
 		883E54ED252B6EDC00315DAD /* ClassicTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54EC252B6EDC00315DAD /* ClassicTheme.swift */; };
 		883E54F0252B6F0400315DAD /* DayTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54EF252B6F0400315DAD /* DayTheme.swift */; };
 		883E54F3252B6F1600315DAD /* NightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54F2252B6F1600315DAD /* NightTheme.swift */; };
@@ -60,9 +59,8 @@
 		883E54C9252782B300315DAD /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		883E54CD252782C800315DAD /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		883E54D82528DC3A00315DAD /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
-		883E54DD252AFA7D00315DAD /* ThemeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeHelper.swift; sourceTree = "<group>"; };
-		883E54E1252B014A00315DAD /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		883E54E9252B6E1400315DAD /* Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themeable.swift; sourceTree = "<group>"; };
+		883E54E1252B014A00315DAD /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		883E54E9252B6E1400315DAD /* Themable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themable.swift; sourceTree = "<group>"; };
 		883E54EC252B6EDC00315DAD /* ClassicTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicTheme.swift; sourceTree = "<group>"; };
 		883E54EF252B6F0400315DAD /* DayTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTheme.swift; sourceTree = "<group>"; };
 		883E54F2252B6F1600315DAD /* NightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightTheme.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				883E54E8252B6DC700315DAD /* Theme */,
-				883E54DD252AFA7D00315DAD /* ThemeHelper.swift */,
 				883E54C9252782B300315DAD /* ThemesViewController.swift */,
 				883E54CD252782C800315DAD /* ThemesViewController.storyboard */,
 				883E54D82528DC3A00315DAD /* ThemeButton.swift */,
@@ -181,8 +178,8 @@
 		883E54E8252B6DC700315DAD /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				883E54E1252B014A00315DAD /* Theme.swift */,
-				883E54E9252B6E1400315DAD /* Themeable.swift */,
+				883E54E1252B014A00315DAD /* ThemeManager.swift */,
+				883E54E9252B6E1400315DAD /* Themable.swift */,
 				883E54EC252B6EDC00315DAD /* ClassicTheme.swift */,
 				883E54EF252B6F0400315DAD /* DayTheme.swift */,
 				883E54F2252B6F1600315DAD /* NightTheme.swift */,
@@ -352,7 +349,6 @@
 				889CC1E1252230BE00A1812F /* ConversationViewController.swift in Sources */,
 				8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */,
 				88023679251610CA0079FA1B /* AvatarImageView.swift in Sources */,
-				883E54DE252AFA7E00315DAD /* ThemeHelper.swift in Sources */,
 				883E54F3252B6F1600315DAD /* NightTheme.swift in Sources */,
 				883E54F0252B6F0400315DAD /* DayTheme.swift in Sources */,
 				889CC1FC2523288D00A1812F /* IncomingMessageTableViewCell.swift in Sources */,
@@ -361,7 +357,7 @@
 				88921E26252111E60033BD47 /* UIViewController + Extension.swift in Sources */,
 				88921E392521C8320033BD47 /* UIView + Extension.swift in Sources */,
 				8853591125249F1400469AD6 /* MiniAvatarView.swift in Sources */,
-				883E54E2252B014A00315DAD /* Theme.swift in Sources */,
+				883E54E2252B014A00315DAD /* ThemeManager.swift in Sources */,
 				889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */,
 				889CC201252328D500A1812F /* MessageCellModel.swift in Sources */,
 				88BCF75F251C702600CA81A7 /* Logger.swift in Sources */,
@@ -369,7 +365,7 @@
 				8809DADE250B486500E4365A /* AppDelegate.swift in Sources */,
 				883E54CA252782B300315DAD /* ThemesViewController.swift in Sources */,
 				8853590A252475D800469AD6 /* AvatarView.swift in Sources */,
-				883E54EA252B6E1400315DAD /* Themeable.swift in Sources */,
+				883E54EA252B6E1400315DAD /* Themable.swift in Sources */,
 				883E54D92528DC3A00315DAD /* ThemeButton.swift in Sources */,
 				8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */,
 				88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */,

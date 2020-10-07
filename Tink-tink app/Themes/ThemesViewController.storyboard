@@ -34,7 +34,7 @@
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="0bi-ko-1r7"/>
+                                                    <action selector="classicButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="rBb-Bx-dIx"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iew-4p-1cd">
@@ -70,7 +70,7 @@
                                                 </constraints>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="Mzz-sR-EwZ"/>
+                                                    <action selector="dayButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="SCp-Rz-2wQ"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCB-pT-wVD">
@@ -102,7 +102,7 @@
                                                 </constraints>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <action selector="themeButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="91l-0V-gfq"/>
+                                                    <action selector="nightButtonTapped:" destination="kiz-td-A8u" eventType="touchUpInside" id="ctj-gV-dL9"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBI-bj-jFN">
@@ -136,12 +136,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outletCollection property="themeLabels" destination="97s-DJ-jDP" collectionClass="NSMutableArray" id="l2i-pY-U7T"/>
-                        <outletCollection property="themeLabels" destination="Y83-4T-fp3" collectionClass="NSMutableArray" id="6dB-IM-8Ke"/>
-                        <outletCollection property="themeLabels" destination="H1q-ki-G3y" collectionClass="NSMutableArray" id="nr1-7j-Bxl"/>
-                        <outletCollection property="themeButtons" destination="Nxd-lR-6gf" collectionClass="NSMutableArray" id="pDk-do-rZZ"/>
-                        <outletCollection property="themeButtons" destination="l53-1I-3wZ" collectionClass="NSMutableArray" id="eoP-Hb-PuW"/>
-                        <outletCollection property="themeButtons" destination="p2A-Iz-PkP" collectionClass="NSMutableArray" id="Bsn-5a-jbh"/>
+                        <outlet property="classicButton" destination="Nxd-lR-6gf" id="rLY-uu-wo0"/>
+                        <outlet property="classicLabel" destination="97s-DJ-jDP" id="J5L-vd-MeD"/>
+                        <outlet property="dayButton" destination="l53-1I-3wZ" id="CP2-Ql-r8J"/>
+                        <outlet property="dayLabel" destination="Y83-4T-fp3" id="IR1-kc-4sm"/>
+                        <outlet property="nightButton" destination="p2A-Iz-PkP" id="t81-4M-1Sr"/>
+                        <outlet property="nightLabel" destination="H1q-ki-G3y" id="pXp-x1-jp9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHC-r1-vO0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
