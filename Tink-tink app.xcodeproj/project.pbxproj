@@ -151,7 +151,6 @@
 			children = (
 				883E54C82527828300315DAD /* Themes */,
 				8802368325165B400079FA1B /* Application */,
-				889CC1F025230CD200A1812F /* Helpers */,
 				889CC1DF252230A500A1812F /* Conversation */,
 				8848400A25210C8E0083B204 /* ConversationsList */,
 				8802368425165B6A0079FA1B /* Profile */,
@@ -251,13 +250,6 @@
 				889CC1E4252230E900A1812F /* ConversationViewController.storyboard */,
 			);
 			path = Conversation;
-			sourceTree = "<group>";
-		};
-		889CC1F025230CD200A1812F /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		889CC1F92523285800A1812F /* Cells */ = {
