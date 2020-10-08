@@ -91,7 +91,7 @@ final class ThemeButton: UIButton {
     constraints += vBubbleConstraint
     let vSecondBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-22-[secondBubble]-10-|", options: .init(rawValue: 0), metrics: nil, views: views)
     constraints += vSecondBubbleConstraint
-    let hBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-27-[bubble]-[secondBubble(==bubble)]-27-|", options: .init(rawValue: 0), metrics: nil, views: views)
+    let hBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[bubble]-[secondBubble(==bubble)]-20-|", options: .init(rawValue: 0), metrics: nil, views: views)
     constraints += hBubbleConstraint
     NSLayoutConstraint.activate(constraints)
   }

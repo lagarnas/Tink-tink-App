@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mYf-Wp-5kL">
-                                <rect key="frame" x="37" y="98" width="246" height="412"/>
+                                <rect key="frame" x="25" y="98" width="270" height="412"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hJV-ac-iZ1">
-                                        <rect key="frame" x="0.0" y="0.0" width="246" height="124"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="270" height="124"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-lR-6gf" userLabel="classic" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="246" height="57"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="57"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="SxJ-s0-1mM"/>
@@ -38,7 +38,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97s-DJ-jDP">
-                                                <rect key="frame" x="0.0" y="67" width="246" height="57"/>
+                                                <rect key="frame" x="0.0" y="67" width="270" height="57"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -50,10 +50,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="n1k-Zi-l7s">
-                                        <rect key="frame" x="0.0" y="144" width="246" height="124"/>
+                                        <rect key="frame" x="0.0" y="144" width="270" height="124"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l53-1I-3wZ" userLabel="day" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="246" height="57"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="57"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="ttj-ta-OWV"/>
@@ -64,7 +64,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y83-4T-fp3">
-                                                <rect key="frame" x="0.0" y="67" width="246" height="57"/>
+                                                <rect key="frame" x="0.0" y="67" width="270" height="57"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -72,10 +72,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tiq-8R-ImL">
-                                        <rect key="frame" x="0.0" y="288" width="246" height="124"/>
+                                        <rect key="frame" x="0.0" y="288" width="270" height="124"/>
                                         <subviews>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2A-Iz-PkP" userLabel="night" customClass="ThemeButton" customModule="Tink_tink_app" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="246" height="57"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="270" height="57"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="Hju-hc-68r"/>
@@ -86,7 +86,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1q-ki-G3y">
-                                                <rect key="frame" x="0.0" y="67" width="246" height="57"/>
+                                                <rect key="frame" x="0.0" y="67" width="270" height="57"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -94,14 +94,15 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="ypU-nW-cGI"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kPR-lP-HPy"/>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.21176470588235294" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mYf-Wp-5kL" firstAttribute="centerX" secondItem="BZ6-Bm-le8" secondAttribute="centerX" id="8Sd-aU-KsN"/>
-                            <constraint firstItem="kPR-lP-HPy" firstAttribute="trailing" secondItem="mYf-Wp-5kL" secondAttribute="trailing" constant="37" id="HMB-F8-wlw"/>
-                            <constraint firstItem="mYf-Wp-5kL" firstAttribute="leading" secondItem="kPR-lP-HPy" secondAttribute="leading" constant="37" id="eNh-Gu-6Ef"/>
                             <constraint firstItem="mYf-Wp-5kL" firstAttribute="centerY" secondItem="BZ6-Bm-le8" secondAttribute="centerY" constant="20" id="gcl-2h-Zvx"/>
                         </constraints>
                     </view>
