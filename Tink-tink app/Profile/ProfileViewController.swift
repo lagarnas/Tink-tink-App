@@ -15,6 +15,7 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var bioLabel: UILabel!
   @IBOutlet weak var saveButton: UIButton!
+  @IBOutlet weak var GCDButton: UIButton!
   @IBOutlet weak var avatarView: AvatarView!
   
   weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
@@ -65,16 +66,18 @@ extension ProfileViewController {
     updateTheme()
     self.navigationBar.prefersLargeTitles = true
     saveButton.clipsToBounds = true
+    GCDButton.clipsToBounds = true
     saveButton.layer.cornerRadius = 10
+    GCDButton.layer.cornerRadius = 10
     avatarView.imageView.image = retrieveImage(forKey: "avatarImage")
-    setupInitialsOfName()
+   // setupInitialsOfName()
   }
   
   private func setupInitialsOfName() {
-    let nameAv = String(nameLabel.text?.first ?? " ")
-    let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
-    avatarView.nameLabel.text = nameAv
-    avatarView.secondNameLabel.text = secondNameAv
+//    let nameAv = String(nameLabel.text?.first ?? " ")
+//    let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
+//    avatarView.nameLabel.text = nameAv
+//    avatarView.secondNameLabel.text = secondNameAv
 
   }
   
@@ -85,6 +88,8 @@ extension ProfileViewController {
     bioLabel.textColor = ThemeManager.shared.current.mainTextColor
     saveButton.backgroundColor = ThemeManager.shared.current.accent
     saveButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
+    GCDButton.backgroundColor = ThemeManager.shared.current.accent
+    GCDButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
   }
   
   private func openAlertAction() {
