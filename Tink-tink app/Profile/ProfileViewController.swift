@@ -14,7 +14,7 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var bioLabel: UILabel!
-  @IBOutlet weak var saveButton: UIButton!
+  @IBOutlet weak var operationButton: UIButton!
   @IBOutlet weak var GCDButton: UIButton!
   @IBOutlet weak var avatarView: AvatarView!
   
@@ -34,7 +34,7 @@ final class ProfileViewController: UIViewController {
     
     configure()
     os_log("%@", log: .viewCycle, type: .info, #function)
-    os_log("%@", log: .frameChanged, type: .info, saveButton.frame as CVarArg)
+    os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
   }
   
   
@@ -42,9 +42,13 @@ final class ProfileViewController: UIViewController {
   @IBAction private func editButtonTapped(_ sender: UIButton) {
     openAlertAction()
   }
-  @IBAction private func saveButtonTapped(_ sender: UIButton) {
+  @IBAction private func operationButtonTapped(_ sender: UIButton) {
     store(image: avatarView.imageView.image, forKey: "avatarImage")
   }
+  @IBAction func GCDButtonTapped(_ sender: UIButton) {
+  }
+  
+  
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
   }
@@ -65,9 +69,9 @@ extension ProfileViewController {
   private func configure() {
     updateTheme()
     self.navigationBar.prefersLargeTitles = true
-    saveButton.clipsToBounds = true
+    operationButton.clipsToBounds = true
     GCDButton.clipsToBounds = true
-    saveButton.layer.cornerRadius = 10
+    operationButton.layer.cornerRadius = 10
     GCDButton.layer.cornerRadius = 10
     avatarView.imageView.image = retrieveImage(forKey: "avatarImage")
    // setupInitialsOfName()
@@ -86,8 +90,8 @@ extension ProfileViewController {
     view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     nameLabel.textColor = ThemeManager.shared.current.mainTextColor
     bioLabel.textColor = ThemeManager.shared.current.mainTextColor
-    saveButton.backgroundColor = ThemeManager.shared.current.accent
-    saveButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
+    operationButton.backgroundColor = ThemeManager.shared.current.accent
+    operationButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
     GCDButton.backgroundColor = ThemeManager.shared.current.accent
     GCDButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
   }
@@ -155,7 +159,7 @@ extension ProfileViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     os_log("%@", log: .viewCycle, type: .info, #function)
-    os_log("%@", log: .frameChanged, type: .info, saveButton.frame as CVarArg)
+    os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
   }
   
   override func viewWillDisappear(_ animated: Bool) {

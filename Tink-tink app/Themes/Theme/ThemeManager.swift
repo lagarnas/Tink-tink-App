@@ -23,7 +23,7 @@ final class ThemeManager {
     sharedApplication.delegate?.window??.tintColor = current.tintColor
     sharedApplication.delegate?.window??.backgroundColor = current.backgroundAppColor
     UINavigationBar.appearance().barStyle = barStyle
-    UITextField.appearance().backgroundColor = current.accent
+    UITextField.appearance().backgroundColor = .clear
     UITextField.appearance().keyboardAppearance = currentMode == .night ? .dark : .light
   }
   
