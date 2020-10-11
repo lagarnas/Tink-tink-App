@@ -18,6 +18,7 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var operationButton: UIButton!
   @IBOutlet weak var GCDButton: UIButton!
   @IBOutlet weak var avatarView: AvatarView!
+  @IBOutlet weak var setImageButton: UIButton!
   @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var bioTextView: UITextView!
@@ -34,29 +35,33 @@ final class ProfileViewController: UIViewController {
   
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {
+    nameTextField.isEnabled = false
     super.viewDidLoad()
-    
+    setImageButton.isHidden = true
     addNotifications()
     //MARK: - Retain cycle
 //    themesVC?.didChangeTheme = {
 //      self.updateTheme()
 //    }
-
-
-    
+    nameTextField.text = "Anastasia Leonteva"
+    bioTextView.text = "QA engineer, iOS developer, friendly girl, I like to learn new things"
     configure()
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
   }
   
-
-  
-
   
   //MARK: - IBActions
-  @IBAction private func editButtonTapped(_ sender: UIButton) {
+  @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+    bioTextView.isEditable = true
+    setImageButton.isHidden = false
+    nameTextField.isEnabled = true
+  }
+  
+  @IBAction private func setImageButtonTapped(_ sender: UIButton) {
     openAlertAction()
   }
+  
   @IBAction private func operationButtonTapped(_ sender: UIButton) {
     store(image: avatarView.imageView.image, forKey: "avatarImage")
   }

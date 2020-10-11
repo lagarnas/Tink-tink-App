@@ -62,17 +62,17 @@ extension ProfileViewController {
     if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
       
       keyboardHeight = keyboardSize.height
+      
       UIView.animate(withDuration: 0.3, animations: {
         self.constraintContentHeight.constant += self.keyboardHeight
       })
-      
+
       // move if keyboard hide input field
       let distanceToBottom = self.scrollView.frame.size.height -
         (textStackView?.frame.origin.y)! -
         (textStackView?.frame.size.height)!
       let collapseSpace = keyboardHeight - distanceToBottom
       if collapseSpace < 0 { return }
-      
       UIView.animate(withDuration: 0.3, animations: {
         self.scrollView.contentOffset = CGPoint(x: self.lastOffset.x, y: collapseSpace + 10)
       })
