@@ -16,9 +16,9 @@ struct ChatMessage {
 final class ConversationViewController: UIViewController {
   
   @IBOutlet private weak var messageTextField: UITextField!
-  @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView!
   @IBOutlet private weak var sendButton: UIButton!
-  @IBOutlet private weak var dockViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var dockView: UIView!
   
   private let allChatMessages = [
@@ -38,6 +38,7 @@ final class ConversationViewController: UIViewController {
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
     ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false)
   ]
+  
   private var keyboardHeight: CGFloat = 0
   
   //MARK: - Lifecycle of VC
@@ -70,14 +71,7 @@ final class ConversationViewController: UIViewController {
     self.messageTextField.endEditing(true)
   }
   
-  private func updateTheme() {
-    ThemeManager.shared.applyTheme()
-    
-    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
-    self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.dockView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-   
-  }
+
 }
 
 //MARK: - Setup TableView
@@ -134,15 +128,3 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
   }
 }
 
-//MARK: - UITextFieldDelegate
-extension ConversationViewController: UITextFieldDelegate {
-  
-
-  func textFieldDidEndEditing(_ textField: UITextField) {
-    self.view.layoutIfNeeded()
-    UIView.animate(withDuration: 0.5, animations: {
-      self.dockViewHeightConstraint.constant = 80
-      self.view.layoutIfNeeded()
-    }, completion: nil)
-  }
-}

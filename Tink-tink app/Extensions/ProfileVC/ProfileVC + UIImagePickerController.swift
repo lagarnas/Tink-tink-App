@@ -10,6 +10,40 @@ import UIKit
 //MARK: - Work with image, UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
+  func openAlertAction() {
+    // создаем экземпляр класса UIAlertController
+    let cameraIcon = #imageLiteral(resourceName: "camera")
+    let photoIcon = #imageLiteral(resourceName: "photo")
+    let actionSheet = UIAlertController(title: nil,
+                                        message: nil,
+                                        preferredStyle: .actionSheet)
+    
+    let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+      self.chooseImagePicker(source: .camera)
+    }
+    
+    camera.setValue(cameraIcon, forKey: "image")
+    camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+    camera.titleTextColor = .black
+    
+    let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+      self.chooseImagePicker(source: .photoLibrary)
+    }
+    
+    photo.setValue(photoIcon, forKey: "image")
+    photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+    photo.titleTextColor = .black
+    
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+    cancel.titleTextColor = .red
+    
+    actionSheet.addAction(camera)
+    actionSheet.addAction(photo)
+    actionSheet.addAction(cancel)
+    actionSheet.pruneNegativeWidthConstraints()
+    present(actionSheet, animated: true)
+  }
+  
   func chooseImagePicker(source: UIImagePickerController.SourceType) {
     
     guard UIImagePickerController.isSourceTypeAvailable(source) else { return }

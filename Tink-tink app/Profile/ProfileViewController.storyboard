@@ -9,25 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="AYh-5y-nBp">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="GY4-XJ-BFY" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6l6-je-RDj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="zxR-CM-kic"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <connections>
-                        <outlet property="navigationBar" destination="gCq-jQ-ouh" id="dYN-mZ-ryv"/>
-                        <outlet property="saveButton" destination="nm9-rg-xEO" id="CNd-fz-hWi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="noE-7F-0rW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-904" y="18"/>
-        </scene>
         <!--Profile View Controller-->
         <scene sceneID="3DN-LA-fsX">
             <objects>
@@ -36,10 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-jQ-ouh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="cZb-0q-oF4"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="My Profile" largeTitleDisplayMode="always" id="T1L-rW-LBE">
+                                        <barButtonItem key="rightBarButtonItem" title="Close" id="x3h-yg-dMf">
+                                            <connections>
+                                                <action selector="closeButtonTapped:" destination="ySx-SM-L9v" id="cMc-dg-K53"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ik5-Tl-sc2">
                                 <rect key="frame" x="0.0" y="100" width="320" height="468"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-2m-cso">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-2m-cso" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="468"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TxL-pl-40p" customClass="AvatarView" customModule="Tink_tink_app" customModuleProvider="target">
@@ -50,7 +46,6 @@
                                                         <state key="normal" title="Edit"/>
                                                         <connections>
                                                             <action selector="editButtonTapped:" destination="ySx-SM-L9v" eventType="touchUpInside" id="C1B-ap-hUN"/>
-                                                            <action selector="editButtonTapped:" destination="GY4-XJ-BFY" eventType="touchUpInside" id="J8U-EJ-psZ"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -79,6 +74,9 @@
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="ySx-SM-L9v" id="uyu-91-jl7"/>
+                                                                </connections>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWT-23-zpA" userLabel="separator">
                                                                 <rect key="frame" x="0.0" y="24" width="288" height="1"/>
@@ -102,11 +100,14 @@
                                                                 <rect key="frame" x="0.0" y="25.5" width="288" height="50"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="sZW-Ka-dpD"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="sZW-Ka-dpD"/>
                                                                 </constraints>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="ySx-SM-L9v" id="p8l-6d-Oed"/>
+                                                                </connections>
                                                             </textView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-Xn-DAj" userLabel="separator">
                                                                 <rect key="frame" x="0.0" y="80.5" width="288" height="1"/>
@@ -142,7 +143,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="operationButtonTapped:" destination="ySx-SM-L9v" eventType="touchUpInside" id="qhG-Xe-xJi"/>
-                                                            <action selector="saveButtonTapped:" destination="GY4-XJ-BFY" eventType="touchUpInside" id="03g-Y6-imS"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -160,62 +160,56 @@
                                             <constraint firstAttribute="trailing" secondItem="K2T-eT-nQI" secondAttribute="trailing" constant="50" id="VUi-j5-VCK"/>
                                             <constraint firstItem="DYo-Ee-dwX" firstAttribute="leading" secondItem="9rb-2m-cso" secondAttribute="leading" constant="16" id="W21-UJ-t5t"/>
                                             <constraint firstItem="DYo-Ee-dwX" firstAttribute="top" secondItem="TxL-pl-40p" secondAttribute="bottom" constant="15" id="hAm-WY-Bcy"/>
+                                            <constraint firstItem="TxL-pl-40p" firstAttribute="top" secondItem="9rb-2m-cso" secondAttribute="top" id="jis-x4-4mS"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="L3f-CD-gCZ" firstAttribute="bottom" secondItem="9rb-2m-cso" secondAttribute="bottom" id="18x-dw-kmb"/>
+                                    <constraint firstItem="9rb-2m-cso" firstAttribute="width" secondItem="ik5-Tl-sc2" secondAttribute="width" id="4Jo-YY-yQl"/>
                                     <constraint firstItem="9rb-2m-cso" firstAttribute="leading" secondItem="L3f-CD-gCZ" secondAttribute="leading" id="9o1-Np-HqA"/>
                                     <constraint firstAttribute="trailing" secondItem="9rb-2m-cso" secondAttribute="trailing" id="G2v-HG-VWC"/>
-                                    <constraint firstItem="9rb-2m-cso" firstAttribute="top" secondItem="L3f-CD-gCZ" secondAttribute="top" id="I0Y-q6-vh6"/>
                                     <constraint firstAttribute="bottom" secondItem="9rb-2m-cso" secondAttribute="bottom" id="JvJ-yf-dAh"/>
+                                    <constraint firstItem="9rb-2m-cso" firstAttribute="leading" secondItem="ik5-Tl-sc2" secondAttribute="leading" id="jtV-Tl-F1j"/>
+                                    <constraint firstItem="9rb-2m-cso" firstAttribute="top" secondItem="ik5-Tl-sc2" secondAttribute="top" id="kmr-d7-KG0"/>
+                                    <constraint firstItem="9rb-2m-cso" firstAttribute="height" secondItem="ik5-Tl-sc2" secondAttribute="height" id="pI2-US-x3G"/>
                                     <constraint firstItem="L3f-CD-gCZ" firstAttribute="trailing" secondItem="9rb-2m-cso" secondAttribute="trailing" id="qQJ-qe-iwa"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="gUH-56-bxD"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="L3f-CD-gCZ"/>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-jQ-ouh">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="cZb-0q-oF4"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="My Profile" largeTitleDisplayMode="always" id="T1L-rW-LBE">
-                                        <barButtonItem key="rightBarButtonItem" title="Close" id="x3h-yg-dMf">
-                                            <connections>
-                                                <action selector="closeButtonTapped:" destination="ySx-SM-L9v" id="cMc-dg-K53"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JJi-he-l2R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ik5-Tl-sc2" firstAttribute="leading" secondItem="JJi-he-l2R" secondAttribute="leading" id="07V-dM-fcV"/>
+                            <constraint firstItem="JJi-he-l2R" firstAttribute="trailing" secondItem="gCq-jQ-ouh" secondAttribute="trailing" id="4qL-vR-CLW"/>
+                            <constraint firstItem="gCq-jQ-ouh" firstAttribute="top" secondItem="JJi-he-l2R" secondAttribute="top" id="4ts-vL-zeN"/>
                             <constraint firstItem="JJi-he-l2R" firstAttribute="bottom" secondItem="K2T-eT-nQI" secondAttribute="bottom" constant="20" id="7dw-2H-ViX"/>
+                            <constraint firstItem="gCq-jQ-ouh" firstAttribute="leading" secondItem="JJi-he-l2R" secondAttribute="leading" id="BYV-BM-SVY"/>
                             <constraint firstItem="ik5-Tl-sc2" firstAttribute="trailing" secondItem="JJi-he-l2R" secondAttribute="trailing" id="Cyg-2l-auF"/>
-                            <constraint firstItem="gCq-jQ-ouh" firstAttribute="leading" secondItem="mvs-x0-am0" secondAttribute="leading" id="Hz8-ir-bAm"/>
-                            <constraint firstItem="JJi-he-l2R" firstAttribute="trailing" secondItem="gCq-jQ-ouh" secondAttribute="trailing" id="JsA-Bu-GPw"/>
+                            <constraint firstItem="ik5-Tl-sc2" firstAttribute="top" secondItem="gCq-jQ-ouh" secondAttribute="bottom" id="JO4-dk-H4s"/>
                             <constraint firstAttribute="bottom" secondItem="ik5-Tl-sc2" secondAttribute="bottom" id="SBq-Zk-vU9"/>
-                            <constraint firstItem="gCq-jQ-ouh" firstAttribute="top" secondItem="JJi-he-l2R" secondAttribute="top" id="b4r-p6-X3s"/>
-                            <constraint firstItem="TxL-pl-40p" firstAttribute="top" secondItem="gCq-jQ-ouh" secondAttribute="bottom" id="jHP-cK-Mbv"/>
-                            <constraint firstItem="ik5-Tl-sc2" firstAttribute="top" secondItem="gCq-jQ-ouh" secondAttribute="bottom" id="yM3-Dg-8p6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="GCDButton" destination="6EL-wu-aMD" id="2u6-k9-hQb"/>
                         <outlet property="avatarView" destination="TxL-pl-40p" id="ZgS-yZ-TgN"/>
                         <outlet property="bioLabel" destination="eOI-c8-Xt6" id="r8O-P5-xL3"/>
+                        <outlet property="bioTextView" destination="JJd-Eo-4v5" id="Ip0-tZ-5fW"/>
+                        <outlet property="constraintContentHeight" destination="pI2-US-x3G" id="1y3-Dl-wqu"/>
+                        <outlet property="contentView" destination="9rb-2m-cso" id="xuu-7q-Gcg"/>
                         <outlet property="nameLabel" destination="kUm-Fj-Bpw" id="vjM-ev-oOM"/>
+                        <outlet property="nameTextField" destination="jRY-cX-n04" id="AA3-1c-Fsc"/>
                         <outlet property="navigationBar" destination="gCq-jQ-ouh" id="u0E-el-2IU"/>
                         <outlet property="operationButton" destination="nm9-rg-xEO" id="WL4-oY-agm"/>
+                        <outlet property="scrollView" destination="ik5-Tl-sc2" id="Lg6-ca-Kwq"/>
+                        <outlet property="textStackView" destination="DYo-Ee-dwX" id="oD7-fO-A7e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3a-gh-MV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-21" y="18"/>
+            <point key="canvasLocation" x="-551" y="-57"/>
         </scene>
     </scenes>
     <resources>

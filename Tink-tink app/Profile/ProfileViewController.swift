@@ -11,32 +11,47 @@ import os.log
 
 final class ProfileViewController: UIViewController {
   
+  //MARK: - @IBOutlets
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var bioLabel: UILabel!
   @IBOutlet weak var operationButton: UIButton!
   @IBOutlet weak var GCDButton: UIButton!
   @IBOutlet weak var avatarView: AvatarView!
+  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var nameTextField: UITextField!
+  @IBOutlet weak var bioTextView: UITextView!
+  @IBOutlet weak var contentView: UIView!
+  @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
+  @IBOutlet weak var textStackView: UIStackView!
   
   weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
   
   var imageIsChanged = false
   
+  var lastOffset: CGPoint!
+  var keyboardHeight: CGFloat!
+  
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
+    addNotifications()
     //MARK: - Retain cycle
 //    themesVC?.didChangeTheme = {
 //      self.updateTheme()
 //    }
+
+
     
     configure()
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
   }
   
+
+  
+
   
   //MARK: - IBActions
   @IBAction private func editButtonTapped(_ sender: UIButton) {
@@ -45,9 +60,9 @@ final class ProfileViewController: UIViewController {
   @IBAction private func operationButtonTapped(_ sender: UIButton) {
     store(image: avatarView.imageView.image, forKey: "avatarImage")
   }
-  @IBAction func GCDButtonTapped(_ sender: UIButton) {
-  }
   
+  @IBAction private func GCDButtonTapped(_ sender: UIButton) {
+  }
   
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
@@ -82,99 +97,10 @@ extension ProfileViewController {
 //    let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
 //    avatarView.nameLabel.text = nameAv
 //    avatarView.secondNameLabel.text = secondNameAv
-
   }
   
-  private func updateTheme() {
-    ThemeManager.shared.applyTheme()
-    view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    nameLabel.textColor = ThemeManager.shared.current.mainTextColor
-    bioLabel.textColor = ThemeManager.shared.current.mainTextColor
-    operationButton.backgroundColor = ThemeManager.shared.current.accent
-    operationButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
-    GCDButton.backgroundColor = ThemeManager.shared.current.accent
-    GCDButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
-  }
-  
-  private func openAlertAction() {
-    // создаем экземпляр класса UIAlertController
-    let cameraIcon = #imageLiteral(resourceName: "camera")
-    let photoIcon = #imageLiteral(resourceName: "photo")
-    let actionSheet = UIAlertController(title: nil,
-                                        message: nil,
-                                        preferredStyle: .actionSheet)
-    
-    let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-      self.chooseImagePicker(source: .camera)
-    }
-    
-    camera.setValue(cameraIcon, forKey: "image")
-    camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-    camera.titleTextColor = .black
-    
-    let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-      self.chooseImagePicker(source: .photoLibrary)
-    }
-    
-    photo.setValue(photoIcon, forKey: "image")
-    photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-    photo.titleTextColor = .black
-    
-    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-    cancel.titleTextColor = .red
-    
-    actionSheet.addAction(camera)
-    actionSheet.addAction(photo)
-    actionSheet.addAction(cancel)
-    actionSheet.pruneNegativeWidthConstraints()
-    present(actionSheet, animated: true)
-  }
   
 }
 
 
-//MARK: Lyfecycle of VC
-extension ProfileViewController {
-  // Загрузка вью
-  override func loadView() {
-    super.loadView()
-    os_log("%@", log: .viewCycle, type: .info, #function)
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    if avatarView.imageView.image != nil { hideInitials() }
-    os_log("%@", log: OSLog.viewCycle, type: .info, #function)
-  }
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    os_log("%@", log: .viewCycle, type: .info, #function)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    os_log("%@", log: .viewCycle, type: .info, #function)
-    os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
-  }
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    os_log("%@", log: .viewCycle, type: .info, #function)
-  }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    os_log("%@", log: .viewCycle, type: .info, #function)
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    NSLog(#function)
-  }
-}
 
