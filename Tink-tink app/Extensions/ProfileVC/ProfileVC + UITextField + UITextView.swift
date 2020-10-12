@@ -15,7 +15,6 @@ extension ProfileViewController: UITextFieldDelegate {
     nameTextField = textField
     lastOffset = self.scrollView.contentOffset
     return true
-    
   }
   
   //решает убрать клавиатуру или нет
@@ -49,9 +48,17 @@ extension ProfileViewController: UITextViewDelegate {
 extension ProfileViewController {
   
   func addNotifications() {
+    NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextView.textDidChangeNotification, object: nil)
+    
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
+  }
+  
+  //MARK: - Notifications
+  @objc func textDidChange(notification: Notification) {
+    enabledButtons()
   }
   
   
@@ -93,13 +100,13 @@ extension ProfileViewController {
   
   @objc
   func returnTextView(gesture: UIGestureRecognizer) {
-    guard nameTextField != nil
+    guard nameTextField != nil, bioTextView != nil
     else {
-      bioTextView.resignFirstResponder()
+      nameTextField = nil
       bioTextView = nil
       return
     }
     nameTextField.resignFirstResponder()
-    nameTextField = nil
+    bioTextView.resignFirstResponder()
   }
 }

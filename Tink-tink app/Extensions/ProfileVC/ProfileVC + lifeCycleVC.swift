@@ -25,6 +25,9 @@ extension ProfileViewController {
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
+    if imageIsChanged {
+      enabledButtons()
+    } 
   }
   
   override func viewDidLayoutSubviews() {
