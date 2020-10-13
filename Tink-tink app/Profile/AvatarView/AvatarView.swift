@@ -29,6 +29,15 @@ class AvatarView: UIView {
     return imageView
   }()
   
+  func hideInitials() {
+    nameLabel.isHidden = true
+    secondNameLabel.isHidden = true
+  }
+  
+  
+  
+  
+  
   override func layoutSubviews() {
     addSubview(imageView)
     addSubview(nameLabel)

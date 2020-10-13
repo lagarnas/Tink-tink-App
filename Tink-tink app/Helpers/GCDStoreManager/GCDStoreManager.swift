@@ -10,19 +10,21 @@ import Foundation
 import UIKit
 
 
+enum FileName: String {
+  case userName  = "userName.txt"
+  case userBio   = "userBio.txt"
+  case userPhoto = "photo.png"
+}
+
 final class GCDStoreManager {
-  
-  private enum FileName: String {
-    case userName  = "userName.txt"
-    case userBio   = "userBio.txt"
-    case userPhoto = "photo.png"
-  }
   
   static let shared = GCDStoreManager()
   private init() {}
   
   let fileManager = FileManager.default
   let queue = DispatchQueue(label: "GCD", qos: .background, attributes: .concurrent)
+  
+  
 
   //MARK: - Save data
   func save(profile: Profile, completion: @escaping (Result<Profile, Error>)-> Void) {

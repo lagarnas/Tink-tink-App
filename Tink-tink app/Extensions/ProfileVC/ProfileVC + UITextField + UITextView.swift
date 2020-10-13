@@ -48,7 +48,7 @@ extension ProfileViewController: UITextViewDelegate {
 extension ProfileViewController {
   
   func addNotifications() {
-    NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextView.textDidChangeNotification, object: nil)
     
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -59,8 +59,12 @@ extension ProfileViewController {
   //MARK: - Notifications
   @objc func textDidChange(notification: Notification) {
     enabledButtons()
+    
   }
   
+  @objc func textFieldDidChange(notification: Notification) {
+    enabledButtons()
+  }
   
   @objc
   func keyboardWillShow(notification: NSNotification) {

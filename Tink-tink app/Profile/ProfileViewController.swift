@@ -29,20 +29,17 @@ final class ProfileViewController: UIViewController {
   
   weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
   
+  
   var imageIsChanged = false
   
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   
   let dataManager  = GCDStoreManager.shared
-
-  
-  var profile: Profile?
   
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     
     //MARK: - Retain cycle
     //    themesVC?.didChangeTheme = {
@@ -54,7 +51,6 @@ final class ProfileViewController: UIViewController {
     dataManager.retrive { result in
       switch result {
       case .success(let profile):
-        self.profile = profile
         self.nameTextField.text = profile.userName
         self.bioTextView.text  = profile.userBio
         self.avatarView.imageView.image = UIImage(data: profile.photo)
@@ -101,8 +97,6 @@ final class ProfileViewController: UIViewController {
   
   @IBAction private func setImageButtonTapped(_ sender: UIButton) {
     openAlertAction()
-    
-    print(#function)
   }
   
   @IBAction private func operationButtonTapped(_ sender: UIButton) {
@@ -114,17 +108,19 @@ final class ProfileViewController: UIViewController {
     activityIndicator.startAnimating()
     unEnabledButtons()
     // MARK: - GCD save
-    guard var profile = self.profile else {return }
-    profile.userName = nameTextField.text ?? ""
-    profile.userBio = bioTextView.text
-    profile.photo = avatarView.imageView.image?.pngData() ?? Data()
-    dataManager.save(profile: profile) { [weak self] result in
+    
+    dataManager.save(profile: Profile(userName: self.nameTextField.text ?? "",
+                                      userBio: self.bioTextView.text,
+                                      photo: self.avatarView.imageView.image?.pngData() ?? Data())) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success(let profile):
         self.nameTextField.text = profile.userName
+        print(profile.userName)
         self.bioTextView.text = profile.userBio
+        print(profile.userBio)
         self.avatarView.imageView.image = UIImage(data: profile.photo)
+        print(profile.photo)
         self.enabledButtons()
         self.setupInitialsOfName()
         self.activityIndicator.stopAnimating()
@@ -155,6 +151,7 @@ final class ProfileViewController: UIViewController {
   
   
   deinit {
+    print(#function)
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
@@ -162,15 +159,15 @@ final class ProfileViewController: UIViewController {
 //MARK: - Functions
 extension ProfileViewController {
   
-  func hideInitials() {
-    avatarView.nameLabel.isHidden = true
-    avatarView.secondNameLabel.isHidden = true
-  }
+//  func hideInitials() {
+//    avatarView.nameLabel.isHidden = true
+//    avatarView.secondNameLabel.isHidden = true
+//  }
 
   
   private func setupInitialsOfName() {
     if avatarView.imageView.image != nil {
-      hideInitials()
+      avatarView.hideInitials()
     }
     else {
       guard let tf = nameTextField.text else { return }

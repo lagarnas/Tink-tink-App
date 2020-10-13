@@ -19,7 +19,7 @@ extension ProfileViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    if avatarView.imageView.image != nil { hideInitials() }
+    if avatarView.imageView.image != nil { avatarView.hideInitials() }
     os_log("%@", log: OSLog.viewCycle, type: .info, #function)
   }
   
