@@ -11,7 +11,7 @@ import os.log
 
 //MARK: Lifecycle of VC
 extension ProfileViewController {
-  // Загрузка вью
+  
   override func loadView() {
     super.loadView()
     os_log("%@", log: .viewCycle, type: .info, #function)
@@ -25,9 +25,6 @@ extension ProfileViewController {
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    if imageIsChanged {
-      enabledButtons()
-    } 
   }
   
   override func viewDidLayoutSubviews() {

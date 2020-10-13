@@ -10,14 +10,13 @@ import UIKit
 
 extension ProfileViewController: UITextFieldDelegate {
   
-  //решает можно ли начать редактировать поле
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     nameTextField = textField
     lastOffset = self.scrollView.contentOffset
     return true
   }
   
-  //решает убрать клавиатуру или нет
+
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == nameTextField {
       self.nameTextField.resignFirstResponder()
@@ -29,13 +28,12 @@ extension ProfileViewController: UITextFieldDelegate {
 
 extension ProfileViewController: UITextViewDelegate {
   
-  //решает можно ли начать редактировать поле
   func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
     bioTextView = textView
     lastOffset = self.scrollView.contentOffset
     return true
   }
-  //решает убрать клавиатуру или нет
+
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
       if(text == "\n") {
           textView.resignFirstResponder()
@@ -57,14 +55,20 @@ extension ProfileViewController {
   }
   
   //MARK: - Notifications
+  @objc func textFieldDidChange(notification: Notification) {
+    enabledButtons()
+    
+    self.profile?.userName = nameTextField.text ?? ""
+    self.profile?.nameChanged = true
+  }
+  
   @objc func textDidChange(notification: Notification) {
     enabledButtons()
     
+    self.profile?.userBio = bioTextView.text ?? ""
+    self.profile?.bioChanged = true
   }
   
-  @objc func textFieldDidChange(notification: Notification) {
-    enabledButtons()
-  }
   
   @objc
   func keyboardWillShow(notification: NSNotification) {

@@ -29,17 +29,17 @@ final class ProfileViewController: UIViewController {
   
   weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
   
-  
-  var imageIsChanged = false
-  
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   
-  let dataManager  = GCDStoreManager.shared
+  let dataManager = GCDStoreManager.shared
+  
+  var profile: Profile?
   
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
+    profile = Profile(userName: nameTextField.text ?? "", userBio: bioTextView.text, userData: avatarView.imageView.image?.pngData() ?? Data())
     
     //MARK: - Retain cycle
     //    themesVC?.didChangeTheme = {
@@ -53,7 +53,7 @@ final class ProfileViewController: UIViewController {
       case .success(let profile):
         self.nameTextField.text = profile.userName
         self.bioTextView.text  = profile.userBio
-        self.avatarView.imageView.image = UIImage(data: profile.photo)
+        self.avatarView.imageView.image = UIImage(data: profile.userData)
         self.setupInitialsOfName()
       case .failure(let error):
         print(error.localizedDescription)
@@ -67,10 +67,11 @@ final class ProfileViewController: UIViewController {
   
   //MARK: - Configure
   private func configure() {
+    
     updateTheme()
     addNotifications()
-    setImageButton.isHidden = true
-    nameTextField.isEnabled = false
+    unEnabledUIElements()
+    setupInitialsOfName()
     
     activityIndicator.stopAnimating()
     activityIndicator.hidesWhenStopped = true
@@ -82,17 +83,28 @@ final class ProfileViewController: UIViewController {
     GCDButton.layer.cornerRadius = 10
     GCDButton.addTarget(self, action: #selector(GCDButtonTapped), for: .touchUpInside)
     
-    self.unEnabledButtons()
-    setupInitialsOfName()
+
   }
+  
+  
+  func enabledUIElements() {
+    setImageButton.isHidden = false
+    nameTextField.isEnabled = true
+    bioTextView.isEditable = true
+  }
+  
+  func unEnabledUIElements() {
+    setImageButton.isHidden = true
+    nameTextField.isEnabled = false
+    bioTextView.isEditable = false
+    unEnabledButtons()
+  }
+  
   
   
   //MARK: - IBActions
   @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-    bioTextView.isEditable = true
-    setImageButton.isHidden = false
-    guard let nameTF = nameTextField else { return }
-    nameTF.isEnabled = true
+    enabledUIElements()
   }
   
   @IBAction private func setImageButtonTapped(_ sender: UIButton) {
@@ -106,29 +118,18 @@ final class ProfileViewController: UIViewController {
   @objc
   func GCDButtonTapped() {
     activityIndicator.startAnimating()
-    unEnabledButtons()
+ 
     // MARK: - GCD save
+    guard let profile = self.profile else { return }
     
-    dataManager.save(profile: Profile(userName: self.nameTextField.text ?? "",
-                                      userBio: self.bioTextView.text,
-                                      photo: self.avatarView.imageView.image?.pngData() ?? Data())) { [weak self] result in
-      guard let self = self else { return }
+    dataManager.save(profile: profile) { result in
       switch result {
-      case .success(let profile):
-        self.nameTextField.text = profile.userName
-        print(profile.userName)
-        self.bioTextView.text = profile.userBio
-        print(profile.userBio)
-        self.avatarView.imageView.image = UIImage(data: profile.photo)
-        print(profile.photo)
-        self.enabledButtons()
-        self.setupInitialsOfName()
+      case .success(_):
         self.activityIndicator.stopAnimating()
         self.alert(title: "Data saved", message: "", style: .alert)
-      case .failure( _):
+        self.setupInitialsOfName()
+      case .failure(_):
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
-        self.enabledButtons()
-        self.activityIndicator.stopAnimating()
       }
     }
   }
@@ -151,7 +152,6 @@ final class ProfileViewController: UIViewController {
   
   
   deinit {
-    print(#function)
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
@@ -159,10 +159,10 @@ final class ProfileViewController: UIViewController {
 //MARK: - Functions
 extension ProfileViewController {
   
-//  func hideInitials() {
-//    avatarView.nameLabel.isHidden = true
-//    avatarView.secondNameLabel.isHidden = true
-//  }
+  func hideInitials() {
+    avatarView.nameLabel.isHidden = true
+    avatarView.secondNameLabel.isHidden = true
+  }
 
   
   private func setupInitialsOfName() {

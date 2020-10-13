@@ -58,8 +58,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     avatarView.imageView.image = info[.editedImage] as? UIImage
     avatarView.imageView.contentMode = .scaleAspectFill
     avatarView.imageView.clipsToBounds = true
-    imageIsChanged = true
+    self.profile?.userData = avatarView.imageView.image?.pngData() ?? Data()
+    self.profile?.photoChanged = true
     avatarView.hideInitials()
+    enabledButtons()
+    
     dismiss(animated: true)
   }
   

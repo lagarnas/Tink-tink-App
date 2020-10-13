@@ -149,38 +149,32 @@ extension ConversationsListViewController {
   }
   
   private func setupMiniature() {
-//    avatarView.miniNameLabel.text = "A"
-//    avatarView.miniSecondNameLabel.text = "L"
     GCDStoreManager.shared.retrive { result in
       switch result {
       case .success(let profile):
       self.setupInitialsOfName(profile: profile)
       case .failure(let error):
-        print(error)
+        print(error.localizedDescription)
       }
     }
-    print(#function)
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
     avatarView.isUserInteractionEnabled = true
     avatarView.addGestureRecognizer(tapGestureRecognizer)
   }
   
-  
   private func setupInitialsOfName(profile: Profile) {
 
-      let fullNameArr = profile.userName.components(separatedBy: " ")
+    let fullNameArr = profile.userName.components(separatedBy: " ")
       let firstName: String = fullNameArr[0]
       let lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
-      
+
       let firstInitial = String(firstName.first ?? " ")
       let secondInitial = String(lastName?.first ?? " ")
-      
+
       avatarView.miniNameLabel.text = firstInitial
-      print(firstInitial)
       avatarView.miniSecondNameLabel.text = secondInitial
-      print(secondInitial)
-      avatarView.miniImageView.image = UIImage(data: profile.photo)
-    
+      avatarView.miniImageView.image = UIImage(data: profile.userData)
+
     if avatarView.miniImageView.image != nil {
       avatarView.hideInitials()
     }

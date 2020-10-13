@@ -9,7 +9,13 @@
 import Foundation
 
 struct Profile {
+  
   var userName: String
   var userBio: String
-  var photo: Data
+  var userData: Data
+  
+  var nameChanged: Bool = false
+  var bioChanged: Bool = false
+  var photoChanged: Bool = false
+
 }

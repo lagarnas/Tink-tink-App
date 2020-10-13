@@ -25,36 +25,36 @@ final class GCDStoreManager {
   let queue = DispatchQueue(label: "GCD", qos: .background, attributes: .concurrent)
   
   
-
   //MARK: - Save data
-  func save(profile: Profile, completion: @escaping (Result<Profile, Error>)-> Void) {
-    let userNameURL = self.fileURL(.userName)
-    print(userNameURL)
-    let userBioURL = self.fileURL(.userBio)
-    print(userBioURL)
-    let userPhotoURL = self.fileURL(.userPhoto)
-    print(userPhotoURL)
+  
+
+  func save(profile: Profile, completion: @escaping (Result <Any?, Error>) -> Void) {
     
     queue.async {
-      sleep(2)
       do {
+        if profile.nameChanged {
+          let nameURL = self.fileURL(.userName)
+          try profile.userName.write(to: nameURL, atomically: true, encoding: .utf8)
+          
+        }
         
-        //let urlError = URL(string: "google.com")
+        if profile.bioChanged {
+          let bioURL = self.fileURL(.userBio)
+          try profile.userBio.write(to: bioURL, atomically: true, encoding: .utf8)
+          
+        }
         
-        //guard let urlError1 = urlError  else {return }
+        if profile.photoChanged {
+          let photoURL = self.fileURL(.userPhoto)
+          try profile.userData.write(to: photoURL)
+          
+        }
         
-        try profile.userName.write(to: userNameURL, atomically: true, encoding: .utf8)
-        try profile.userBio.write(to: userBioURL, atomically: true, encoding: .utf8)
-        try profile.photo.write(to: userPhotoURL)
-        
-        //print("success saved data")
-        //completion block .success
         DispatchQueue.main.async {
-          completion(.success(profile))
+          completion(.success(nil))
         }
         
       } catch let error {
-        //completion block .failure
         DispatchQueue.main.async {
           completion(.failure(error))
         }
@@ -63,19 +63,50 @@ final class GCDStoreManager {
   }
   
   
+  
   //MARK: - Retrive data
-  func retrive(completion: @escaping (Result<Profile, Error>)-> Void) {
+  func retrive(completion: @escaping (Result<Profile, Error>) -> Void) {
+    
+    var userName = ""
+    var userBio = ""
+    var userPhotoData = Data()
+    
+    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let url = NSURL(fileURLWithPath: path)
     
     queue.async {
       do {
-        let profileName = try String(contentsOf: self.fileURL(.userName))
-        let profileBio = try String(contentsOf: self.fileURL(.userBio))
-        let profilePhoto = try Data(contentsOf: self.fileURL(.userPhoto))
+        
+        //check file name
+        if let pathComponent = url.appendingPathComponent("userName.txt") {
+          let filePath = pathComponent.path
+          let fileManager = FileManager.default
+          if fileManager.fileExists(atPath: filePath) {
+            userName = try String(contentsOf: self.fileURL(.userName))
+          }
+        }
+        //check file bio
+        if let pathComponent = url.appendingPathComponent("userBio.txt") {
+          let filePath = pathComponent.path
+          let fileManager = FileManager.default
+          if fileManager.fileExists(atPath: filePath) {
+            userBio = try String(contentsOf: self.fileURL(.userBio))
+          }
+        }
+        //check file photo
+        if let pathComponent = url.appendingPathComponent("photo.png") {
+          let filePath = pathComponent.path
+          let fileManager = FileManager.default
+          if fileManager.fileExists(atPath: filePath) {
+            userPhotoData = try Data(contentsOf: self.fileURL(.userPhoto))
+          }
+        }
+        
         
         DispatchQueue.main.async {
-          completion(.success(Profile(userName: profileName, userBio: profileBio, photo: profilePhoto)))
+          completion(.success(Profile(userName: userName, userBio: userBio, userData: userPhotoData)))
         }
-
+        
         
       } catch let error {
         DispatchQueue.main.async {
@@ -91,6 +122,7 @@ final class GCDStoreManager {
                                               in: .userDomainMask,
                                               appropriateFor: nil,
                                               create: true)
+    
     let fileURL = documentDirURL.appendingPathComponent(fileName.rawValue)
     return fileURL
   }
