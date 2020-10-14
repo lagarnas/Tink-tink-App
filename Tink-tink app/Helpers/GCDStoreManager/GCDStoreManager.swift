@@ -9,14 +9,19 @@
 import Foundation
 import UIKit
 
-
-enum FileName: String {
-  case userName  = "userName.txt"
-  case userBio   = "userBio.txt"
-  case userPhoto = "photo.png"
+protocol Storeable {
+  func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void)
+  func retrive(completion: @escaping (Result<Profile, Error>) -> Void)
 }
 
-final class GCDStoreManager {
+
+final class GCDStoreManager: Storeable {
+  
+  private enum FileName: String {
+    case userName  = "userName.txt"
+    case userBio   = "userBio.txt"
+    case userPhoto = "photo.png"
+  }
   
   static let shared = GCDStoreManager()
   private init() {}
@@ -27,13 +32,13 @@ final class GCDStoreManager {
   
   //MARK: - Save data
   
-
-  func save(profile: Profile, completion: @escaping (Result <Any?, Error>) -> Void) {
-    
+  
+  func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void) {
     queue.async {
       do {
         if profile.nameChanged {
           let nameURL = self.fileURL(.userName)
+          print(nameURL)
           try profile.userName.write(to: nameURL, atomically: true, encoding: .utf8)
           
         }
@@ -51,7 +56,7 @@ final class GCDStoreManager {
         }
         
         DispatchQueue.main.async {
-          completion(.success(nil))
+          completion(.success(profile))
         }
         
       } catch let error {
@@ -71,48 +76,38 @@ final class GCDStoreManager {
     var userBio = ""
     var userPhotoData = Data()
     
-    let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-    let url = NSURL(fileURLWithPath: path)
-    
     queue.async {
       do {
         
-        //check file name
-        if let pathComponent = url.appendingPathComponent("userName.txt") {
-          let filePath = pathComponent.path
-          let fileManager = FileManager.default
-          if fileManager.fileExists(atPath: filePath) {
-            userName = try String(contentsOf: self.fileURL(.userName))
-          }
-        }
-        //check file bio
-        if let pathComponent = url.appendingPathComponent("userBio.txt") {
-          let filePath = pathComponent.path
-          let fileManager = FileManager.default
-          if fileManager.fileExists(atPath: filePath) {
-            userBio = try String(contentsOf: self.fileURL(.userBio))
-          }
-        }
-        //check file photo
-        if let pathComponent = url.appendingPathComponent("photo.png") {
-          let filePath = pathComponent.path
-          let fileManager = FileManager.default
-          if fileManager.fileExists(atPath: filePath) {
-            userPhotoData = try Data(contentsOf: self.fileURL(.userPhoto))
-          }
+        if self.fileManager.fileExists(atPath: self.fileURL(.userName).path) {
+          userName = try String(contentsOf: self.fileURL(.userName))
         }
         
+        if self.fileManager.fileExists(atPath: self.fileURL(.userBio).path) {
+          userBio = try String(contentsOf: self.fileURL(.userBio))
+        }
+        
+        if self.fileManager.fileExists(atPath: self.fileURL(.userPhoto).path) {
+          userPhotoData = try Data(contentsOf: self.fileURL(.userPhoto))
+        }
         
         DispatchQueue.main.async {
           completion(.success(Profile(userName: userName, userBio: userBio, userData: userPhotoData)))
         }
-        
         
       } catch let error {
         DispatchQueue.main.async {
           completion(.failure(error))
         }
       }
+    }
+  }
+  
+  private func checkExistFile(pathComponent: URL) -> Bool {
+    if fileManager.fileExists(atPath:  pathComponent.path) {
+      return true
+    } else {
+      return false
     }
   }
   

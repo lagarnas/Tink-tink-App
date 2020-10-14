@@ -50,6 +50,7 @@
 		889CC201252328D500A1812F /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* MessageCellModel.swift */; };
 		88A152BB25348AF4001E2480 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152BA25348AF4001E2480 /* Profile.swift */; };
 		88A152C42534B1B3001E2480 /* ProfileVC + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152C32534B1B3001E2480 /* ProfileVC + UIAlertController.swift */; };
+		88A152CB25365672001E2480 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152CA25365672001E2480 /* OperationDataManager.swift */; };
 		88BCF75F251C702600CA81A7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		889CC200252328D500A1812F /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
 		88A152BA25348AF4001E2480 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		88A152C32534B1B3001E2480 /* ProfileVC + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UIAlertController.swift"; sourceTree = "<group>"; };
+		88A152CA25365672001E2480 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 		883DBB552534230500FA425C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				88A152C925365652001E2480 /* OperationDataManager */,
 				883DBB562534231000FA425C /* GCDStoreManager */,
 			);
 			path = Helpers;
@@ -315,6 +318,14 @@
 				885358FD25245C6800469AD6 /* IncomingMessageTableViewCell */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		88A152C925365652001E2480 /* OperationDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				88A152CA25365672001E2480 /* OperationDataManager.swift */,
+			);
+			path = OperationDataManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +440,7 @@
 				88A152C42534B1B3001E2480 /* ProfileVC + UIAlertController.swift in Sources */,
 				88921E302521AC750033BD47 /* ConversationTableViewCell.swift in Sources */,
 				889CC1DD252226FD00A1812F /* TypeSection + Extension.swift in Sources */,
+				88A152CB25365672001E2480 /* OperationDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

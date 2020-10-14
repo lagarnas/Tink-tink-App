@@ -32,7 +32,7 @@ final class ProfileViewController: UIViewController {
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   
-  let dataManager = GCDStoreManager.shared
+  let dataManager: Storeable = OperationDataManager.shared
   
   var profile: Profile?
   
@@ -112,7 +112,17 @@ final class ProfileViewController: UIViewController {
   }
   
   @IBAction private func operationButtonTapped(_ sender: UIButton) {
-    print(#function)
+    guard let profile = self.profile else { return }
+    dataManager.save(profile: profile) { (result) in
+      switch result {
+      case .success(_):
+        self.activityIndicator.stopAnimating()
+        self.alert(title: "Data saved", message: "", style: .alert)
+        self.setupInitialsOfName()
+      case .failure(_):
+        self.alertError(title: "Error", message: "Failed to save data", style: .alert)
+      }
+    }
   }
   
   @objc
