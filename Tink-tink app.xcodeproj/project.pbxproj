@@ -51,6 +51,7 @@
 		88A152BB25348AF4001E2480 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152BA25348AF4001E2480 /* Profile.swift */; };
 		88A152C42534B1B3001E2480 /* ProfileVC + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152C32534B1B3001E2480 /* ProfileVC + UIAlertController.swift */; };
 		88A152CB25365672001E2480 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152CA25365672001E2480 /* OperationDataManager.swift */; };
+		88A152D6253774E5001E2480 /* Storeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152D5253774E5001E2480 /* Storeable.swift */; };
 		88BCF75F251C702600CA81A7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,7 @@
 		88A152BA25348AF4001E2480 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		88A152C32534B1B3001E2480 /* ProfileVC + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UIAlertController.swift"; sourceTree = "<group>"; };
 		88A152CA25365672001E2480 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
+		88A152D5253774E5001E2480 /* Storeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storeable.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,6 +211,7 @@
 			children = (
 				88A152C925365652001E2480 /* OperationDataManager */,
 				883DBB562534231000FA425C /* GCDDataManager */,
+				88A152D5253774E5001E2480 /* Storeable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				883E54D92528DC3A00315DAD /* ThemeButton.swift in Sources */,
 				8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */,
 				88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */,
+				88A152D6253774E5001E2480 /* Storeable.swift in Sources */,
 				883DBB3A2531CC8600FA425C /* ConversationVC + UpdateTheme.swift in Sources */,
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,

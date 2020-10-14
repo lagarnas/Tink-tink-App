@@ -9,12 +9,6 @@
 import Foundation
 import UIKit
 
-protocol Storeable {
-  func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void)
-  func retrive(completion: @escaping (Result<Profile, Error>) -> Void)
-}
-
-
 final class GCDDataManager: Storeable {
 
   static let shared = GCDDataManager()
@@ -54,8 +48,6 @@ final class GCDDataManager: Storeable {
       }
     }
   }
-  
-  
   
   //MARK: - Retrive data
   func retrive(completion: @escaping (Result<Profile, Error>) -> Void) {

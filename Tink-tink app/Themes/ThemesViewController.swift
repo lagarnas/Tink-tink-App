@@ -101,11 +101,16 @@ extension ThemesViewController {
   
   
   private func updateTheme() {
-    saveTheme()
-    applyTheme()
+   // saveTheme()
+    ThemeManager.shared.save(themeMode: self.themeMode) {
+      self.applyTheme()
+      self.didChangeTheme?()
+    }
+    
   }
   
   private func applyTheme() {
+    ThemeManager.shared.applyTheme()
     view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     classicLabel.textColor = ThemeManager.shared.current.mainTextColor
     dayLabel.textColor = ThemeManager.shared.current.mainTextColor
@@ -157,6 +162,9 @@ extension ThemesViewController {
   
 
   private func saveTheme() {
-    ThemeManager.shared.save(themeMode: themeMode)
+
+  //  ThemeManager.shared.save(themeMode: self.themeMode, completion: <#() -> Void#>)
+    
+    
   }
 }
