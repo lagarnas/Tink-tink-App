@@ -24,9 +24,19 @@ extension ProfileViewController {
 
     let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
     
-    let actionOK = UIAlertAction(title: "OK", style: .default)
+    let actionOK = UIAlertAction(title: "OK", style: .default) {_ in 
+      self.activityIndicator.stopAnimating()
+    }
     let actionRepeat = UIAlertAction(title: "Try again", style: .default) {_ in
-      self.GCDButtonTapped()
+      
+      if self.GCDButtonIsClick {
+        self.GCDButtonTapped()
+      } else {
+        self.operationButtonTapped(self.operationButton)
+      }
+      
+      
+      
     }
     alertController.addAction(actionOK)
     alertController.addAction(actionRepeat)

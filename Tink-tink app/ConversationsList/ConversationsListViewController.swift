@@ -53,7 +53,8 @@ final class ConversationsListViewController: UIViewController {
   ]
   private var searchController = UISearchController(searchResultsController: nil)
   
-  let dataManager: Storeable = OperationDataManager.shared
+   //let dataManager: Storeable = OperationDataManager.shared
+   let dataManager: Storeable = GCDDataManager.shared
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -151,7 +152,8 @@ extension ConversationsListViewController {
   }
   
   private func setupMiniature() {
-    dataManager.retrive { result in
+    dataManager.retrive { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case .success(let profile):
       self.setupInitialsOfName(profile: profile)

@@ -20,7 +20,7 @@
 		883DBB292531CA7300FA425C /* ProfileVC + UpdateTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB282531CA7300FA425C /* ProfileVC + UpdateTheme.swift */; };
 		883DBB2F2531CB0100FA425C /* ConversationVC + UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB2E2531CB0100FA425C /* ConversationVC + UITextFieldDelegate.swift */; };
 		883DBB3A2531CC8600FA425C /* ConversationVC + UpdateTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB392531CC8600FA425C /* ConversationVC + UpdateTheme.swift */; };
-		883DBB582534232900FA425C /* GCDStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB572534232800FA425C /* GCDStoreManager.swift */; };
+		883DBB582534232900FA425C /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB572534232800FA425C /* GCDDataManager.swift */; };
 		883E54CA252782B300315DAD /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54C9252782B300315DAD /* ThemesViewController.swift */; };
 		883E54CE252782C800315DAD /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883E54CD252782C800315DAD /* ThemesViewController.storyboard */; };
 		883E54D92528DC3A00315DAD /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54D82528DC3A00315DAD /* ThemeButton.swift */; };
@@ -70,7 +70,7 @@
 		883DBB282531CA7300FA425C /* ProfileVC + UpdateTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UpdateTheme.swift"; sourceTree = "<group>"; };
 		883DBB2E2531CB0100FA425C /* ConversationVC + UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationVC + UITextFieldDelegate.swift"; sourceTree = "<group>"; };
 		883DBB392531CC8600FA425C /* ConversationVC + UpdateTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationVC + UpdateTheme.swift"; sourceTree = "<group>"; };
-		883DBB572534232800FA425C /* GCDStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDStoreManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		883DBB572534232800FA425C /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		883E54C9252782B300315DAD /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		883E54CD252782C800315DAD /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		883E54D82528DC3A00315DAD /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
@@ -208,17 +208,17 @@
 			isa = PBXGroup;
 			children = (
 				88A152C925365652001E2480 /* OperationDataManager */,
-				883DBB562534231000FA425C /* GCDStoreManager */,
+				883DBB562534231000FA425C /* GCDDataManager */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		883DBB562534231000FA425C /* GCDStoreManager */ = {
+		883DBB562534231000FA425C /* GCDDataManager */ = {
 			isa = PBXGroup;
 			children = (
-				883DBB572534232800FA425C /* GCDStoreManager.swift */,
+				883DBB572534232800FA425C /* GCDDataManager.swift */,
 			);
-			path = GCDStoreManager;
+			path = GCDDataManager;
 			sourceTree = "<group>";
 		};
 		883E54C82527828300315DAD /* Themes */ = {
@@ -408,7 +408,7 @@
 				889CC1E1252230BE00A1812F /* ConversationViewController.swift in Sources */,
 				8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */,
 				88023679251610CA0079FA1B /* AvatarImageView.swift in Sources */,
-				883DBB582534232900FA425C /* GCDStoreManager.swift in Sources */,
+				883DBB582534232900FA425C /* GCDDataManager.swift in Sources */,
 				883E54F3252B6F1600315DAD /* NightTheme.swift in Sources */,
 				883E54F0252B6F0400315DAD /* DayTheme.swift in Sources */,
 				889CC1FC2523288D00A1812F /* IncomingMessageTableViewCell.swift in Sources */,

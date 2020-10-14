@@ -46,6 +46,7 @@ class SaveOperation: RetriveOperation {
   
   override func main() {
     print(Thread.current)
+    sleep(2)
     do {
       if profile.nameChanged {
         let nameURL = self.fileURL(.userName)
@@ -98,6 +99,7 @@ class RetriveOperation: Operation {
   }
   
   override func main() {
+    //sleep(2)
     do {
       
       if self.fileManager.fileExists(atPath: self.fileURL(.userName).path) {

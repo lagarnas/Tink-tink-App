@@ -26,13 +26,16 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
   @IBOutlet weak var textStackView: UIStackView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-  
-  weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
+  @IBOutlet weak var nameSeparator: UIView!
+  @IBOutlet weak var bioSeparator: UIView!
+  @IBOutlet weak var editButton: UIBarButtonItem!
   
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
+  var GCDButtonIsClick = false
   
-  let dataManager: Storeable = OperationDataManager.shared
+  //let dataManager: Storeable = OperationDataManager.shared
+  let dataManager: Storeable = GCDDataManager.shared
   
   var profile: Profile?
   
@@ -41,14 +44,10 @@ final class ProfileViewController: UIViewController {
     super.viewDidLoad()
     profile = Profile(userName: nameTextField.text ?? "", userBio: bioTextView.text, userData: avatarView.imageView.image?.pngData() ?? Data())
     
-    //MARK: - Retain cycle
-    //    themesVC?.didChangeTheme = {
-    //      self.updateTheme()
-    //    }
-    
     self.configure()
     
-    dataManager.retrive { result in
+    dataManager.retrive { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case .success(let profile):
         self.nameTextField.text = profile.userName
@@ -82,18 +81,16 @@ final class ProfileViewController: UIViewController {
     GCDButton.clipsToBounds = true
     GCDButton.layer.cornerRadius = 10
     GCDButton.addTarget(self, action: #selector(GCDButtonTapped), for: .touchUpInside)
-    
-
   }
   
   
-  func enabledUIElements() {
+  private func enabledUIElements() {
     setImageButton.isHidden = false
     nameTextField.isEnabled = true
     bioTextView.isEditable = true
   }
   
-  func unEnabledUIElements() {
+  private func unEnabledUIElements() {
     setImageButton.isHidden = true
     nameTextField.isEnabled = false
     bioTextView.isEditable = false
@@ -103,47 +100,60 @@ final class ProfileViewController: UIViewController {
   
   
   //MARK: - IBActions
-  @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+  @IBAction private func editButtonTapped(_ sender: UIBarButtonItem) {
     enabledUIElements()
+    editButton.isEnabled = false
+    nameTextField.becomeFirstResponder()
   }
   
   @IBAction private func setImageButtonTapped(_ sender: UIButton) {
     openAlertAction()
+    
   }
   
-  @IBAction private func operationButtonTapped(_ sender: UIButton) {
+  // MARK: - operationButtonTapped()
+  @IBAction func operationButtonTapped(_ sender: UIButton) {
+    unEnabledButtons()
+    activityIndicator.startAnimating()
     guard let profile = self.profile else { return }
-    dataManager.save(profile: profile) { (result) in
+    OperationDataManager.shared.save(profile: profile) { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case .success(_):
-        self.activityIndicator.stopAnimating()
-        self.alert(title: "Data saved", message: "", style: .alert)
-        self.setupInitialsOfName()
+        self.updateUI()
       case .failure(_):
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
       }
     }
   }
   
-  @objc
-  func GCDButtonTapped() {
+  
+  // MARK: - GCDButtonTapped()
+  @objc func GCDButtonTapped() {
+    GCDButtonIsClick = true
     activityIndicator.startAnimating()
- 
-    // MARK: - GCD save
+    unEnabledButtons()
+    
     guard let profile = self.profile else { return }
     
-    dataManager.save(profile: profile) { result in
+    GCDDataManager.shared.save(profile: profile) { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case .success(_):
-        self.activityIndicator.stopAnimating()
-        self.alert(title: "Data saved", message: "", style: .alert)
-        self.setupInitialsOfName()
+        self.updateUI()
       case .failure(_):
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
       }
     }
   }
   
+  private func updateUI() {
+    activityIndicator.stopAnimating()
+    alert(title: "Data saved", message: "", style: .alert)
+    setupInitialsOfName()
+    unEnabledUIElements()
+    editButton.isEnabled = true
+  }
   
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
@@ -162,6 +172,7 @@ final class ProfileViewController: UIViewController {
   
   
   deinit {
+    print(#function)
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }

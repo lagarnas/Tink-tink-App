@@ -70,7 +70,7 @@
                                                                     <outlet property="delegate" destination="ySx-SM-L9v" id="uyu-91-jl7"/>
                                                                 </connections>
                                                             </textField>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWT-23-zpA" userLabel="separator">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWT-23-zpA" userLabel="nameSeparator">
                                                                 <rect key="frame" x="0.0" y="24" width="343" height="1"/>
                                                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                                                 <constraints>
@@ -104,7 +104,7 @@
                                                                     <outlet property="delegate" destination="ySx-SM-L9v" id="p8l-6d-Oed"/>
                                                                 </connections>
                                                             </textView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-Xn-DAj" userLabel="separator">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjD-Xn-DAj" userLabel="bioSeparator">
                                                                 <rect key="frame" x="0.0" y="73" width="343" height="1"/>
                                                                 <color key="backgroundColor" systemColor="separatorColor"/>
                                                                 <constraints>
@@ -162,7 +162,7 @@
                                             </view>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="q3m-dH-Mx0">
                                                 <rect key="frame" x="169" y="315.66666666666669" width="37" height="37"/>
-                                                <color key="color" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="color" systemColor="systemGray4Color"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -216,10 +216,13 @@
                         <outlet property="activityIndicator" destination="q3m-dH-Mx0" id="t2b-is-smN"/>
                         <outlet property="avatarView" destination="TxL-pl-40p" id="ZgS-yZ-TgN"/>
                         <outlet property="bioLabel" destination="eOI-c8-Xt6" id="1es-c7-ubY"/>
+                        <outlet property="bioSeparator" destination="gjD-Xn-DAj" id="iZZ-Ad-X28"/>
                         <outlet property="bioTextView" destination="JJd-Eo-4v5" id="Ip0-tZ-5fW"/>
                         <outlet property="constraintContentHeight" destination="pI2-US-x3G" id="1y3-Dl-wqu"/>
                         <outlet property="contentView" destination="9rb-2m-cso" id="xuu-7q-Gcg"/>
+                        <outlet property="editButton" destination="sVD-LD-QJg" id="WOg-CI-cUV"/>
                         <outlet property="nameLabel" destination="kUm-Fj-Bpw" id="Ivt-jV-eHM"/>
+                        <outlet property="nameSeparator" destination="XWT-23-zpA" id="8Pg-HL-5UW"/>
                         <outlet property="nameTextField" destination="jRY-cX-n04" id="AA3-1c-Fsc"/>
                         <outlet property="navigationBar" destination="gCq-jQ-ouh" id="u0E-el-2IU"/>
                         <outlet property="operationButton" destination="nm9-rg-xEO" id="WL4-oY-agm"/>
@@ -245,6 +248,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

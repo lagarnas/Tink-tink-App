@@ -15,15 +15,9 @@ protocol Storeable {
 }
 
 
-final class GCDStoreManager: Storeable {
-  
-  private enum FileName: String {
-    case userName  = "userName.txt"
-    case userBio   = "userBio.txt"
-    case userPhoto = "photo.png"
-  }
-  
-  static let shared = GCDStoreManager()
+final class GCDDataManager: Storeable {
+
+  static let shared = GCDDataManager()
   private init() {}
   
   let fileManager = FileManager.default
@@ -31,28 +25,22 @@ final class GCDStoreManager: Storeable {
   
   
   //MARK: - Save data
-  
-  
   func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void) {
     queue.async {
       do {
         if profile.nameChanged {
           let nameURL = self.fileURL(.userName)
-          print(nameURL)
           try profile.userName.write(to: nameURL, atomically: true, encoding: .utf8)
-          
         }
         
         if profile.bioChanged {
           let bioURL = self.fileURL(.userBio)
           try profile.userBio.write(to: bioURL, atomically: true, encoding: .utf8)
-          
         }
         
         if profile.photoChanged {
           let photoURL = self.fileURL(.userPhoto)
           try profile.userData.write(to: photoURL)
-          
         }
         
         DispatchQueue.main.async {
