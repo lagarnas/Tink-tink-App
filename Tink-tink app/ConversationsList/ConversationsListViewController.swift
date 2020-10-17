@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 struct TypeSection {
   var title: String
@@ -17,6 +18,8 @@ struct TypeSection {
 final class ConversationsListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet private weak var avatarView: MiniAvatarView!
+  @IBOutlet weak var settingsIcon: UIBarButtonItem!
   
   private var sections = [TypeSection]()
   private var chats = [
@@ -50,39 +53,74 @@ final class ConversationsListViewController: UIViewController {
   ]
   private var searchController = UISearchController(searchResultsController: nil)
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupNavigation()
     setupTableView()
-    createRightBar()
     setupSearchController()
+    setupMiniature()
   }
   
-
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    updateTheme()
+  }
+  
+  @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+    let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
+    //MARK: Delegate
+    // themesVC.delegate = self
+    
+    //MARK: Closure
+    themesVC.didChangeTheme = { [weak self] in
+      self?.updateTheme()
+    }
+    
+    self.navigationController?.pushViewController(themesVC, animated: true)
+  }
+  
+  //MARK: - Не получилось поменять цвета для хедеров Online и History
+  private func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.navigationController?.navigationBar.barStyle = ThemeManager.shared.barStyle
+    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
+    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
+    settingsIcon.tintColor = ThemeManager.shared.current.tintColor
+    
+    tableView.reloadData()
+  }
+  
+  deinit {
+    os_log("%@", log: .retainCycle, type: .info, self)
+  }
 }
+
+//MARK: ThemesPickerDelegate
+//extension ConversationsListViewController: ThemesPickerDelegate {
+//  func didChangeTheme(_ themesViewController: ThemesViewController) {
+//    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
+//  }
+//
+//}
 
 //MARK: - Functions
 extension ConversationsListViewController {
   
-  private func createRightBar() {
-    let profileButton = UIButton()
-    profileButton.addTarget(self, action: #selector(openProfileVC), for: .touchUpInside)
-    profileButton.translatesAutoresizingMaskIntoConstraints = false
-    
-    let barBurronItem = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(openProfileVC(_sender:)))
-    self.navigationItem.rightBarButtonItem = barBurronItem
-  }
-  
-  @objc
-  private func openProfileVC(_sender: UIBarButtonItem) {
-    let profileVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
-    self.present(profileVC, animated: true)
-  }
-  
   @objc
   private func close() {
     self.dismiss(animated: true)
+  }
+  
+  @objc
+  private func avatarTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    let _ = tapGestureRecognizer.view as! MiniAvatarView
+    openProfileVC()
+  }
+  
+  private func openProfileVC() {
+    let profileVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
+    self.present(profileVC, animated: true)
   }
   
   private func setupTableView() {
@@ -98,11 +136,6 @@ extension ConversationsListViewController {
       chat.message != ""
     }
   }
-  private func setupNavigation() {
-    self.title = "Tinkoff chat"
-    self.navigationController?.navigationBar.backgroundColor = .white
-    self.navigationController?.navigationBar.prefersLargeTitles = true
-  }
   
   private func setupSearchController() {
     //searchController.searchResultsUpdater = self
@@ -111,6 +144,14 @@ extension ConversationsListViewController {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
     definesPresentationContext = true
+  }
+  
+  private func setupMiniature() {
+    avatarView.miniNameLabel.text = "A"
+    avatarView.miniSecondNameLabel.text = "L"
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
+    avatarView.isUserInteractionEnabled = true
+    avatarView.addGestureRecognizer(tapGestureRecognizer)
   }
 }
 
@@ -123,7 +164,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let section = self.sections[section]
-    
     return section.chats.count
   }
   

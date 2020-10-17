@@ -45,10 +45,10 @@ class MiniAvatarView: AvatarView {
     miniSecondNameLabel.translatesAutoresizingMaskIntoConstraints = false
     
     let imageViewConstrains = [
-      miniImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      miniImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      miniImageView.widthAnchor.constraint(equalToConstant: 48),
-      miniImageView.heightAnchor.constraint(equalToConstant: 48)
+      miniImageView.topAnchor.constraint(equalTo: topAnchor),
+      miniImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      miniImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      miniImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ]
     
     let nameLabelConstraints = [

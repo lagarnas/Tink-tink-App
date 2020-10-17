@@ -17,12 +17,20 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   @IBOutlet weak var avatarView: AvatarView!
   
+  weak var themesVC: ThemesViewController? = ThemesViewController.loadFromStoryboard()
+  
   var imageIsChanged = false
-  private let defaults = UserDefaults.standard
   
   //MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
+    //MARK: - Retain cycle
+//    themesVC?.didChangeTheme = {
+//      self.updateTheme()
+//    }
+    
     configure()
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, saveButton.frame as CVarArg)
@@ -39,6 +47,10 @@ final class ProfileViewController: UIViewController {
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
   }
+  
+  deinit {
+    os_log("%@", log: .retainCycle, type: .info, self)
+  }
 }
 
 //MARK: - Functions
@@ -50,12 +62,10 @@ extension ProfileViewController {
   }
   
   private func configure() {
-    self.navigationBar.backgroundColor = .white
+    updateTheme()
     self.navigationBar.prefersLargeTitles = true
     saveButton.clipsToBounds = true
     saveButton.layer.cornerRadius = 10
-    nameLabel.text = "Anastasia Leonteva"
-    bioLabel.text = "iOS developer, QA engineer, Russia, Samara"
     avatarView.imageView.image = retrieveImage(forKey: "avatarImage")
     setupInitialsOfName()
   }
@@ -65,6 +75,16 @@ extension ProfileViewController {
     let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
     avatarView.nameLabel.text = nameAv
     avatarView.secondNameLabel.text = secondNameAv
+
+  }
+  
+  private func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    nameLabel.textColor = ThemeManager.shared.current.mainTextColor
+    bioLabel.textColor = ThemeManager.shared.current.mainTextColor
+    saveButton.backgroundColor = ThemeManager.shared.current.accent
+    saveButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
   }
   
   private func openAlertAction() {
@@ -81,6 +101,7 @@ extension ProfileViewController {
     
     camera.setValue(cameraIcon, forKey: "image")
     camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+    camera.titleTextColor = .black
     
     let photo = UIAlertAction(title: "Photo", style: .default) { _ in
       self.chooseImagePicker(source: .photoLibrary)
@@ -88,8 +109,10 @@ extension ProfileViewController {
     
     photo.setValue(photoIcon, forKey: "image")
     photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+    photo.titleTextColor = .black
     
     let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+    cancel.titleTextColor = .red
     
     actionSheet.addAction(camera)
     actionSheet.addAction(photo)
@@ -97,7 +120,7 @@ extension ProfileViewController {
     actionSheet.pruneNegativeWidthConstraints()
     present(actionSheet, animated: true)
   }
-
+  
 }
 
 
@@ -114,7 +137,7 @@ extension ProfileViewController {
     if avatarView.imageView.image != nil { hideInitials() }
     os_log("%@", log: OSLog.viewCycle, type: .info, #function)
   }
-
+  
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
   }
@@ -144,6 +167,5 @@ extension ProfileViewController {
     super.didReceiveMemoryWarning()
     NSLog(#function)
   }
-
-  
 }
+

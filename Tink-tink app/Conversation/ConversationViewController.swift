@@ -19,6 +19,7 @@ final class ConversationViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView!
   @IBOutlet private weak var sendButton: UIButton!
   @IBOutlet private weak var dockViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var dockView: UIView!
   
   private let allChatMessages = [
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
@@ -49,12 +50,9 @@ final class ConversationViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = false
     self.messageTextField.delegate = self
     setupTableView()
-    
+    updateTheme()
   }
   
-  private func createRightBarCustom() {
-  }
-
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -71,6 +69,15 @@ final class ConversationViewController: UIViewController {
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
   }
+  
+  private func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
+    self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.dockView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+   
+  }
 }
 
 //MARK: - Setup TableView
@@ -82,7 +89,7 @@ extension ConversationViewController {
     tableView.register(UINib(nibName: IncomingMessageTableViewCell.nibName, bundle: nil),
                        forCellReuseIdentifier: IncomingMessageTableViewCell.reuseIdentifier)
     tableView.register(UINib(nibName: OutgoingMessageTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: OutgoingMessageTableViewCell.reuseIdentifier)
-    
+    tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
     self.tableView.addGestureRecognizer(tapGesture)
   }

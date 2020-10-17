@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0me-a7-DvC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XzP-4s-pIq">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Conversations List View Controller-->
+        <!--Tinkoff chat-->
         <scene sceneID="gZj-3r-wjK">
             <objects>
                 <viewController storyboardIdentifier="ConversationsListViewController" id="0me-a7-DvC" customClass="ConversationsListViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -27,7 +27,6 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JhH-Ub-Cft"/>
-                        <color key="backgroundColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="trailing" secondItem="JhH-Ub-Cft" secondAttribute="trailing" id="2UP-y2-ofW"/>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="bottom" secondItem="2QP-wE-iys" secondAttribute="bottom" id="77t-6s-b2B"/>
@@ -35,17 +34,58 @@
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="top" secondItem="2QP-wE-iys" secondAttribute="top" id="fAD-rV-e3q"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Szd-t3-0AS"/>
+                    <navigationItem key="navigationItem" title="Tinkoff chat" id="Szd-t3-0AS">
+                        <barButtonItem key="leftBarButtonItem" image="Settings_group" id="lWv-nV-MH4">
+                            <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.34509803921568627" alpha="0.65360124143835618" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="settingsTapped:" destination="0me-a7-DvC" id="3yW-fR-hVA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="2020-01-23 14.33.44" id="2xc-gI-HDh">
+                            <view key="customView" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hle-LC-Dgs">
+                                <rect key="frame" x="276" y="0.0" width="83" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phf-zg-dap" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
+                                        <rect key="frame" x="43" y="0.0" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </view>
+                                </subviews>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="avatarView" destination="phf-zg-dap" id="gGn-Jw-psa"/>
+                        <outlet property="settingsIcon" destination="lWv-nV-MH4" id="bun-Bs-901"/>
                         <outlet property="tableView" destination="JN0-8I-qn3" id="5ua-Yv-SF5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PqF-WB-T0a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2192.8000000000002" y="-7.389162561576355"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2rO-Fn-HAF">
+            <objects>
+                <navigationController storyboardIdentifier="navControlloer" automaticallyAdjustsScrollViewInsets="NO" id="XzP-4s-pIq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="N5j-6C-eEN">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0me-a7-DvC" kind="relationship" relationship="rootViewController" id="kbE-zk-itW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E7x-bD-Iws" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="1250.4000000000001" y="-7.389162561576355"/>
         </scene>
     </scenes>
     <resources>
+        <image name="2020-01-23 14.33.44" width="213.33332824707031" height="213.33332824707031"/>
+        <image name="Settings_group" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

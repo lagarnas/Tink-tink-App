@@ -14,7 +14,6 @@ import os.log
   
   
   var window: UIWindow?
-  var navController = UINavigationController()
   // 1) Запускаем приложение по тапу на иконку
   //  State: Приложение запускается, не активно
   // 2) Ждем пока приложение загрузится смотрим на LaunchScreen
@@ -22,10 +21,11 @@ import os.log
   
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
-    let convVC: ConversationsListViewController = ConversationsListViewController.loadFromStoryboard()
-    self.navController = UINavigationController(rootViewController: convVC)
+    let storyboard = UIStoryboard(name: "ConversationsListViewController", bundle: nil)
     
-    self.window?.rootViewController = self.navController
+    let rootViewController = storyboard.instantiateViewController(withIdentifier: "navControlloer")
+    
+    self.window?.rootViewController = rootViewController
     self.window?.makeKeyAndVisible()
     
     os_log("Application moved from <Not Running> to <Inactive>: didFinishLaunchingWithOptions", log: OSLog.appCycle, type: .info)

@@ -15,6 +15,9 @@ final class IncomingMessageTableViewCell: UITableViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    self.backgroundColor = .clear
+    bubbleView.backgroundColor = ThemeManager.shared.current.incomingMessageColor
+    messageLabel.textColor = ThemeManager.shared.current.mainTextColor
     bubbleView.layer.cornerRadius = 12
   }
 }

@@ -20,6 +20,7 @@ final class ConversationTableViewCell: UITableViewCell {
   @IBOutlet private weak var previewMessageLabel: UILabel!
   @IBOutlet private weak var dateLabel: UILabel!
   @IBOutlet private weak var onlineIndicatorView: UIView!
+  @IBOutlet weak var forwardIcon: UIImageView!
   
   override func prepareForReuse() {
     self.backgroundColor = .clear
@@ -29,6 +30,15 @@ final class ConversationTableViewCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     setupOnlineIndicator()
+    updateTheme()
+  }
+  
+  private func updateTheme() {
+    nameLabel.textColor = ThemeManager.shared.current.mainTextColor
+    previewMessageLabel.textColor = ThemeManager.shared.current.minorTextColor
+    dateLabel.textColor = ThemeManager.shared.current.minorTextColor
+    forwardIcon.tintColor = ThemeManager.shared.current.tintColor
+    onlineIndicatorView.backgroundColor = ThemeManager.shared.current.onlineIndicator
   }
   
   //MARK: Functions
@@ -56,18 +66,10 @@ extension ConversationTableViewCell: ConfigurableView {
     onlineIndicatorView.isHidden = model.isOnline ? false : true
     previewMessageLabel.font = model.hasUnreadMessages && model.message != ""  ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
     
-    if model.message == "" {
-      previewMessageLabel.text =  "No messages yet..."
-      previewMessageLabel.font = UIFont.italicSystemFont(ofSize: 13)
-      dateLabel.isHidden = true
-    } else {
-      previewMessageLabel.text = model.message
-      previewMessageLabel.font = UIFont.systemFont(ofSize: 13)
-      dateLabel.isHidden = false
-    }
-    
-    self.backgroundColor = model.isOnline ? #colorLiteral(red: 0.8941176471, green: 0.9098039216, blue: 0.168627451, alpha: 0.3048212757) : .white
-    
+    previewMessageLabel.text = model.message == "" ? "No messages yet..." : model.message
+    previewMessageLabel.font = model.message == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
+    dateLabel.isHidden = model.message == ""
+
     dateLabel.text = model.date.getFormattingDate()
     nameLabel.text = model.name
     
