@@ -20,7 +20,6 @@ final class ThemeManager {
   let fileManager = FileManager.default
   let queue = DispatchQueue(label: "Theme", qos: .background, attributes: .concurrent)
   
-  
   func applyTheme() {
     UserDefaults.standard.synchronize()
     let sharedApplication = UIApplication.shared
@@ -60,7 +59,6 @@ final class ThemeManager {
 
     let themeMode = ThemeMode(rawValue: themeModeValue ?? 0) ?? .classic
     return themeMode
-   
     
   }
   
@@ -68,7 +66,6 @@ final class ThemeManager {
     //UserDefaults.standard.set(themeMode.rawValue, forKey: "themeMode")
     
     queue.async {
-      print(Thread.current)
       let themeMode = String(themeMode.rawValue)
       
       do {
@@ -85,16 +82,17 @@ final class ThemeManager {
   }
   
   private func fileURL(_ fileName: FileName) -> URL {
-    let documentDirURL = try! fileManager.url(for: .documentDirectory,
-                                              in: .userDomainMask,
-                                              appropriateFor: nil,
-                                              create: true)
-    
-    let fileURL = documentDirURL.appendingPathComponent(fileName.rawValue)
+    var documentDirURL = URL(string: "")
+    do {
+      documentDirURL = try fileManager.url(for: .documentDirectory,
+                                                in: .userDomainMask,
+                                                appropriateFor: nil,
+                                                create: true)
+    } catch  { print(error.localizedDescription) }
+    let fileURL = documentDirURL!.appendingPathComponent(fileName.rawValue)
     return fileURL
   }
 }
-
 
 extension ThemeManager {
   var barStyle: UIBarStyle {

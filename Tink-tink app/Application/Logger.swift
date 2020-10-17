@@ -21,6 +21,3 @@ extension OSLog {
   // Logs the deinit is performing
   static let retainCycle = OSLog(subsystem: subsystem, category: "retainCycle")
 }
-
-
-

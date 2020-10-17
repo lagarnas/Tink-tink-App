@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import Firebase
 
 struct TypeSection {
   var title: String
@@ -23,7 +24,9 @@ final class ConversationsListViewController: UIViewController {
   
   private var sections = [TypeSection]()
   private var chats = [
+    // swiftlint:disable:next line_length
     ConversationCellModel(avatar: nil, name: "Alena Иванова", message: "Привет! Как дела? Пошли в кино сегодня вечером?", date: Date(timeIntervalSinceNow: -184000), isOnline:  true, hasUnreadMessages: true),
+    // swiftlint:disable:next line_length
     ConversationCellModel(avatar: nil, name: "Кристина Стоцкая", message:"Нормально, работаю, учусть, поступила вот на курсы", date: Date(), isOnline:  true, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Aлександр Вермутов", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
     ConversationCellModel(avatar: nil, name: "Данила Козловский", message: "", date: Date(timeIntervalSinceNow: -90000), isOnline:  true, hasUnreadMessages: true),
@@ -53,10 +56,18 @@ final class ConversationsListViewController: UIViewController {
   ]
   private var searchController = UISearchController(searchResultsController: nil)
   
-   //let dataManager: Storeable = OperationDataManager.shared
-   let dataManager: Storeable = GCDDataManager.shared
-  
+  //let dataManager: Storeable = OperationDataManager.shared
+  let dataManager: Storeable = GCDDataManager.shared
+  private lazy var dataBase = Firestore.firestore()
+  private lazy var referance = dataBase.collection("channels")
+
   override func viewDidLoad() {
+    
+    referance.addSnapshotListener { (snapshot, eror) in
+      snapshot?.documents[0].documentID
+      snapshot?.documents.compactMap { $0.data() }
+    }
+    
     super.viewDidLoad()
     setupTableView()
     setupSearchController()
@@ -69,13 +80,12 @@ final class ConversationsListViewController: UIViewController {
     updateTheme()
   }
   
-  
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
-    //MARK: Delegate
+    // MARK: Delegate
     // themesVC.delegate = self
     
-    //MARK: Closure
+    // MARK: Closure
     themesVC.didChangeTheme = { [weak self] in
       self?.updateTheme()
     }
@@ -83,7 +93,7 @@ final class ConversationsListViewController: UIViewController {
     self.navigationController?.pushViewController(themesVC, animated: true)
   }
   
-  //MARK: - Не получилось поменять цвета для хедеров Online и History
+  // MARK: - Не получилось поменять цвета для хедеров Online и History
   private func updateTheme() {
     ThemeManager.shared.applyTheme()
     self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
@@ -93,7 +103,7 @@ final class ConversationsListViewController: UIViewController {
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
     settingsIcon.tintColor = ThemeManager.shared.current.tintColor
     
-    tableView.reloadData()
+    //tableView.reloadData()
   }
   
   deinit {
@@ -101,7 +111,7 @@ final class ConversationsListViewController: UIViewController {
   }
 }
 
-//MARK: ThemesPickerDelegate
+// MARK: ThemesPickerDelegate
 //extension ConversationsListViewController: ThemesPickerDelegate {
 //  func didChangeTheme(_ themesViewController: ThemesViewController) {
 //    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
@@ -109,7 +119,7 @@ final class ConversationsListViewController: UIViewController {
 //
 //}
 
-//MARK: - Functions
+// MARK: - Functions
 extension ConversationsListViewController {
   
   @objc
@@ -119,7 +129,7 @@ extension ConversationsListViewController {
   
   @objc
   private func avatarTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-    let _ = tapGestureRecognizer.view as! MiniAvatarView
+    _ = tapGestureRecognizer.view as? MiniAvatarView
     openProfileVC()
   }
   
@@ -185,8 +195,7 @@ extension ConversationsListViewController {
   }
 }
 
-
-//MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {

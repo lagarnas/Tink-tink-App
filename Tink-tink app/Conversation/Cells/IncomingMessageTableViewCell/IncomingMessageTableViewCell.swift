@@ -22,7 +22,7 @@ final class IncomingMessageTableViewCell: UITableViewCell {
   }
 }
 
-//MARK: - ConfigurableView Protocol
+// MARK: - ConfigurableView Protocol
 extension IncomingMessageTableViewCell: ConfigurableView {
   
   typealias ConfigurtionModel = MessageCellModel
@@ -30,8 +30,5 @@ extension IncomingMessageTableViewCell: ConfigurableView {
   func configure(model: MessageCellModel) {
     self.messageLabel.text = model.text
   }
-  
-  
-  
   
 }

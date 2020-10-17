@@ -23,16 +23,19 @@ final class ConversationViewController: UIViewController {
   
   private let allChatMessages = [
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
+    // swiftlint:disable:next line_length
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
     ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
     ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false),
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
+    // swiftlint:disable:next line_length
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
     ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
     ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false),
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
+    // swiftlint:disable:next line_length
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
     ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
     ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
@@ -41,7 +44,7 @@ final class ConversationViewController: UIViewController {
   
   private var keyboardHeight: CGFloat = 0
   
-  //MARK: - Lifecycle of VC
+  // MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self,
@@ -54,27 +57,23 @@ final class ConversationViewController: UIViewController {
     updateTheme()
   }
   
-  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let indexPath = IndexPath(item: self.allChatMessages.count-1, section: 0)
+    let indexPath = IndexPath(item: self.allChatMessages.count - 1, section: 0)
     self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    NotificationCenter.default.removeObserver(self)
   }
   
-  //MARK: - @IBActions
+  // MARK: - @IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
   }
-  
-
 }
 
-//MARK: - Setup TableView
+// MARK: - Setup TableView
 extension ConversationViewController {
   
   private func setupTableView() {
@@ -108,7 +107,7 @@ extension ConversationViewController {
   }
 }
 
-//MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension ConversationViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     allChatMessages.count
@@ -127,4 +126,3 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     }
   }
 }
-

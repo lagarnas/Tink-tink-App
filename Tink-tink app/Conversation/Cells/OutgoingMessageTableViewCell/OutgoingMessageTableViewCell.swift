@@ -22,7 +22,7 @@ final class OutgoingMessageTableViewCell: UITableViewCell {
   }
 }
 
-//MARK: - ConfigurableView Protocol
+// MARK: - ConfigurableView Protocol
 extension OutgoingMessageTableViewCell: ConfigurableView {
   
   typealias ConfigurtionModel = MessageCellModel

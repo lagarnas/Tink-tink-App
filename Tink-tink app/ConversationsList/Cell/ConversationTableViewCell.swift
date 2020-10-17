@@ -23,6 +23,7 @@ final class ConversationTableViewCell: UITableViewCell {
   @IBOutlet weak var forwardIcon: UIImageView!
   
   override func prepareForReuse() {
+    super.prepareForReuse()
     self.backgroundColor = .clear
     avatarView.imageView.image = nil
   }
@@ -41,7 +42,7 @@ final class ConversationTableViewCell: UITableViewCell {
     onlineIndicatorView.backgroundColor = ThemeManager.shared.current.onlineIndicator
   }
   
-  //MARK: Functions
+  // MARK: Functions
   private func setupOnlineIndicator() {
     onlineIndicatorView.clipsToBounds = true
     onlineIndicatorView.layer.cornerRadius = onlineIndicatorView.frame.width / 2
@@ -57,7 +58,7 @@ final class ConversationTableViewCell: UITableViewCell {
   }
 }
 
-//MARK: - ConfigurableView Protocol
+// MARK: - ConfigurableView Protocol
 extension ConversationTableViewCell: ConfigurableView {
   typealias ConfigurtionModel = ConversationCellModel
   
