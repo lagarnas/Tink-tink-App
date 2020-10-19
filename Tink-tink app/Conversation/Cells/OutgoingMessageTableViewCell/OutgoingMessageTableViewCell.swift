@@ -25,9 +25,9 @@ final class OutgoingMessageTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView Protocol
 extension OutgoingMessageTableViewCell: ConfigurableView {
   
-  typealias ConfigurtionModel = MessageCellModel
+  typealias ConfigurtionModel = Message
   
-  func configure(model: MessageCellModel) {
-    self.messageLabel.text = model.text
+  func configure(model: Message) {
+    self.messageLabel.text = model.content
   }
 }

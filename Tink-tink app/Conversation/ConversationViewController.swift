@@ -9,7 +9,7 @@
 import UIKit
 
 struct ChatMessage {
-  let text: MessageCellModel
+  let text: Message
   let isIncoming: Bool
 }
 
@@ -21,26 +21,7 @@ final class ConversationViewController: UIViewController {
   @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var dockView: UIView!
   
-  private let allChatMessages = [
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
-    // swiftlint:disable:next line_length
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
-    // swiftlint:disable:next line_length
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
-    // swiftlint:disable:next line_length
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false)
-  ]
+  private let allChatMessages = [Message]()
   
   private var keyboardHeight: CGFloat = 0
   
@@ -115,13 +96,13 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let chatMessage = allChatMessages[indexPath.row]
-    if chatMessage.isIncoming {
+    if chatMessage.senderId == "1" {
       let cell = tableView.dequeueCell(IncomingMessageTableViewCell.self, for: indexPath)
-      cell.configure(model: chatMessage.text)
+      cell.configure(model: chatMessage)
       return cell
     } else {
       let cell = tableView.dequeueCell(OutgoingMessageTableViewCell.self, for: indexPath)
-      cell.configure(model: chatMessage.text)
+      cell.configure(model: chatMessage)
       return cell
     }
   }

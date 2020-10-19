@@ -10,68 +10,35 @@ import UIKit
 import os.log
 import Firebase
 
-struct TypeSection {
-  var title: String
-  var isOnline: Bool
-  var chats: [ConversationCellModel]
-}
-
 final class ConversationsListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
   @IBOutlet private weak var avatarView: MiniAvatarView!
   @IBOutlet weak var settingsIcon: UIBarButtonItem!
   
-  private var sections = [TypeSection]()
-  private var chats = [
-    // swiftlint:disable:next line_length
-    ConversationCellModel(avatar: nil, name: "Alena Иванова", message: "Привет! Как дела? Пошли в кино сегодня вечером?", date: Date(timeIntervalSinceNow: -184000), isOnline:  true, hasUnreadMessages: true),
-    // swiftlint:disable:next line_length
-    ConversationCellModel(avatar: nil, name: "Кристина Стоцкая", message:"Нормально, работаю, учусть, поступила вот на курсы", date: Date(), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Aлександр Вермутов", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Данила Козловский", message: "", date: Date(timeIntervalSinceNow: -90000), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Кети Перри", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Арнольд Шварценегер", message: "Нормально", date: Date(timeIntervalSinceNow: -356000),isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Вася Петров", message: "", date: Date(), isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Юлия Поздеева", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Антонина Федорова", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Кот Лепольд", message: "Привет!", date: Date(), isOnline:  false, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Шелдон Купер", message:"Как дела", date: Date(), isOnline:  true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Раджеш Кутрапалли", message: "", date: Date(),isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Леонард Хофстедер", message: "Привет!", date: Date(), isOnline:  true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Говард Воловиц", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Бернадет Ростенковски", message: "Нормально", date: Date(),isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Эми Фарафаулер", message: "Привет!", date: Date(), isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Пенни Сидорова", message:"Как дела", date: Date(), isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Серега Пеннивайз", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Андрей Малахов", message: "Привет!", date: Date(), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Анатолий Собчак", message:"Как дела", date: Date(), isOnline:  false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Кейт Мидлтон", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Илон Маск", message: "Привет!", date: Date(), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Квентин Тарантино", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Ума Турман", message: "Нормально", date: Date(),isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Волтер Уайт", message: "Привет!", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Джесси Пинкман", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Сол Гудман", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: true)
-  ]
   private var searchController = UISearchController(searchResultsController: nil)
   
   //let dataManager: Storeable = OperationDataManager.shared
   let dataManager: Storeable = GCDDataManager.shared
-  private lazy var dataBase = Firestore.firestore()
-  private lazy var referance = dataBase.collection("channels")
+
+  var channels = [Channel]()
 
   override func viewDidLoad() {
-    
-    referance.addSnapshotListener { (snapshot, eror) in
-      snapshot?.documents[0].documentID
-      snapshot?.documents.compactMap { $0.data() }
-    }
-    
     super.viewDidLoad()
     setupTableView()
     setupSearchController()
     
+    DatabaseManager.shared.getChannels { (result) in
+      switch result {
+      case .failure(let error):
+        print(error)
+      case .success(let channels1):
+        self.channels = channels1.sorted { (ch1, ch2) -> Bool in
+          ch1.lastActivity ?? Date() > ch2.lastActivity ?? Date()
+        }
+        self.tableView.reloadData()
+      }
+    }
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -80,6 +47,30 @@ final class ConversationsListViewController: UIViewController {
     updateTheme()
   }
   
+  override func viewWillLayoutSubviews() {
+    print(#function)
+  }
+  
+  @IBAction func addChannelButtonTapped(_ sender: Any) {
+    
+    let alertController = UIAlertController(title: "New channel", message: nil, preferredStyle: .alert)
+    
+    let createAction = UIAlertAction(title: "Create", style: .default) {_ in
+      let text = alertController.textFields?.first?.text
+      guard let channelName = text else { return }
+      DatabaseManager.shared.insertChannel(name: channelName)
+      
+    }
+    let cancelAction = UIAlertAction(title: "OK", style: .cancel)
+    alertController.addTextField { (textField) in
+      textField.placeholder = "Add new channel"
+    }
+    alertController.addAction(createAction)
+    alertController.addAction(cancelAction)
+    
+    self.present(alertController, animated: true, completion: nil)
+    
+  }
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
     // MARK: Delegate
@@ -139,17 +130,9 @@ extension ConversationsListViewController {
   }
   
   private func setupTableView() {
-    self.sections = TypeSection.group(chats: chats)
-    sections[1].chats = filteredMessagesInHistory()
     tableView.rowHeight = 80
     tableView.register(UINib(nibName: ConversationTableViewCell.nibName, bundle: nil),
                        forCellReuseIdentifier: ConversationTableViewCell.reuseIdentifier)
-  }
-  
-  private func filteredMessagesInHistory() -> [ConversationCellModel] {
-    return sections[1].chats.filter { chat in
-      chat.message != ""
-    }
   }
   
   private func setupSearchController() {
@@ -198,32 +181,22 @@ extension ConversationsListViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
-    sections.count
-  }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let section = self.sections[section]
-    return section.chats.count
+
+    return channels.count
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sections[section].title
-  }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let section = self.sections[indexPath.section]
     
     let cell = tableView.dequeueCell(ConversationTableViewCell.self, for: indexPath)
-    cell.configure(model: section.chats[indexPath.row])
+    cell.configure(model: channels[indexPath.row])
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let section = self.sections[indexPath.section]
     let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
-    conversationVC.title = section.chats[indexPath.row].name
     self.navigationController?.pushViewController(conversationVC, animated: true)
-    
   }
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

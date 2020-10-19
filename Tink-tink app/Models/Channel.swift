@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import Firebase
 
-struct ConversationCellModel {
-  let avatar: Data?
-  let name: String
-  let message: String
-  let date: Date
-  let isOnline: Bool
-  let hasUnreadMessages: Bool
+struct Channel{
+    //var avatar: Data?
+    var identifier: String
+    var name: String
+    var lastMessage: String?
+    var lastActivity: Date?
 }

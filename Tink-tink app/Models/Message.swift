@@ -8,7 +8,10 @@
 
 import Foundation
 
-struct MessageCellModel {
-  let text: String
-  
+
+struct Message {
+    let senderId: String
+    var senderName: String
+    var content: String
+    var created: Date
 }

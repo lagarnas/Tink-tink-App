@@ -41,18 +41,29 @@
                                 <action selector="settingsTapped:" destination="0me-a7-DvC" id="3yW-fR-hVA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="2020-01-23 14.33.44" id="2xc-gI-HDh">
-                            <view key="customView" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hle-LC-Dgs">
-                                <rect key="frame" x="276" y="0.0" width="83" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phf-zg-dap" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
-                                        <rect key="frame" x="43" y="0.0" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </view>
-                                </subviews>
-                            </view>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="2020-01-23 14.33.44" id="2xc-gI-HDh">
+                                <view key="customView" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="hle-LC-Dgs">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phf-zg-dap" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
+                                            <rect key="frame" x="2" y="2" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="c8U-No-Dqb"/>
+                                                <constraint firstAttribute="width" constant="40" id="uEo-hC-BRa"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="phf-zg-dap" secondAttribute="bottom" constant="2" id="6Bd-yW-aoS"/>
+                                        <constraint firstItem="phf-zg-dap" firstAttribute="top" secondItem="hle-LC-Dgs" secondAttribute="top" constant="2" id="NXa-MV-NDa"/>
+                                        <constraint firstAttribute="trailing" secondItem="phf-zg-dap" secondAttribute="trailing" constant="2" id="esF-8c-bUG"/>
+                                        <constraint firstItem="phf-zg-dap" firstAttribute="leading" secondItem="hle-LC-Dgs" secondAttribute="leading" constant="2" id="vNV-o7-7Lf"/>
+                                    </constraints>
+                                </view>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="LBF-Cf-8Ed"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="avatarView" destination="phf-zg-dap" id="gGn-Jw-psa"/>
