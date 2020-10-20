@@ -18,6 +18,7 @@
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
 		880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 880F1CC02539FAF00018C52D /* GoogleService-Info.plist */; };
 		880F1D17253C49690018C52D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F1D16253C49690018C52D /* DatabaseManager.swift */; };
+		88374DC9253ED410000E3B9C /* ConversationListVC + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88374DC8253ED40F000E3B9C /* ConversationListVC + UIAlertController.swift */; };
 		883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */; };
 		883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */; };
 		883DBB292531CA7300FA425C /* ProfileVC + UpdateTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB282531CA7300FA425C /* ProfileVC + UpdateTheme.swift */; };
@@ -72,6 +73,7 @@
 		8809DAEB250B486900E4365A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		880F1CC02539FAF00018C52D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		880F1D16253C49690018C52D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		88374DC8253ED40F000E3B9C /* ConversationListVC + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationListVC + UIAlertController.swift"; sourceTree = "<group>"; };
 		883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UITextField + UITextView.swift"; sourceTree = "<group>"; };
 		883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + lifeCycleVC.swift"; sourceTree = "<group>"; };
 		883DBB282531CA7300FA425C /* ProfileVC + UpdateTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UpdateTheme.swift"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		8802367C251648A20079FA1B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				88374DC7253ED3E0000E3B9C /* ConversationListVC + UIAlerController */,
 				883DBB4D2532DE5500FA425C /* ConversationVC */,
 				883DBB4E2532DE7500FA425C /* ProfileVC */,
 				88921E25252111E60033BD47 /* UIViewController + Extension.swift */,
@@ -200,6 +203,14 @@
 				880F1D16253C49690018C52D /* DatabaseManager.swift */,
 			);
 			path = DatabaseManager;
+			sourceTree = "<group>";
+		};
+		88374DC7253ED3E0000E3B9C /* ConversationListVC + UIAlerController */ = {
+			isa = PBXGroup;
+			children = (
+				88374DC8253ED40F000E3B9C /* ConversationListVC + UIAlertController.swift */,
+			);
+			path = "ConversationListVC + UIAlerController";
 			sourceTree = "<group>";
 		};
 		883DBB4D2532DE5500FA425C /* ConversationVC */ = {
@@ -541,6 +552,7 @@
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,
 				8802367E251648E50079FA1B /* UIAlertController + constraints.swift in Sources */,
+				88374DC9253ED410000E3B9C /* ConversationListVC + UIAlertController.swift in Sources */,
 				88A152C42534B1B3001E2480 /* ProfileVC + UIAlertController.swift in Sources */,
 				88921E302521AC750033BD47 /* ConversationTableViewCell.swift in Sources */,
 				88A152CB25365672001E2480 /* OperationDataManager.swift in Sources */,

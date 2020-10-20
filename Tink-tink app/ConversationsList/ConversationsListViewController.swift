@@ -14,31 +14,20 @@ final class ConversationsListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
   @IBOutlet private weak var avatarView: MiniAvatarView!
-  @IBOutlet weak var settingsIcon: UIBarButtonItem!
-  
+  @IBOutlet private weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
   //let dataManager: Storeable = OperationDataManager.shared
   let dataManager: Storeable = GCDDataManager.shared
-
-  var channels = [Channel]()
+  
+  private var channels = [Channel]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
     setupSearchController()
-    
-    DatabaseManager.shared.getChannels { (result) in
-      switch result {
-      case .failure(_): break
-      case .success(let channels):
-        self.channels = channels.sorted {
-          $0.lastActivity ?? Date() > $1.lastActivity ?? Date()
-        }
-        self.tableView.reloadData()
-      }
-    }
-    self.channels = []
+    loadChannels()
+
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -47,26 +36,35 @@ final class ConversationsListViewController: UIViewController {
     updateTheme()
   }
   
-  @IBAction func addChannelButtonTapped(_ sender: Any) {
-    
-    let alertController = UIAlertController(title: "New channel", message: nil, preferredStyle: .alert)
-    
-    let createAction = UIAlertAction(title: "Create", style: .default) {_ in
-      let text = alertController.textFields?.first?.text
-      guard let channelName = text else { return }
-      DatabaseManager.shared.insertChannel(name: channelName)
-      
+  // MARK: - Private methods
+  private func loadChannels() {
+    DatabaseManager.shared.getChannels { (result) in
+      switch result {
+      case .failure( _): break
+      case .success(let channels):
+        self.channels = channels.sorted {
+          $0.lastActivity ?? Date() > $1.lastActivity ?? Date()
+        }
+        self.tableView.reloadData()
+      }
     }
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-    alertController.addTextField { (textField) in
-      textField.placeholder = "Add new channel"
-    }
-    alertController.addAction(createAction)
-    alertController.addAction(cancelAction)
-    
-    self.present(alertController, animated: true, completion: nil)
-    
   }
+  
+  private func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.navigationController?.navigationBar.barStyle = ThemeManager.shared.barStyle
+    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
+    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
+    settingsIcon.tintColor = ThemeManager.shared.current.tintColor
+  }
+  
+  // MARK: - @IBActions
+  @IBAction func addChannelButtonTapped(_ sender: Any) {
+    showChannelAlert()
+  }
+  
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
     // MARK: Delegate
@@ -76,23 +74,9 @@ final class ConversationsListViewController: UIViewController {
     themesVC.didChangeTheme = { [weak self] in
       self?.updateTheme()
     }
-    
     self.navigationController?.pushViewController(themesVC, animated: true)
   }
-  
-  // MARK: - Не получилось поменять цвета для хедеров Online и History
-  private func updateTheme() {
-    ThemeManager.shared.applyTheme()
-    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.navigationController?.navigationBar.barStyle = ThemeManager.shared.barStyle
-    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
-    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
-    settingsIcon.tintColor = ThemeManager.shared.current.tintColor
     
-    //tableView.reloadData()
-  }
-  
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
   }

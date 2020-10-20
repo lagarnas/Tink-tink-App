@@ -15,6 +15,7 @@ extension ConversationViewController {
     self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
     self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.backgroundAppColor
     self.dockView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    
+    self.messageTextField.backgroundColor = ThemeManager.shared.current.outgoingMessageColor
+    self.messageTextField.textColor = ThemeManager.shared.current.mainTextColor
   }
 }

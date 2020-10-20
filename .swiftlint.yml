@@ -16,6 +16,7 @@ disabled_rules:
   - control_statement
   - opening_brace
   - prohibited_super_call
+  - empty_enum_arguments
 
 opt_in_rules:
   - overridden_super_call

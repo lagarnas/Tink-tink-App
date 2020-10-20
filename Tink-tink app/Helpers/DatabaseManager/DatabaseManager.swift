@@ -15,6 +15,10 @@ final class DatabaseManager {
   
   private let database = Firestore.firestore()
   private lazy var referanceChannels = database.collection("channels")
+  let senderId = UIDevice.current.identifierForVendor?.uuidString
+  
+  var messages = [Message]()
+  
   
   func insertChannel(name: String) {
     
@@ -41,34 +45,39 @@ final class DatabaseManager {
                                      lastMessage: lastMessage,
                                      lastActivity: Date(timeIntervalSince1970: TimeInterval(lastActivity.seconds))))
       }
-      print(channels.count)
       completion(.success(channels))
+      channels = []
     }
   }
   
-  func insertMessage(message: String) {
-    //достать айди канала
-    
+  func insertMessage(channelId: String, message: String) {
+    guard let senderId = self.senderId else { return }
+    let newMessage: [String: Any] = ["content": message,
+                                      "created": Date(),
+                                      "senderName": "🐷",
+                                      "senderId": senderId]
+
+    referanceChannels.document(channelId).collection("messages").addDocument(data: newMessage)
   }
   
   func getMessages(channelId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
-    var messages = [Message]()
     referanceChannels.document(channelId)
       .collection("messages").addSnapshotListener { (snapshot, _) in
         _ = snapshot?.documents.compactMap {
-          // print($0.data())
           guard
             let senderId = $0["senderId"] as? String,
             let senderName = $0["senderName"] as? String,
             let content = $0["content"] as? String,
             let created = $0["created"] as? Timestamp
           else { return }
-          messages.append(Message(senderId: senderId,
+          self.messages.append(Message(senderId: senderId,
                                        senderName: senderName,
                                        content: content,
                                        created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
+          
         }
-        completion(.success(messages))
+        completion(.success(self.messages))
+        self.messages = []
       }
   }
   
