@@ -30,25 +30,21 @@ final class ConversationsListViewController: UIViewController {
     
     DatabaseManager.shared.getChannels { (result) in
       switch result {
-      case .failure(let error):
-        print(error)
-      case .success(let channels1):
-        self.channels = channels1.sorted { (ch1, ch2) -> Bool in
-          ch1.lastActivity ?? Date() > ch2.lastActivity ?? Date()
+      case .failure(_): break
+      case .success(let channels):
+        self.channels = channels.sorted {
+          $0.lastActivity ?? Date() > $1.lastActivity ?? Date()
         }
         self.tableView.reloadData()
       }
     }
+    self.channels = []
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupMiniature()
     updateTheme()
-  }
-  
-  override func viewWillLayoutSubviews() {
-    print(#function)
   }
   
   @IBAction func addChannelButtonTapped(_ sender: Any) {
@@ -61,7 +57,7 @@ final class ConversationsListViewController: UIViewController {
       DatabaseManager.shared.insertChannel(name: channelName)
       
     }
-    let cancelAction = UIAlertAction(title: "OK", style: .cancel)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     alertController.addTextField { (textField) in
       textField.placeholder = "Add new channel"
     }
@@ -182,11 +178,9 @@ extension ConversationsListViewController {
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
     return channels.count
   }
   
-
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueCell(ConversationTableViewCell.self, for: indexPath)
@@ -196,6 +190,8 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
+    conversationVC.title = channels[indexPath.row].name
+    conversationVC.channelId = channels[indexPath.row].identifier
     self.navigationController?.pushViewController(conversationVC, animated: true)
   }
   

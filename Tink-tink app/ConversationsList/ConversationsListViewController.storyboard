@@ -44,7 +44,7 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="2020-01-23 14.33.44" id="2xc-gI-HDh">
                                 <view key="customView" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="hle-LC-Dgs">
-                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <rect key="frame" x="315" y="0.0" width="44" height="44"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phf-zg-dap" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
                                             <rect key="frame" x="2" y="2" width="40" height="40"/>
@@ -62,7 +62,11 @@
                                     </constraints>
                                 </view>
                             </barButtonItem>
-                            <barButtonItem systemItem="add" id="LBF-Cf-8Ed"/>
+                            <barButtonItem systemItem="add" id="LBF-Cf-8Ed">
+                                <connections>
+                                    <action selector="addChannelButtonTapped:" destination="0me-a7-DvC" id="V09-QP-Unl"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
