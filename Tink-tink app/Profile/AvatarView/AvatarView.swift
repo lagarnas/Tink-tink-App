@@ -12,14 +12,14 @@ class AvatarView: UIView {
   
   let nameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 130.0)
+    label.font = UIFont.systemFont(ofSize: 100.0)
     label.textColor = #colorLiteral(red: 0.1725490196, green: 0.1764705882, blue: 0.1803921569, alpha: 1)
     return label
   }()
   
   let secondNameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 130.0)
+    label.font = UIFont.systemFont(ofSize: 100.0)
     label.textColor = #colorLiteral(red: 0.1725490196, green: 0.1764705882, blue: 0.1803921569, alpha: 1)
     return label
   }()
@@ -28,6 +28,15 @@ class AvatarView: UIView {
     let imageView = AvatarImageView()
     return imageView
   }()
+  
+  func hideInitials() {
+    nameLabel.isHidden = true
+    secondNameLabel.isHidden = true
+  }
+  
+  
+  
+  
   
   override func layoutSubviews() {
     addSubview(imageView)

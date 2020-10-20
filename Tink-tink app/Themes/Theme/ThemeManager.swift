@@ -17,13 +17,17 @@ final class ThemeManager {
   static let shared = ThemeManager()
   private init() {}
   
+  let fileManager = FileManager.default
+  let queue = DispatchQueue(label: "Theme", qos: .background, attributes: .concurrent)
+  
+  
   func applyTheme() {
     UserDefaults.standard.synchronize()
     let sharedApplication = UIApplication.shared
     sharedApplication.delegate?.window??.tintColor = current.tintColor
     sharedApplication.delegate?.window??.backgroundColor = current.backgroundAppColor
     UINavigationBar.appearance().barStyle = barStyle
-    UITextField.appearance().backgroundColor = current.accent
+    UITextField.appearance().backgroundColor = .clear
     UITextField.appearance().keyboardAppearance = currentMode == .night ? .dark : .light
   }
   
@@ -39,13 +43,55 @@ final class ThemeManager {
   }
   
   var currentMode: ThemeMode {
-    let themeModeValue = UserDefaults.standard.integer(forKey: "themeMode")
-    let themeMode = ThemeMode(rawValue: themeModeValue) ?? .classic
+    //    let themeModeValue = UserDefaults.standard.integer(forKey: "themeMode")
+    //    let themeMode = ThemeMode(rawValue: themeModeValue) ?? .classic
+    //    return themeMode
+    
+    var themeModeValueString = ""
+    do {
+      if self.fileManager.fileExists(atPath: self.fileURL(.userTheme).path) {
+        themeModeValueString = try String(contentsOf: self.fileURL(.userTheme))
+      }
+    } catch {
+      print(error.localizedDescription)
+    }
+
+    let themeModeValue = Int(themeModeValueString)
+
+    let themeMode = ThemeMode(rawValue: themeModeValue ?? 0) ?? .classic
     return themeMode
+   
+    
   }
   
-  func save(themeMode: ThemeMode) {
-    UserDefaults.standard.set(themeMode.rawValue, forKey: "themeMode")
+  func save(themeMode: ThemeMode, completion: @escaping () -> Void) {
+    //UserDefaults.standard.set(themeMode.rawValue, forKey: "themeMode")
+    
+    queue.async {
+      print(Thread.current)
+      let themeMode = String(themeMode.rawValue)
+      
+      do {
+        let themeURL = self.fileURL(.userTheme)
+        try themeMode.write(to: themeURL, atomically: true, encoding: .utf8)
+        DispatchQueue.main.async {
+          completion()
+        }
+      } catch {
+        print(error.localizedDescription)
+      }
+    }
+
+  }
+  
+  private func fileURL(_ fileName: FileName) -> URL {
+    let documentDirURL = try! fileManager.url(for: .documentDirectory,
+                                              in: .userDomainMask,
+                                              appropriateFor: nil,
+                                              create: true)
+    
+    let fileURL = documentDirURL.appendingPathComponent(fileName.rawValue)
+    return fileURL
   }
 }
 

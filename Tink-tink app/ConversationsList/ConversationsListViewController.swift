@@ -53,17 +53,22 @@ final class ConversationsListViewController: UIViewController {
   ]
   private var searchController = UISearchController(searchResultsController: nil)
   
+   //let dataManager: Storeable = OperationDataManager.shared
+   let dataManager: Storeable = GCDDataManager.shared
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
     setupSearchController()
-    setupMiniature()
+    
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    setupMiniature()
     updateTheme()
   }
+  
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
@@ -147,11 +152,36 @@ extension ConversationsListViewController {
   }
   
   private func setupMiniature() {
-    avatarView.miniNameLabel.text = "A"
-    avatarView.miniSecondNameLabel.text = "L"
+    dataManager.retrive { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+      case .success(let profile):
+      self.setupInitialsOfName(profile: profile)
+      case .failure(let error):
+        print(error.localizedDescription)
+      }
+    }
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
     avatarView.isUserInteractionEnabled = true
     avatarView.addGestureRecognizer(tapGestureRecognizer)
+  }
+  
+  private func setupInitialsOfName(profile: Profile) {
+
+    let fullNameArr = profile.userName.components(separatedBy: " ")
+      let firstName: String = fullNameArr[0]
+      let lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
+
+      let firstInitial = String(firstName.first ?? " ")
+      let secondInitial = String(lastName?.first ?? " ")
+
+      avatarView.miniNameLabel.text = firstInitial
+      avatarView.miniSecondNameLabel.text = secondInitial
+      avatarView.miniImageView.image = UIImage(data: profile.userData)
+
+    if avatarView.miniImageView.image != nil {
+      avatarView.hideInitials()
+    }
   }
 }
 

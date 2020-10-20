@@ -37,6 +37,11 @@ class MiniAvatarView: AvatarView {
     setupConstraints()
   }
   
+  override func hideInitials() {
+    miniNameLabel.isHidden = true
+    miniSecondNameLabel.isHidden = true
+  }
+  
   
   override func setupConstraints() {
     
