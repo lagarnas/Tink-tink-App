@@ -19,7 +19,6 @@ final class DatabaseManager {
   
   var messages = [Message]()
   
-  
   func insertChannel(name: String) {
     
     let newChannel: [String : Any] = ["name"        : name,

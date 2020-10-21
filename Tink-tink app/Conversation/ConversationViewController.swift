@@ -60,7 +60,11 @@ final class ConversationViewController: UIViewController {
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
     guard let channelId = self.channelId else { return }
-    DatabaseManager.shared.insertMessage(channelId: channelId, message: messageTextField.text ?? "")
+    guard let message = messageTextField.text else { return }
+    guard message != "" else { return }
+      
+      DatabaseManager.shared.insertMessage(channelId: channelId, message: message)
+      self.messageTextField.text = ""
   }
 }
 
