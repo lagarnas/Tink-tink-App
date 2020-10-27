@@ -9,11 +9,13 @@
 import Foundation
 import Firebase
 
-final class DatabaseManager {
-  static let shared = DatabaseManager()
+final class FirebaseManager {
+  static let shared = FirebaseManager()
   private init() {}
   
   private let database = Firestore.firestore()
+  private lazy var coreDataManager = CoreDataManager.shared
+  
   private lazy var referanceChannels = database.collection("channels")
   let senderId = UIDevice.current.identifierForVendor?.uuidString
   
@@ -39,12 +41,15 @@ final class DatabaseManager {
           completion(.failure(DataBaseError.failedToFetch))
           return
         }
-        channels.append(Channel(identifier: $0.documentID,
-                                     name: name,
-                                     lastMessage: lastMessage,
-                                     lastActivity: Date(timeIntervalSince1970: TimeInterval(lastActivity.seconds))))
+        let channel = Channel(identifier: $0.documentID,
+                              name: name,
+                              lastMessage: lastMessage,
+                              lastActivity: Date(timeIntervalSince1970: TimeInterval(lastActivity.seconds)))
+        
+        channels.append(channel)
       }
       completion(.success(channels))
+      self.coreDataManager.makeSaveChannelsRequest(channels: channels)
       channels = []
     }
   }
@@ -52,32 +57,33 @@ final class DatabaseManager {
   func insertMessage(channelId: String, message: String) {
     guard let senderId = self.senderId else { return }
     let newMessage: [String: Any] = ["content": message,
-                                      "created": Date(),
-                                      "senderName": "🐷",
-                                      "senderId": senderId]
-
+                                     "created": Date(),
+                                     "senderName": "🐷",
+                                     "senderId": senderId]
+    
     referanceChannels.document(channelId).collection("messages").addDocument(data: newMessage)
   }
   
-  func getMessages(channelId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
-    referanceChannels.document(channelId)
-      .collection("messages").addSnapshotListener { (snapshot, _) in
-        _ = snapshot?.documents.compactMap {
-          guard
-            let senderId = $0["senderId"] as? String,
-            let senderName = $0["senderName"] as? String,
-            let content = $0["content"] as? String,
-            let created = $0["created"] as? Timestamp
-          else { return }
-          self.messages.append(Message(senderId: senderId,
-                                       senderName: senderName,
-                                       content: content,
-                                       created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
-          
-        }
-        completion(.success(self.messages))
-        self.messages = []
+  func getMessages(channel: Channel, completion: @escaping (Result<[Message], Error>) -> Void) {
+    
+    referanceChannels.document(channel.identifier).collection("messages").addSnapshotListener { (snapshot, _) in
+      self.messages = []
+      _ = snapshot?.documents.compactMap {
+        guard
+          let senderId = $0["senderId"] as? String,
+          let senderName = $0["senderName"] as? String,
+          let content = $0["content"] as? String,
+          let created = $0["created"] as? Timestamp
+        else { return }
+        self.messages.append(Message(senderId: senderId,
+                                     senderName: senderName,
+                                     content: content,
+                                     created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
+        
       }
+      completion(.success(self.messages))
+      self.coreDataManager.makeSaveMessagesRequest(channel: channel, messages: self.messages)
+    }
   }
   
   enum DataBaseError: Error {

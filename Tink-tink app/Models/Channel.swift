@@ -9,8 +9,7 @@
 import Foundation
 import Firebase
 
-struct Channel{
-    //var avatar: Data?
+struct Channel {
     var identifier: String
     var name: String
     var lastMessage: String?

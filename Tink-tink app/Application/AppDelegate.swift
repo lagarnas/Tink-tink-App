@@ -13,16 +13,19 @@ import Firebase
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
-  // 1) Запускаем приложение по тапу на иконку
-  //  State: Приложение запускается, не активно
-  // 2) Ждем пока приложение загрузится смотрим на LaunchScreen
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    FirebaseApp.configure()
-  
-    self.window = UIWindow(frame: UIScreen.main.bounds)
 
-    let storyboard = UIStoryboard(name: "ConversationsListViewController", bundle: nil)
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
+    FirebaseApp.configure()
+    
+    CoreDataStack.shared.didUpdateDataBase = { stack in
+      stack.printDatabaseStatistics()
+    }
+    
+    CoreDataStack.shared.enableObservers()
+    
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    let storyboard = UIStoryboard(name: "ConversationsListViewController", bundle: nil)
     let rootViewController = storyboard.instantiateViewController(withIdentifier: "navControlloer")
     
     self.window?.rootViewController = rootViewController

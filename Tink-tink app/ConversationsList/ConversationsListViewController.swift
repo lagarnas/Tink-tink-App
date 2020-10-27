@@ -27,7 +27,6 @@ final class ConversationsListViewController: UIViewController {
     setupTableView()
     setupSearchController()
     loadChannels()
-
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -38,7 +37,7 @@ final class ConversationsListViewController: UIViewController {
   
   // MARK: - Private methods
   private func loadChannels() {
-    DatabaseManager.shared.getChannels { (result) in
+    FirebaseManager.shared.getChannels { (result) in
       switch result {
       case .failure( _): break
       case .success(let channels):
@@ -175,7 +174,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
     conversationVC.title = channels[indexPath.row].name
-    conversationVC.channelId = channels[indexPath.row].identifier
+    conversationVC.channel = channels[indexPath.row]
     self.navigationController?.pushViewController(conversationVC, animated: true)
   }
   

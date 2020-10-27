@@ -20,4 +20,6 @@ extension OSLog {
   static let frameChanged = OSLog(subsystem: subsystem, category: "frameChanged")
   // Logs the deinit is performing
   static let retainCycle = OSLog(subsystem: subsystem, category: "retainCycle")
+  // Core data logs
+  static let coreData = OSLog(subsystem: subsystem, category: "coreData")
 }

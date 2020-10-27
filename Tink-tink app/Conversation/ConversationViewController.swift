@@ -18,7 +18,7 @@ final class ConversationViewController: UIViewController {
   
   private var keyboardHeight: CGFloat = 0
   private var messages = [Message]()
-  var channelId: String?
+  var channel: Channel?
   
   // MARK: - Lifecycle of VC
   override func viewDidLoad() {
@@ -36,7 +36,7 @@ final class ConversationViewController: UIViewController {
   
   // MARK: - Private methods
   private func loadMessages() {
-    DatabaseManager.shared.getMessages(channelId: channelId ?? "") { (result) in
+    FirebaseManager.shared.getMessages(channel: channel!) { (result) in
       switch result {
       case .success(let messages):
         self.messages = messages.sorted {
@@ -59,11 +59,11 @@ final class ConversationViewController: UIViewController {
   // MARK: - @IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
-    guard let channelId = self.channelId else { return }
+    guard let channel = self.channel else { return }
     guard let message = messageTextField.text else { return }
     guard message != "" else { return }
       
-      DatabaseManager.shared.insertMessage(channelId: channelId, message: message)
+    FirebaseManager.shared.insertMessage(channelId: channel.identifier, message: message)
       self.messageTextField.text = ""
   }
 }
@@ -109,7 +109,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let chatMessage = messages[indexPath.row]
-    if chatMessage.senderId == DatabaseManager.shared.senderId {
+    if chatMessage.senderId == FirebaseManager.shared.senderId {
       let cell = tableView.dequeueCell(OutgoingMessageTableViewCell.self, for: indexPath)
       cell.configure(model: chatMessage)
       return cell
