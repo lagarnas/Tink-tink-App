@@ -12,4 +12,3 @@ protocol Storeable {
   func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void)
   func retrive(completion: @escaping (Result<Profile, Error>) -> Void)
 }
-

@@ -12,6 +12,7 @@ final class IncomingMessageTableViewCell: UITableViewCell {
   
   @IBOutlet private weak var bubbleView: UIView!
   @IBOutlet private weak var messageLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -22,16 +23,14 @@ final class IncomingMessageTableViewCell: UITableViewCell {
   }
 }
 
-//MARK: - ConfigurableView Protocol
+// MARK: - ConfigurableView Protocol
 extension IncomingMessageTableViewCell: ConfigurableView {
   
-  typealias ConfigurtionModel = MessageCellModel
+  typealias ConfigurtionModel = Message
   
-  func configure(model: MessageCellModel) {
-    self.messageLabel.text = model.text
+  func configure(model: Message) {
+    self.nameLabel.text = model.senderName
+    self.messageLabel.text = model.content
   }
-  
-  
-  
   
 }

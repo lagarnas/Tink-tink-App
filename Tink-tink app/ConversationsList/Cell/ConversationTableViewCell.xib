@@ -108,6 +108,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="avatarView" destination="L7K-kX-gYI" id="nI5-c0-sQU"/>
                 <outlet property="dateLabel" destination="dyO-tv-OlN" id="djf-8t-6ra"/>

@@ -8,16 +8,16 @@
 
 import UIKit
 import os.log
+import Firebase
 
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
-  
-  
   var window: UIWindow?
   // 1) Запускаем приложение по тапу на иконку
   //  State: Приложение запускается, не активно
   // 2) Ждем пока приложение загрузится смотрим на LaunchScreen
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    FirebaseApp.configure()
   
     self.window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -60,4 +60,3 @@ import os.log
     os_log("Application moved from <Background> to <Suspended> to <Not Running>: applicationWillTerminate", log: OSLog.appCycle, type: .info)
   }
 }
-

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//MARK: - Work with image, UINavigationControllerDelegate
+// MARK: - Work with image, UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   func openAlertAction() {

@@ -25,18 +25,10 @@ final class ThemesViewController: UIViewController {
   
   private var themeMode: ThemeMode = .classic
   
-  /*
-  Retain cycle возникнет если будет сильная ссылка на этот VC, с другого VC (Наглядно это видно с ProfileVC, так как он закрывается и сразу видно уничтожается ли он или нет) и соответственно сильная ссылка на ProfileVC (vc.delegate = self) Если не сделать одну из этих ссылок weak (разница будет ли в том в каком порядке они будут уничтожаться), то объект не уничтожится и будет висеть в памяти (соответсвеено deinit не вызовится).Поэтому либо делаем переменную delegate weak, либо переменную themesVC. Но обычно delagate делают weak. (Если что, я удалила код связанный с этим из ProfileVC). Аналогичная ситуация если рассматривать ConverationsListVC, просто там не будет видно уничтожены ли объекты или нет, так как ConverationsListVC уничтожается только когда мы закрываем приложение. Там я создаю ссылку на ThemesVC внутри @IBAction settingsTapped() и сразу после отработки этого метода объект уничтожается  и его не держит никто значит на ThemesVC не будет ссылки, поэтому тут и без weak будут уничтожаться VC. Но я тут оставлю weak все равно, так привычно)
-  */
-  
-  //MARK: Delegate
+  // MARK: Delegate
   //  weak var delegate: ThemesPickerDelegate?
   
-  /*
-  Аналогично retain cycle возникнет если будут 2 сильных ссылки например ProfileVC будет сильно ссылаться на ThemesVC, а ThemesVC внутри замыкающего выражения будет сильно ссылаться на ProfileVC, таким образом, опять надо одну из ссылок сделать weak, потому что если, например, внутри замыкания не поставить [weak self] будет retain cycle, deinit не вызовется, что приведет к утечки памяти. В ProfileVC закомментирую код, иллюстрирующий retain cycle.
-  */
-  
-  //MARK: Closure
+  // MARK: Closure
   var didChangeTheme: (() -> Void)?
   
   override func viewDidLoad() {
@@ -45,7 +37,6 @@ final class ThemesViewController: UIViewController {
     setupUI()
     applyTheme()
   }
-  
   
   @IBAction private func classicButtonTapped(_ sender: ThemeButton) {
     unSelectAll()
@@ -72,7 +63,6 @@ final class ThemesViewController: UIViewController {
     didChangeTheme?()
   }
   
-  
   @IBAction private func nightButtonTapped(_ sender: ThemeButton) {
     unSelectAll()
     sender.isSelected = true
@@ -98,7 +88,6 @@ extension ThemesViewController {
     dayButton.isSelected = false
     nightButton.isSelected = false
   }
-  
   
   private func updateTheme() {
    // saveTheme()
@@ -141,7 +130,7 @@ extension ThemesViewController {
   }
   
   private func setupLabelTapRecognizer(label: UILabel) {
-    let labelTap = UITapGestureRecognizer (target: self, action: #selector(labelTapped))
+    let labelTap = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
     label.isUserInteractionEnabled = true
     label.addGestureRecognizer(labelTap)
   }
@@ -159,12 +148,10 @@ extension ThemesViewController {
       break
     }
   }
-  
 
   private func saveTheme() {
 
   //  ThemeManager.shared.save(themeMode: self.themeMode, completion: <#() -> Void#>)
-    
     
   }
 }

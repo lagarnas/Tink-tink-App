@@ -34,10 +34,6 @@ class AvatarView: UIView {
     secondNameLabel.isHidden = true
   }
   
-  
-  
-  
-  
   override func layoutSubviews() {
     addSubview(imageView)
     addSubview(nameLabel)
@@ -70,6 +66,5 @@ class AvatarView: UIView {
     NSLayoutConstraint.activate(nameLabelConstraints)
     
   }
-  
   
 }

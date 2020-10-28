@@ -15,7 +15,7 @@ struct NightTheme: Themable {
   var outgoingMessageColor: UIColor = #colorLiteral(red: 0.3607843137, green: 0.3607843137, blue: 0.3607843137, alpha: 1)
   var accent: UIColor = #colorLiteral(red: 0.1176470588, green: 0.1176470588, blue: 0.1176470588, alpha: 0.6022313784)
   var backgroundAppColor: UIColor = .black
-  var backgroundChatColor: UIColor = .black
+  var backgroundChatColor: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
   var mainTextColor: UIColor = .white
   var minorTextColor: UIColor = #colorLiteral(red: 0.5529411765, green: 0.5529411765, blue: 0.5764705882, alpha: 1)
 }

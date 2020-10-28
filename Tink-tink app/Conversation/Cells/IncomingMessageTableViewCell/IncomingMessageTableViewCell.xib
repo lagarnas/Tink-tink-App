@@ -20,19 +20,30 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUo-m6-dY7" userLabel="bubbleView">
                         <rect key="frame" x="7" y="10" width="216.5" height="149"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" bvmfgobmngobm gbmtbkm bkm kmbtklmb otmhktym  klbmhtlkm  kjn vkjfngbkjfnbjfnbjgnbfjkbnfgbkjngjbnbkjnkbjfnbkjn" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KL-nG-DwL">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ed9-VT-yyB">
                                 <rect key="frame" x="8" y="5" width="200.5" height="139"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKu-5t-Kbn">
+                                        <rect key="frame" x="0.0" y="0.0" width="200.5" height="37.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.89411764709999997" green="0.52538611338082197" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" bvmfgobmngobm gbmtbkm bkm kmbtklmb otmhktym  klbmhtlkm  kjn vkjfngbkjfnbjfnbjgnbfjkbnfgbkjngjbnbkjnkbjfnbkjn" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KL-nG-DwL">
+                                        <rect key="frame" x="0.0" y="37.5" width="200.5" height="101.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Ed9-VT-yyB" secondAttribute="bottom" constant="5" id="1M8-jc-cGG"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="334-Ng-sRz"/>
-                            <constraint firstAttribute="trailing" secondItem="0KL-nG-DwL" secondAttribute="trailing" constant="8" id="5fw-Rj-4Pc"/>
-                            <constraint firstItem="0KL-nG-DwL" firstAttribute="leading" secondItem="jUo-m6-dY7" secondAttribute="leading" constant="8" id="FES-6w-SYj"/>
-                            <constraint firstItem="0KL-nG-DwL" firstAttribute="top" secondItem="jUo-m6-dY7" secondAttribute="top" constant="5" id="HcD-hn-58q"/>
-                            <constraint firstAttribute="bottom" secondItem="0KL-nG-DwL" secondAttribute="bottom" constant="5" id="ovF-pO-rgV"/>
+                            <constraint firstAttribute="trailing" secondItem="Ed9-VT-yyB" secondAttribute="trailing" constant="8" id="nGO-8r-NFo"/>
+                            <constraint firstItem="Ed9-VT-yyB" firstAttribute="leading" secondItem="jUo-m6-dY7" secondAttribute="leading" constant="8" id="tM1-f0-CZf"/>
+                            <constraint firstItem="Ed9-VT-yyB" firstAttribute="top" secondItem="jUo-m6-dY7" secondAttribute="top" constant="5" id="vLc-Pb-nbg"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -48,6 +59,7 @@
             <connections>
                 <outlet property="bubbleView" destination="jUo-m6-dY7" id="xe8-3N-MfF"/>
                 <outlet property="messageLabel" destination="0KL-nG-DwL" id="hDT-X6-P2W"/>
+                <outlet property="nameLabel" destination="iKu-5t-Kbn" id="awY-cg-ahX"/>
             </connections>
             <point key="canvasLocation" x="1" y="-62"/>
         </tableViewCell>

@@ -8,59 +8,26 @@
 
 import UIKit
 import os.log
-
-struct TypeSection {
-  var title: String
-  var isOnline: Bool
-  var chats: [ConversationCellModel]
-}
+import Firebase
 
 final class ConversationsListViewController: UIViewController {
   
   @IBOutlet private weak var tableView: UITableView!
   @IBOutlet private weak var avatarView: MiniAvatarView!
-  @IBOutlet weak var settingsIcon: UIBarButtonItem!
-  
-  private var sections = [TypeSection]()
-  private var chats = [
-    ConversationCellModel(avatar: nil, name: "Alena Иванова", message: "Привет! Как дела? Пошли в кино сегодня вечером?", date: Date(timeIntervalSinceNow: -184000), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Кристина Стоцкая", message:"Нормально, работаю, учусть, поступила вот на курсы", date: Date(), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Aлександр Вермутов", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Данила Козловский", message: "", date: Date(timeIntervalSinceNow: -90000), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Кети Перри", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Арнольд Шварценегер", message: "Нормально", date: Date(timeIntervalSinceNow: -356000),isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Вася Петров", message: "", date: Date(), isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Юлия Поздеева", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Антонина Федорова", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Кот Лепольд", message: "Привет!", date: Date(), isOnline:  false, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Шелдон Купер", message:"Как дела", date: Date(), isOnline:  true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Раджеш Кутрапалли", message: "", date: Date(),isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Леонард Хофстедер", message: "Привет!", date: Date(), isOnline:  true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Говард Воловиц", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Бернадет Ростенковски", message: "Нормально", date: Date(),isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Эми Фарафаулер", message: "Привет!", date: Date(), isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Пенни Сидорова", message:"Как дела", date: Date(), isOnline: true, hasUnreadMessages: false),
-    ConversationCellModel(avatar: nil, name: "Серега Пеннивайз", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Андрей Малахов", message: "Привет!", date: Date(), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Анатолий Собчак", message:"Как дела", date: Date(), isOnline:  false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Кейт Мидлтон", message: "", date: Date(),isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Илон Маск", message: "Привет!", date: Date(), isOnline:  true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Квентин Тарантино", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Ума Турман", message: "Нормально", date: Date(),isOnline: true, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Волтер Уайт", message: "Привет!", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Джесси Пинкман", message:"Как дела", date: Date(), isOnline: false, hasUnreadMessages: true),
-    ConversationCellModel(avatar: nil, name: "Сол Гудман", message: "Нормально", date: Date(),isOnline: false, hasUnreadMessages: true)
-  ]
+  @IBOutlet private weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
-   //let dataManager: Storeable = OperationDataManager.shared
-   let dataManager: Storeable = GCDDataManager.shared
+  //let dataManager: Storeable = OperationDataManager.shared
+  let dataManager: Storeable = GCDDataManager.shared
   
+  private var channels = [Channel]()
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTableView()
     setupSearchController()
-    
+    loadChannels()
+
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -69,21 +36,20 @@ final class ConversationsListViewController: UIViewController {
     updateTheme()
   }
   
-  
-  @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
-    let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
-    //MARK: Delegate
-    // themesVC.delegate = self
-    
-    //MARK: Closure
-    themesVC.didChangeTheme = { [weak self] in
-      self?.updateTheme()
+  // MARK: - Private methods
+  private func loadChannels() {
+    DatabaseManager.shared.getChannels { (result) in
+      switch result {
+      case .failure( _): break
+      case .success(let channels):
+        self.channels = channels.sorted {
+          $0.lastActivity ?? Date() > $1.lastActivity ?? Date()
+        }
+        self.tableView.reloadData()
+      }
     }
-    
-    self.navigationController?.pushViewController(themesVC, animated: true)
   }
   
-  //MARK: - Не получилось поменять цвета для хедеров Online и History
   private func updateTheme() {
     ThemeManager.shared.applyTheme()
     self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
@@ -92,16 +58,31 @@ final class ConversationsListViewController: UIViewController {
     self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
     settingsIcon.tintColor = ThemeManager.shared.current.tintColor
-    
-    tableView.reloadData()
   }
   
+  // MARK: - @IBActions
+  @IBAction func addChannelButtonTapped(_ sender: Any) {
+    showChannelAlert()
+  }
+  
+  @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+    let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
+    // MARK: Delegate
+    // themesVC.delegate = self
+    
+    // MARK: Closure
+    themesVC.didChangeTheme = { [weak self] in
+      self?.updateTheme()
+    }
+    self.navigationController?.pushViewController(themesVC, animated: true)
+  }
+    
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
 
-//MARK: ThemesPickerDelegate
+// MARK: ThemesPickerDelegate
 //extension ConversationsListViewController: ThemesPickerDelegate {
 //  func didChangeTheme(_ themesViewController: ThemesViewController) {
 //    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
@@ -109,7 +90,7 @@ final class ConversationsListViewController: UIViewController {
 //
 //}
 
-//MARK: - Functions
+// MARK: - Functions
 extension ConversationsListViewController {
   
   @objc
@@ -119,7 +100,7 @@ extension ConversationsListViewController {
   
   @objc
   private func avatarTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-    let _ = tapGestureRecognizer.view as! MiniAvatarView
+    _ = tapGestureRecognizer.view as? MiniAvatarView
     openProfileVC()
   }
   
@@ -129,17 +110,9 @@ extension ConversationsListViewController {
   }
   
   private func setupTableView() {
-    self.sections = TypeSection.group(chats: chats)
-    sections[1].chats = filteredMessagesInHistory()
     tableView.rowHeight = 80
     tableView.register(UINib(nibName: ConversationTableViewCell.nibName, bundle: nil),
                        forCellReuseIdentifier: ConversationTableViewCell.reuseIdentifier)
-  }
-  
-  private func filteredMessagesInHistory() -> [ConversationCellModel] {
-    return sections[1].chats.filter { chat in
-      chat.message != ""
-    }
   }
   
   private func setupSearchController() {
@@ -185,36 +158,25 @@ extension ConversationsListViewController {
   }
 }
 
-
-//MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
-    sections.count
-  }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let section = self.sections[section]
-    return section.chats.count
-  }
-  
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return sections[section].title
+    return channels.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let section = self.sections[indexPath.section]
     
     let cell = tableView.dequeueCell(ConversationTableViewCell.self, for: indexPath)
-    cell.configure(model: section.chats[indexPath.row])
+    cell.configure(model: channels[indexPath.row])
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let section = self.sections[indexPath.section]
     let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
-    conversationVC.title = section.chats[indexPath.row].name
+    conversationVC.title = channels[indexPath.row].name
+    conversationVC.channelId = channels[indexPath.row].identifier
     self.navigationController?.pushViewController(conversationVC, animated: true)
-    
   }
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

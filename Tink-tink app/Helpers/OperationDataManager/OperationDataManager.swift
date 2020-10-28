@@ -35,7 +35,7 @@ class OperationDataManager: Storeable {
 
 }
 
-//MARK: -Save operation
+// MARK: - Save operation
 class SaveOperation: RetriveOperation {
   
   var profile: Profile
@@ -46,7 +46,6 @@ class SaveOperation: RetriveOperation {
   }
   
   override func main() {
-    print(Thread.current)
     do {
       if profile.nameChanged {
         let nameURL = self.fileURL(.userName)
@@ -70,18 +69,16 @@ class SaveOperation: RetriveOperation {
         self.completion(.success(self.profile))
       }
       
-      
     } catch let error {
       mainQueue.addOperation {
         self.completion(.failure(error))
       }
     }
   }
-  
 
 }
 
-//MARK: -Retrive operation
+// MARK: - Retrive operation
 class RetriveOperation: Operation {
   
   let mainQueue = OperationQueue.main
@@ -125,12 +122,14 @@ class RetriveOperation: Operation {
   }
   
   func fileURL(_ fileName: FileName) -> URL {
-    let documentDirURL = try! fileManager.url(for: .documentDirectory,
-                                              in: .userDomainMask,
-                                              appropriateFor: nil,
-                                              create: true)
-    
-    let fileURL = documentDirURL.appendingPathComponent(fileName.rawValue)
+    var documentDirURL = URL(string: "")
+    do {
+      documentDirURL = try fileManager.url(for: .documentDirectory,
+                                                in: .userDomainMask,
+                                                appropriateFor: nil,
+                                                create: true)
+    } catch  { print(error.localizedDescription) }
+    let fileURL = documentDirURL!.appendingPathComponent(fileName.rawValue)
     return fileURL
   }
 }

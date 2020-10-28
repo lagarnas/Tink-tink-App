@@ -9,14 +9,12 @@
 import UIKit
 
 extension ProfileViewController: UITextFieldDelegate {
-  
 
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     nameTextField = textField
     lastOffset = self.scrollView.contentOffset
     return true
   }
-  
 
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == nameTextField {
@@ -55,7 +53,7 @@ extension ProfileViewController {
     self.contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(returnTextView(gesture:))))
   }
   
-  //MARK: - Notifications
+  // MARK: - Notifications
   @objc func textFieldDidChange(notification: Notification) {
     enabledButtons()
     
@@ -69,7 +67,6 @@ extension ProfileViewController {
     self.profile?.userBio = bioTextView.text ?? ""
     self.profile?.bioChanged = true
   }
-  
   
   @objc
   func keyboardWillShow(notification: NSNotification) {

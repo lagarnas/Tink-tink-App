@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 final class AvatarImageView: UIImageView {
   
   override func layoutSubviews() {
@@ -20,6 +19,7 @@ final class AvatarImageView: UIImageView {
   }
   
   override func prepareForInterfaceBuilder() {
+    super.prepareForInterfaceBuilder()
       setNeedsLayout()
   }
 }

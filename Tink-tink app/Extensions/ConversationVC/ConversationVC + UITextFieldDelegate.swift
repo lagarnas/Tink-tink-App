@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 extension ConversationViewController: UITextFieldDelegate {
   
   func textFieldDidEndEditing(_ textField: UITextField) {
@@ -19,4 +19,3 @@ extension ConversationViewController: UITextFieldDelegate {
     }, completion: nil)
   }
 }
-

@@ -42,7 +42,6 @@ class MiniAvatarView: AvatarView {
     miniSecondNameLabel.isHidden = true
   }
   
-  
   override func setupConstraints() {
     
     miniImageView.translatesAutoresizingMaskIntoConstraints = false

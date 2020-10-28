@@ -17,8 +17,7 @@ final class GCDDataManager: Storeable {
   let fileManager = FileManager.default
   let queue = DispatchQueue(label: "GCD", qos: .background, attributes: .concurrent)
   
-  
-  //MARK: - Save data
+  // MARK: - Save data
   func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void) {
     queue.async {
       do {
@@ -49,7 +48,7 @@ final class GCDDataManager: Storeable {
     }
   }
   
-  //MARK: - Retrive data
+  // MARK: - Retrive data
   func retrive(completion: @escaping (Result<Profile, Error>) -> Void) {
     
     var userName = ""
@@ -91,14 +90,15 @@ final class GCDDataManager: Storeable {
     }
   }
   
-  
   private func fileURL(_ fileName: FileName) -> URL {
-    let documentDirURL = try! fileManager.url(for: .documentDirectory,
-                                              in: .userDomainMask,
-                                              appropriateFor: nil,
-                                              create: true)
-    
-    let fileURL = documentDirURL.appendingPathComponent(fileName.rawValue)
+    var documentDirURL = URL(string: "")
+    do {
+      documentDirURL = try fileManager.url(for: .documentDirectory,
+                                                in: .userDomainMask,
+                                                appropriateFor: nil,
+                                                create: true)
+    } catch  { print(error.localizedDescription) }
+    let fileURL = documentDirURL!.appendingPathComponent(fileName.rawValue)
     return fileURL
   }
 }

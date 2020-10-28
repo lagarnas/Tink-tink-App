@@ -40,8 +40,6 @@ final class ThemeButton: UIButton {
     setupConstraints()
   }
   
-  
-  
   private func addFirstBubbleView() {
     switch self.tag {
     case 0:
@@ -91,30 +89,29 @@ final class ThemeButton: UIButton {
     constraints += vBubbleConstraint
     let vSecondBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-22-[secondBubble]-10-|", options: .init(rawValue: 0), metrics: nil, views: views)
     constraints += vSecondBubbleConstraint
+    // swiftlint:disable:next line_length
     let hBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[bubble]-[secondBubble(==bubble)]-20-|", options: .init(rawValue: 0), metrics: nil, views: views)
     constraints += hBubbleConstraint
     NSLayoutConstraint.activate(constraints)
   }
   
   func shake() {
-    let shake          = CABasicAnimation(keyPath: "position")
-    shake.duration     = 0.1
-    shake.repeatCount  = 2
+    let shake = CABasicAnimation(keyPath: "position")
+    shake.duration = 0.1
+    shake.repeatCount = 2
     shake.autoreverses = true
     
-    let fromPoint      = CGPoint(x: center.x - 8, y: center.y)
-    let fromValue      = NSValue(cgPoint: fromPoint)
+    let fromPoint = CGPoint(x: center.x - 8, y: center.y)
+    let fromValue = NSValue(cgPoint: fromPoint)
     
-    let toPoint        = CGPoint(x: center.x + 8, y: center.y)
-    let toValue        = NSValue(cgPoint: toPoint)
+    let toPoint = CGPoint(x: center.x + 8, y: center.y)
+    let toValue = NSValue(cgPoint: toPoint)
     
-    shake.fromValue    = fromValue
-    shake.toValue      = toValue
+    shake.fromValue = fromValue
+    shake.toValue = toValue
     
     layer.add(shake, forKey: "position")
     
-    
   }
-  
   
 }

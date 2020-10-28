@@ -8,40 +8,19 @@
 
 import UIKit
 
-struct ChatMessage {
-  let text: MessageCellModel
-  let isIncoming: Bool
-}
-
 final class ConversationViewController: UIViewController {
   
-  @IBOutlet private weak var messageTextField: UITextField!
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var messageTextField: UITextField!
   @IBOutlet private weak var sendButton: UIButton!
+  @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var dockView: UIView!
   
-  private let allChatMessages = [
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет"), isIncoming: false),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела нормально как в школе,Привет как дела нормально как в школе"), isIncoming: true),
-    ChatMessage(text: MessageCellModel(text: "Привет как дела?"), isIncoming: false)
-  ]
-  
   private var keyboardHeight: CGFloat = 0
+  private var messages = [Message]()
+  var channelId: String?
   
-  //MARK: - Lifecycle of VC
+  // MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self,
@@ -52,31 +31,45 @@ final class ConversationViewController: UIViewController {
     self.messageTextField.delegate = self
     setupTableView()
     updateTheme()
+    loadMessages()
   }
   
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    let indexPath = IndexPath(item: self.allChatMessages.count-1, section: 0)
-    self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
+  // MARK: - Private methods
+  private func loadMessages() {
+    DatabaseManager.shared.getMessages(channelId: channelId ?? "") { (result) in
+      switch result {
+      case .success(let messages):
+        self.messages = messages.sorted {
+          $0.created < $1.created
+        }
+        self.tableView.reloadData()
+        self.scrollToBottom()
+      case .failure( _): break
+      }
+    }
   }
   
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    NotificationCenter.default.removeObserver(self)
+  private func scrollToBottom(){
+    let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
+    if indexPath != [0, -1] {
+      self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
+    }
   }
-  
-  //MARK: - @IBActions
+
+  // MARK: - @IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
+    guard let channelId = self.channelId else { return }
+    guard let message = messageTextField.text else { return }
+    guard message != "" else { return }
+      
+      DatabaseManager.shared.insertMessage(channelId: channelId, message: message)
+      self.messageTextField.text = ""
   }
-  
-
 }
 
-//MARK: - Setup TableView
+// MARK: - Setup TableView
 extension ConversationViewController {
-  
   private func setupTableView() {
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 44
@@ -108,23 +101,23 @@ extension ConversationViewController {
   }
 }
 
-//MARK: - UITableViewDataSource, UITableViewDelegate
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension ConversationViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    allChatMessages.count
+    return messages.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let chatMessage = allChatMessages[indexPath.row]
-    if chatMessage.isIncoming {
-      let cell = tableView.dequeueCell(IncomingMessageTableViewCell.self, for: indexPath)
-      cell.configure(model: chatMessage.text)
-      return cell
-    } else {
+    let chatMessage = messages[indexPath.row]
+    if chatMessage.senderId == DatabaseManager.shared.senderId {
       let cell = tableView.dequeueCell(OutgoingMessageTableViewCell.self, for: indexPath)
-      cell.configure(model: chatMessage.text)
+      cell.configure(model: chatMessage)
+      return cell
+      
+    } else {
+      let cell = tableView.dequeueCell(IncomingMessageTableViewCell.self, for: indexPath)
+      cell.configure(model: chatMessage)
       return cell
     }
   }
 }
-

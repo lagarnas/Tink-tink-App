@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30904886970EA7F4238CB525 /* Pods_Tink_tink_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1140951E44D5D255083898D5 /* Pods_Tink_tink_app.framework */; };
 		88023679251610CA0079FA1B /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88023678251610CA0079FA1B /* AvatarImageView.swift */; };
 		8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8802367A2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift */; };
 		8802367E251648E50079FA1B /* UIAlertController + constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8802367D251648E50079FA1B /* UIAlertController + constraints.swift */; };
@@ -15,6 +16,9 @@
 		8809DAE2250B486500E4365A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8809DAE1250B486500E4365A /* ProfileViewController.swift */; };
 		8809DAE7250B486900E4365A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE6250B486900E4365A /* Assets.xcassets */; };
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
+		880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 880F1CC02539FAF00018C52D /* GoogleService-Info.plist */; };
+		880F1D17253C49690018C52D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880F1D16253C49690018C52D /* DatabaseManager.swift */; };
+		88374DC9253ED410000E3B9C /* ConversationListVC + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88374DC8253ED40F000E3B9C /* ConversationListVC + UIAlertController.swift */; };
 		883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */; };
 		883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */; };
 		883DBB292531CA7300FA425C /* ProfileVC + UpdateTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB282531CA7300FA425C /* ProfileVC + UpdateTheme.swift */; };
@@ -38,16 +42,15 @@
 		88921E2A25218E3C0033BD47 /* ConversationsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88921E2925218E3C0033BD47 /* ConversationsListViewController.storyboard */; };
 		88921E302521AC750033BD47 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88921E2E2521AC750033BD47 /* ConversationTableViewCell.swift */; };
 		88921E312521AC750033BD47 /* ConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88921E2F2521AC750033BD47 /* ConversationTableViewCell.xib */; };
-		88921E362521C0890033BD47 /* ConversationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88921E352521C0890033BD47 /* ConversationCellModel.swift */; };
+		88921E362521C0890033BD47 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88921E352521C0890033BD47 /* Channel.swift */; };
 		88921E392521C8320033BD47 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88921E382521C8320033BD47 /* UIView + Extension.swift */; };
 		88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88921E3B2521C8B00033BD47 /* UITableView + dequeueCell.swift */; };
-		889CC1DD252226FD00A1812F /* TypeSection + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC1DC252226FD00A1812F /* TypeSection + Extension.swift */; };
 		889CC1E1252230BE00A1812F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC1E0252230BE00A1812F /* ConversationViewController.swift */; };
 		889CC1E5252230E900A1812F /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 889CC1E4252230E900A1812F /* ConversationViewController.storyboard */; };
 		889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC1F6252317D500A1812F /* Date + Extension.swift */; };
 		889CC1FC2523288D00A1812F /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC1FA2523288D00A1812F /* IncomingMessageTableViewCell.swift */; };
 		889CC1FD2523288D00A1812F /* IncomingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */; };
-		889CC201252328D500A1812F /* MessageCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* MessageCellModel.swift */; };
+		889CC201252328D500A1812F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* Message.swift */; };
 		88A152BB25348AF4001E2480 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152BA25348AF4001E2480 /* Profile.swift */; };
 		88A152C42534B1B3001E2480 /* ProfileVC + UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152C32534B1B3001E2480 /* ProfileVC + UIAlertController.swift */; };
 		88A152CB25365672001E2480 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152CA25365672001E2480 /* OperationDataManager.swift */; };
@@ -56,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1140951E44D5D255083898D5 /* Pods_Tink_tink_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tink_tink_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4BA66D6AE2E79B96B0CE6B /* Pods-Tink-tink app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.release.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.release.xcconfig"; sourceTree = "<group>"; };
 		88023678251610CA0079FA1B /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageView.swift; sourceTree = "<group>"; };
 		8802367A2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UIImagePickerController.swift"; sourceTree = "<group>"; };
 		8802367D251648E50079FA1B /* UIAlertController + constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + constraints.swift"; sourceTree = "<group>"; };
@@ -66,6 +71,9 @@
 		8809DAE6250B486900E4365A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8809DAE9250B486900E4365A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8809DAEB250B486900E4365A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		880F1CC02539FAF00018C52D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		880F1D16253C49690018C52D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		88374DC8253ED40F000E3B9C /* ConversationListVC + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationListVC + UIAlertController.swift"; sourceTree = "<group>"; };
 		883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UITextField + UITextView.swift"; sourceTree = "<group>"; };
 		883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + lifeCycleVC.swift"; sourceTree = "<group>"; };
 		883DBB282531CA7300FA425C /* ProfileVC + UpdateTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UpdateTheme.swift"; sourceTree = "<group>"; };
@@ -89,21 +97,21 @@
 		88921E2925218E3C0033BD47 /* ConversationsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsListViewController.storyboard; sourceTree = "<group>"; };
 		88921E2E2521AC750033BD47 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		88921E2F2521AC750033BD47 /* ConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationTableViewCell.xib; sourceTree = "<group>"; };
-		88921E352521C0890033BD47 /* ConversationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCellModel.swift; sourceTree = "<group>"; };
+		88921E352521C0890033BD47 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		88921E382521C8320033BD47 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		88921E3B2521C8B00033BD47 /* UITableView + dequeueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + dequeueCell.swift"; sourceTree = "<group>"; };
-		889CC1DC252226FD00A1812F /* TypeSection + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TypeSection + Extension.swift"; sourceTree = "<group>"; };
 		889CC1E0252230BE00A1812F /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		889CC1E4252230E900A1812F /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
 		889CC1F6252317D500A1812F /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		889CC1FA2523288D00A1812F /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageTableViewCell.xib; sourceTree = "<group>"; };
-		889CC200252328D500A1812F /* MessageCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellModel.swift; sourceTree = "<group>"; };
+		889CC200252328D500A1812F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		88A152BA25348AF4001E2480 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		88A152C32534B1B3001E2480 /* ProfileVC + UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UIAlertController.swift"; sourceTree = "<group>"; };
 		88A152CA25365672001E2480 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
 		88A152D5253774E5001E2480 /* Storeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storeable.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.debug.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30904886970EA7F4238CB525 /* Pods_Tink_tink_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,10 +129,10 @@
 		8802367C251648A20079FA1B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				88374DC7253ED3E0000E3B9C /* ConversationListVC + UIAlerController */,
 				883DBB4D2532DE5500FA425C /* ConversationVC */,
 				883DBB4E2532DE7500FA425C /* ProfileVC */,
 				88921E25252111E60033BD47 /* UIViewController + Extension.swift */,
-				889CC1DC252226FD00A1812F /* TypeSection + Extension.swift */,
 				8802367D251648E50079FA1B /* UIAlertController + constraints.swift */,
 				88921E382521C8320033BD47 /* UIView + Extension.swift */,
 				88921E3B2521C8B00033BD47 /* UITableView + dequeueCell.swift */,
@@ -156,6 +165,8 @@
 			children = (
 				8809DADC250B486500E4365A /* Tink-tink app */,
 				8809DADB250B486500E4365A /* Products */,
+				F0700BA301DCE3857F5D0ADE /* Pods */,
+				BF43BE9B424509BA93C410E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,9 +181,9 @@
 		8809DADC250B486500E4365A /* Tink-tink app */ = {
 			isa = PBXGroup;
 			children = (
+				8802368325165B400079FA1B /* Application */,
 				883DBB552534230500FA425C /* Helpers */,
 				883E54C82527828300315DAD /* Themes */,
-				8802368325165B400079FA1B /* Application */,
 				889CC1DF252230A500A1812F /* Conversation */,
 				8848400A25210C8E0083B204 /* ConversationsList */,
 				8802368425165B6A0079FA1B /* Profile */,
@@ -181,8 +192,25 @@
 				8809DAE6250B486900E4365A /* Assets.xcassets */,
 				8809DAE8250B486900E4365A /* LaunchScreen.storyboard */,
 				8809DAEB250B486900E4365A /* Info.plist */,
+				880F1CC02539FAF00018C52D /* GoogleService-Info.plist */,
 			);
 			path = "Tink-tink app";
+			sourceTree = "<group>";
+		};
+		880F1D15253C49230018C52D /* DatabaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				880F1D16253C49690018C52D /* DatabaseManager.swift */,
+			);
+			path = DatabaseManager;
+			sourceTree = "<group>";
+		};
+		88374DC7253ED3E0000E3B9C /* ConversationListVC + UIAlerController */ = {
+			isa = PBXGroup;
+			children = (
+				88374DC8253ED40F000E3B9C /* ConversationListVC + UIAlertController.swift */,
+			);
+			path = "ConversationListVC + UIAlerController";
 			sourceTree = "<group>";
 		};
 		883DBB4D2532DE5500FA425C /* ConversationVC */ = {
@@ -209,6 +237,7 @@
 		883DBB552534230500FA425C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				880F1D15253C49230018C52D /* DatabaseManager */,
 				88A152C925365652001E2480 /* OperationDataManager */,
 				883DBB562534231000FA425C /* GCDDataManager */,
 				88A152D5253774E5001E2480 /* Storeable.swift */,
@@ -298,8 +327,8 @@
 			isa = PBXGroup;
 			children = (
 				88A152BA25348AF4001E2480 /* Profile.swift */,
-				88921E352521C0890033BD47 /* ConversationCellModel.swift */,
-				889CC200252328D500A1812F /* MessageCellModel.swift */,
+				88921E352521C0890033BD47 /* Channel.swift */,
+				889CC200252328D500A1812F /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +360,23 @@
 			path = OperationDataManager;
 			sourceTree = "<group>";
 		};
+		BF43BE9B424509BA93C410E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1140951E44D5D255083898D5 /* Pods_Tink_tink_app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0700BA301DCE3857F5D0ADE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */,
+				3B4BA66D6AE2E79B96B0CE6B /* Pods-Tink-tink app.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -338,9 +384,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8809DAEE250B486900E4365A /* Build configuration list for PBXNativeTarget "Tink-tink app" */;
 			buildPhases = (
+				C5D29E78A82D6DCFAA9ABE0F /* [CP] Check Pods Manifest.lock */,
 				8809DAD6250B486500E4365A /* Sources */,
 				8809DAD7250B486500E4365A /* Frameworks */,
 				8809DAD8250B486500E4365A /* Resources */,
+				FAAD7CD09BA5B4D0BC59D54A /* [CP] Embed Pods Frameworks */,
+				880F1CAD2539F6D80018C52D /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -358,7 +407,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = lagarnas;
 				TargetAttributes = {
 					8809DAD9250B486500E4365A = {
@@ -396,12 +445,73 @@
 				883E54CE252782C800315DAD /* ThemesViewController.storyboard in Resources */,
 				8809DAE7250B486900E4365A /* Assets.xcassets in Resources */,
 				88921E2A25218E3C0033BD47 /* ConversationsListViewController.storyboard in Resources */,
+				880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */,
 				889CC1FD2523288D00A1812F /* IncomingMessageTableViewCell.xib in Resources */,
 				8802368625165BEA0079FA1B /* ProfileViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		880F1CAD2539F6D80018C52D /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+		};
+		C5D29E78A82D6DCFAA9ABE0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tink-tink app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAAD7CD09BA5B4D0BC59D54A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8809DAD6250B486500E4365A /* Sources */ = {
@@ -415,15 +525,16 @@
 				883E54F3252B6F1600315DAD /* NightTheme.swift in Sources */,
 				883E54F0252B6F0400315DAD /* DayTheme.swift in Sources */,
 				889CC1FC2523288D00A1812F /* IncomingMessageTableViewCell.swift in Sources */,
-				88921E362521C0890033BD47 /* ConversationCellModel.swift in Sources */,
+				88921E362521C0890033BD47 /* Channel.swift in Sources */,
 				883E54ED252B6EDC00315DAD /* ClassicTheme.swift in Sources */,
 				88921E26252111E60033BD47 /* UIViewController + Extension.swift in Sources */,
 				883DBB292531CA7300FA425C /* ProfileVC + UpdateTheme.swift in Sources */,
 				88921E392521C8320033BD47 /* UIView + Extension.swift in Sources */,
 				8853591125249F1400469AD6 /* MiniAvatarView.swift in Sources */,
 				883E54E2252B014A00315DAD /* ThemeManager.swift in Sources */,
+				880F1D17253C49690018C52D /* DatabaseManager.swift in Sources */,
 				889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */,
-				889CC201252328D500A1812F /* MessageCellModel.swift in Sources */,
+				889CC201252328D500A1812F /* Message.swift in Sources */,
 				88BCF75F251C702600CA81A7 /* Logger.swift in Sources */,
 				88A152BB25348AF4001E2480 /* Profile.swift in Sources */,
 				8809DAE2250B486500E4365A /* ProfileViewController.swift in Sources */,
@@ -441,9 +552,9 @@
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,
 				8802367E251648E50079FA1B /* UIAlertController + constraints.swift in Sources */,
+				88374DC9253ED410000E3B9C /* ConversationListVC + UIAlertController.swift in Sources */,
 				88A152C42534B1B3001E2480 /* ProfileVC + UIAlertController.swift in Sources */,
 				88921E302521AC750033BD47 /* ConversationTableViewCell.swift in Sources */,
-				889CC1DD252226FD00A1812F /* TypeSection + Extension.swift in Sources */,
 				88A152CB25365672001E2480 /* OperationDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +599,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -548,6 +660,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -578,6 +691,7 @@
 		};
 		8809DAEF250B486900E4365A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -588,7 +702,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lagarnas.Tink-tink-app";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -597,6 +711,7 @@
 		};
 		8809DAF0250B486900E4365A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B4BA66D6AE2E79B96B0CE6B /* Pods-Tink-tink app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -607,7 +722,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lagarnas.Tink-tink-app";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

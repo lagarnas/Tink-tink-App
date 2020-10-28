@@ -23,8 +23,11 @@ final class ConversationTableViewCell: UITableViewCell {
   @IBOutlet weak var forwardIcon: UIImageView!
   
   override func prepareForReuse() {
+    super.prepareForReuse()
     self.backgroundColor = .clear
     avatarView.imageView.image = nil
+    avatarView.miniNameLabel.text = nil
+    avatarView.miniSecondNameLabel.text = nil
   }
   
   override func layoutSubviews() {
@@ -41,7 +44,7 @@ final class ConversationTableViewCell: UITableViewCell {
     onlineIndicatorView.backgroundColor = ThemeManager.shared.current.onlineIndicator
   }
   
-  //MARK: Functions
+  // MARK: Functions
   private func setupOnlineIndicator() {
     onlineIndicatorView.clipsToBounds = true
     onlineIndicatorView.layer.cornerRadius = onlineIndicatorView.frame.width / 2
@@ -51,30 +54,32 @@ final class ConversationTableViewCell: UITableViewCell {
   
   private func setupInitialsOfName() {
     let nameAv = String(nameLabel.text?.first ?? " ")
-    let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
+    if nameLabel.text?.components(separatedBy: " ").count ?? 0 > 1 {
+      let secondNameAv = String(nameLabel.text?.components(separatedBy: " ")[1].first ?? " ")
+       avatarView.miniSecondNameLabel.text = secondNameAv
+    }
+    
     avatarView.miniNameLabel.text = nameAv
-    avatarView.miniSecondNameLabel.text = secondNameAv
+   
   }
 }
 
-//MARK: - ConfigurableView Protocol
+// MARK: - ConfigurableView Protocol
 extension ConversationTableViewCell: ConfigurableView {
-  typealias ConfigurtionModel = ConversationCellModel
+  typealias ConfigurtionModel = Channel
   
-  func configure(model: ConversationCellModel) {
+  func configure(model: Channel) {
     
-    onlineIndicatorView.isHidden = model.isOnline ? false : true
-    previewMessageLabel.font = model.hasUnreadMessages && model.message != ""  ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
+    //onlineIndicatorView.isHidden = model.isOnline ? false : true
+//    previewMessageLabel.font = model.hasUnreadMessages && model.message != ""  ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
     
-    previewMessageLabel.text = model.message == "" ? "No messages yet..." : model.message
-    previewMessageLabel.font = model.message == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
-    dateLabel.isHidden = model.message == ""
-
-    dateLabel.text = model.date.getFormattingDate()
+    previewMessageLabel.text = model.lastMessage
+    previewMessageLabel.font = model.lastMessage == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
+    dateLabel.text = model.lastActivity?.getFormattingDate()
     nameLabel.text = model.name
     
     setupInitialsOfName()
-    guard let avatar = model.avatar else { return }
-    avatarView.miniImageView.image = UIImage(data: avatar)
+   // guard let avatar = model.avatar else { return }
+    //avatarView.miniImageView.image = UIImage(data: avatar)
   }
 }

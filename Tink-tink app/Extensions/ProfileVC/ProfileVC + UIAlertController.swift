@@ -35,8 +35,6 @@ extension ProfileViewController {
         self.operationButtonTapped(self.operationButton)
       }
       
-      
-      
     }
     alertController.addAction(actionOK)
     alertController.addAction(actionRepeat)

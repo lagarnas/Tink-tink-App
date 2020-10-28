@@ -17,7 +17,7 @@ extension Date {
     formatterForPastDays.dateFormat = "dd MMM"
     
     let calendar = Calendar.current
-    if calendar.isDateInToday(self){
+    if calendar.isDateInToday(self) {
       return formatterForToday.string(from: self)
     } else {
       return formatterForPastDays.string(from: self)
