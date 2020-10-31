@@ -17,14 +17,28 @@ class CoreDataManager {
   let coreDataStack = CoreDataStack.shared
   
   func makeSaveChannelsRequest(channels: [Channel]) {
-    var channelsDb = [Channel_db]()
+    
+    let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
+    let savedChannels = try? coreDataStack.mainContext.fetch(request)
+    
     coreDataStack.performSave { context in
-      channels.forEach {
-        channelsDb.append(Channel_db(identifier: $0.identifier,
-                                   name: $0.name,
-                                   lastActivity: $0.lastActivity,
-                                   lastMessage: $0.lastMessage,
-                                   in: context))
+      channels.forEach { channel in
+        
+        let savedChannel = savedChannels?.filter {
+          $0.identifier == channel.identifier
+        }.first
+        
+        if savedChannel == nil {
+          Channel_db(identifier: channel.identifier,
+                                     name: channel.name,
+                                     lastActivity: channel.lastActivity,
+                                     lastMessage: channel.lastMessage,
+                                     in: context)
+        } else {
+          savedChannel?.name = channel.name
+          savedChannel?.lastActivity = channel.lastActivity
+          savedChannel?.lastMessage = channel.lastMessage
+        }
       }
     }
   }
