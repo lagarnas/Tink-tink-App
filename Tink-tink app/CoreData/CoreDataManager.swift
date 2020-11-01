@@ -22,6 +22,8 @@ class CoreDataManager {
     let savedChannels = try? coreDataStack.mainContext.fetch(request)
     
     coreDataStack.performSave { context in
+      let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
+      let savedChannels = try? coreDataStack.mainContext.fetch(request)
       channels.forEach { channel in
         
         let savedChannel = savedChannels?.filter {

@@ -66,9 +66,9 @@ final class ConversationTableViewCell: UITableViewCell {
 
 // MARK: - ConfigurableView Protocol
 extension ConversationTableViewCell: ConfigurableView {
-  typealias ConfigurtionModel = Channel
+  typealias ConfigurtionModel = Channel_db
   
-  func configure(model: Channel) {
+  func configure(model: Channel_db) {
     
     //onlineIndicatorView.isHidden = model.isOnline ? false : true
 //    previewMessageLabel.font = model.hasUnreadMessages && model.message != ""  ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)

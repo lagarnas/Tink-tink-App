@@ -18,7 +18,7 @@ final class ConversationViewController: UIViewController {
   
   private var keyboardHeight: CGFloat = 0
   private var messages = [Message]()
-  var channel: Channel?
+  var channel: Channel_db?
   
   // MARK: - Lifecycle of VC
   override func viewDidLoad() {
@@ -31,23 +31,23 @@ final class ConversationViewController: UIViewController {
     self.messageTextField.delegate = self
     setupTableView()
     updateTheme()
-    loadMessages()
+   // loadMessages()
   }
   
   // MARK: - Private methods
-  private func loadMessages() {
-    FirebaseManager.shared.getMessages(channel: channel!) { (result) in
-      switch result {
-      case .success(let messages):
-        self.messages = messages.sorted {
-          $0.created < $1.created
-        }
-        self.tableView.reloadData()
-        self.scrollToBottom()
-      case .failure( _): break
-      }
-    }
-  }
+//  private func loadMessages() {
+//    FirebaseManager.shared.getMessages(channel: channel!) { (result) in
+//      switch result {
+//      case .success(let messages):
+//        self.messages = messages.sorted {
+//          $0.created < $1.created
+//        }
+//        self.tableView.reloadData()
+//        self.scrollToBottom()
+//      case .failure( _): break
+//      }
+//    }
+//  }
   
   private func scrollToBottom(){
     let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
@@ -63,7 +63,7 @@ final class ConversationViewController: UIViewController {
     guard let message = messageTextField.text else { return }
     guard message != "" else { return }
       
-    FirebaseManager.shared.insertMessage(channelId: channel.identifier, message: message)
+    FirebaseManager.shared.insertMessage(channelId: channel.identifier!, message: message)
       self.messageTextField.text = ""
   }
 }

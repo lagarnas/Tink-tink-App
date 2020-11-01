@@ -29,7 +29,7 @@ final class FirebaseManager {
     referanceChannels.addDocument(data: newChannel)
   }
   
-  func getChannels(completion: @escaping (Result<[Channel], Error>) -> Void) {
+  func getChannels() {
     
     referanceChannels.addSnapshotListener { snapshot, _ in
       var channels = [Channel]()
@@ -38,7 +38,7 @@ final class FirebaseManager {
               let lastActivity = $0["lastActivity"] as? Timestamp,
               let lastMessage  = $0["lastMessage"] as? String
         else {
-          completion(.failure(DataBaseError.failedToFetch))
+          //completion(.failure(DataBaseError.failedToFetch))
           return
         }
         let channel = Channel(identifier: $0.documentID,
@@ -48,8 +48,10 @@ final class FirebaseManager {
         
         channels.append(channel)
       }
-      completion(.success(channels))
+      
+      print(channels.count)
       self.coreDataManager.makeSaveChannelsRequest(channels: channels)
+
       channels = []
     }
   }
@@ -81,8 +83,8 @@ final class FirebaseManager {
                                      created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
         
       }
-      completion(.success(self.messages))
       self.coreDataManager.makeSaveMessagesRequest(channel: channel, messages: self.messages)
+      completion(.success(self.messages))
     }
   }
   

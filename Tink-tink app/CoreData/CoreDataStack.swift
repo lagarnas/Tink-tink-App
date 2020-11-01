@@ -85,42 +85,29 @@ final class CoreDataStack {
     return context
   }
   
-  // MARK: - Save context
-  
-  func performSave(_ block: (NSManagedObjectContext) -> Void) {
-    let  context = saveContext()
-    //блок сохранения будет выполняться последовательно
-    context.performAndWait {
-      block(context)
-      if context.hasChanges {
-        do {
-          try performSave(in: context)
-          
-        } catch {
-          assertionFailure(error.localizedDescription)
-          
-        }
-      }
-    }
-  }
-  
-  private func performSave(in context: NSManagedObjectContext)  throws {
-    try context.save()
-    if let parent = context.parent {
-      parent.performAndWait {
-        if parent.hasChanges {
-          do {
-            try performSave(in: parent)
-            os_log("Saved sucessfully in parent context", log: OSLog.coreData, type: .info)
-          } catch {
-            assertionFailure(error.localizedDescription)
-          }
-        }
-      }
-    } else {
-      os_log("Saved sucessfully", log: OSLog.coreData, type: .info)
-    }
-  }
+  // MARK: - Save Context
+   
+   func performSave(_ block: (NSManagedObjectContext) -> Void) {
+       let context = saveContext()
+       context.performAndWait {
+           block(context)
+           if context.hasChanges {
+               performSave(in: context)
+           }
+       }
+   }
+   
+   private func performSave(in context: NSManagedObjectContext) {
+       context.performAndWait {
+           do {
+            try context.obtainPermanentIDs(for: Array(context.insertedObjects))
+               try context.save()
+           } catch {
+               assertionFailure(error.localizedDescription)
+           }
+       }
+       if let parent = context.parent { performSave(in: parent) }
+   }
   
   func enableObservers() {
     let notificationCenter = NotificationCenter.default
