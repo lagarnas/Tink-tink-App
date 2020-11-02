@@ -16,11 +16,8 @@ class CoreDataManager {
   
   let coreDataStack = CoreDataStack.shared
   
-  func makeSaveChannelsRequest(channels: [Channel]) {
-    
-    let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
-    let savedChannels = try? coreDataStack.mainContext.fetch(request)
-    
+  func saveChannels(_ channels: [Channel]) {
+  
     coreDataStack.performSave { context in
       let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
       let savedChannels = try? coreDataStack.mainContext.fetch(request)
@@ -45,26 +42,32 @@ class CoreDataManager {
     }
   }
   
-  func makeSaveMessagesRequest(channel: Channel, messages: [Message]) {
+  func saveMessages(_ channel: Channel_db, _ messages: [Message]) {
     
     coreDataStack.performSave { context in
 
       let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
-      request.predicate = NSPredicate(format: "identifier = %@", channel.identifier)
+      guard let identifier = channel.identifier else { return }
+      request.predicate = NSPredicate(format: "identifier = %@", identifier)
       let objects = try? context.fetch(request)
       guard let channel = objects?.first
       else { return }
       
       var messagesDb = [Message_db]()
-      messages.forEach {
-        let messageDb = Message_db(senderId: $0.senderId,
-                                   senderName: $0.senderName,
-                                   content: $0.content,
-                                   created: $0.created,
-                                   in: context)
-        messagesDb.append(messageDb)
-        channel.addToMessages(messageDb)
-      
+      messages.forEach { message in
+        
+        let savedMessage = channel.messages?.filter {
+          message.created == ($0 as? Message_db)?.created
+        }.first
+        if savedMessage == nil {
+          let messageDb = Message_db(senderId: message.senderId,
+                                     senderName: message.senderName,
+                                     content: message.content,
+                                     created: message.created,
+                                     in: context)
+          messagesDb.append(messageDb)
+          channel.addToMessages(messageDb)
+        }
       }
       print("For channel:", channel.name!, "saved:", messagesDb.count, "messages")
     }

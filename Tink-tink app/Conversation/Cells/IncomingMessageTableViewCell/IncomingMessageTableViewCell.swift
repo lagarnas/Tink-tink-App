@@ -26,9 +26,9 @@ final class IncomingMessageTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView Protocol
 extension IncomingMessageTableViewCell: ConfigurableView {
   
-  typealias ConfigurtionModel = Message
+  typealias ConfigurtionModel = Message_db
   
-  func configure(model: Message) {
+  func configure(model: Message_db) {
     self.nameLabel.text = model.senderName
     self.messageLabel.text = model.content
   }

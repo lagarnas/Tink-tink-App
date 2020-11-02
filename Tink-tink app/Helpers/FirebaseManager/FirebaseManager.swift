@@ -37,10 +37,7 @@ final class FirebaseManager {
         guard let name         = $0["name"] as? String,
               let lastActivity = $0["lastActivity"] as? Timestamp,
               let lastMessage  = $0["lastMessage"] as? String
-        else {
-          //completion(.failure(DataBaseError.failedToFetch))
-          return
-        }
+        else { return }
         let channel = Channel(identifier: $0.documentID,
                               name: name,
                               lastMessage: lastMessage,
@@ -50,7 +47,7 @@ final class FirebaseManager {
       }
       
       print(channels.count)
-      self.coreDataManager.makeSaveChannelsRequest(channels: channels)
+      self.coreDataManager.saveChannels(channels)
 
       channels = []
     }
@@ -66,9 +63,10 @@ final class FirebaseManager {
     referanceChannels.document(channelId).collection("messages").addDocument(data: newMessage)
   }
   
-  func getMessages(channel: Channel, completion: @escaping (Result<[Message], Error>) -> Void) {
-    
-    referanceChannels.document(channel.identifier).collection("messages").addSnapshotListener { (snapshot, _) in
+  func getMessages(channel: Channel_db) {
+    print(channel.identifier!)
+    guard let identifier = channel.identifier else { return }
+    referanceChannels.document(identifier).collection("messages").addSnapshotListener { (snapshot, _) in
       self.messages = []
       _ = snapshot?.documents.compactMap {
         guard
@@ -83,12 +81,7 @@ final class FirebaseManager {
                                      created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
         
       }
-      self.coreDataManager.makeSaveMessagesRequest(channel: channel, messages: self.messages)
-      completion(.success(self.messages))
+      self.coreDataManager.saveMessages(channel, self.messages)
     }
-  }
-  
-  enum DataBaseError: Error {
-    case failedToFetch
   }
 }
