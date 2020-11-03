@@ -18,10 +18,10 @@ final class ConversationsListViewController: UIViewController {
   @IBOutlet private weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
-  //let dataManager: Storeable = OperationDataManager.shared
+  // MARK: -  GCD manager
   let dataManager: Storeable = GCDDataManager.shared
-  
-  //private var channels = [Channel]()
+  // MARK: - Firebase manager
+  private let firebaseManager = FirebaseManager.shared
   
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Channel_db>!
@@ -42,7 +42,7 @@ final class ConversationsListViewController: UIViewController {
   
   // MARK: - Private methods
   private func loadChannels() {
-    FirebaseManager.shared.getChannels()
+    firebaseManager.getChannels()
         let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
         let sortDescriptor = NSSortDescriptor(keyPath: \Channel_db.lastActivity, ascending: false)
         request.sortDescriptors = [sortDescriptor]
@@ -188,6 +188,18 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     navigationItem.hidesSearchBarWhenScrolling = true
   }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+      .delete
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        let channel = fetchedResultsController.object(at: indexPath)
+        firebaseManager.deleteChannel(channel: channel)
+      }
+  }
+
 }
 
 extension ConversationsListViewController: NSFetchedResultsControllerDelegate {

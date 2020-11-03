@@ -42,6 +42,12 @@ class CoreDataManager {
     }
   }
   
+  func deleteChannel(_ channelObject: NSManagedObject) {
+    
+    coreDataStack.mainContext.delete(channelObject)
+    coreDataStack.performSave(in: coreDataStack.mainContext)
+  }
+  
   func saveMessages(_ channel: Channel_db, _ messages: [Message]) {
     
     coreDataStack.performSave { context in

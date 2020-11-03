@@ -29,6 +29,18 @@ final class FirebaseManager {
     referanceChannels.addDocument(data: newChannel)
   }
   
+  func deleteChannel( channel: Channel_db) {
+    referanceChannels.document(channel.identifier!).delete() { err in
+      if let err = err {
+          print("Error removing document: \(err)")
+      } else {
+          print("Document successfully removed!")
+      }
+    }
+    
+    coreDataManager.deleteChannel(channel)
+  }
+  
   func getChannels() {
     
     referanceChannels.addSnapshotListener { snapshot, _ in
@@ -45,10 +57,8 @@ final class FirebaseManager {
         
         channels.append(channel)
       }
-      
       print(channels.count)
       self.coreDataManager.saveChannels(channels)
-
       channels = []
     }
   }

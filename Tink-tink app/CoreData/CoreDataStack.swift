@@ -59,7 +59,7 @@ final class CoreDataStack {
   
   // MARK: - Contexts
   //работает непосредственно со стором
-  private lazy var masterContext: NSManagedObjectContext = {
+  lazy var masterContext: NSManagedObjectContext = {
     let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
     context.persistentStoreCoordinator = persistentStoreCoordinator
     //полная перезапись объектов которую надо изменить
@@ -97,7 +97,7 @@ final class CoreDataStack {
        }
    }
    
-   private func performSave(in context: NSManagedObjectContext) {
+   func performSave(in context: NSManagedObjectContext) {
        context.performAndWait {
            do {
             try context.obtainPermanentIDs(for: Array(context.insertedObjects))
