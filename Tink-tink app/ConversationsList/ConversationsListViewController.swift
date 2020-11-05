@@ -164,7 +164,6 @@ extension ConversationsListViewController {
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //return channels.count
     guard let sections = fetchedResultsController?.sections else { return 0 }
     return sections[section].numberOfObjects
   }

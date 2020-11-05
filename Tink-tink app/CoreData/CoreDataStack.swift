@@ -69,7 +69,7 @@ final class CoreDataStack {
   
   private(set) lazy var mainContext: NSManagedObjectContext = {
     let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    //его родителем является writterContext
+    //его родителем является  masterContext
     context.parent = masterContext
     context.automaticallyMergesChangesFromParent = true
     context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
