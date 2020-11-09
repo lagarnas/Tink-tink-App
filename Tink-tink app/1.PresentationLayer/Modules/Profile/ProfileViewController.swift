@@ -112,7 +112,7 @@ final class ProfileViewController: UIViewController {
     unEnabledButtons()
     activityIndicator.startAnimating()
     guard let profile = self.profile else { return }
-    OperationDataManager.shared.save(profile: profile) { [weak self] result in
+    OperationSaveService.shared.save(profile: profile) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success:
@@ -193,5 +193,65 @@ extension ProfileViewController {
       avatarView.nameLabel.text = firstInitial
       avatarView.secondNameLabel.text = secondInitial
     }
+  }
+}
+
+extension ProfileViewController {
+  func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    scrollView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    contentView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    
+    nameLabel.textColor = ThemeManager.shared.current.mainTextColor
+    nameTextField.textColor = ThemeManager.shared.current.mainTextColor
+    nameSeparator.backgroundColor = ThemeManager.shared.current.accent
+    
+    bioLabel.textColor = ThemeManager.shared.current.mainTextColor
+    bioTextView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    bioTextView.textColor = ThemeManager.shared.current.mainTextColor
+    bioSeparator.backgroundColor = ThemeManager.shared.current.accent
+    
+    operationButton.backgroundColor = ThemeManager.shared.current.accent
+    operationButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
+    
+    GCDButton.backgroundColor = ThemeManager.shared.current.accent
+    GCDButton.setTitleColor(ThemeManager.shared.current.tintColor, for: .normal)
+  }
+}
+
+
+extension ProfileViewController {
+  
+  func alert(title: String, message: String, style: UIAlertController.Style) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+
+    let action = UIAlertAction(title: "OK", style: .default)
+
+    alertController.addAction(action)
+
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
+  func alertError(title: String, message: String, style: UIAlertController.Style) {
+
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+    
+    let actionOK = UIAlertAction(title: "OK", style: .default) {_ in
+      self.activityIndicator.stopAnimating()
+    }
+    let actionRepeat = UIAlertAction(title: "Try again", style: .default) {_ in
+      
+      if self.GCDButtonIsClick {
+        self.GCDButtonTapped()
+      } else {
+        self.operationButtonTapped(self.operationButton)
+      }
+      
+    }
+    alertController.addAction(actionOK)
+    alertController.addAction(actionRepeat)
+
+    self.present(alertController, animated: true, completion: nil)
   }
 }

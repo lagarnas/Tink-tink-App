@@ -1,8 +1,8 @@
 //
-//  OperationDataManager.swift
+//  OperationSaveService.swift
 //  Tink-tink app
 //
-//  Created by Анастасия Леонтьева on 14.10.2020.
+//  Created by Анастасия Леонтьева on 09.11.2020.
 //  Copyright © 2020 lagarnas. All rights reserved.
 //
 
@@ -15,9 +15,14 @@ enum FileName: String {
   case userTheme = "theme.txt"
 }
 
-class OperationDataManager: Storeable {
+protocol Storeable {
+  func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void)
+  func retrive(completion: @escaping (Result<Profile, Error>) -> Void)
+}
+
+class OperationSaveService: Storeable {
   
-  static let shared = OperationDataManager()
+  static let shared = OperationSaveService()
   private init() {}
   
   let queue = OperationQueue()

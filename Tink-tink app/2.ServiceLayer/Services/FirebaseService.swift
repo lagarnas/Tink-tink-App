@@ -1,21 +1,20 @@
 //
-//  DatabaseManager.swift
+//  FirebaseSevice.swift
 //  Tink-tink app
 //
-//  Created by Анастасия Леонтьева on 18.10.2020.
+//  Created by Анастасия Леонтьева on 09.11.2020.
 //  Copyright © 2020 lagarnas. All rights reserved.
 //
 
 import Foundation
 import Firebase
 
-final class FirebaseManager {
-  static let shared = FirebaseManager()
+final class FirebaseService {
+  static let shared = FirebaseService()
   private init() {}
   
   private let database = Firestore.firestore()
-  private lazy var coreDataManager = CoreDataManager.shared
-  
+  private lazy var coreDataManager = CoreDataService.shared
   private lazy var referanceChannels = database.collection("channels")
   let senderId = UIDevice.current.identifierForVendor?.uuidString
   

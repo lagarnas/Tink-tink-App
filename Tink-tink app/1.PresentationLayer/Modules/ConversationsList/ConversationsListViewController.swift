@@ -21,7 +21,7 @@ final class ConversationsListViewController: UIViewController {
   // MARK: -  GCD manager
   let dataManager: Storeable = GCDDataManager.shared
   // MARK: - Firebase manager
-  private let firebaseManager = FirebaseManager.shared
+  private let firebaseManager = FirebaseService.shared
   
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Channel_db>!
@@ -228,5 +228,27 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
     @unknown default:
       fatalError()
     }
+  }
+}
+
+extension ConversationsListViewController {
+  
+  func showChannelAlert() {
+    let alertController = UIAlertController(title: "New channel", message: nil, preferredStyle: .alert)
+    
+    let createAction = UIAlertAction(title: "Create", style: .default) {_ in
+      let text = alertController.textFields?.first?.text
+      guard let channelName = text else { return }
+      FirebaseService.shared.insertChannel(name: channelName)
+      
+    }
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    alertController.addTextField { (textField) in
+      textField.placeholder = "Add new channel"
+    }
+    alertController.addAction(createAction)
+    alertController.addAction(cancelAction)
+    
+    self.present(alertController, animated: true, completion: nil)
   }
 }

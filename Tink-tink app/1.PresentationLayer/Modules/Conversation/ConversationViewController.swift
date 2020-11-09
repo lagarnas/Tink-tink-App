@@ -18,7 +18,6 @@ final class ConversationViewController: UIViewController {
   @IBOutlet weak var dockView: UIView!
   
   private var keyboardHeight: CGFloat = 0
-  //private var messages = [Message]()
   var channel: Channel_db!
   
   // MARK: - FetchedResultsController
@@ -40,7 +39,7 @@ final class ConversationViewController: UIViewController {
   
   // MARK: - Private methods
   private func loadMessages() {
-    FirebaseManager.shared.getMessages(channel: channel)
+    FirebaseService.shared.getMessages(channel: channel)
     let request: NSFetchRequest<Message_db> = Message_db.fetchRequest()
     request.predicate = NSPredicate(format: "channel == %@", channel)
     let sortDescriptor = NSSortDescriptor(keyPath: \Message_db.created, ascending: true)
@@ -68,7 +67,7 @@ final class ConversationViewController: UIViewController {
     guard let message = messageTextField.text else { return }
     guard message != "" else { return }
     guard let identifier = channel.identifier else { return }
-    FirebaseManager.shared.insertMessage(channelId: identifier, message: message)
+    FirebaseService.shared.insertMessage(channelId: identifier, message: message)
       self.messageTextField.text = ""
   }
 }
@@ -116,7 +115,7 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let chatMessage = fetchedResultsController.object(at: indexPath)
-    if chatMessage.senderId == FirebaseManager.shared.senderId {
+    if chatMessage.senderId == FirebaseService.shared.senderId {
       let cell = tableView.dequeueCell(OutgoingMessageTableViewCell.self, for: indexPath)
       cell.configure(model: chatMessage)
       return cell
@@ -157,5 +156,29 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     @unknown default:
       fatalError()
     }
+  }
+}
+
+extension ConversationViewController {
+  func updateTheme() {
+    ThemeManager.shared.applyTheme()
+    
+    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
+    self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.dockView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
+    self.messageTextField.backgroundColor = ThemeManager.shared.current.incomingMessageColor
+    self.messageTextField.textColor = ThemeManager.shared.current.mainTextColor
+  }
+}
+
+// MARK: - UITextFieldDelegate
+extension ConversationViewController: UITextFieldDelegate {
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    self.view.layoutIfNeeded()
+    UIView.animate(withDuration: 0.5, animations: {
+      self.dockViewHeightConstraint.constant = 80
+      self.view.layoutIfNeeded()
+    }, completion: nil)
   }
 }

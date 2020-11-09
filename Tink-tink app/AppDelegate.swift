@@ -26,7 +26,7 @@ import Firebase
     
     self.window = UIWindow(frame: UIScreen.main.bounds)
     let storyboard = UIStoryboard(name: "ConversationsListViewController", bundle: nil)
-    let rootViewController = storyboard.instantiateViewController(withIdentifier: "navControlloer")
+    let rootViewController = storyboard.instantiateViewController(withIdentifier: "navController")
     
     self.window?.rootViewController = rootViewController
     self.window?.makeKeyAndVisible()

@@ -1,17 +1,17 @@
 //
-//  CoreDataManager.swift
+//  CoreDataService.swift
 //  Tink-tink app
 //
-//  Created by Анастасия Леонтьева on 23.10.2020.
+//  Created by Анастасия Леонтьева on 09.11.2020.
 //  Copyright © 2020 lagarnas. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class CoreDataManager {
+class CoreDataService {
   
-  static let shared = CoreDataManager()
+  static let shared = CoreDataService()
   private init() {}
   
   let coreDataStack = CoreDataStack.shared
@@ -79,3 +79,5 @@ class CoreDataManager {
     }
   }
 }
+
+
