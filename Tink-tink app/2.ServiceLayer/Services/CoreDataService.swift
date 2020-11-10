@@ -13,10 +13,13 @@ protocol ICoreDataService {
   func setupChannelsFetchedResultsController() -> NSFetchedResultsController<Channel_db>
   func setupMessagesFetchedResultsController(channel: Channel_db) -> NSFetchedResultsController<Message_db>
   
+  func saveChannels(_ channels: [ChannelCellDisplayModel])
+  func deleteChannel(_ channelObject: NSManagedObject)
+  
+  func saveMessages(_ channel: Channel_db, _ messages: [MessageCellDisplay])
 }
 
 class CoreDataService: ICoreDataService {
-
   
   let coreDataStorage: ICoreDataStorage
   
@@ -44,7 +47,7 @@ class CoreDataService: ICoreDataService {
   }
   
   func saveChannels(_ channels: [ChannelCellDisplayModel]) {
-  
+    
     coreDataStorage.performSave { context in
       let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
       let savedChannels = try? coreDataStorage.mainContext.fetch(request)
@@ -56,10 +59,10 @@ class CoreDataService: ICoreDataService {
         
         if savedChannel == nil {
           Channel_db(identifier: channel.identifier,
-                                     name: channel.name,
-                                     lastActivity: channel.lastActivity,
-                                     lastMessage: channel.lastMessage,
-                                     in: context)
+                     name: channel.name,
+                     lastActivity: channel.lastActivity,
+                     lastMessage: channel.lastMessage,
+                     in: context)
         } else {
           savedChannel?.name = channel.name
           savedChannel?.lastActivity = channel.lastActivity
@@ -70,15 +73,15 @@ class CoreDataService: ICoreDataService {
   }
   
   func deleteChannel(_ channelObject: NSManagedObject) {
-    
     coreDataStorage.mainContext.delete(channelObject)
     coreDataStorage.performSave(in: coreDataStorage.mainContext)
+    print("CD: Success deleted!")
   }
   
-  func saveMessages(_ channel: Channel_db, _ messages: [Message]) {
+  func saveMessages(_ channel: Channel_db, _ messages: [MessageCellDisplay]) {
     
     coreDataStorage.performSave { context in
-
+      
       let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
       guard let identifier = channel.identifier else { return }
       request.predicate = NSPredicate(format: "identifier = %@", identifier)

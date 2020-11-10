@@ -10,10 +10,11 @@ import Foundation
 protocol ICoreAssembly {
   var coreDataStorage: ICoreDataStorage { get }
   var profileStorage: IProfileStorage { get }
+  var firebaseStorage: IFirebaseStorage { get }
 }
 
 class CoreAssembly: ICoreAssembly {
   lazy var profileStorage: IProfileStorage = ProfileStorage()
   lazy var coreDataStorage: ICoreDataStorage = CoreDataStorage()
-  
+  lazy var firebaseStorage: IFirebaseStorage = FirebaseStorage()
 }

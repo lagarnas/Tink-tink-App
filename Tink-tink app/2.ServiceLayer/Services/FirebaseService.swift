@@ -9,88 +9,75 @@
 import Foundation
 import Firebase
 
-final class FirebaseService {
-  static let shared = FirebaseService()
-  private init() {}
+protocol IFirebaseService {
+  var senderId: String? { get set }
   
-  private let database = Firestore.firestore()
-  //private lazy var coreDataManager = CoreDataService.shared
-  private lazy var referanceChannels = database.collection("channels")
-  let senderId = UIDevice.current.identifierForVendor?.uuidString
+  func insertChannel(name: String)
+  func deleteChannel(_ channel: Channel_db, completion: @escaping () -> Void)
+  func getChannels(completion: @escaping ([ChannelCellDisplayModel]) -> Void)
   
-  var messages = [Message]()
+  func insertMessage(channelId: String, message: String)
+  func getMessages(channel: Channel_db, completion: @escaping ([MessageCellDisplay]) -> Void)
+}
+
+final class FirebaseService: IFirebaseService {
+  
+  var senderId = UIDevice.current.identifierForVendor?.uuidString
+  let firebaseStorage: IFirebaseStorage
+  
+  init(firebaseStorage: IFirebaseStorage) {
+    self.firebaseStorage = firebaseStorage
+  }
   
   func insertChannel(name: String) {
-    
     let newChannel: [String : Any] = ["name"        : name,
                                       "lastActivity":  Date(),
                                       "lastMessage" : "No message yet"]
-    referanceChannels.addDocument(data: newChannel)
+    firebaseStorage.insertChannel(newChannel: newChannel)
   }
   
-  func deleteChannel( channel: Channel_db) {
-    referanceChannels.document(channel.identifier!).delete() { err in
-      if let err = err {
-          print("Error removing document: \(err)")
-      } else {
-          print("Document successfully removed!")
-      }
-    }
-    
-   // coreDataManager.deleteChannel(channel)
+  func deleteChannel(_ channel: Channel_db, completion: @escaping () -> Void) {
+    guard let identifier = channel.identifier else { return }
+    firebaseStorage.deleteChannel(identifier: identifier, completion: completion)
   }
   
-  func getChannels() {
+  func getChannels(completion: @escaping ([ChannelCellDisplayModel]) -> Void) {
+    var channels = [ChannelCellDisplayModel]()
     
-    referanceChannels.addSnapshotListener { snapshot, _ in
-      var channels = [ChannelCellDisplayModel]()
-      _ = snapshot?.documents.compactMap {
-        guard let name         = $0["name"] as? String,
-              let lastActivity = $0["lastActivity"] as? Timestamp,
-              let lastMessage  = $0["lastMessage"] as? String
-        else { return }
-        let channel = ChannelCellDisplayModel(identifier: $0.documentID,
-                              name: name,
-                              lastMessage: lastMessage,
-                              lastActivity: Date(timeIntervalSince1970: TimeInterval(lastActivity.seconds)))
-        
-        channels.append(channel)
-      }
-      print(channels.count)
-     // self.coreDataManager.saveChannels(channels)
-      channels = []
+    firebaseStorage.fetchChannel {
+      let channel = ChannelCellDisplayModel(identifier: $0.documentId,
+                                            name: $0.name,
+                                            lastMessage: $0.lastMessage,
+                                            lastActivity: Date(timeIntervalSince1970: TimeInterval($0.lastActivity.seconds)))
+      channels.append(channel)
+    } saveCompletion: {
+      completion(channels)
     }
   }
   
   func insertMessage(channelId: String, message: String) {
+    
     guard let senderId = self.senderId else { return }
+    
     let newMessage: [String: Any] = ["content": message,
                                      "created": Date(),
                                      "senderName": "🐷",
                                      "senderId": senderId]
-    
-    referanceChannels.document(channelId).collection("messages").addDocument(data: newMessage)
+    firebaseStorage.insertMessage(channelId: channelId, newMessage: newMessage)
   }
   
-  func getMessages(channel: Channel_db) {
-    print(channel.identifier!)
+  func getMessages(channel: Channel_db, completion: @escaping ([MessageCellDisplay]) -> Void) {
+    var messages = [MessageCellDisplay]()
     guard let identifier = channel.identifier else { return }
-    referanceChannels.document(identifier).collection("messages").addSnapshotListener { (snapshot, _) in
-      self.messages = []
-      _ = snapshot?.documents.compactMap {
-        guard
-          let senderId = $0["senderId"] as? String,
-          let senderName = $0["senderName"] as? String,
-          let content = $0["content"] as? String,
-          let created = $0["created"] as? Timestamp
-        else { return }
-        self.messages.append(Message(senderId: senderId,
-                                     senderName: senderName,
-                                     content: content,
-                                     created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
-        
-      }
-   //   self.coreDataManager.saveMessages(channel, self.messages)
+    
+    firebaseStorage.fetchMessage(identifier: identifier) {
+      let message = MessageCellDisplay(senderId: $0.senderId,
+                                       senderName: $0.senderName,
+                                       content: $0.content,
+                                       created: Date(timeIntervalSince1970: TimeInterval($0.created.seconds)))
+      messages.append(message)
+    } saveCompletion: {
+      completion(messages)
     }
   }
 }

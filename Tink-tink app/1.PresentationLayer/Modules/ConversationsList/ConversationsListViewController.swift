@@ -18,16 +18,13 @@ final class ConversationsListViewController: UIViewController {
   @IBOutlet private weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
-  // MARK: - Firebase manager
-  private let firebaseManager = FirebaseService.shared
-  
   //DEPENDENCY
   var presentationAssembly: IPresentationAssembly?
   var model: IConversationsListModel?
   
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Channel_db>!
- 
+  
   // MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,15 +37,16 @@ final class ConversationsListViewController: UIViewController {
     super.viewDidAppear(animated)
     setupMiniature()
     updateTheme()
+
   }
   
   // MARK: - Private methods
   private func loadChannels() {
-    firebaseManager.getChannels()
-
-    fetchedResultsController = model?.fetchedResultController()
-          try? self.fetchedResultsController.performFetch()
-          self.fetchedResultsController.delegate = self
+    guard let model = self.model else { return }
+    model.getChannels()
+    self.fetchedResultsController = model.fetchedResultController()
+    try? self.fetchedResultsController.performFetch()
+    self.fetchedResultsController.delegate = self
   }
   
   private func updateTheme() {
@@ -75,7 +73,7 @@ final class ConversationsListViewController: UIViewController {
     }
     self.navigationController?.pushViewController(themesVC, animated: true)
   }
-    
+  
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
   }
@@ -108,7 +106,6 @@ extension ConversationsListViewController {
   }
   
   private func setupSearchController() {
-    //searchController.searchResultsUpdater = self
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchBar.placeholder = NSLocalizedString("search", comment: "")
     navigationItem.searchController = searchController
@@ -122,31 +119,31 @@ extension ConversationsListViewController {
       guard let self = self else { return }
       switch result {
       case .success(let profile):
-      self.setupInitialsOfName(profile: profile)
+        self.setupInitialsOfName(profile: profile)
       case .failure(let error):
         print(error.localizedDescription)
       }
       
     }
-
+    
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
     avatarView.isUserInteractionEnabled = true
     avatarView.addGestureRecognizer(tapGestureRecognizer)
   }
   
   private func setupInitialsOfName(profile: Profile) {
-
+    
     let fullNameArr = profile.userName.components(separatedBy: " ")
-      let firstName: String = fullNameArr[0]
-      let lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
-
-      let firstInitial = String(firstName.first ?? " ")
-      let secondInitial = String(lastName?.first ?? " ")
-
-      avatarView.miniNameLabel.text = firstInitial
-      avatarView.miniSecondNameLabel.text = secondInitial
-      avatarView.miniImageView.image = UIImage(data: profile.userData)
-
+    let firstName: String = fullNameArr[0]
+    let lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
+    
+    let firstInitial = String(firstName.first ?? " ")
+    let secondInitial = String(lastName?.first ?? " ")
+    
+    avatarView.miniNameLabel.text = firstInitial
+    avatarView.miniSecondNameLabel.text = secondInitial
+    avatarView.miniImageView.image = UIImage(data: profile.userData)
+    
     if avatarView.miniImageView.image != nil {
       avatarView.hideInitials()
     }
@@ -170,7 +167,10 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
+    guard let presentationAssembly = self.presentationAssembly else { return }
+    let conversationVC = presentationAssembly.conversationViewController()
+    
+    //    let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
     let channel = fetchedResultsController.object(at: indexPath)
     conversationVC.title = channel.name
     conversationVC.channel = channel
@@ -182,27 +182,29 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   
   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-      .delete
+    .delete
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      if editingStyle == .delete {
-        let channel = fetchedResultsController.object(at: indexPath)
-        firebaseManager.deleteChannel(channel: channel)
-      }
+    if editingStyle == .delete {
+      let channel = fetchedResultsController.object(at: indexPath)
+      guard let model = self.model else { return }
+      model.deleteChannel(channel: channel)
+      //firebaseManager.deleteChannel(channel: channel)
+    }
   }
-
+  
 }
 
 extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.beginUpdates()
   }
-
+  
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     tableView.endUpdates()
   }
-
+  
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                   didChange anObject: Any,
                   at indexPath: IndexPath?,
@@ -231,10 +233,10 @@ extension ConversationsListViewController {
     
     let createAction = UIAlertAction(title: "Create", style: .default) {_ in
       let text = alertController.textFields?.first?.text
-      guard let channelName = text else { return }
-      FirebaseService.shared.insertChannel(name: channelName)
-      
+      guard let channelName = text, let model = self.model else { return }
+      model.insertChannel(name: channelName)
     }
+    
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     alertController.addTextField { (textField) in
       textField.placeholder = "Add new channel"

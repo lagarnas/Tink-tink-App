@@ -37,6 +37,7 @@
 		883F76E825595E2700959C50 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F76E725595E2700959C50 /* ServiceAssembly.swift */; };
 		883F76EE255963E200959C50 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F76ED255963E200959C50 /* PresentationAssembly.swift */; };
 		883F76F4255A728200959C50 /* ProfileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F76F3255A728200959C50 /* ProfileStorage.swift */; };
+		883F76F8255AB09800959C50 /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F76F7255AB09800959C50 /* FirebaseStorage.swift */; };
 		8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848400B25210CE00083B204 /* ConversationsListViewController.swift */; };
 		8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853590225245D2A00469AD6 /* OutgoingMessageTableViewCell.swift */; };
 		8853590525245D2A00469AD6 /* OutgoingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8853590325245D2A00469AD6 /* OutgoingMessageTableViewCell.xib */; };
@@ -57,7 +58,7 @@
 		889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC1F6252317D500A1812F /* Date + Extension.swift */; };
 		889CC1FC2523288D00A1812F /* IncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC1FA2523288D00A1812F /* IncomingMessageTableViewCell.swift */; };
 		889CC1FD2523288D00A1812F /* IncomingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */; };
-		889CC201252328D500A1812F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* Message.swift */; };
+		889CC201252328D500A1812F /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* ConversationModel.swift */; };
 		88A152BB25348AF4001E2480 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152BA25348AF4001E2480 /* ProfileModel.swift */; };
 		88BCF75F251C702600CA81A7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* Logger.swift */; };
 /* End PBXBuildFile section */
@@ -96,6 +97,7 @@
 		883F76E725595E2700959C50 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		883F76ED255963E200959C50 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		883F76F3255A728200959C50 /* ProfileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStorage.swift; sourceTree = "<group>"; };
+		883F76F7255AB09800959C50 /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
 		8848400B25210CE00083B204 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		8853590225245D2A00469AD6 /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		8853590325245D2A00469AD6 /* OutgoingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutgoingMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -116,7 +118,7 @@
 		889CC1F6252317D500A1812F /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		889CC1FA2523288D00A1812F /* IncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageTableViewCell.xib; sourceTree = "<group>"; };
-		889CC200252328D500A1812F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		889CC200252328D500A1812F /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		88A152BA25348AF4001E2480 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.debug.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.debug.xcconfig"; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		883F76DD255958E300959C50 /* FirebaseStorage */ = {
 			isa = PBXGroup;
 			children = (
+				883F76F7255AB09800959C50 /* FirebaseStorage.swift */,
 			);
 			path = FirebaseStorage;
 			sourceTree = "<group>";
@@ -395,7 +398,7 @@
 		889CC1DF252230A500A1812F /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
-				889CC200252328D500A1812F /* Message.swift */,
+				889CC200252328D500A1812F /* ConversationModel.swift */,
 				889CC1F92523285800A1812F /* Cells */,
 				889CC1E0252230BE00A1812F /* ConversationViewController.swift */,
 				889CC1E4252230E900A1812F /* ConversationViewController.storyboard */,
@@ -590,7 +593,7 @@
 				88875A8F2542BCA7004513EE /* CoreDataStorage.swift in Sources */,
 				883F76BD25594C1100959C50 /* ThemeService.swift in Sources */,
 				889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */,
-				889CC201252328D500A1812F /* Message.swift in Sources */,
+				889CC201252328D500A1812F /* ConversationModel.swift in Sources */,
 				88875A9825432380004513EE /* ObjectsExtensions.swift in Sources */,
 				883F76E325595D7900959C50 /* CoreAssembly.swift in Sources */,
 				88BCF75F251C702600CA81A7 /* Logger.swift in Sources */,
@@ -601,6 +604,7 @@
 				883E54CA252782B300315DAD /* ThemesViewController.swift in Sources */,
 				8853590A252475D800469AD6 /* AvatarView.swift in Sources */,
 				883F76EE255963E200959C50 /* PresentationAssembly.swift in Sources */,
+				883F76F8255AB09800959C50 /* FirebaseStorage.swift in Sources */,
 				883F76D7255956F400959C50 /* RootAssembly.swift in Sources */,
 				883E54EA252B6E1400315DAD /* Themable.swift in Sources */,
 				883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */,

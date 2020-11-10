@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+protocol IThemeService {
+
+}
+
+class ThemeService: IThemeService {
+}

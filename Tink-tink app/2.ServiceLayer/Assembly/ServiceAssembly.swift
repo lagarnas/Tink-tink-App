@@ -12,6 +12,7 @@ protocol IServiceAssembly {
   var coreDataService: ICoreDataService { get }
   var operationSaveService: IProfileService { get }
   var gcdSaveService: IProfileService { get }
+  var firebaseService: IFirebaseService { get }
 }
 
 class ServiceAssembly: IServiceAssembly {
@@ -23,4 +24,5 @@ class ServiceAssembly: IServiceAssembly {
   lazy var coreDataService: ICoreDataService = CoreDataService(coreDataStorage: self.coreAssembly.coreDataStorage)
   lazy var operationSaveService: IProfileService = OperationSaveService(profileStorage: self.coreAssembly.profileStorage)
   lazy var gcdSaveService: IProfileService = GCDSaveService(profileStorage: self.coreAssembly.profileStorage)
+  lazy var firebaseService: IFirebaseService = FirebaseService(firebaseStorage: self.coreAssembly.firebaseStorage)
 }

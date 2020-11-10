@@ -13,6 +13,7 @@ protocol IPresentationAssembly {
   
   func entryPoint() -> UINavigationController
   func profileViewController() -> ProfileViewController
+  func conversationViewController() -> ConversationViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -36,7 +37,24 @@ class PresentationAssembly: IPresentationAssembly {
   }
   
   private func conversationsListModel() -> IConversationsListModel {
-    return ConversationsListModel(coreDataService: self.serviceAssembly.coreDataService, profileSaveService: self.serviceAssembly.gcdSaveService)
+    return ConversationsListModel(coreDataService: self.serviceAssembly.coreDataService,
+                                  profileSaveService: self.serviceAssembly.gcdSaveService,
+                                  firebaseService: self.serviceAssembly.firebaseService)
+  }
+  
+  // MARK: - ConversationController
+  func conversationViewController() -> ConversationViewController {
+    let model = conversationModel()
+    let conversationVC = ConversationViewController.loadFromStoryboard() as ConversationViewController
+    conversationVC.model = model
+    conversationVC.presentationAssembly = self
+    
+    return conversationVC
+  }
+  
+  private func conversationModel() -> IConversationModel {
+    return ConversationModel(coreDataService: self.serviceAssembly.coreDataService,
+                             firebaseService: self.serviceAssembly.firebaseService)
   }
   
   // MARK: - ProfileViewController
@@ -56,7 +74,7 @@ class PresentationAssembly: IPresentationAssembly {
     profileVC.presentationAssembly = self
     return profileVC
   }
-    
+  
   private func profileModel(savingType: ProfileSavingType) -> IProfileModel {
     switch savingType {
     case .operation:
@@ -65,5 +83,4 @@ class PresentationAssembly: IPresentationAssembly {
       return ProfileModel(profileService: self.serviceAssembly.gcdSaveService)
     }
   }
-
 }

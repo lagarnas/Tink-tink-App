@@ -14,11 +14,10 @@ protocol IProfileStorage {
 }
 
 class ProfileStorage: IProfileStorage {
-
-  let fileManager = FileManager.default
+  
+  private let fileManager = FileManager.default
   
   func retriveExistingFiles(completion: @escaping (Result<Profile, Error>) -> Void) {
-    
     var profile = Profile(userName: "", userBio: "", userData: Data())
     
     do {
@@ -39,45 +38,39 @@ class ProfileStorage: IProfileStorage {
     } catch let error {
       completion(.failure(error))
     }
-
   }
   
   func writeFiles(profile: Profile, completion: @escaping (Result<Profile, Error>) -> Void) {
-    
     do {
       if profile.nameChanged {
         let nameURL = self.fileURL(.userName)
         try profile.userName.write(to: nameURL, atomically: true, encoding: .utf8)
-        
       }
       
       if profile.bioChanged {
         let bioURL = self.fileURL(.userBio)
         try profile.userBio.write(to: bioURL, atomically: true, encoding: .utf8)
-        
       }
       
       if profile.photoChanged {
         let photoURL = self.fileURL(.userPhoto)
         try profile.userData.write(to: photoURL)
-        
       }
+      
       completion(.success(profile))
       
     } catch let error {
       completion(.failure(error))
     }
-    
-
   }
   
-  func fileURL(_ fileName: FileName) -> URL {
+  private func fileURL(_ fileName: FileName) -> URL {
     var documentDirURL = URL(string: "")
     do {
       documentDirURL = try fileManager.url(for: .documentDirectory,
-                                                in: .userDomainMask,
-                                                appropriateFor: nil,
-                                                create: true)
+                                           in: .userDomainMask,
+                                           appropriateFor: nil,
+                                           create: true)
     } catch  { print(error.localizedDescription) }
     let fileURL = documentDirURL!.appendingPathComponent(fileName.rawValue)
     return fileURL

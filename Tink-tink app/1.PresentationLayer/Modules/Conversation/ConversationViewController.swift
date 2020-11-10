@@ -20,6 +20,10 @@ final class ConversationViewController: UIViewController {
   private var keyboardHeight: CGFloat = 0
   var channel: Channel_db!
   
+  //DEPENDENCY
+  var presentationAssembly: IPresentationAssembly?
+  var model: IConversationModel?
+  
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Message_db>!
   
@@ -34,35 +38,36 @@ final class ConversationViewController: UIViewController {
     self.messageTextField.delegate = self
     setupTableView()
     updateTheme()
-   // loadMessages()
+    loadMessages()
   }
   
   // MARK: - Private methods
-//  private func loadMessages() {
-//    FirebaseService.shared.getMessages(channel: channel)
-//    fetchedResultsController = CoreDataService.shared.setupMessagesFetchedResultsController(channel: channel)
-//    try? self.fetchedResultsController.performFetch()
-//    self.fetchedResultsController.delegate = self
-//     //   self.scrollToBottom()
-//      
-//  }
+  private func loadMessages() {
+    guard let model = self.model else { return }
+    model.getMessages(channel: channel)
+    fetchedResultsController = model.fetchedResultController(channel: channel)
+    try? self.fetchedResultsController.performFetch()
+    self.fetchedResultsController.delegate = self
+    // self.scrollToBottom()
+    
+  }
   
-//  private func scrollToBottom(){
-//    let indexPath = IndexPath(item: self.fetchedResultsController.fetchedObjects?.count ?? 1 - 1, section: 0)
-//    if indexPath != [0, -1] {
-//      self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
-//    }
-//  }
-
+  private func scrollToBottom(){
+    let indexPath = IndexPath(item: self.fetchedResultsController.fetchedObjects?.count ?? 1 - 1, section: 0)
+    if indexPath != [0, -1] {
+      self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
+    }
+  }
+  
   // MARK: - @IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
     self.messageTextField.endEditing(true)
     guard let channel = self.channel else { return }
     guard let message = messageTextField.text else { return }
     guard message != "" else { return }
-    guard let identifier = channel.identifier else { return }
-    FirebaseService.shared.insertMessage(channelId: identifier, message: message)
-      self.messageTextField.text = ""
+    guard let channelId = channel.identifier, let model = self.model else { return }
+    model.insertMessage(channelId: channelId, message: message)
+    self.messageTextField.text = ""
   }
 }
 
@@ -91,7 +96,6 @@ extension ConversationViewController {
        let duration: TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
       self.keyboardHeight = keyboardRectangle.height
       UIView.animate(withDuration: duration, animations: {
-        //временное решение
         self.dockViewHeightConstraint.constant = self.keyboardHeight + 25 + 34
         self.view.layoutIfNeeded()
       }, completion: nil)
@@ -102,14 +106,13 @@ extension ConversationViewController {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension ConversationViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return messages.count
     guard let sections = fetchedResultsController?.sections else { return 0 }
     return sections[section].numberOfObjects
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let chatMessage = fetchedResultsController.object(at: indexPath)
-    if chatMessage.senderId == FirebaseService.shared.senderId {
+    if chatMessage.senderId == model?.senderId() {
       let cell = tableView.dequeueCell(OutgoingMessageTableViewCell.self, for: indexPath)
       cell.configure(model: chatMessage)
       return cell
