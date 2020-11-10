@@ -12,23 +12,24 @@ import Firebase
 
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate {
+  
   var window: UIWindow?
-
+  
+  private let rootAssembly = RootAssembly()
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
     
-    CoreDataStack.shared.didUpdateDataBase = { stack in
-      stack.printDatabaseStatistics()
-    }
-    
-    CoreDataStack.shared.enableObservers()
+//    CoreDataStorage.shared.didUpdateDataBase = { stack in
+//      stack.printDatabaseStatistics()
+//    }
+//    
+//    CoreDataStorage.shared.enableObservers()
     
     self.window = UIWindow(frame: UIScreen.main.bounds)
-    let storyboard = UIStoryboard(name: "ConversationsListViewController", bundle: nil)
-    let rootViewController = storyboard.instantiateViewController(withIdentifier: "navController")
-    
-    self.window?.rootViewController = rootViewController
+
+    self.window?.rootViewController = rootAssembly.presentationAssembly.entryPoint()
     self.window?.makeKeyAndVisible()
     
     os_log("Application moved from <Not Running> to <Inactive>: didFinishLaunchingWithOptions", log: OSLog.appCycle, type: .info)

@@ -14,7 +14,7 @@ final class FirebaseService {
   private init() {}
   
   private let database = Firestore.firestore()
-  private lazy var coreDataManager = CoreDataService.shared
+  //private lazy var coreDataManager = CoreDataService.shared
   private lazy var referanceChannels = database.collection("channels")
   let senderId = UIDevice.current.identifierForVendor?.uuidString
   
@@ -37,19 +37,19 @@ final class FirebaseService {
       }
     }
     
-    coreDataManager.deleteChannel(channel)
+   // coreDataManager.deleteChannel(channel)
   }
   
   func getChannels() {
     
     referanceChannels.addSnapshotListener { snapshot, _ in
-      var channels = [Channel]()
+      var channels = [ChannelCellDisplayModel]()
       _ = snapshot?.documents.compactMap {
         guard let name         = $0["name"] as? String,
               let lastActivity = $0["lastActivity"] as? Timestamp,
               let lastMessage  = $0["lastMessage"] as? String
         else { return }
-        let channel = Channel(identifier: $0.documentID,
+        let channel = ChannelCellDisplayModel(identifier: $0.documentID,
                               name: name,
                               lastMessage: lastMessage,
                               lastActivity: Date(timeIntervalSince1970: TimeInterval(lastActivity.seconds)))
@@ -57,7 +57,7 @@ final class FirebaseService {
         channels.append(channel)
       }
       print(channels.count)
-      self.coreDataManager.saveChannels(channels)
+     // self.coreDataManager.saveChannels(channels)
       channels = []
     }
   }
@@ -90,7 +90,7 @@ final class FirebaseService {
                                      created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
         
       }
-      self.coreDataManager.saveMessages(channel, self.messages)
+   //   self.coreDataManager.saveMessages(channel, self.messages)
     }
   }
 }

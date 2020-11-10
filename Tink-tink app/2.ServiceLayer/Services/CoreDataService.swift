@@ -9,18 +9,45 @@
 import Foundation
 import CoreData
 
-class CoreDataService {
+protocol ICoreDataService {
+  func setupChannelsFetchedResultsController() -> NSFetchedResultsController<Channel_db>
+  func setupMessagesFetchedResultsController(channel: Channel_db) -> NSFetchedResultsController<Message_db>
   
-  static let shared = CoreDataService()
-  private init() {}
+}
+
+class CoreDataService: ICoreDataService {
+
   
-  let coreDataStack = CoreDataStack.shared
+  let coreDataStorage: ICoreDataStorage
   
-  func saveChannels(_ channels: [Channel]) {
+  init(coreDataStorage: ICoreDataStorage) {
+    self.coreDataStorage = coreDataStorage
+  }
   
-    coreDataStack.performSave { context in
+  func setupChannelsFetchedResultsController() -> NSFetchedResultsController<Channel_db> {
+    let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
+    let sortDescriptor = NSSortDescriptor(keyPath: \Channel_db.lastActivity, ascending: false)
+    request.sortDescriptors = [sortDescriptor]
+    let frc = NSFetchedResultsController(fetchRequest: request,
+                                         managedObjectContext: coreDataStorage.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+    return frc
+  }
+  
+  func setupMessagesFetchedResultsController(channel: Channel_db) -> NSFetchedResultsController<Message_db> {
+    let request: NSFetchRequest<Message_db> = Message_db.fetchRequest()
+    request.predicate = NSPredicate(format: "channel == %@", channel)
+    let sortDescriptor = NSSortDescriptor(keyPath: \Message_db.created, ascending: true)
+    request.sortDescriptors = [sortDescriptor]
+    let frc = NSFetchedResultsController(fetchRequest: request,
+                                         managedObjectContext: coreDataStorage.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+    return frc
+  }
+  
+  func saveChannels(_ channels: [ChannelCellDisplayModel]) {
+  
+    coreDataStorage.performSave { context in
       let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
-      let savedChannels = try? coreDataStack.mainContext.fetch(request)
+      let savedChannels = try? coreDataStorage.mainContext.fetch(request)
       channels.forEach { channel in
         
         let savedChannel = savedChannels?.filter {
@@ -44,13 +71,13 @@ class CoreDataService {
   
   func deleteChannel(_ channelObject: NSManagedObject) {
     
-    coreDataStack.mainContext.delete(channelObject)
-    coreDataStack.performSave(in: coreDataStack.mainContext)
+    coreDataStorage.mainContext.delete(channelObject)
+    coreDataStorage.performSave(in: coreDataStorage.mainContext)
   }
   
   func saveMessages(_ channel: Channel_db, _ messages: [Message]) {
     
-    coreDataStack.performSave { context in
+    coreDataStorage.performSave { context in
 
       let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
       guard let identifier = channel.identifier else { return }
@@ -79,5 +106,3 @@ class CoreDataService {
     }
   }
 }
-
-

@@ -34,24 +34,18 @@ final class ConversationViewController: UIViewController {
     self.messageTextField.delegate = self
     setupTableView()
     updateTheme()
-    loadMessages()
+   // loadMessages()
   }
   
   // MARK: - Private methods
-  private func loadMessages() {
-    FirebaseService.shared.getMessages(channel: channel)
-    let request: NSFetchRequest<Message_db> = Message_db.fetchRequest()
-    request.predicate = NSPredicate(format: "channel == %@", channel)
-    let sortDescriptor = NSSortDescriptor(keyPath: \Message_db.created, ascending: true)
-    request.sortDescriptors = [sortDescriptor]
-    fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                          managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
-    try? self.fetchedResultsController.performFetch()
-    self.fetchedResultsController.delegate = self
-        //self.tableView.reloadData()
-     //   self.scrollToBottom()
-      
-  }
+//  private func loadMessages() {
+//    FirebaseService.shared.getMessages(channel: channel)
+//    fetchedResultsController = CoreDataService.shared.setupMessagesFetchedResultsController(channel: channel)
+//    try? self.fetchedResultsController.performFetch()
+//    self.fetchedResultsController.delegate = self
+//     //   self.scrollToBottom()
+//      
+//  }
   
 //  private func scrollToBottom(){
 //    let indexPath = IndexPath(item: self.fetchedResultsController.fetchedObjects?.count ?? 1 - 1, section: 0)

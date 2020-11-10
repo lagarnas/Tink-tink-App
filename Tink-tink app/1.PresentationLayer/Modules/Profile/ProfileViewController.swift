@@ -9,6 +9,11 @@
 import UIKit
 import os.log
 
+enum ProfileSavingType {
+  case operation
+  case gcd
+}
+
 final class ProfileViewController: UIViewController {
   
   // MARK: - @IBOutlets
@@ -33,9 +38,13 @@ final class ProfileViewController: UIViewController {
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   var GCDButtonIsClick = false
+
+  var savingType: ProfileSavingType = .gcd
   
-  //let dataManager: Storeable = OperationDataManager.shared
-  let dataManager: Storeable = GCDDataManager.shared
+  //DEPENDENCY
+  var presentationAssembly: IPresentationAssembly?
+  var operationModel: IProfileModel?
+  var model: IProfileModel?
   
   var profile: Profile?
   
@@ -45,9 +54,12 @@ final class ProfileViewController: UIViewController {
     profile = Profile(userName: nameTextField.text ?? "", userBio: bioTextView.text, userData: avatarView.imageView.image?.pngData() ?? Data())
     
     self.configure()
+    guard let model = self.model
+    else { return }
     
-    dataManager.retrive { [weak self] result in
-      guard let self = self else { return }
+    model.retriveProfile { [weak self] result in
+      guard let self = self
+      else { return }
       switch result {
       case .success(let profile):
         self.nameTextField.text = profile.userName
@@ -57,6 +69,7 @@ final class ProfileViewController: UIViewController {
       case .failure(let error):
         print(error.localizedDescription)
       }
+      
     }
     
     os_log("%@", log: .viewCycle, type: .info, #function)
@@ -111,8 +124,10 @@ final class ProfileViewController: UIViewController {
   @IBAction func operationButtonTapped(_ sender: UIButton) {
     unEnabledButtons()
     activityIndicator.startAnimating()
-    guard let profile = self.profile else { return }
-    OperationSaveService.shared.save(profile: profile) { [weak self] result in
+    guard let profile = self.profile,
+          let operationModel = self.operationModel
+    else { return }
+    operationModel.save(profile: profile) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success:
@@ -120,6 +135,7 @@ final class ProfileViewController: UIViewController {
       case .failure:
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
       }
+      
     }
   }
   
@@ -129,9 +145,10 @@ final class ProfileViewController: UIViewController {
     activityIndicator.startAnimating()
     unEnabledButtons()
     
-    guard let profile = self.profile else { return }
-    
-    GCDDataManager.shared.save(profile: profile) { [weak self] result in
+    guard let profile = self.profile,
+          let model = self.model
+    else { return }
+    model.save(profile: profile) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success:
@@ -220,21 +237,20 @@ extension ProfileViewController {
   }
 }
 
-
 extension ProfileViewController {
   
   func alert(title: String, message: String, style: UIAlertController.Style) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
-
+    
     let action = UIAlertAction(title: "OK", style: .default)
-
+    
     alertController.addAction(action)
-
+    
     self.present(alertController, animated: true, completion: nil)
   }
   
   func alertError(title: String, message: String, style: UIAlertController.Style) {
-
+    
     let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
     
     let actionOK = UIAlertAction(title: "OK", style: .default) {_ in
@@ -251,7 +267,7 @@ extension ProfileViewController {
     }
     alertController.addAction(actionOK)
     alertController.addAction(actionRepeat)
-
+    
     self.present(alertController, animated: true, completion: nil)
   }
 }

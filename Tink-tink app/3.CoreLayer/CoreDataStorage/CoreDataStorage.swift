@@ -10,12 +10,15 @@ import Foundation
 import CoreData
 import os.log
 
-final class CoreDataStack {
+protocol ICoreDataStorage {
+  var mainContext: NSManagedObjectContext { get }
+  func performSave(_ block: (NSManagedObjectContext) -> Void)
+  func performSave(in context: NSManagedObjectContext)
+}
+
+final class CoreDataStorage: ICoreDataStorage {
   
-  static let shared = CoreDataStack()
-  private init() {}
-  
-  var didUpdateDataBase: ((CoreDataStack) -> Void)?
+  var didUpdateDataBase: ((CoreDataStorage) -> Void)?
   // MARK: - storeUrl
   private var storeUrl: URL = {
     guard let documentsUrl = FileManager.default.urls(for: .documentDirectory,
@@ -29,7 +32,6 @@ final class CoreDataStack {
   private let dataModelExtension = "momd"
   
   // MARK: - init stack
-  
   //Load our scheme
   private(set) lazy var managedObjectModel: NSManagedObjectModel = {
     guard let modelURL = Bundle.main.url(forResource: self.dataModelName,
@@ -45,8 +47,6 @@ final class CoreDataStack {
   private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
     do {
-      //конфигурирует store
-      //желательно сделать отдельную очередь для конфигугрирования  persistentStore
       try coordinator.addPersistentStore(ofType: NSSQLiteStoreType,
                                          configurationName: nil,
                                          at: self.storeUrl,
@@ -86,7 +86,6 @@ final class CoreDataStack {
   }
   
   // MARK: - Save Context
-   
    func performSave(_ block: (NSManagedObjectContext) -> Void) {
        let context = saveContext()
        context.performAndWait {

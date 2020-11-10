@@ -18,10 +18,12 @@ final class ConversationsListViewController: UIViewController {
   @IBOutlet private weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
-  // MARK: -  GCD manager
-  let dataManager: Storeable = GCDDataManager.shared
   // MARK: - Firebase manager
   private let firebaseManager = FirebaseService.shared
+  
+  //DEPENDENCY
+  var presentationAssembly: IPresentationAssembly?
+  var model: IConversationsListModel?
   
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Channel_db>!
@@ -43,11 +45,8 @@ final class ConversationsListViewController: UIViewController {
   // MARK: - Private methods
   private func loadChannels() {
     firebaseManager.getChannels()
-        let request: NSFetchRequest<Channel_db> = Channel_db.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(keyPath: \Channel_db.lastActivity, ascending: false)
-        request.sortDescriptors = [sortDescriptor]
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                             managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+
+    fetchedResultsController = model?.fetchedResultController()
           try? self.fetchedResultsController.performFetch()
           self.fetchedResultsController.delegate = self
   }
@@ -69,8 +68,6 @@ final class ConversationsListViewController: UIViewController {
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
-    // MARK: Delegate
-    // themesVC.delegate = self
     
     // MARK: Closure
     themesVC.didChangeTheme = { [weak self] in
@@ -83,14 +80,6 @@ final class ConversationsListViewController: UIViewController {
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
-
-// MARK: ThemesPickerDelegate
-//extension ConversationsListViewController: ThemesPickerDelegate {
-//  func didChangeTheme(_ themesViewController: ThemesViewController) {
-//    self.tableView.backgroundColor = ThemeHelper.shared.current.backgroundAppColor
-//  }
-//
-//}
 
 // MARK: - Functions
 extension ConversationsListViewController {
@@ -107,7 +96,8 @@ extension ConversationsListViewController {
   }
   
   private func openProfileVC() {
-    let profileVC: ProfileViewController = ProfileViewController.loadFromStoryboard()
+    guard let presentationAssembly = self.presentationAssembly else { return }
+    let profileVC = presentationAssembly.profileViewController()
     self.present(profileVC, animated: true)
   }
   
@@ -127,7 +117,8 @@ extension ConversationsListViewController {
   }
   
   private func setupMiniature() {
-    dataManager.retrive { [weak self] result in
+    guard let model = self.model else { return }
+    model.retriveProfile { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success(let profile):
@@ -135,7 +126,9 @@ extension ConversationsListViewController {
       case .failure(let error):
         print(error.localizedDescription)
       }
+      
     }
+
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
     avatarView.isUserInteractionEnabled = true
     avatarView.addGestureRecognizer(tapGestureRecognizer)
