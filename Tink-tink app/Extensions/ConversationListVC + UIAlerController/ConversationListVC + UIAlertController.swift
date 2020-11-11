@@ -16,7 +16,7 @@ extension ConversationsListViewController {
     let createAction = UIAlertAction(title: "Create", style: .default) {_ in
       let text = alertController.textFields?.first?.text
       guard let channelName = text else { return }
-      DatabaseManager.shared.insertChannel(name: channelName)
+      FirebaseManager.shared.insertChannel(name: channelName)
       
     }
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
