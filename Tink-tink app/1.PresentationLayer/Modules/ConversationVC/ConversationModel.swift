@@ -24,10 +24,12 @@ protocol IConversationModel {
 }
 
 class ConversationModel: IConversationModel {
+
   let coreDataService: ICoreDataService
   let firebaseService: IFirebaseService
   
-  init(coreDataService: ICoreDataService, firebaseService: IFirebaseService ) {
+  init(coreDataService: ICoreDataService,
+       firebaseService: IFirebaseService) {
     self.coreDataService = coreDataService
     self.firebaseService = firebaseService
   }

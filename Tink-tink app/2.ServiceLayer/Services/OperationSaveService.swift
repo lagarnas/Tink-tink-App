@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum FileName: String {
-  case userName  = "userName.txt"
-  case userBio   = "userBio.txt"
-  case userPhoto = "photo.png"
-  case userTheme = "theme.txt"
-}
 protocol IProfileService {
   func save(profile: Profile, completion: @escaping (Result <Profile, Error>) -> Void)
   func retrive(completion: @escaping (Result<Profile, Error>) -> Void)

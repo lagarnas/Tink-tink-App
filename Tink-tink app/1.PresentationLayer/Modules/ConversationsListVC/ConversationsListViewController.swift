@@ -8,7 +8,6 @@
 
 import UIKit
 import os.log
-import Firebase
 import CoreData
 
 final class ConversationsListViewController: UIViewController {
@@ -21,6 +20,7 @@ final class ConversationsListViewController: UIViewController {
   //DEPENDENCY
   var presentationAssembly: IPresentationAssembly?
   var model: IConversationsListModel?
+  var themeModel: IThemeModel?
   
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Channel_db>!
@@ -37,7 +37,6 @@ final class ConversationsListViewController: UIViewController {
     super.viewDidAppear(animated)
     setupMiniature()
     updateTheme()
-
   }
   
   // MARK: - Private methods
@@ -50,13 +49,13 @@ final class ConversationsListViewController: UIViewController {
   }
   
   private func updateTheme() {
-    ThemeManager.shared.applyTheme()
-    self.view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.navigationController?.navigationBar.barStyle = ThemeManager.shared.barStyle
-    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
-    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ThemeManager.shared.current.mainTextColor]
-    settingsIcon.tintColor = ThemeManager.shared.current.tintColor
+    guard let themeModel = self.themeModel else { return }
+    themeModel.applyTheme()
+    self.view.backgroundColor = themeModel.current.backgroundAppColor
+    self.tableView.backgroundColor = themeModel.current.backgroundAppColor
+    self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: themeModel.current.mainTextColor]
+    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: themeModel.current.mainTextColor]
+    settingsIcon.tintColor = themeModel.current.tintColor
   }
   
   // MARK: - @IBActions
@@ -65,13 +64,13 @@ final class ConversationsListViewController: UIViewController {
   }
   
   @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
-    let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard()
+    let themesVC = presentationAssembly?.themesViewController()
+    guard let vc = themesVC else { return }
     
-    // MARK: Closure
-    themesVC.didChangeTheme = { [weak self] in
+    vc.didChangeTheme = { [weak self] in
       self?.updateTheme()
     }
-    self.navigationController?.pushViewController(themesVC, animated: true)
+    self.navigationController?.pushViewController(vc, animated: true)
   }
   
   deinit {
@@ -123,7 +122,6 @@ extension ConversationsListViewController {
       case .failure(let error):
         print(error.localizedDescription)
       }
-      
     }
     
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
@@ -162,6 +160,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
     
     let cell = tableView.dequeueCell(ConversationTableViewCell.self, for: indexPath)
     let channel = fetchedResultsController.object(at: indexPath)
+    cell.themeModel = themeModel
     cell.configure(model: channel)
     return cell
   }
@@ -169,8 +168,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let presentationAssembly = self.presentationAssembly else { return }
     let conversationVC = presentationAssembly.conversationViewController()
-    
-    //    let conversationVC: ConversationViewController = ConversationViewController.loadFromStoryboard()
     let channel = fetchedResultsController.object(at: indexPath)
     conversationVC.title = channel.name
     conversationVC.channel = channel
@@ -190,7 +187,6 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
       let channel = fetchedResultsController.object(at: indexPath)
       guard let model = self.model else { return }
       model.deleteChannel(channel: channel)
-      //firebaseManager.deleteChannel(channel: channel)
     }
   }
   

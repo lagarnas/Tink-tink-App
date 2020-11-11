@@ -43,9 +43,9 @@ class FirebaseStorage: IFirebaseStorage {
   }
   
   func deleteChannel(identifier: String, completion: @escaping () -> Void) {
-    referanceChannels.document(identifier).delete() { err in
-      guard err == nil else {
-        print("Error removing document: \(String(describing: err))")
+    referanceChannels.document(identifier).delete() {
+      guard $0 == nil else {
+        print("Error removing document: \(String(describing: $0))")
         return }
       completion()
       print("FB: Success deleted!")

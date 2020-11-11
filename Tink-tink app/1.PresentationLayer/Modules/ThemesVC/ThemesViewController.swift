@@ -9,10 +9,6 @@
 import UIKit
 import os.log
 
-protocol ThemesPickerDelegate: class {
-  func didChangeTheme(_ themesViewController: ThemesViewController)
-}
-
 final class ThemesViewController: UIViewController {
   
   @IBOutlet private weak var classicButton: ThemeButton!
@@ -25,8 +21,8 @@ final class ThemesViewController: UIViewController {
   
   private var themeMode: ThemeMode = .classic
   
-  // MARK: Delegate
-  //  weak var delegate: ThemesPickerDelegate?
+  //DEPENDENCY
+  var model: IThemeModel?
   
   // MARK: Closure
   var didChangeTheme: (() -> Void)?
@@ -45,8 +41,6 @@ final class ThemesViewController: UIViewController {
     updateTheme()
     sender.shake()
     
-    //delegate?.didChangeTheme(self)
-    
     didChangeTheme?()
     
   }
@@ -58,8 +52,6 @@ final class ThemesViewController: UIViewController {
     updateTheme()
     sender.shake()
     
-    // delegate?.didChangeTheme(self)
-    
     didChangeTheme?()
   }
   
@@ -69,9 +61,7 @@ final class ThemesViewController: UIViewController {
     themeMode = .night
     updateTheme()
     sender.shake()
-    
-    //delegate?.didChangeTheme(self)
-    
+      
     didChangeTheme?()
   }
   
@@ -90,20 +80,18 @@ extension ThemesViewController {
   }
   
   private func updateTheme() {
-   // saveTheme()
-    ThemeManager.shared.save(themeMode: self.themeMode) {
-      self.applyTheme()
-      self.didChangeTheme?()
+    model?.save(themeMode: themeMode) {
+        self.applyTheme()
     }
-    
   }
   
   private func applyTheme() {
-    ThemeManager.shared.applyTheme()
-    view.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    classicLabel.textColor = ThemeManager.shared.current.mainTextColor
-    dayLabel.textColor = ThemeManager.shared.current.mainTextColor
-    nightLabel.textColor = ThemeManager.shared.current.mainTextColor
+    model?.applyTheme()
+    view.backgroundColor = model?.current.backgroundAppColor
+    view.backgroundColor = model?.current.backgroundAppColor
+    classicLabel.textColor = model?.current.mainTextColor
+    dayLabel.textColor = model?.current.mainTextColor
+    nightLabel.textColor = model?.current.mainTextColor
   }
   
   private func setupNavigation() {
@@ -112,8 +100,8 @@ extension ThemesViewController {
   }
   
   private func setupUI() {
-    
-    themeMode = ThemeManager.shared.currentMode
+    guard let model = model else { return }
+    themeMode = model.currentMode
     
     switch themeMode {
     case .classic:
@@ -130,7 +118,8 @@ extension ThemesViewController {
   }
   
   private func setupLabelTapRecognizer(label: UILabel) {
-    let labelTap = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
+    let labelTap = UITapGestureRecognizer(target: self,
+                                          action: #selector(labelTapped))
     label.isUserInteractionEnabled = true
     label.addGestureRecognizer(labelTap)
   }
@@ -147,11 +136,5 @@ extension ThemesViewController {
     default:
       break
     }
-  }
-
-  private func saveTheme() {
-
-  //  ThemeManager.shared.save(themeMode: self.themeMode, completion: <#() -> Void#>)
-    
   }
 }

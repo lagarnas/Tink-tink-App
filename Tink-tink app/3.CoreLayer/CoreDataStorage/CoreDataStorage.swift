@@ -16,7 +16,12 @@ protocol ICoreDataStorage {
   func performSave(in context: NSManagedObjectContext)
 }
 
-final class CoreDataStorage: ICoreDataStorage {
+protocol ICoreDataStorageStatistics {
+  var didUpdateDataBase: ((CoreDataStorage) -> Void)? { get set }
+  func enableObservers()
+}
+
+final class CoreDataStorage: ICoreDataStorage, ICoreDataStorageStatistics {
   
   var didUpdateDataBase: ((CoreDataStorage) -> Void)?
   // MARK: - storeUrl

@@ -89,8 +89,11 @@ final class ThemeButton: UIButton {
     constraints += vBubbleConstraint
     let vSecondBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-22-[secondBubble]-10-|", options: .init(rawValue: 0), metrics: nil, views: views)
     constraints += vSecondBubbleConstraint
-    // swiftlint:disable:next line_length
-    let hBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-20-[bubble]-[secondBubble(==bubble)]-20-|", options: .init(rawValue: 0), metrics: nil, views: views)
+    let hBubbleConstraint = NSLayoutConstraint.constraints(withVisualFormat:
+                                                            "H:|-20-[bubble]-[secondBubble(==bubble)]-20-|",
+                                                           options: .init(rawValue: 0),
+                                                           metrics: nil,
+                                                           views: views)
     constraints += hBubbleConstraint
     NSLayoutConstraint.activate(constraints)
   }
@@ -111,7 +114,5 @@ final class ThemeButton: UIButton {
     shake.toValue = toValue
     
     layer.add(shake, forKey: "position")
-    
   }
-  
 }

@@ -27,11 +27,15 @@ protocol IConversationsListModel {
 }
 
 class ConversationsListModel: IConversationsListModel {
+  
   let coreDataService: ICoreDataService
   let profileSaveService: IProfileService
   let firebaseService: IFirebaseService
   
-  init(coreDataService: ICoreDataService, profileSaveService: IProfileService, firebaseService: IFirebaseService) {
+  init(coreDataService: ICoreDataService,
+       profileSaveService: IProfileService,
+       firebaseService: IFirebaseService) {
+    
     self.coreDataService = coreDataService
     self.profileSaveService = profileSaveService
     self.firebaseService = firebaseService

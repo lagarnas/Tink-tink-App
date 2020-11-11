@@ -15,17 +15,16 @@ import Firebase
   
   var window: UIWindow?
   
+  var coreDataStorage: ICoreDataStorageStatistics?
+  
   private let rootAssembly = RootAssembly()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
     
-//    CoreDataStorage.shared.didUpdateDataBase = { stack in
-//      stack.printDatabaseStatistics()
-//    }
-//    
-//    CoreDataStorage.shared.enableObservers()
+    coreDataStorage?.didUpdateDataBase = { $0.printDatabaseStatistics() }
+    coreDataStorage?.enableObservers()
     
     self.window = UIWindow(frame: UIScreen.main.bounds)
 

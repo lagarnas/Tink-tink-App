@@ -23,9 +23,11 @@ struct Profile {
 protocol IProfileModel {
   func save(profile: Profile, completion: @escaping (Result<Profile, Error>) -> Void)
   func retriveProfile(completion: @escaping (Result<Profile, Error>) -> Void)
+  
 }
 
 class ProfileModel: IProfileModel {
+  
   let profileService: IProfileService
   
   init(profileService: IProfileService) {
@@ -39,5 +41,4 @@ class ProfileModel: IProfileModel {
   func retriveProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
     profileService.retrive(completion: completion)
   }
-  
 }

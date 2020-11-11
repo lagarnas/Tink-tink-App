@@ -14,6 +14,7 @@ protocol IPresentationAssembly {
   func entryPoint() -> UINavigationController
   func profileViewController() -> ProfileViewController
   func conversationViewController() -> ConversationViewController
+  func themesViewController() -> ThemesViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -32,6 +33,7 @@ class PresentationAssembly: IPresentationAssembly {
     
     let conversationsListVC = rootController?.viewControllers.first as? ConversationsListViewController
     conversationsListVC?.model = model
+    conversationsListVC?.themeModel = themeModel()
     conversationsListVC?.presentationAssembly = self
     return rootController ?? UINavigationController()
   }
@@ -47,7 +49,7 @@ class PresentationAssembly: IPresentationAssembly {
     let model = conversationModel()
     let conversationVC = ConversationViewController.loadFromStoryboard() as ConversationViewController
     conversationVC.model = model
-    conversationVC.presentationAssembly = self
+    conversationVC.themeModel = themeModel()
     
     return conversationVC
   }
@@ -71,7 +73,7 @@ class PresentationAssembly: IPresentationAssembly {
       profileVC.model = model
     }
     profileVC.operationModel = profileModel(savingType: .operation)
-    profileVC.presentationAssembly = self
+    profileVC.themeModel = themeModel()
     return profileVC
   }
   
@@ -82,5 +84,16 @@ class PresentationAssembly: IPresentationAssembly {
     case .gcd:
       return ProfileModel(profileService: self.serviceAssembly.gcdSaveService)
     }
+  }
+  
+  // MARK: - ThemesViewController
+  func themesViewController() -> ThemesViewController {
+    let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard() as ThemesViewController
+    themesVC.model = themeModel()
+    return themesVC
+  }
+  
+  private func themeModel() -> IThemeModel {
+    return ThemeModel(themeService: self.serviceAssembly.themeService)
   }
 }

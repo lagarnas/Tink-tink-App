@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import UIKit
 
 protocol IFirebaseService {
   var senderId: String? { get set }

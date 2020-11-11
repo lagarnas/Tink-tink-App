@@ -21,8 +21,8 @@ final class ConversationViewController: UIViewController {
   var channel: Channel_db!
   
   //DEPENDENCY
-  var presentationAssembly: IPresentationAssembly?
   var model: IConversationModel?
+  var themeModel: IThemeModel?
   
   // MARK: - FetchedResultsController
   private var fetchedResultsController: NSFetchedResultsController<Message_db>!
@@ -114,11 +114,13 @@ extension ConversationViewController: UITableViewDataSource, UITableViewDelegate
     let chatMessage = fetchedResultsController.object(at: indexPath)
     if chatMessage.senderId == model?.senderId() {
       let cell = tableView.dequeueCell(OutgoingMessageTableViewCell.self, for: indexPath)
+      cell.themeModel = themeModel
       cell.configure(model: chatMessage)
       return cell
       
     } else {
       let cell = tableView.dequeueCell(IncomingMessageTableViewCell.self, for: indexPath)
+      cell.themeModel = themeModel
       cell.configure(model: chatMessage)
       return cell
     }
@@ -158,13 +160,15 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
 
 extension ConversationViewController {
   func updateTheme() {
-    ThemeManager.shared.applyTheme()
-    
-    self.tableView.backgroundColor = ThemeManager.shared.current.backgroundChatColor
-    self.navigationController?.navigationBar.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.dockView.backgroundColor = ThemeManager.shared.current.backgroundAppColor
-    self.messageTextField.backgroundColor = ThemeManager.shared.current.incomingMessageColor
-    self.messageTextField.textColor = ThemeManager.shared.current.mainTextColor
+    guard let themeModel = self.themeModel else { return }
+    themeModel.applyTheme()
+//    ThemeService.shared.applyTheme()
+//    
+    self.tableView.backgroundColor = themeModel.current.backgroundChatColor
+    self.navigationController?.navigationBar.backgroundColor = themeModel.current.backgroundAppColor
+    self.dockView.backgroundColor = themeModel.current.backgroundAppColor
+    self.messageTextField.backgroundColor = themeModel.current.incomingMessageColor
+    self.messageTextField.textColor = themeModel.current.mainTextColor
   }
 }
 

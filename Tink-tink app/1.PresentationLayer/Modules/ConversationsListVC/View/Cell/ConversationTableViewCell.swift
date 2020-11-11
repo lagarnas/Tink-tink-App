@@ -22,6 +22,8 @@ final class ConversationTableViewCell: UITableViewCell {
   @IBOutlet private weak var onlineIndicatorView: UIView!
   @IBOutlet weak var forwardIcon: UIImageView!
   
+  var themeModel: IThemeModel?
+  
   override func prepareForReuse() {
     super.prepareForReuse()
     self.backgroundColor = .clear
@@ -37,11 +39,11 @@ final class ConversationTableViewCell: UITableViewCell {
   }
   
   private func updateTheme() {
-    nameLabel.textColor = ThemeManager.shared.current.mainTextColor
-    previewMessageLabel.textColor = ThemeManager.shared.current.minorTextColor
-    dateLabel.textColor = ThemeManager.shared.current.minorTextColor
-    forwardIcon.tintColor = ThemeManager.shared.current.tintColor
-    onlineIndicatorView.backgroundColor = ThemeManager.shared.current.onlineIndicator
+    nameLabel.textColor = themeModel?.current.mainTextColor
+    previewMessageLabel.textColor = themeModel?.current.minorTextColor
+    dateLabel.textColor = themeModel?.current.minorTextColor
+    forwardIcon.tintColor = themeModel?.current.tintColor
+    onlineIndicatorView.backgroundColor = themeModel?.current.onlineIndicator
   }
   
   // MARK: Functions
