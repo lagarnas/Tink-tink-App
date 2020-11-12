@@ -71,17 +71,11 @@ extension ConversationTableViewCell: ConfigurableView {
   typealias ConfigurtionModel = Channel_db
   
   func configure(model: Channel_db) {
-    
-    //onlineIndicatorView.isHidden = model.isOnline ? false : true
-//    previewMessageLabel.font = model.hasUnreadMessages && model.message != ""  ? UIFont.boldSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
-    
     previewMessageLabel.text = model.lastMessage
     previewMessageLabel.font = model.lastMessage == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)
     dateLabel.text = model.lastActivity?.getFormattingDate()
     nameLabel.text = model.name
     
     setupInitialsOfName()
-   // guard let avatar = model.avatar else { return }
-    //avatarView.miniImageView.image = UIImage(data: avatar)
   }
 }

@@ -58,7 +58,7 @@ class CoreDataService: ICoreDataService {
         }.first
         
         if savedChannel == nil {
-          Channel_db(identifier: channel.identifier,
+          _ = Channel_db(identifier: channel.identifier,
                      name: channel.name,
                      lastActivity: channel.lastActivity,
                      lastMessage: channel.lastMessage,

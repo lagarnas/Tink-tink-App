@@ -38,25 +38,37 @@ final class ProfileViewController: UIViewController {
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   var GCDButtonIsClick = false
-
   var savingType: ProfileSavingType = .gcd
   
   //DEPENDENCY
+  var profile: Profile?
   var operationModel: IProfileModel?
   var model: IProfileModel?
   var themeModel: IThemeModel?
   
-  var profile: Profile?
-  
   // MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.configure()
+
+    os_log("%@", log: .viewCycle, type: .info, #function)
+    os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
+  }
+  
+  // MARK: - Configure
+  private func configure() {
     profile = Profile(userName: nameTextField.text ?? "", userBio: bioTextView.text, userData: avatarView.imageView.image?.pngData() ?? Data())
     
-    self.configure()
-    guard let model = self.model
-    else { return }
-    
+    updateTheme()
+    addNotifications()
+    unEnabledUIElements()
+    setupInitialsOfName()
+    configUI()
+    getProfile()
+  }
+  
+  private func getProfile() {
+    guard let model = self.model else { return }
     model.retriveProfile { [weak self] result in
       guard let self = self
       else { return }
@@ -69,43 +81,7 @@ final class ProfileViewController: UIViewController {
       case .failure(let error):
         print(error.localizedDescription)
       }
-      
     }
-    
-    os_log("%@", log: .viewCycle, type: .info, #function)
-    os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
-  }
-  
-  // MARK: - Configure
-  private func configure() {
-    
-    updateTheme()
-    addNotifications()
-    unEnabledUIElements()
-    setupInitialsOfName()
-    
-    activityIndicator.stopAnimating()
-    activityIndicator.hidesWhenStopped = true
-    
-    operationButton.clipsToBounds = true
-    operationButton.layer.cornerRadius = 10
-    
-    GCDButton.clipsToBounds = true
-    GCDButton.layer.cornerRadius = 10
-    GCDButton.addTarget(self, action: #selector(GCDButtonTapped), for: .touchUpInside)
-  }
-  
-  private func enabledUIElements() {
-    setImageButton.isHidden = false
-    nameTextField.isEnabled = true
-    bioTextView.isEditable = true
-  }
-  
-  private func unEnabledUIElements() {
-    setImageButton.isHidden = true
-    nameTextField.isEnabled = false
-    bioTextView.isEditable = false
-    unEnabledButtons()
   }
   
   // MARK: - IBActions
@@ -117,7 +93,6 @@ final class ProfileViewController: UIViewController {
   
   @IBAction private func setImageButtonTapped(_ sender: UIButton) {
     openAlertAction()
-    
   }
   
   // MARK: - operationButtonTapped()
@@ -135,7 +110,6 @@ final class ProfileViewController: UIViewController {
       case .failure:
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
       }
-      
     }
   }
   
@@ -159,117 +133,12 @@ final class ProfileViewController: UIViewController {
     }
   }
   
-  private func updateUI() {
-    activityIndicator.stopAnimating()
-    alert(title: "Data saved", message: "", style: .alert)
-    setupInitialsOfName()
-    unEnabledUIElements()
-    editButton.isEnabled = true
-  }
-  
+  // MARK: - closeButtonTapped()
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
   }
-  
-  func enabledButtons() {
-    self.GCDButton.isEnabled = true
-    self.operationButton.isEnabled = true
-  }
-  
-  func unEnabledButtons() {
-    GCDButton.isEnabled = false
-    operationButton.isEnabled = false
-  }
-  
+    
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
-  }
-}
-
-// MARK: - Functions
-extension ProfileViewController {
-  
-  func hideInitials() {
-    avatarView.nameLabel.isHidden = true
-    avatarView.secondNameLabel.isHidden = true
-  }
-  
-  private func setupInitialsOfName() {
-    if avatarView.imageView.image != nil {
-      avatarView.hideInitials()
-    } else {
-      guard let tf = nameTextField.text else { return }
-      let fullName = tf
-      let fullNameArr = fullName.components(separatedBy: " ")
-      let firstName: String = fullNameArr[0]
-      let lastName: String? = fullNameArr.count > 1 ? fullNameArr[1] : nil
-      
-      let firstInitial = String(firstName.first ?? " ")
-      let secondInitial = String(lastName?.first ?? " ")
-      
-      avatarView.nameLabel.text = firstInitial
-      avatarView.secondNameLabel.text = secondInitial
-    }
-  }
-}
-
-extension ProfileViewController {
-  func updateTheme() {
-    guard let themeModel = self.themeModel else { return }
-    themeModel.applyTheme()
-//    ThemeService.shared.applyTheme()
-    view.backgroundColor = themeModel.current.backgroundAppColor
-    scrollView.backgroundColor = themeModel.current.backgroundAppColor
-    contentView.backgroundColor = themeModel.current.backgroundAppColor
-    
-    nameLabel.textColor = themeModel.current.mainTextColor
-    nameTextField.textColor = themeModel.current.mainTextColor
-    nameSeparator.backgroundColor = themeModel.current.accent
-    
-    bioLabel.textColor = themeModel.current.mainTextColor
-    bioTextView.backgroundColor = themeModel.current.backgroundAppColor
-    bioTextView.textColor = themeModel.current.mainTextColor
-    bioSeparator.backgroundColor = themeModel.current.accent
-    
-    operationButton.backgroundColor = themeModel.current.accent
-    operationButton.setTitleColor(themeModel.current.tintColor, for: .normal)
-    
-    GCDButton.backgroundColor = themeModel.current.accent
-    GCDButton.setTitleColor(themeModel.current.tintColor, for: .normal)
-  }
-}
-
-extension ProfileViewController {
-  
-  func alert(title: String, message: String, style: UIAlertController.Style) {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
-    
-    let action = UIAlertAction(title: "OK", style: .default)
-    
-    alertController.addAction(action)
-    
-    self.present(alertController, animated: true, completion: nil)
-  }
-  
-  func alertError(title: String, message: String, style: UIAlertController.Style) {
-    
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
-    
-    let actionOK = UIAlertAction(title: "OK", style: .default) {_ in
-      self.activityIndicator.stopAnimating()
-    }
-    let actionRepeat = UIAlertAction(title: "Try again", style: .default) {_ in
-      
-      if self.GCDButtonIsClick {
-        self.GCDButtonTapped()
-      } else {
-        self.operationButtonTapped(self.operationButton)
-      }
-      
-    }
-    alertController.addAction(actionOK)
-    alertController.addAction(actionRepeat)
-    
-    self.present(alertController, animated: true, completion: nil)
   }
 }

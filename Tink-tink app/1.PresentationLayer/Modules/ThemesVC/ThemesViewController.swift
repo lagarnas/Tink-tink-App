@@ -42,7 +42,6 @@ final class ThemesViewController: UIViewController {
     sender.shake()
     
     didChangeTheme?()
-    
   }
   
   @IBAction private func dayButtonTapped(_ sender: ThemeButton) {
@@ -68,7 +67,6 @@ final class ThemesViewController: UIViewController {
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
   }
-  
 }
 
 extension ThemesViewController {

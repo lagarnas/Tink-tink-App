@@ -91,27 +91,27 @@ final class CoreDataStorage: ICoreDataStorage, ICoreDataStorageStatistics {
   }
   
   // MARK: - Save Context
-   func performSave(_ block: (NSManagedObjectContext) -> Void) {
-       let context = saveContext()
-       context.performAndWait {
-           block(context)
-           if context.hasChanges {
-               performSave(in: context)
-           }
-       }
-   }
-   
-   func performSave(in context: NSManagedObjectContext) {
-       context.performAndWait {
-           do {
-            try context.obtainPermanentIDs(for: Array(context.insertedObjects))
-               try context.save()
-           } catch {
-               assertionFailure(error.localizedDescription)
-           }
-       }
-       if let parent = context.parent { performSave(in: parent) }
-   }
+  func performSave(_ block: (NSManagedObjectContext) -> Void) {
+    let context = saveContext()
+    context.performAndWait {
+      block(context)
+      if context.hasChanges {
+        performSave(in: context)
+      }
+    }
+  }
+  
+  func performSave(in context: NSManagedObjectContext) {
+    context.performAndWait {
+      do {
+        try context.obtainPermanentIDs(for: Array(context.insertedObjects))
+        try context.save()
+      } catch {
+        assertionFailure(error.localizedDescription)
+      }
+    }
+    if let parent = context.parent { performSave(in: parent) }
+  }
   
   func enableObservers() {
     let notificationCenter = NotificationCenter.default
@@ -127,31 +127,31 @@ final class CoreDataStorage: ICoreDataStorage, ICoreDataStorageStatistics {
     
     didUpdateDataBase?(self)
     
-      if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>,
-         inserts.count > 0 {
-        print("Add objects: ", inserts.count)
-      }
-      if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
-         updates.count > 0 {
-        print("Update objects: ", updates.count)
-      }
-      if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
-         deletes.count > 0 {
-        print("Delete objects: ", deletes.count)
-      }
+    if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>,
+       inserts.count > 0 {
+      print("Add objects: ", inserts.count)
+    }
+    if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>,
+       updates.count > 0 {
+      print("Update objects: ", updates.count)
+    }
+    if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>,
+       deletes.count > 0 {
+      print("Delete objects: ", deletes.count)
+    }
   }
   
   func printDatabaseStatistics() {
-      mainContext.perform {
-        do {
-          let count = try self.mainContext.count(for: Channel_db.fetchRequest())
-          print("Saved channels: ", count)
-          let countMessages = try self.mainContext.count(for: Message_db.fetchRequest())
-          print("Saved messages: ", countMessages)
-
-        } catch {
-          fatalError(error.localizedDescription)
-        }
+    mainContext.perform {
+      do {
+        let count = try self.mainContext.count(for: Channel_db.fetchRequest())
+        print("Saved channels: ", count)
+        let countMessages = try self.mainContext.count(for: Message_db.fetchRequest())
+        print("Saved messages: ", countMessages)
+        
+      } catch {
+        fatalError(error.localizedDescription)
       }
+    }
   }
 }
