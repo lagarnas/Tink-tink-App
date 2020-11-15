@@ -42,6 +42,14 @@
 		883F7738255C2E7600959C50 /* ConversationsListVC + updateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7737255C2E7600959C50 /* ConversationsListVC + updateTableView.swift */; };
 		883F773B255D2FD700959C50 /* Conversation + updateUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F773A255D2FD700959C50 /* Conversation + updateUI.swift */; };
 		883F7740255D30DC00959C50 /* ConversationVC + updateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F773F255D30DC00959C50 /* ConversationVC + updateTableView.swift */; };
+		883F7762255E5EAC00959C50 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7761255E5EAC00959C50 /* RequestsFactory.swift */; };
+		883F7766255E605400959C50 /* PixbayAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7765255E605400959C50 /* PixbayAPIRequest.swift */; };
+		883F7771255EA17100959C50 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7770255EA17100959C50 /* RequestSender.swift */; };
+		883F7774255EA33B00959C50 /* LoaderImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7773255EA33B00959C50 /* LoaderImagesService.swift */; };
+		883F7779255EA66400959C50 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7778255EA66400959C50 /* GalleryViewController.swift */; };
+		883F777D255EA69500959C50 /* GalleryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883F777C255EA69500959C50 /* GalleryViewController.storyboard */; };
+		883F7780255EAA3500959C50 /* GalleryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F777F255EAA3500959C50 /* GalleryModel.swift */; };
+		883F7783255ED4FE00959C50 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883F7782255ED4FE00959C50 /* JsonParser.swift */; };
 		8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8848400B25210CE00083B204 /* ConversationsListViewController.swift */; };
 		8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853590225245D2A00469AD6 /* OutgoingMessageTableViewCell.swift */; };
 		8853590525245D2A00469AD6 /* OutgoingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8853590325245D2A00469AD6 /* OutgoingMessageTableViewCell.xib */; };
@@ -64,6 +72,7 @@
 		889CC1FD2523288D00A1812F /* IncomingMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */; };
 		889CC201252328D500A1812F /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* ConversationModel.swift */; };
 		88A152BB25348AF4001E2480 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152BA25348AF4001E2480 /* ProfileModel.swift */; };
+		88B63830256192C6001BEA7A /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6382F256192C6001BEA7A /* NetworkDataFetcher.swift */; };
 		88BCF75F251C702600CA81A7 /* OSLog + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +115,14 @@
 		883F7737255C2E7600959C50 /* ConversationsListVC + updateTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationsListVC + updateTableView.swift"; sourceTree = "<group>"; };
 		883F773A255D2FD700959C50 /* Conversation + updateUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conversation + updateUI.swift"; sourceTree = "<group>"; };
 		883F773F255D30DC00959C50 /* ConversationVC + updateTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConversationVC + updateTableView.swift"; sourceTree = "<group>"; };
+		883F7761255E5EAC00959C50 /* RequestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
+		883F7765255E605400959C50 /* PixbayAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixbayAPIRequest.swift; sourceTree = "<group>"; };
+		883F7770255EA17100959C50 /* RequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
+		883F7773255EA33B00959C50 /* LoaderImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderImagesService.swift; sourceTree = "<group>"; };
+		883F7778255EA66400959C50 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		883F777C255EA69500959C50 /* GalleryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GalleryViewController.storyboard; sourceTree = "<group>"; };
+		883F777F255EAA3500959C50 /* GalleryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryModel.swift; sourceTree = "<group>"; };
+		883F7782255ED4FE00959C50 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		8848400B25210CE00083B204 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		8853590225245D2A00469AD6 /* OutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		8853590325245D2A00469AD6 /* OutgoingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutgoingMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -128,6 +145,7 @@
 		889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageTableViewCell.xib; sourceTree = "<group>"; };
 		889CC200252328D500A1812F /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		88A152BA25348AF4001E2480 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		88B6382F256192C6001BEA7A /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog + Extension.swift"; sourceTree = "<group>"; };
 		F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.debug.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				883F76B225594B3300959C50 /* Assembly */,
+				883F7758255DB55A00959C50 /* Networking */,
 				88875A8C2542BC30004513EE /* CoreDataStorage */,
 				883F76DB255958C000959C50 /* ProfileStorage */,
 				883F76DC255958D200959C50 /* ThemeStorage */,
@@ -284,6 +303,7 @@
 				883E54E1252B014A00315DAD /* ThemeService.swift */,
 				883F76BF25594C4000959C50 /* OperationSaveService.swift */,
 				883F76C225594C5200959C50 /* GCDSaveService.swift */,
+				883F7773255EA33B00959C50 /* LoaderImagesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -291,6 +311,7 @@
 		883F76C525594C6400959C50 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				883F7777255EA5F300959C50 /* GalleryVC */,
 				8802367C251648A20079FA1B /* UI + Extensions */,
 				8802368425165B6A0079FA1B /* ProfileVC */,
 				8848400A25210C8E0083B204 /* ConversationsListVC */,
@@ -388,6 +409,60 @@
 				883F773A255D2FD700959C50 /* Conversation + updateUI.swift */,
 			);
 			path = "ConversationVC + Extensions";
+			sourceTree = "<group>";
+		};
+		883F7758255DB55A00959C50 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				883F775E255E5E4100959C50 /* RequestManager */,
+				883F775F255E5E6200959C50 /* Parser */,
+				883F7760255E5E7000959C50 /* Request */,
+				883F7761255E5EAC00959C50 /* RequestsFactory.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		883F775E255E5E4100959C50 /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				883F7770255EA17100959C50 /* RequestSender.swift */,
+				88B6382F256192C6001BEA7A /* NetworkDataFetcher.swift */,
+			);
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
+		883F775F255E5E6200959C50 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				883F7782255ED4FE00959C50 /* JsonParser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		883F7760255E5E7000959C50 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				883F7765255E605400959C50 /* PixbayAPIRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		883F7777255EA5F300959C50 /* GalleryVC */ = {
+			isa = PBXGroup;
+			children = (
+				883F777B255EA67A00959C50 /* View */,
+				883F7778255EA66400959C50 /* GalleryViewController.swift */,
+			);
+			path = GalleryVC;
+			sourceTree = "<group>";
+		};
+		883F777B255EA67A00959C50 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				883F777C255EA69500959C50 /* GalleryViewController.storyboard */,
+				883F777F255EAA3500959C50 /* GalleryModel.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8848400A25210C8E0083B204 /* ConversationsListVC */ = {
@@ -554,6 +629,7 @@
 				88921E2A25218E3C0033BD47 /* ConversationsListViewController.storyboard in Resources */,
 				880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */,
 				889CC1FD2523288D00A1812F /* IncomingMessageTableViewCell.xib in Resources */,
+				883F777D255EA69500959C50 /* GalleryViewController.storyboard in Resources */,
 				8802368625165BEA0079FA1B /* ProfileViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,12 +701,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88B63830256192C6001BEA7A /* NetworkDataFetcher.swift in Sources */,
 				883F76C025594C4000959C50 /* OperationSaveService.swift in Sources */,
 				889CC1E1252230BE00A1812F /* ConversationViewController.swift in Sources */,
 				883F772D255C2C6E00959C50 /* ConversationsListVC + updateUI.swift in Sources */,
 				88875A942543113B004513EE /* Chat.xcdatamodeld in Sources */,
 				883F76F4255A728200959C50 /* ProfileStorage.swift in Sources */,
+				883F7779255EA66400959C50 /* GalleryViewController.swift in Sources */,
 				8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */,
+				883F7774255EA33B00959C50 /* LoaderImagesService.swift in Sources */,
 				883F7740255D30DC00959C50 /* ConversationVC + updateTableView.swift in Sources */,
 				883F76B725594BE500959C50 /* CoreDataService.swift in Sources */,
 				88023679251610CA0079FA1B /* AvatarImageView.swift in Sources */,
@@ -645,6 +724,7 @@
 				88875A8F2542BCA7004513EE /* CoreDataStorage.swift in Sources */,
 				889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */,
 				889CC201252328D500A1812F /* ConversationModel.swift in Sources */,
+				883F7762255E5EAC00959C50 /* RequestsFactory.swift in Sources */,
 				88875A9825432380004513EE /* ObjectsExtensions.swift in Sources */,
 				883F76E325595D7900959C50 /* CoreAssembly.swift in Sources */,
 				883F773B255D2FD700959C50 /* Conversation + updateUI.swift in Sources */,
@@ -666,11 +746,15 @@
 				8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */,
 				88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */,
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
+				883F7771255EA17100959C50 /* RequestSender.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,
 				883F76C325594C5200959C50 /* GCDSaveService.swift in Sources */,
 				883F7708255BB0F100959C50 /* ThemeStorage.swift in Sources */,
 				8802367E251648E50079FA1B /* UIAlertController + constraints.swift in Sources */,
+				883F7780255EAA3500959C50 /* GalleryModel.swift in Sources */,
+				883F7783255ED4FE00959C50 /* JsonParser.swift in Sources */,
 				883F7738255C2E7600959C50 /* ConversationsListVC + updateTableView.swift in Sources */,
+				883F7766255E605400959C50 /* PixbayAPIRequest.swift in Sources */,
 				88921E302521AC750033BD47 /* ConversationTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     // создаем экземпляр класса UIAlertController
     let cameraIcon = #imageLiteral(resourceName: "camera")
     let photoIcon = #imageLiteral(resourceName: "photo")
+    let galleryIcon = #imageLiteral(resourceName: "icons8-image_gallery")
     let actionSheet = UIAlertController(title: nil,
                                         message: nil,
                                         preferredStyle: .actionSheet)
@@ -34,11 +35,22 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
     photo.titleTextColor = .black
     
+    let gallery = UIAlertAction(title: "Gallery", style: .default) { _ in
+      guard let galleryVC = self.presentationAssembly?.galleryViewController() else { return }
+
+      self.present(galleryVC, animated: true)
+    }
+    
+    gallery.setValue(galleryIcon, forKey: "image")
+    gallery.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+    gallery.titleTextColor = .black
+    
     let cancel = UIAlertAction(title: "Cancel", style: .cancel)
     cancel.titleTextColor = .red
     
     actionSheet.addAction(camera)
     actionSheet.addAction(photo)
+    actionSheet.addAction(gallery)
     actionSheet.addAction(cancel)
     actionSheet.pruneNegativeWidthConstraints()
     present(actionSheet, animated: true)

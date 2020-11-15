@@ -15,6 +15,7 @@ protocol IPresentationAssembly {
   func profileViewController() -> ProfileViewController
   func conversationViewController() -> ConversationViewController
   func themesViewController() -> ThemesViewController
+  func galleryViewController() -> GalleryViewController
 }
 
 class PresentationAssembly: IPresentationAssembly {
@@ -72,6 +73,7 @@ class PresentationAssembly: IPresentationAssembly {
       let model = profileModel(savingType: .operation)
       profileVC.model = model
     }
+    profileVC.presentationAssembly = self
     profileVC.operationModel = profileModel(savingType: .operation)
     profileVC.themeModel = themeModel()
     return profileVC
@@ -84,6 +86,17 @@ class PresentationAssembly: IPresentationAssembly {
     case .gcd:
       return ProfileModel(profileService: self.serviceAssembly.gcdSaveService)
     }
+  }
+  
+  // MARK: - GalleryViewController
+  func galleryViewController() -> GalleryViewController {
+    let galleryVC: GalleryViewController = GalleryViewController.loadFromStoryboard() as GalleryViewController
+    galleryVC.galleryModel = galleryModel()
+    return galleryVC
+  }
+  
+  private func galleryModel() -> IGalleryModel {
+    return GalleryModel(loaderImagesService: self.serviceAssembly.loaderImagesService)
   }
   
   // MARK: - ThemesViewController

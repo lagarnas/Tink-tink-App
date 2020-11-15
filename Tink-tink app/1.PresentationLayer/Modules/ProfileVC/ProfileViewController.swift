@@ -41,6 +41,7 @@ final class ProfileViewController: UIViewController {
   var savingType: ProfileSavingType = .gcd
   
   //DEPENDENCY
+  var presentationAssembly: IPresentationAssembly?
   var profile: Profile?
   var operationModel: IProfileModel?
   var model: IProfileModel?
