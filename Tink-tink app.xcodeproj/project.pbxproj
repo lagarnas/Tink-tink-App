@@ -73,6 +73,8 @@
 		889CC201252328D500A1812F /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CC200252328D500A1812F /* ConversationModel.swift */; };
 		88A152BB25348AF4001E2480 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A152BA25348AF4001E2480 /* ProfileModel.swift */; };
 		88B63830256192C6001BEA7A /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6382F256192C6001BEA7A /* NetworkDataFetcher.swift */; };
+		88B6383625624C2B001BEA7A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */; };
+		88B638502562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */; };
 		88BCF75F251C702600CA81A7 /* OSLog + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +148,8 @@
 		889CC200252328D500A1812F /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		88A152BA25348AF4001E2480 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		88B6382F256192C6001BEA7A /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog + Extension.swift"; sourceTree = "<group>"; };
 		F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.debug.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,6 +465,8 @@
 			children = (
 				883F777C255EA69500959C50 /* GalleryViewController.storyboard */,
 				883F777F255EAA3500959C50 /* GalleryModel.swift */,
+				88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */,
+				88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 				889CC1E1252230BE00A1812F /* ConversationViewController.swift in Sources */,
 				883F772D255C2C6E00959C50 /* ConversationsListVC + updateUI.swift in Sources */,
 				88875A942543113B004513EE /* Chat.xcdatamodeld in Sources */,
+				88B6383625624C2B001BEA7A /* ImageCollectionViewCell.swift in Sources */,
 				883F76F4255A728200959C50 /* ProfileStorage.swift in Sources */,
 				883F7779255EA66400959C50 /* GalleryViewController.swift in Sources */,
 				8802367B2516489C0079FA1B /* ProfileVC + UIImagePickerController.swift in Sources */,
@@ -745,6 +752,7 @@
 				883E54D92528DC3A00315DAD /* ThemeButton.swift in Sources */,
 				8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */,
 				88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */,
+				88B638502562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift in Sources */,
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
 				883F7771255EA17100959C50 /* RequestSender.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,

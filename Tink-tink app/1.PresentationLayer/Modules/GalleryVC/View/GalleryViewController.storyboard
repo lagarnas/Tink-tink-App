@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,13 +17,75 @@
                     <view key="view" contentMode="scaleToFill" id="rd2-fH-HWh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wjb-oO-7Er">
+                                <rect key="frame" x="0.0" y="54" width="414" height="842"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r77-rp-7lf">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="XcU-0e-lT5" customClass="ImageCollectionViewCell" customModule="Tink_tink_app" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c3m-MC-sie">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-CE-X7U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.50196078430000002" green="0.023529411760000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="kSd-CE-X7U" secondAttribute="trailing" id="3E0-5y-kIp"/>
+                                                <constraint firstItem="kSd-CE-X7U" firstAttribute="leading" secondItem="c3m-MC-sie" secondAttribute="leading" id="CHf-18-Bat"/>
+                                                <constraint firstAttribute="bottom" secondItem="kSd-CE-X7U" secondAttribute="bottom" id="gUW-I6-H08"/>
+                                                <constraint firstItem="kSd-CE-X7U" firstAttribute="top" secondItem="c3m-MC-sie" secondAttribute="top" id="sJl-PZ-aGT"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="kSd-CE-X7U" id="zzT-C3-5Ny"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="IqT-Ag-rat" id="fbv-3X-cub"/>
+                                    <outlet property="delegate" destination="IqT-Ag-rat" id="b5c-42-2PQ"/>
+                                </connections>
+                            </collectionView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwk-lV-OTf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ctf-hT-jRb"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Select image" id="UBi-jP-e8I"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="jvF-pD-PWi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Wjb-oO-7Er" firstAttribute="leading" secondItem="jvF-pD-PWi" secondAttribute="leading" id="7k6-We-hV6"/>
+                            <constraint firstItem="jvF-pD-PWi" firstAttribute="trailing" secondItem="Wjb-oO-7Er" secondAttribute="trailing" id="9tk-cZ-e5N"/>
+                            <constraint firstItem="Wjb-oO-7Er" firstAttribute="top" secondItem="Xwk-lV-OTf" secondAttribute="bottom" constant="10" id="Zvd-gy-ixc"/>
+                            <constraint firstItem="Xwk-lV-OTf" firstAttribute="leading" secondItem="rd2-fH-HWh" secondAttribute="leading" id="fwJ-AB-tBy"/>
+                            <constraint firstItem="Xwk-lV-OTf" firstAttribute="top" secondItem="rd2-fH-HWh" secondAttribute="top" id="liS-XJ-ig4"/>
+                            <constraint firstAttribute="trailing" secondItem="Xwk-lV-OTf" secondAttribute="trailing" id="tUg-Eb-Jr3"/>
+                            <constraint firstAttribute="bottom" secondItem="Wjb-oO-7Er" secondAttribute="bottom" id="uQn-3j-6I2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Wjb-oO-7Er" id="cED-aO-NLN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLa-hT-SWu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="263" y="80"/>
+            <point key="canvasLocation" x="262.31884057971018" y="79.6875"/>
         </scene>
     </scenes>
     <resources>

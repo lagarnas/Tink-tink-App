@@ -10,11 +10,29 @@ import UIKit
 
 class GalleryViewController: UIViewController {
   
+  @IBOutlet weak var collectionView: UICollectionView!
   var galleryModel: IGalleryModel?
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      galleryModel?.loadImages()
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    print(collectionView.visibleCells.count)
+    galleryModel?.loadImages()
+  }
+}
 
+extension GalleryViewController: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    30
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueCell(ImageCollectionViewCell.self, for: indexPath)
+    return cell
+  }
+  
 }

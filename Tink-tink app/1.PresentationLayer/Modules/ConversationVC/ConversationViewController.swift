@@ -47,13 +47,19 @@ final class ConversationViewController: UIViewController {
     model.getMessages(channel: channel)
     fetchedResultsController = model.fetchedResultController(channel: channel)
     try? self.fetchedResultsController.performFetch()
-    self.fetchedResultsController.delegate = self
-    // self.scrollToBottom()
-    
+    self.fetchedResultsController.delegate = self        
+  }
+  
+  override func viewWillLayoutSubviews() {
+    DispatchQueue.main.async {
+      self.scrollToBottom()
+    }
   }
   
   private func scrollToBottom(){
-    let indexPath = IndexPath(item: self.fetchedResultsController.fetchedObjects?.count ?? 1 - 1, section: 0)
+    guard let item = self.fetchedResultsController.fetchedObjects?.count
+    else { return }
+    let indexPath = IndexPath(item: item - 1, section: 0)
     if indexPath != [0, -1] {
       self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
     }

@@ -23,7 +23,6 @@ struct Hit: Codable {
 protocol IParser {
   associatedtype Model
   func parse(data: Data) -> Model?
- // func parse<Response: Decodable>(data: Data, type: Response.Type) -> Response?
 }
 
 class JsonParser: IParser {
