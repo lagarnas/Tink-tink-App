@@ -32,7 +32,7 @@ class PixbayAPIRequest: IRequest {
   var urlRequest: URLRequest? {
     let url = urlPath([URLQueryItem(name: API.QueryItemName.q.rawValue, value: "yellow+flowers"),
                        URLQueryItem(name: API.QueryItemName.imageType.rawValue, value: "photo"),
-                       URLQueryItem(name: API.QueryItemName.perPage.rawValue, value: "3")])
+                       URLQueryItem(name: API.QueryItemName.perPage.rawValue, value: "10")])
     guard let urlPath = url else { return nil }
     print(urlPath)
     return URLRequest(url: urlPath)

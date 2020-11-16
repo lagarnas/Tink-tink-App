@@ -454,6 +454,7 @@
 		883F7777255EA5F300959C50 /* GalleryVC */ = {
 			isa = PBXGroup;
 			children = (
+				883F777F255EAA3500959C50 /* GalleryModel.swift */,
 				883F777B255EA67A00959C50 /* View */,
 				883F7778255EA66400959C50 /* GalleryViewController.swift */,
 			);
@@ -464,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				883F777C255EA69500959C50 /* GalleryViewController.storyboard */,
-				883F777F255EAA3500959C50 /* GalleryModel.swift */,
 				88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */,
 				88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */,
 			);

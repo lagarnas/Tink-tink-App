@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ILoaderImagesService {
-  func loadImages(completion: @escaping (Result<RequestConfig<JsonParser> ,Error>) -> Void)
+  func loadImages(completion: @escaping (Result<[Hit], Error>) -> Void)
 }
 
 class LoaderImagesService: ILoaderImagesService {
@@ -21,13 +21,14 @@ class LoaderImagesService: ILoaderImagesService {
     self.request = PixbayAPIRequest()
   }
   
-  func loadImages(completion: @escaping (Result<RequestConfig<JsonParser>, Error>) -> Void) {
+  func loadImages(completion: @escaping (Result<[Hit], Error>) -> Void) {
     let requestConfig = RequestsFactory.PixbayAPIRequests.ImagesRequests.imagesConfig()
     networkDataFetcher.fetchData(from: requestConfig) {result in
       switch result {
       case .success(let response):
         DispatchQueue.main.async {
           print(response.hits.count)
+          completion(.success(response.hits))
         }
       case .failure(let error):
         print(error.localizedDescription)

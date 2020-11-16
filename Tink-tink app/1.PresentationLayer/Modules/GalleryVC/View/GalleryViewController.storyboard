@@ -19,10 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Wjb-oO-7Er">
-                                <rect key="frame" x="0.0" y="54" width="414" height="842"/>
+                                <rect key="frame" x="0.0" y="59" width="414" height="837"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r77-rp-7lf">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r77-rp-7lf">
                                     <size key="itemSize" width="128" height="128"/>
+                                    <size key="estimatedItemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -35,17 +36,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-CE-X7U">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nasia" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-CE-X7U">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.50196078430000002" green="0.023529411760000001" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="kSd-CE-X7U" secondAttribute="trailing" id="3E0-5y-kIp"/>
-                                                <constraint firstItem="kSd-CE-X7U" firstAttribute="leading" secondItem="c3m-MC-sie" secondAttribute="leading" id="CHf-18-Bat"/>
-                                                <constraint firstAttribute="bottom" secondItem="kSd-CE-X7U" secondAttribute="bottom" id="gUW-I6-H08"/>
-                                                <constraint firstItem="kSd-CE-X7U" firstAttribute="top" secondItem="c3m-MC-sie" secondAttribute="top" id="sJl-PZ-aGT"/>
-                                            </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="imageView" destination="kSd-CE-X7U" id="zzT-C3-5Ny"/>
@@ -59,6 +54,7 @@
                             </collectionView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwk-lV-OTf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ctf-hT-jRb"/>
                                 </constraints>
@@ -72,7 +68,7 @@
                         <constraints>
                             <constraint firstItem="Wjb-oO-7Er" firstAttribute="leading" secondItem="jvF-pD-PWi" secondAttribute="leading" id="7k6-We-hV6"/>
                             <constraint firstItem="jvF-pD-PWi" firstAttribute="trailing" secondItem="Wjb-oO-7Er" secondAttribute="trailing" id="9tk-cZ-e5N"/>
-                            <constraint firstItem="Wjb-oO-7Er" firstAttribute="top" secondItem="Xwk-lV-OTf" secondAttribute="bottom" constant="10" id="Zvd-gy-ixc"/>
+                            <constraint firstItem="Wjb-oO-7Er" firstAttribute="top" secondItem="Xwk-lV-OTf" secondAttribute="bottom" constant="15" id="Zvd-gy-ixc"/>
                             <constraint firstItem="Xwk-lV-OTf" firstAttribute="leading" secondItem="rd2-fH-HWh" secondAttribute="leading" id="fwJ-AB-tBy"/>
                             <constraint firstItem="Xwk-lV-OTf" firstAttribute="top" secondItem="rd2-fH-HWh" secondAttribute="top" id="liS-XJ-ig4"/>
                             <constraint firstAttribute="trailing" secondItem="Xwk-lV-OTf" secondAttribute="trailing" id="tUg-Eb-Jr3"/>
@@ -89,6 +85,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="nasia" width="853" height="1280"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
