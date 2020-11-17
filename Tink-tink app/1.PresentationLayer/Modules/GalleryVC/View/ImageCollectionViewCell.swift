@@ -14,19 +14,21 @@ class ImageCollectionViewCell: UICollectionViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    imageView.image = nil
+    self.configure(galleryDisplayModel: .none)
   }
   
-  func configure(urlImage: String) {
-    guard let resource = URL(string: urlImage) else {
-      setupPlaceHolder()
-      return }
-    
-    do {
-      let data = try Data(contentsOf: resource)
-      imageView.image = UIImage(data: data)
+  func configure(galleryDisplayModel: GalleryDisplayModel?) {
+    if let galleryDisplayModel = galleryDisplayModel {
+      guard let resource = URL(string: galleryDisplayModel.urlImage) else {
+        setupPlaceHolder()
+        return }
 
-    } catch {}
+      do {
+        let data = try Data(contentsOf: resource)
+        imageView.image = UIImage(data: data)
+
+      } catch {}
+    }
   }
   
   private func setupPlaceHolder() {

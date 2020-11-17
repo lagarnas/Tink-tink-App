@@ -10,41 +10,40 @@ import UIKit
 
 class GalleryViewController: UIViewController {
   
-  @IBOutlet weak var collectionView: UICollectionView!
-  var galleryModel: IGalleryModel?
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var galleryCollectionView: UICollectionView!
+  var galleryModel: IGalleryModel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    galleryModel.delegate = self
+    galleryModel.fetchGallery()
+    activityIndicator.startAnimating()
+  }
+}
+
+extension GalleryViewController: IGalleryModelDelegate {
+  func onFetchCompleted(_ galleryModel: GalleryModel) {
+    activityIndicator.stopAnimating()
+    self.galleryCollectionView.reloadData()
+    
   }
   
-  var gallery: [GalleryDisplayModel] = []
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    print(collectionView.visibleCells.count)
-    galleryModel?.loadImages { [weak self] result in
-      switch result {
-      case .success(let gallery):
-        print(gallery.count)
-        self?.gallery = gallery
-        self?.collectionView.reloadData()
-      case .failure(let error):
-        print(error.localizedDescription)
-      }
-    }
+  func onFetchFailed(error: Error) {
+    print(error.localizedDescription)
   }
 }
 
 extension GalleryViewController: UICollectionViewDataSource {
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    gallery.count
+    return galleryModel.currentCount
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueCell(ImageCollectionViewCell.self, for: indexPath)
-    let galleryItem = self.gallery[indexPath.item]
-    cell.configure(urlImage: galleryItem.urlImage)
+      cell.configure(galleryDisplayModel: galleryModel.galleryDisplayModel(at: indexPath.item))
+    
     return cell
   }
-  
 }

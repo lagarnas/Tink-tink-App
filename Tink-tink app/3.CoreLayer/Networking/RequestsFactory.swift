@@ -13,8 +13,8 @@ struct RequestsFactory {
   struct PixbayAPIRequests {
     
     struct ImagesRequests {
-        static func imagesConfig() -> RequestConfig<JsonParser> {
-          let request = PixbayAPIRequest()
+      static func imagesConfig() -> RequestConfig<JsonParser> {
+        let request = PixbayAPIRequest()
           let sender = RequestSender()
           
           return RequestConfig<JsonParser>(request: request, sender: sender, parser: JsonParser())

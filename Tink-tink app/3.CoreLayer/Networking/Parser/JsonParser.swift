@@ -9,12 +9,13 @@
 import Foundation
 
 struct Empty: Codable {
+  let totalHits: Int
   let hits: [Hit]
 }
 
 // MARK: - Hit
 struct Hit: Codable {
-  let webformatURL: String
+  let previewURL: String
 }
 
 protocol IParser {

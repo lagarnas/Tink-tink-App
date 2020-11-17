@@ -28,6 +28,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="XcU-vA-Yzd">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="837"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="XcU-0e-lT5" customClass="ImageCollectionViewCell" customModule="Tink_tink_app" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -36,7 +40,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nasia" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-CE-X7U">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-CE-X7U">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -48,8 +52,8 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="IqT-Ag-rat" id="fbv-3X-cub"/>
-                                    <outlet property="delegate" destination="IqT-Ag-rat" id="b5c-42-2PQ"/>
+                                    <outlet property="dataSource" destination="IqT-Ag-rat" id="jLU-DP-cf4"/>
+                                    <outlet property="delegate" destination="IqT-Ag-rat" id="1wS-bt-Bmd"/>
                                 </connections>
                             </collectionView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwk-lV-OTf">
@@ -76,7 +80,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="Wjb-oO-7Er" id="cED-aO-NLN"/>
+                        <outlet property="activityIndicator" destination="XcU-vA-Yzd" id="EJp-Ih-IHq"/>
+                        <outlet property="galleryCollectionView" destination="Wjb-oO-7Er" id="i7S-Sa-Ys6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLa-hT-SWu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -85,7 +90,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="nasia" width="853" height="1280"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

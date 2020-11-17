@@ -9,7 +9,7 @@
 import Foundation
 
 struct RequestConfig<Parser> where Parser: IParser {
-  let request: IRequest
+  let request: IPixbayAPIRequest
   let sender: IRequestSender
   let parser: Parser
 }
@@ -19,7 +19,7 @@ protocol IRequestSender {
 }
 
 class RequestSender: IRequestSender {
-  
+
   let session = URLSession.shared
     
   func send<Parser>(request config: RequestConfig<Parser>, completion: @escaping (Result<Data, NetworkingError>) -> Void) {

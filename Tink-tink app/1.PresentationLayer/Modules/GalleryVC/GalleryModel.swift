@@ -7,33 +7,57 @@
 //
 
 import Foundation
+import UIKit
 
 struct GalleryDisplayModel {
   let urlImage: String
-  
   init(hit: Hit) {
-    self.urlImage = hit.webformatURL
+    self.urlImage = hit.previewURL
   }
 }
 
 protocol IGalleryModel {
-  func loadImages(completion: @escaping (Result<[GalleryDisplayModel], Error>) -> Void)
+  var currentCount: Int { get }
+  var delegate: IGalleryModelDelegate? { get set }
+  
+  func fetchGallery()
+  func galleryDisplayModel(at index: Int) -> GalleryDisplayModel 
+}
+
+protocol IGalleryModelDelegate: class {
+  func onFetchCompleted(_ galleryModel: GalleryModel)
+  func onFetchFailed(error: Error)
 }
 
 class GalleryModel: IGalleryModel {
   
+  private var galleryOfImages = [GalleryDisplayModel]()
+  
+  weak var delegate: IGalleryModelDelegate?
   let loaderImagesService: ILoaderImagesService
   
   init(loaderImagesService: ILoaderImagesService) {
     self.loaderImagesService = loaderImagesService
   }
-  func loadImages(completion: @escaping (Result<[GalleryDisplayModel], Error>) -> Void) {
-    loaderImagesService.loadImages { result in
+  
+  var currentCount: Int {
+    galleryOfImages.count
+  }
+  
+  func galleryDisplayModel(at index: Int) -> GalleryDisplayModel {
+    return galleryOfImages[index]
+  }
+  
+  func fetchGallery() {
+    loaderImagesService.loadImages { [weak self] result in
+      guard let self = self else { return }
       switch result {
-      case .success(let hits):
-        completion(.success(hits.getGallery()))
+      case .success(let response):
+        self.galleryOfImages.append(contentsOf: response.hits.getGallery())
+        self.delegate?.onFetchCompleted(self)
+      
       case .failure(let error):
-        completion(.failure(error))
+        self.delegate?.onFetchFailed(error: error)
       }
     }
   }

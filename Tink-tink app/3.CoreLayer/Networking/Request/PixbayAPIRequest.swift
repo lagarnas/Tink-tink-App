@@ -23,20 +23,23 @@ struct API {
   }
 }
 
-protocol IRequest {
-    var urlRequest: URLRequest? { get }
-
+protocol IPixbayAPIRequest {
+  var urlRequest: URLRequest? { get }
 }
 
-class PixbayAPIRequest: IRequest {
+class PixbayAPIRequest: IPixbayAPIRequest {
+  
   var urlRequest: URLRequest? {
-    let url = urlPath([URLQueryItem(name: API.QueryItemName.q.rawValue, value: "yellow+flowers"),
-                       URLQueryItem(name: API.QueryItemName.imageType.rawValue, value: "photo"),
-                       URLQueryItem(name: API.QueryItemName.perPage.rawValue, value: "10")])
+    let url = urlPath([URLQueryItem(name: API.QueryItemName.q.rawValue,
+                                    value: "yellow+flowers"),
+                       URLQueryItem(name: API.QueryItemName.imageType.rawValue,
+                                    value: "photo"),
+                       URLQueryItem(name: API.QueryItemName.perPage.rawValue,
+                                    value: "20")])
     guard let urlPath = url else { return nil }
     print(urlPath)
     return URLRequest(url: urlPath)
-
+    
   }
   
   private func urlPath( _ queryItems: [URLQueryItem]) -> URL? {
@@ -45,7 +48,7 @@ class PixbayAPIRequest: IRequest {
     urlComponents.host = API.host
     urlComponents.path = API.path
     urlComponents.queryItems = queryItems + [URLQueryItem(name: API.QueryItemName.key.rawValue, value: API.apiKey)]
-
+    
     return urlComponents.url
   }
 }
