@@ -29,7 +29,19 @@ final class FirebaseManager {
     referanceChannels.addDocument(data: newChannel)
   }
   
-  func getChannels(completion: @escaping (Result<[Channel], Error>) -> Void) {
+  func deleteChannel( channel: Channel_db) {
+    referanceChannels.document(channel.identifier!).delete() { err in
+      if let err = err {
+          print("Error removing document: \(err)")
+      } else {
+          print("Document successfully removed!")
+      }
+    }
+    
+    coreDataManager.deleteChannel(channel)
+  }
+  
+  func getChannels() {
     
     referanceChannels.addSnapshotListener { snapshot, _ in
       var channels = [Channel]()
@@ -37,10 +49,7 @@ final class FirebaseManager {
         guard let name         = $0["name"] as? String,
               let lastActivity = $0["lastActivity"] as? Timestamp,
               let lastMessage  = $0["lastMessage"] as? String
-        else {
-          completion(.failure(DataBaseError.failedToFetch))
-          return
-        }
+        else { return }
         let channel = Channel(identifier: $0.documentID,
                               name: name,
                               lastMessage: lastMessage,
@@ -48,8 +57,8 @@ final class FirebaseManager {
         
         channels.append(channel)
       }
-      completion(.success(channels))
-      self.coreDataManager.makeSaveChannelsRequest(channels: channels)
+      print(channels.count)
+      self.coreDataManager.saveChannels(channels)
       channels = []
     }
   }
@@ -64,9 +73,10 @@ final class FirebaseManager {
     referanceChannels.document(channelId).collection("messages").addDocument(data: newMessage)
   }
   
-  func getMessages(channel: Channel, completion: @escaping (Result<[Message], Error>) -> Void) {
-    
-    referanceChannels.document(channel.identifier).collection("messages").addSnapshotListener { (snapshot, _) in
+  func getMessages(channel: Channel_db) {
+    print(channel.identifier!)
+    guard let identifier = channel.identifier else { return }
+    referanceChannels.document(identifier).collection("messages").addSnapshotListener { (snapshot, _) in
       self.messages = []
       _ = snapshot?.documents.compactMap {
         guard
@@ -81,12 +91,7 @@ final class FirebaseManager {
                                      created: Date(timeIntervalSince1970: TimeInterval(created.seconds))))
         
       }
-      completion(.success(self.messages))
-      self.coreDataManager.makeSaveMessagesRequest(channel: channel, messages: self.messages)
+      self.coreDataManager.saveMessages(channel, self.messages)
     }
-  }
-  
-  enum DataBaseError: Error {
-    case failedToFetch
   }
 }
