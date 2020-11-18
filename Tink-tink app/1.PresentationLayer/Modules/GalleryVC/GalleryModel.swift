@@ -21,7 +21,7 @@ protocol IGalleryModel {
   var delegate: IGalleryModelDelegate? { get set }
   
   func fetchGallery()
-  func galleryDisplayModel(at index: Int) -> GalleryDisplayModel 
+  func galleryDisplayModel(at index: Int) -> GalleryDisplayModel
 }
 
 protocol IGalleryModelDelegate: class {

@@ -22,7 +22,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
       guard let resource = URL(string: galleryDisplayModel.urlImage) else {
         setupPlaceHolder()
         return }
-
       do {
         let data = try Data(contentsOf: resource)
         imageView.image = UIImage(data: data)

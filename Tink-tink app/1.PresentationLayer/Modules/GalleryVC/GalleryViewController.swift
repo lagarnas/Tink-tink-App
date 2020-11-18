@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol GalleryViewControllerDelegate: class {
+  func updateProfile(_ galleryViewController: GalleryViewController, urlImageData: Data)
+}
+
 class GalleryViewController: UIViewController {
   
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var galleryCollectionView: UICollectionView!
   
   private var model: IGalleryModel!
+  
+  weak var delegate: GalleryViewControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,5 +61,15 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print(indexPath.item)
+    let urlImage = model.galleryDisplayModel(at: indexPath.item).urlImage
+    
+    guard let resource = URL(string: urlImage) else { return  }
+    do {
+      let data = try Data(contentsOf: resource)
+      delegate?.updateProfile(self, urlImageData: data)
+    } catch {}
+    
+    self.dismiss(animated: true)
+    
   }
 }

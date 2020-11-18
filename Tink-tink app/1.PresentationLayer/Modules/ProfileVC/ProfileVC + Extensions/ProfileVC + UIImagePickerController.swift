@@ -37,7 +37,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     let gallery = UIAlertAction(title: "Gallery", style: .default) { _ in
       guard let galleryVC = self.presentationAssembly?.galleryViewController() else { return }
-
+      galleryVC.delegate = self
       self.present(galleryVC, animated: true)
     }
     
@@ -76,5 +76,17 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     enabledButtons()
     
     dismiss(animated: true)
+  }
+}
+
+extension ProfileViewController: GalleryViewControllerDelegate {
+  func updateProfile(_ galleryViewController: GalleryViewController, urlImageData: Data) {
+    avatarView.imageView.image = UIImage(data: urlImageData)
+    avatarView.imageView.contentMode = .scaleAspectFill
+    avatarView.imageView.clipsToBounds = true
+    self.profile?.userData = avatarView.imageView.image?.pngData() ?? Data()
+    self.profile?.photoChanged = true
+    avatarView.hideInitials()
+    enabledButtons()
   }
 }
