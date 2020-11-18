@@ -56,9 +56,7 @@ final class ConversationViewController: UIViewController {
   }
   
   override func viewWillLayoutSubviews() {
-    DispatchQueue.main.async {
       self.scrollToBottom()
-    }
   }
   
   private func scrollToBottom(){
