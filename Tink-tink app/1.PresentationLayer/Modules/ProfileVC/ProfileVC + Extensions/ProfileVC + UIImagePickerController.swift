@@ -68,12 +68,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     avatarView.imageView.image = info[.editedImage] as? UIImage
-    avatarView.imageView.contentMode = .scaleAspectFill
-    avatarView.imageView.clipsToBounds = true
-    self.profile?.userData = avatarView.imageView.image?.pngData() ?? Data()
-    self.profile?.photoChanged = true
-    avatarView.hideInitials()
-    enabledButtons()
+    updateProfile()
     
     dismiss(animated: true)
   }
@@ -82,6 +77,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 extension ProfileViewController: GalleryViewControllerDelegate {
   func updateProfile(_ galleryViewController: GalleryViewController, urlImageData: Data) {
     avatarView.imageView.image = UIImage(data: urlImageData)
+    updateProfile()
+  }
+  
+  private func updateProfile() {
     avatarView.imageView.contentMode = .scaleAspectFill
     avatarView.imageView.clipsToBounds = true
     self.profile?.userData = avatarView.imageView.image?.pngData() ?? Data()
