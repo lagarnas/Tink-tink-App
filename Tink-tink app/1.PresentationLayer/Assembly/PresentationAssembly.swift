@@ -28,14 +28,15 @@ class PresentationAssembly: IPresentationAssembly {
   
   // MARK: - EntryPoint and ConversationsListViewController
   func entryPoint() -> UINavigationController {
-    let model = conversationsListModel()
     let storyboard = UIStoryboard(name: "ConversationsListViewController", bundle: nil)
     let rootController = storyboard.instantiateViewController(withIdentifier: "navController") as? UINavigationController
     
     let conversationsListVC = rootController?.viewControllers.first as? ConversationsListViewController
-    conversationsListVC?.model = model
-    conversationsListVC?.themeModel = themeModel()
-    conversationsListVC?.presentationAssembly = self
+    
+    conversationsListVC?.setupDepenencies(model: conversationsListModel(),
+                                          themeModel: themeModel(),
+                                          presentationAssembly: self)
+    
     return rootController ?? UINavigationController()
   }
   
@@ -47,11 +48,11 @@ class PresentationAssembly: IPresentationAssembly {
   
   // MARK: - ConversationController
   func conversationViewController() -> ConversationViewController {
-    let model = conversationModel()
     let conversationVC = ConversationViewController.loadFromStoryboard() as ConversationViewController
-    conversationVC.model = model
-    conversationVC.themeModel = themeModel()
-    
+    conversationVC.setupDepenencies(model: conversationModel(),
+                                    themeModel: themeModel(),
+                                    presentationAssembly: nil)
+        
     return conversationVC
   }
   
@@ -62,20 +63,12 @@ class PresentationAssembly: IPresentationAssembly {
   
   // MARK: - ProfileViewController
   func profileViewController() -> ProfileViewController {
-    
     let profileVC = ProfileViewController.loadFromStoryboard() as ProfileViewController
     
-    switch profileVC.savingType {
-    case .gcd:
-      let model = profileModel(savingType: .gcd)
-      profileVC.model = model
-    case .operation:
-      let model = profileModel(savingType: .operation)
-      profileVC.model = model
-    }
-    profileVC.presentationAssembly = self
-    profileVC.operationModel = profileModel(savingType: .operation)
-    profileVC.themeModel = themeModel()
+    profileVC.setupDepenencies(model: profileModel(savingType: profileVC.savingType),
+                               themeModel: themeModel(),
+                               presentationAssembly: self)
+    
     return profileVC
   }
   
@@ -91,7 +84,7 @@ class PresentationAssembly: IPresentationAssembly {
   // MARK: - GalleryViewController
   func galleryViewController() -> GalleryViewController {
     let galleryVC: GalleryViewController = GalleryViewController.loadFromStoryboard() as GalleryViewController
-    galleryVC.galleryModel = galleryModel()
+    galleryVC.setupDepenencies(model: galleryModel(), themeModel: nil, presentationAssembly: nil)
     return galleryVC
   }
   
@@ -102,7 +95,7 @@ class PresentationAssembly: IPresentationAssembly {
   // MARK: - ThemesViewController
   func themesViewController() -> ThemesViewController {
     let themesVC: ThemesViewController = ThemesViewController.loadFromStoryboard() as ThemesViewController
-    themesVC.model = themeModel()
+    themesVC.setupDepenencies(model: themeModel(), presentationAssembly: nil)
     return themesVC
   }
   

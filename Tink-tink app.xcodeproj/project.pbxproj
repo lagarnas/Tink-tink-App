@@ -315,8 +315,8 @@
 		883F76C525594C6400959C50 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				883F7777255EA5F300959C50 /* GalleryVC */,
 				8802367C251648A20079FA1B /* UI + Extensions */,
+				883F7777255EA5F300959C50 /* GalleryVC */,
 				8802368425165B6A0079FA1B /* ProfileVC */,
 				8848400A25210C8E0083B204 /* ConversationsListVC */,
 				889CC1DF252230A500A1812F /* ConversationVC */,

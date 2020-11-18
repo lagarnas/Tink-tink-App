@@ -41,11 +41,10 @@ final class ProfileViewController: UIViewController {
   var savingType: ProfileSavingType = .gcd
   
   //DEPENDENCY
-  var presentationAssembly: IPresentationAssembly?
-  var profile: Profile?
-  var operationModel: IProfileModel?
-  var model: IProfileModel?
-  var themeModel: IThemeModel?
+  var presentationAssembly: IPresentationAssembly!
+  var profile: Profile!
+  var model: IProfileModel!
+  var themeModel: IThemeModel!
   
   // MARK: - Lifecycle of VC
   override func viewDidLoad() {
@@ -54,6 +53,14 @@ final class ProfileViewController: UIViewController {
 
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
+  }
+  
+  func setupDepenencies(model: IProfileModel?,
+                        themeModel: IThemeModel?,
+                        presentationAssembly: IPresentationAssembly?) {
+    self.model = model
+    self.themeModel = themeModel
+    self.presentationAssembly = presentationAssembly
   }
   
   // MARK: - Configure
@@ -100,10 +107,9 @@ final class ProfileViewController: UIViewController {
   @IBAction func operationButtonTapped(_ sender: UIButton) {
     unEnabledButtons()
     activityIndicator.startAnimating()
-    guard let profile = self.profile,
-          let operationModel = self.operationModel
+    guard let profile = self.profile
     else { return }
-    operationModel.save(profile: profile) { [weak self] result in
+    model.save(profile: profile) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success:

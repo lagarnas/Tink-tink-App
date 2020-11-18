@@ -21,8 +21,8 @@ final class ConversationViewController: UIViewController {
   var channel: Channel_db!
   
   //DEPENDENCY
-  var model: IConversationModel?
-  var themeModel: IThemeModel?
+  var model: IConversationModel!
+  var themeModel: IThemeModel!
   
   // MARK: - FetchedResultsController
   var fetchedResultsController: NSFetchedResultsController<Message_db>!
@@ -39,6 +39,11 @@ final class ConversationViewController: UIViewController {
     setupTableView()
     updateTheme()
     loadMessages()
+  }
+  
+  func setupDepenencies(model: IConversationModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
+    self.model = model
+    self.themeModel = themeModel
   }
   
   // MARK: - Private methods
