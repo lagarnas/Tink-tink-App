@@ -26,6 +26,7 @@ class GalleryViewController: UIViewController {
     model.delegate = self
     model.fetchGallery()
     activityIndicator.startAnimating()
+    activityIndicator.hidesWhenStopped = true
   }
   
   func setupDepenencies(model: IGalleryModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
@@ -54,14 +55,16 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueCell(ImageCollectionViewCell.self, for: indexPath)
-      cell.configure(galleryDisplayModel: model.galleryDisplayModel(at: indexPath.item))
     
+    let displayModel = model.galleryOfImages[indexPath.item]
+    cell.configure(galleryDisplayModel: displayModel)
     return cell
+    
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print(indexPath.item)
-    let urlImage = model.galleryDisplayModel(at: indexPath.item).urlImage
+    let urlImage = model.galleryOfImages[indexPath.item].urlImage
     
     guard let resource = URL(string: urlImage) else { return  }
     do {

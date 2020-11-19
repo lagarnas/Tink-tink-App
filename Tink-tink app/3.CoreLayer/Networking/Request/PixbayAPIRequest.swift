@@ -35,9 +35,8 @@ class PixbayAPIRequest: IPixbayAPIRequest {
                        URLQueryItem(name: API.QueryItemName.imageType.rawValue,
                                     value: "photo"),
                        URLQueryItem(name: API.QueryItemName.perPage.rawValue,
-                                    value: "20")])
+                                    value: "100")])
     guard let urlPath = url else { return nil }
-    print(urlPath)
     return URLRequest(url: urlPath)
     
   }

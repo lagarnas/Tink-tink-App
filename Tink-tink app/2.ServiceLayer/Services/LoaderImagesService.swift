@@ -26,9 +26,7 @@ class LoaderImagesService: ILoaderImagesService {
     networkDataFetcher.fetchData(from: requestConfig) { result in
       switch result {
       case .success(let response):
-        DispatchQueue.main.async {
           completion(.success(response))
-        }
       case .failure(let error):
         completion(.failure(error))
       }
