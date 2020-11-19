@@ -35,7 +35,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
     photo.titleTextColor = .black
     
-    let gallery = UIAlertAction(title: "Gallery", style: .default) { _ in
+    let gallery = UIAlertAction(title: "Download", style: .default) { _ in
       guard let galleryVC = self.presentationAssembly?.galleryViewController() else { return }
       galleryVC.delegate = self
       self.present(galleryVC, animated: true)
