@@ -33,12 +33,14 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var nameSeparator: UIView!
   @IBOutlet weak var bioSeparator: UIView!
-  @IBOutlet weak var editButton: UIBarButtonItem!
+  @IBOutlet weak var editButton: UIButton!
   
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   var GCDButtonIsClick = false
   var savingType: ProfileSavingType = .gcd
+  
+  private var isAnimate: Bool = false
   
   //DEPENDENCY
   var presentationAssembly: IPresentationAssembly!
@@ -50,9 +52,16 @@ final class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.configure()
-
+    
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    editButton.layer.cornerRadius = 10
+    editButton.layer.borderWidth = 2
+    editButton.layer.borderColor = UIColor.black.cgColor
   }
   
   func setupDepenencies(model: IProfileModel?,
@@ -93,10 +102,66 @@ final class ProfileViewController: UIViewController {
   }
   
   // MARK: - IBActions
-  @IBAction private func editButtonTapped(_ sender: UIBarButtonItem) {
-    enabledUIElements()
-    editButton.isEnabled = false
-    nameTextField.becomeFirstResponder()
+  @IBAction private func editButtonTapped(_ sender: UIButton) {
+    
+    if isAnimate {
+      unEnabledUIElements()
+      unEnabledButtons()
+      stopAnimate()
+      
+    } else {
+      enabledUIElements()
+      enabledButtons()
+      shake(button: sender)
+      nameTextField.becomeFirstResponder()
+    }
+  }
+  
+  
+  private func shake(button: UIButton) {
+    
+    var animations = [CAAnimation]()
+    
+    let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+    rotation.values = [0,
+                       NSNumber(value: Double.pi / 10),
+                       0,
+                       NSNumber(value: -Double.pi / 10),
+                       0]
+    rotation.isCumulative = true
+    
+    let animationX = CAKeyframeAnimation(keyPath: "transform.translation.x")
+    animationX.values = [0, -5, 0, 5]
+    animationX.isAdditive = true
+    
+    let animationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
+    animationY.values = [0, -5, 0, 5]
+    animationY.isAdditive = true
+    
+    animations.append(rotation)
+    animations.append(animationY)
+    animations.append(animationX)
+    
+    let group = CAAnimationGroup()
+    group.duration = 0.3
+    group.repeatCount = .infinity
+    group.autoreverses = true
+    group.delegate = self
+    group.animations = animations
+    group.isRemovedOnCompletion = true
+    group.fillMode = .removed
+    group.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    
+    CATransaction.setCompletionBlock {
+      print("all animations completed")
+    }
+    
+    button.layer.add(group, forKey: "shake")
+  }
+  
+  private func stopAnimate() {
+    self.editButton.layer.removeAnimation(forKey: "shake")
+    isAnimate = false
   }
   
   @IBAction private func setImageButtonTapped(_ sender: UIButton) {
@@ -114,6 +179,7 @@ final class ProfileViewController: UIViewController {
       switch result {
       case .success:
         self.updateUI()
+        self.stopAnimate()
       case .failure:
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
       }
@@ -134,6 +200,7 @@ final class ProfileViewController: UIViewController {
       switch result {
       case .success:
         self.updateUI()
+        self.stopAnimate()
       case .failure:
         self.alertError(title: "Error", message: "Failed to save data", style: .alert)
       }
@@ -144,8 +211,14 @@ final class ProfileViewController: UIViewController {
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
   }
-    
+  
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
+  }
+}
+
+extension ProfileViewController: CAAnimationDelegate {
+  func animationDidStart(_ anim: CAAnimation) {
+    isAnimate = true
   }
 }
