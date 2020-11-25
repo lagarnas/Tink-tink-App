@@ -19,6 +19,8 @@ final class ThemesViewController: UIViewController {
   @IBOutlet private weak var dayLabel: UILabel!
   @IBOutlet private weak var nightLabel: UILabel!
   
+  @IBOutlet weak var emblemView: EmblemParticleView!
+    
   private var themeMode: ThemeMode = .classic
   
   //DEPENDENCY
@@ -34,6 +36,19 @@ final class ThemesViewController: UIViewController {
     applyTheme()
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    if let touch = touches.first {
+        let position = touch.location(in: emblemView)
+      emblemView.startAnimation(point: position)
+    }
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    emblemView.stopAnimation()
+  }
+    
   func setupDepenencies(model: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
   }

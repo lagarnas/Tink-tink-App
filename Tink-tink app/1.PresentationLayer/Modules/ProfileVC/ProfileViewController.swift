@@ -35,6 +35,8 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var bioSeparator: UIView!
   @IBOutlet weak var editButton: UIButton!
   
+ // @IBOutlet weak var emblemView: EmblemParticleView!
+  
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   var GCDButtonIsClick = false
@@ -116,7 +118,6 @@ final class ProfileViewController: UIViewController {
       nameTextField.becomeFirstResponder()
     }
   }
-  
   
   private func shake(button: UIButton) {
     

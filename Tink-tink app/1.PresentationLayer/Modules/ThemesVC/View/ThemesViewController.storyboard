@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kiz-td-A8u">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="kiz-td-A8u" customClass="ThemesViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BZ6-Bm-le8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mYf-Wp-5kL">
-                                <rect key="frame" x="25" y="98" width="270" height="412"/>
+                                <rect key="frame" x="52.666666666666657" y="220" width="270" height="412"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hJV-ac-iZ1">
                                         <rect key="frame" x="0.0" y="0.0" width="270" height="124"/>
@@ -98,12 +98,20 @@
                                     <constraint firstAttribute="width" constant="270" id="ypU-nW-cGI"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oyb-y0-y2y" customClass="EmblemParticleView" customModule="Tink_tink_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kPR-lP-HPy"/>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.21176470588235294" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mYf-Wp-5kL" firstAttribute="centerX" secondItem="BZ6-Bm-le8" secondAttribute="centerX" id="8Sd-aU-KsN"/>
+                            <constraint firstItem="Oyb-y0-y2y" firstAttribute="leading" secondItem="kPR-lP-HPy" secondAttribute="leading" id="ESu-Uc-P5R"/>
+                            <constraint firstItem="Oyb-y0-y2y" firstAttribute="top" secondItem="BZ6-Bm-le8" secondAttribute="top" id="F4V-rc-ZBj"/>
+                            <constraint firstAttribute="bottom" secondItem="Oyb-y0-y2y" secondAttribute="bottom" id="WnT-Lz-jzw"/>
                             <constraint firstItem="mYf-Wp-5kL" firstAttribute="centerY" secondItem="BZ6-Bm-le8" secondAttribute="centerY" constant="20" id="gcl-2h-Zvx"/>
+                            <constraint firstItem="kPR-lP-HPy" firstAttribute="trailing" secondItem="Oyb-y0-y2y" secondAttribute="trailing" id="hLn-vh-QkQ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -111,6 +119,7 @@
                         <outlet property="classicLabel" destination="97s-DJ-jDP" id="J5L-vd-MeD"/>
                         <outlet property="dayButton" destination="l53-1I-3wZ" id="CP2-Ql-r8J"/>
                         <outlet property="dayLabel" destination="Y83-4T-fp3" id="IR1-kc-4sm"/>
+                        <outlet property="emblemView" destination="Oyb-y0-y2y" id="uK0-bc-yrt"/>
                         <outlet property="nightButton" destination="p2A-Iz-PkP" id="t81-4M-1Sr"/>
                         <outlet property="nightLabel" destination="H1q-ki-G3y" id="pXp-x1-jp9"/>
                     </connections>
