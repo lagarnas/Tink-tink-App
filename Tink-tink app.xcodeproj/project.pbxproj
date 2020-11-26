@@ -77,6 +77,7 @@
 		88B6383625624C2B001BEA7A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */; };
 		88B638502562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */; };
 		88BCF75F251C702600CA81A7 /* OSLog + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */; };
+		88F31663256F81390039F3B6 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F31662256F81390039F3B6 /* AnimationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +154,7 @@
 		88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog + Extension.swift"; sourceTree = "<group>"; };
+		88F31662256F81390039F3B6 /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.debug.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -516,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				886DD88C256D9A010025559B /* EmblemParticleView.swift */,
+				88F31662256F81390039F3B6 /* AnimationController.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				8853591125249F1400469AD6 /* MiniAvatarView.swift in Sources */,
 				883E54E2252B014A00315DAD /* ThemeService.swift in Sources */,
 				88875A8F2542BCA7004513EE /* CoreDataStorage.swift in Sources */,
+				88F31663256F81390039F3B6 /* AnimationController.swift in Sources */,
 				889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */,
 				889CC201252328D500A1812F /* ConversationModel.swift in Sources */,
 				883F7762255E5EAC00959C50 /* RequestsFactory.swift in Sources */,

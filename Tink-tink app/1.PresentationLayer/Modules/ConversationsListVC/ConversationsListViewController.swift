@@ -134,6 +134,7 @@ extension ConversationsListViewController {
   private func openProfileVC() {
     guard let presentationAssembly = self.presentationAssembly else { return }
     let profileVC = presentationAssembly.profileViewController()
+    profileVC.transitioningDelegate = self
     self.present(profileVC, animated: true)
   }
   
@@ -166,5 +167,21 @@ extension ConversationsListViewController {
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
     avatarView.isUserInteractionEnabled = true
     avatarView.addGestureRecognizer(tapGestureRecognizer)
+  }
+}
+
+extension ConversationsListViewController: UIViewControllerTransitioningDelegate {
+  
+  func animationController(forPresented presented: UIViewController,
+                           presenting: UIViewController,
+                           source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return AnimationController(animationDuration: 2.5,
+                               animationType: .present)
+  }
+  
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    
+    return AnimationController(animationDuration: 2.5,
+                               animationType: .dismiss)
   }
 }

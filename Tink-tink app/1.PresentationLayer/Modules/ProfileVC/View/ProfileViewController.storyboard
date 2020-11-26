@@ -12,7 +12,7 @@
         <!--Profile View Controller-->
         <scene sceneID="3DN-LA-fsX">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="ySx-SM-L9v" customClass="ProfileViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" modalPresentationStyle="overFullScreen" id="ySx-SM-L9v" customClass="ProfileViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mvs-x0-am0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
