@@ -22,7 +22,7 @@ final class ThemesViewController: UIViewController {
   private var themeMode: ThemeMode = .classic
   
   //DEPENDENCY
-  var model: IThemeModel?
+  private var model: IThemeModel!
   
   // MARK: Closure
   var didChangeTheme: (() -> Void)?
@@ -32,6 +32,10 @@ final class ThemesViewController: UIViewController {
     setupNavigation()
     setupUI()
     applyTheme()
+  }
+  
+  func setupDepenencies(model: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
+    self.model = model
   }
   
   @IBAction private func classicButtonTapped(_ sender: ThemeButton) {

@@ -13,11 +13,14 @@ protocol ICoreAssembly {
   var profileStorage: IProfileStorage { get }
   var firebaseStorage: IFirebaseStorage { get }
   var themeStorage: IThemeStorage { get }
+  var networkDataFetcher: INetworkDataFetcher { get }
 }
 
 class CoreAssembly: ICoreAssembly {
+  
   lazy var profileStorage: IProfileStorage = ProfileStorage()
   lazy var coreDataStorage: ICoreDataStorage = CoreDataStorage()
   lazy var firebaseStorage: IFirebaseStorage = FirebaseStorage()
   lazy var themeStorage: IThemeStorage = ThemeStorage()
+  lazy var networkDataFetcher: INetworkDataFetcher = NetworkDataFetcher()
 }

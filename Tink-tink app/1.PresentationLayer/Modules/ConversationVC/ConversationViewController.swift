@@ -21,8 +21,8 @@ final class ConversationViewController: UIViewController {
   var channel: Channel_db!
   
   //DEPENDENCY
-  var model: IConversationModel?
-  var themeModel: IThemeModel?
+  var model: IConversationModel!
+  var themeModel: IThemeModel!
   
   // MARK: - FetchedResultsController
   var fetchedResultsController: NSFetchedResultsController<Message_db>!
@@ -41,19 +41,28 @@ final class ConversationViewController: UIViewController {
     loadMessages()
   }
   
+  func setupDepenencies(model: IConversationModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
+    self.model = model
+    self.themeModel = themeModel
+  }
+  
   // MARK: - Private methods
   private func loadMessages() {
     guard let model = self.model else { return }
     model.getMessages(channel: channel)
     fetchedResultsController = model.fetchedResultController(channel: channel)
     try? self.fetchedResultsController.performFetch()
-    self.fetchedResultsController.delegate = self
-    // self.scrollToBottom()
-    
+    self.fetchedResultsController.delegate = self        
+  }
+  
+  override func viewWillLayoutSubviews() {
+      self.scrollToBottom()
   }
   
   private func scrollToBottom(){
-    let indexPath = IndexPath(item: self.fetchedResultsController.fetchedObjects?.count ?? 1 - 1, section: 0)
+    guard let item = self.fetchedResultsController.fetchedObjects?.count
+    else { return }
+    let indexPath = IndexPath(item: item - 1, section: 0)
     if indexPath != [0, -1] {
       self.tableView.scrollToRow(at:  indexPath, at: .bottom, animated: true)
     }

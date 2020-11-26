@@ -18,9 +18,9 @@ final class ConversationsListViewController: UIViewController {
   private var searchController = UISearchController(searchResultsController: nil)
   
   //DEPENDENCY
-  var presentationAssembly: IPresentationAssembly?
-  var model: IConversationsListModel?
-  var themeModel: IThemeModel?
+  private var presentationAssembly: IPresentationAssembly!
+  var model: IConversationsListModel!
+  var themeModel: IThemeModel!
   
   // MARK: - FetchedResultsController
   var fetchedResultsController: NSFetchedResultsController<Channel_db>!
@@ -37,6 +37,12 @@ final class ConversationsListViewController: UIViewController {
     super.viewDidAppear(animated)
     setupMiniature()
     updateTheme()
+  }
+  
+  func setupDepenencies(model: IConversationsListModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
+    self.model = model
+    self.themeModel = themeModel
+    self.presentationAssembly = presentationAssembly
   }
   
   // MARK: - Private methods
@@ -65,6 +71,49 @@ final class ConversationsListViewController: UIViewController {
   
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
+  }
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    guard let sections = fetchedResultsController?.sections else { return 0 }
+    return sections[section].numberOfObjects
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    let cell = tableView.dequeueCell(ConversationTableViewCell.self, for: indexPath)
+    let channel = fetchedResultsController.object(at: indexPath)
+    cell.themeModel = themeModel
+    cell.configure(model: channel)
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let presentationAssembly = self.presentationAssembly else { return }
+    let conversationVC = presentationAssembly.conversationViewController()
+    let channel = fetchedResultsController.object(at: indexPath)
+    conversationVC.title = channel.name
+    conversationVC.channel = channel
+    self.navigationController?.pushViewController(conversationVC, animated: true)
+  }
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    navigationItem.hidesSearchBarWhenScrolling = true
+  }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    .delete
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      let channel = fetchedResultsController.object(at: indexPath)
+      guard let model = self.model else { return }
+      model.deleteChannel(channel: channel)
+    }
   }
 }
 
