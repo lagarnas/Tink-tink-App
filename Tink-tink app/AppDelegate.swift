@@ -26,8 +26,7 @@ import Firebase
     coreDataStorage?.didUpdateDataBase = { $0.printDatabaseStatistics() }
     coreDataStorage?.enableObservers()
     
-    self.window = UIWindow(frame: UIScreen.main.bounds)
-
+    self.window = MyWindow(frame: UIScreen.main.bounds) as MyWindow
     self.window?.rootViewController = rootAssembly.presentationAssembly.entryPoint()
     self.window?.makeKeyAndVisible()
     

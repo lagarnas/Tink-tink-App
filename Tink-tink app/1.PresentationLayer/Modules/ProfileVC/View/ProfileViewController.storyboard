@@ -17,21 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-jQ-ouh">
-                                <rect key="frame" x="0.0" y="44" width="375" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="cZb-0q-oF4"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="My Profile" largeTitleDisplayMode="always" id="T1L-rW-LBE">
-                                        <barButtonItem key="leftBarButtonItem" title="Close" id="x3h-yg-dMf">
-                                            <connections>
-                                                <action selector="closeButtonTapped:" destination="ySx-SM-L9v" id="cMc-dg-K53"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ik5-Tl-sc2">
                                 <rect key="frame" x="0.0" y="144" width="375" height="668"/>
                                 <subviews>
@@ -207,6 +192,26 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="gUH-56-bxD"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="L3f-CD-gCZ"/>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-jQ-ouh">
+                                <rect key="frame" x="0.0" y="44" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="cZb-0q-oF4"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="My Profile" largeTitleDisplayMode="always" id="T1L-rW-LBE">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="x3h-yg-dMf">
+                                            <connections>
+                                                <action selector="closeButtonTapped:" destination="ySx-SM-L9v" id="cMc-dg-K53"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-PI-P6C" customClass="EmblemParticleView" customModule="Tink_tink_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="1" width="375" height="811"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JJi-he-l2R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -231,6 +236,7 @@
                         <outlet property="constraintContentHeight" destination="pI2-US-x3G" id="1y3-Dl-wqu"/>
                         <outlet property="contentView" destination="9rb-2m-cso" id="xuu-7q-Gcg"/>
                         <outlet property="editButton" destination="fEf-0d-VAr" id="B5F-m7-HLU"/>
+                        <outlet property="emblemView" destination="Isq-PI-P6C" id="mFz-Bx-PdD"/>
                         <outlet property="nameLabel" destination="kUm-Fj-Bpw" id="Ivt-jV-eHM"/>
                         <outlet property="nameSeparator" destination="XWT-23-zpA" id="8Pg-HL-5UW"/>
                         <outlet property="nameTextField" destination="jRY-cX-n04" id="AA3-1c-Fsc"/>
@@ -243,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3a-gh-MV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-551.25" y="-57.04225352112676"/>
+            <point key="canvasLocation" x="-552.79999999999995" y="-57.635467980295566"/>
         </scene>
     </scenes>
     <resources>

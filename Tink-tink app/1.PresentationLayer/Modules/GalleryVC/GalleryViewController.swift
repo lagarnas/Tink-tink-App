@@ -17,6 +17,7 @@ class GalleryViewController: UIViewController {
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var galleryCollectionView: UICollectionView!
   
+  @IBOutlet weak var emblemView: EmblemParticleView!
   private var model: IGalleryModel!
   
   weak var delegate: GalleryViewControllerDelegate?

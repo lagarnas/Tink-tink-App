@@ -66,6 +66,11 @@
                                     <navigationItem title="Select image" id="UBi-jP-e8I"/>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gc9-rY-MOA" customClass="EmblemParticleView" customModule="Tink_tink_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jvF-pD-PWi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -81,6 +86,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="XcU-vA-Yzd" id="EJp-Ih-IHq"/>
+                        <outlet property="emblemView" destination="Gc9-rY-MOA" id="ZS7-1I-0up"/>
                         <outlet property="galleryCollectionView" destination="Wjb-oO-7Er" id="i7S-Sa-Ys6"/>
                     </connections>
                 </viewController>

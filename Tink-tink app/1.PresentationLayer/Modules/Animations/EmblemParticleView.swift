@@ -9,44 +9,76 @@
 import Foundation
 import UIKit
 
-//extension UIView {
-//  open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//    print(self, #function)
-//    next?.touchesBegan(touches, with: event)
-//  }
-//}
+class MyWindow: UIWindow {
+  
+  var didStartAnimate: ((_ point: CGPoint) -> Void)?
+  var didStopAnimate: (() -> Void)?
+      
+  override func sendEvent(_ event: UIEvent) {
+    
+    if event.type == .touches {
+      if let count = event.allTouches?.filter({ $0.phase == .began }).count, count > 0 {
+      //  print("window found \(count) touches began")
+        guard let point = event.allTouches?.first?.location(in: self) else { return }
+        didStartAnimate?(point)
+      }
+      if let count = event.allTouches?.filter({ $0.phase == .ended }).count, count > 0 {
+       // print("window found \(count) touches ended")
+        
+        didStopAnimate?()
+      }
+    }
+    super.sendEvent(event)
+  }
+}
 
 class EmblemParticleView: UIView {
+  
   // main emitter layer
   var emitter: CAEmitterLayer!
   
   override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     let view = super.hitTest(point, with: event)
-    print(point)
-     startAnimation(point: point)
-    if view === self {
-      return nil
+    startAnimation(point: point)
+    
+    let window = self.window as? MyWindow
+    
+    window?.didStopAnimate = { [weak self] in
+      self?.stopAnimation()
     }
-    return view
+        if view === self {
+          return nil
+        }
+        return view
   }
     
   override func layoutSubviews() {
     super.layoutSubviews()
     emitter = CAEmitterLayer()
+    emitter.emitterSize = CGSize(width: self.frame.width / 2, height: self.frame.width / 3)
+    emitter.fillMode = .removed
+    emitter.renderMode = .backToFront
+    emitter.emitterShape = .point
     layer.addSublayer(emitter)
   }
   
   func startAnimation(point: CGPoint) {
-
-    emitter.fillMode = .removed
-    emitter.emitterPosition = point
-    emitter.fillMode = .removed
-    emitter.renderMode = .backToFront
-    emitter.emitterSize = CGSize(width: frame.width / 2, height: frame.width / 3)
-    emitter.emitterShape = .point
-    emitter.beginTime = CACurrentMediaTime()
-    emitter.emitterCells = [makeEmblemCell()]
-
+      self.emitter.emitterPosition = point
+      self.emitter.beginTime = CACurrentMediaTime()
+      self.emitter.emitterCells = [self.makeEmblemCell()]
+  }
+  
+  func startAnimation() {
+    let window = self.window as? MyWindow
+    window?.didStartAnimate = { [weak self] in
+      guard let self = self else {
+        return
+        
+      }
+      self.emitter.emitterPosition = $0
+      self.emitter.beginTime = CACurrentMediaTime()
+      self.emitter.emitterCells = [self.makeEmblemCell()]
+    }
   }
   
   func makeEmblemCell() -> CAEmitterCell {
@@ -56,9 +88,9 @@ class EmblemParticleView: UIView {
     cell.scaleRange = 0.3
     cell.emissionRange = .pi
     cell.lifetime = 1
-    cell.birthRate = 10
+    cell.birthRate = 15
     
-    cell.velocity = 40
+    cell.velocity = 60
     cell.velocityRange = -20
     
     cell.spin = -0.5
@@ -68,12 +100,16 @@ class EmblemParticleView: UIView {
   }
   
   func stopAnimation() {
-    emitter?.birthRate = 0
-    emitter?.removeFromSuperlayer()
+    let window = self.window as? MyWindow
+    window?.didStopAnimate = { [weak self] in
+      self?.emitter?.birthRate = 0
+      self?.emitter?.removeFromSuperlayer()
+    }
+    self.emitter?.birthRate = 0
+    self.emitter?.removeFromSuperlayer()
   }
   
   deinit {
-    print("deinit")
     emitter?.removeFromSuperlayer()
   }
 }

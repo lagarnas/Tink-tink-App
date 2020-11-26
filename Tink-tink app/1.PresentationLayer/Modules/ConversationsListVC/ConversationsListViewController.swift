@@ -40,6 +40,12 @@ final class ConversationsListViewController: UIViewController {
     setupMiniature()
     updateTheme()
   }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    print(#function)
+    emblemView.stopAnimation()
+  }
     
   func setupDepenencies(model: IConversationsListModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model

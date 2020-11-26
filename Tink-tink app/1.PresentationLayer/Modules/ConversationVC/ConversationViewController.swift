@@ -43,6 +43,12 @@ final class ConversationViewController: UIViewController {
     loadMessages()
   }
   
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    print(#function)
+    emblemView.stopAnimation()
+  }
+  
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
     emblemView.stopAnimation()

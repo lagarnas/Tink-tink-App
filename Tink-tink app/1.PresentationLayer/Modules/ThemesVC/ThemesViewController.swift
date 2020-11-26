@@ -36,19 +36,17 @@ final class ThemesViewController: UIViewController {
     applyTheme()
   }
   
-//  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//    super.touchesBegan(touches, with: event)
-//    if let touch = touches.first {
-//        let position = touch.location(in: emblemView)
-//      emblemView.startAnimation(point: position)
-//    }
-//  }
-//
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    emblemView.stopAnimation()
+  }
+  
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
     emblemView.stopAnimation()
   }
-//
+
   func setupDepenencies(model: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
   }

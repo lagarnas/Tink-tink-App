@@ -35,7 +35,7 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var bioSeparator: UIView!
   @IBOutlet weak var editButton: UIButton!
   
- // @IBOutlet weak var emblemView: EmblemParticleView!
+  @IBOutlet weak var emblemView: EmblemParticleView!
   
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
@@ -61,6 +61,7 @@ final class ProfileViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+    emblemView.stopAnimation()
     editButton.layer.cornerRadius = 10
     editButton.layer.borderWidth = 2
     editButton.layer.borderColor = UIColor.black.cgColor
