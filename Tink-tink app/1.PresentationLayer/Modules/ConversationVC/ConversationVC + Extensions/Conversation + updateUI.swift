@@ -21,11 +21,11 @@ extension ConversationViewController: UITextFieldDelegate {
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
+    emblemView.stopAnimation()
     self.view.layoutIfNeeded()
     UIView.animate(withDuration: 0.5, animations: {
       self.dockViewHeightConstraint.constant = 80
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
-  
 }

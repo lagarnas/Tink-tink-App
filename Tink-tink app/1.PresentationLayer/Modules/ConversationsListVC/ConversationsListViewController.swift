@@ -17,6 +17,8 @@ final class ConversationsListViewController: UIViewController {
   @IBOutlet weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
+  @IBOutlet weak var emblemView: EmblemParticleView!
+  
   //DEPENDENCY
   private var presentationAssembly: IPresentationAssembly!
   var model: IConversationsListModel!
@@ -38,7 +40,7 @@ final class ConversationsListViewController: UIViewController {
     setupMiniature()
     updateTheme()
   }
-  
+    
   func setupDepenencies(model: IConversationsListModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
     self.themeModel = themeModel
@@ -92,6 +94,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    emblemView.stopAnimation()
     guard let presentationAssembly = self.presentationAssembly else { return }
     let conversationVC = presentationAssembly.conversationViewController()
     let channel = fetchedResultsController.object(at: indexPath)
@@ -101,6 +104,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    emblemView.stopAnimation()
     navigationItem.hidesSearchBarWhenScrolling = true
   }
   

@@ -17,6 +17,8 @@ final class ConversationViewController: UIViewController {
   @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var dockView: UIView!
   
+  @IBOutlet weak var emblemView: EmblemParticleView!
+  
   private var keyboardHeight: CGFloat = 0
   var channel: Channel_db!
   
@@ -41,6 +43,11 @@ final class ConversationViewController: UIViewController {
     loadMessages()
   }
   
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    emblemView.stopAnimation()
+  }
+  
   func setupDepenencies(model: IConversationModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
     self.themeModel = themeModel
@@ -60,6 +67,7 @@ final class ConversationViewController: UIViewController {
   }
   
   private func scrollToBottom(){
+    emblemView.stopAnimation()
     guard let item = self.fetchedResultsController.fetchedObjects?.count
     else { return }
     let indexPath = IndexPath(item: item - 1, section: 0)
@@ -70,6 +78,7 @@ final class ConversationViewController: UIViewController {
   
   // MARK: - @IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
+    emblemView.stopAnimation()
     self.messageTextField.endEditing(true)
     guard let channel = self.channel else { return }
     guard let message = messageTextField.text else { return }
@@ -95,11 +104,13 @@ extension ConversationViewController {
   
   @objc
   private func tableViewTapped() {
+    emblemView.stopAnimation()
     self.messageTextField.endEditing(true)
   }
   
   @objc
   private func handle(keyboardShowNotification notification: Notification) {
+    emblemView.stopAnimation()
     if let userInfo = notification.userInfo,
        let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
        let duration: TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {

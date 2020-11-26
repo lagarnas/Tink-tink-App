@@ -9,34 +9,44 @@
 import Foundation
 import UIKit
 
+//extension UIView {
+//  open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    print(self, #function)
+//    next?.touchesBegan(touches, with: event)
+//  }
+//}
+
 class EmblemParticleView: UIView {
   // main emitter layer
   var emitter: CAEmitterLayer!
   
   override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     let view = super.hitTest(point, with: event)
-
+    print(point)
+     startAnimation(point: point)
     if view === self {
-      //startAnimation(point: point)
       return nil
     }
     return view
   }
+    
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    emitter = CAEmitterLayer()
+    layer.addSublayer(emitter)
+  }
   
   func startAnimation(point: CGPoint) {
-    emitter = CAEmitterLayer()
+
     emitter.fillMode = .removed
     emitter.emitterPosition = point
+    emitter.fillMode = .removed
     emitter.renderMode = .backToFront
     emitter.emitterSize = CGSize(width: frame.width / 2, height: frame.width / 3)
     emitter.emitterShape = .point
-    //snowLayer.emitterZPosition = 20
     emitter.beginTime = CACurrentMediaTime()
-    //    snowLayer.timeOffset = CFTimeInterval(arc4random_uniform(6) + 5)
     emitter.emitterCells = [makeEmblemCell()]
-    //emitter.delegate = self
-    
-    layer.addSublayer(emitter)
+
   }
   
   func makeEmblemCell() -> CAEmitterCell {
@@ -45,8 +55,8 @@ class EmblemParticleView: UIView {
     cell.scale = 0.03
     cell.scaleRange = 0.3
     cell.emissionRange = .pi
-    cell.lifetime = 1.2
-    cell.birthRate = 15
+    cell.lifetime = 1
+    cell.birthRate = 10
     
     cell.velocity = 40
     cell.velocityRange = -20
@@ -59,6 +69,11 @@ class EmblemParticleView: UIView {
   
   func stopAnimation() {
     emitter?.birthRate = 0
-    emitter.removeFromSuperlayer()
+    emitter?.removeFromSuperlayer()
+  }
+  
+  deinit {
+    print("deinit")
+    emitter?.removeFromSuperlayer()
   }
 }

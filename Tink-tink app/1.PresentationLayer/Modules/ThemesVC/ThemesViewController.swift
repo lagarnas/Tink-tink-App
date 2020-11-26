@@ -36,24 +36,25 @@ final class ThemesViewController: UIViewController {
     applyTheme()
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
-    if let touch = touches.first {
-        let position = touch.location(in: emblemView)
-      emblemView.startAnimation(point: position)
-    }
-  }
-  
+//  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    super.touchesBegan(touches, with: event)
+//    if let touch = touches.first {
+//        let position = touch.location(in: emblemView)
+//      emblemView.startAnimation(point: position)
+//    }
+//  }
+//
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
     emblemView.stopAnimation()
   }
-    
+//
   func setupDepenencies(model: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
   }
   
   @IBAction private func classicButtonTapped(_ sender: ThemeButton) {
+    emblemView.stopAnimation()
     unSelectAll()
     sender.isSelected = true
     themeMode = .classic
@@ -64,6 +65,7 @@ final class ThemesViewController: UIViewController {
   }
   
   @IBAction private func dayButtonTapped(_ sender: ThemeButton) {
+    emblemView.stopAnimation()
     unSelectAll()
     sender.isSelected = true
     themeMode = .day
@@ -74,6 +76,7 @@ final class ThemesViewController: UIViewController {
   }
   
   @IBAction private func nightButtonTapped(_ sender: ThemeButton) {
+    emblemView.stopAnimation()
     unSelectAll()
     sender.isSelected = true
     themeMode = .night

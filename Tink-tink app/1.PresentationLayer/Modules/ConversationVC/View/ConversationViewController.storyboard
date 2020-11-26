@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6kM-x7-l4C">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="ConversationViewController" id="6kM-x7-l4C" customClass="ConversationViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gwe-3b-dMn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SE3-nI-KS2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="772"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="6kM-x7-l4C" id="6zp-uw-ASF"/>
@@ -26,16 +26,16 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXk-rP-Avi" userLabel="dockView">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="816" width="414" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="240" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="You message here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7WV-mw-tG2">
-                                        <rect key="frame" x="20" y="15" width="290" height="34"/>
+                                        <rect key="frame" x="20" y="15" width="329" height="34"/>
                                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fou-k6-orO">
-                                        <rect key="frame" x="320" y="20" width="36" height="30"/>
+                                        <rect key="frame" x="359" y="20" width="36" height="30"/>
                                         <state key="normal" title="Send"/>
                                         <connections>
                                             <action selector="sendButtonTapped:" destination="6kM-x7-l4C" eventType="touchUpInside" id="TKN-4a-QXZ"/>
@@ -52,22 +52,31 @@
                                     <constraint firstAttribute="height" constant="80" id="k0Q-qK-LXE"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MOD-vw-a1g" customClass="EmblemParticleView" customModule="Tink_tink_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cqK-lR-8Pb"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="MOD-vw-a1g" firstAttribute="trailing" secondItem="cqK-lR-8Pb" secondAttribute="trailing" id="214-hW-22J"/>
                             <constraint firstAttribute="trailing" secondItem="SE3-nI-KS2" secondAttribute="trailing" id="2mk-9G-OdH"/>
                             <constraint firstItem="SE3-nI-KS2" firstAttribute="top" secondItem="cqK-lR-8Pb" secondAttribute="top" id="6ZY-wc-nVE"/>
+                            <constraint firstItem="MOD-vw-a1g" firstAttribute="leading" secondItem="cqK-lR-8Pb" secondAttribute="leading" id="Q72-td-cgp"/>
                             <constraint firstItem="zXk-rP-Avi" firstAttribute="top" secondItem="SE3-nI-KS2" secondAttribute="bottom" id="ZUm-Dr-CxX"/>
+                            <constraint firstItem="MOD-vw-a1g" firstAttribute="bottom" secondItem="gwe-3b-dMn" secondAttribute="bottom" id="dXW-oF-UKC"/>
                             <constraint firstItem="SE3-nI-KS2" firstAttribute="leading" secondItem="cqK-lR-8Pb" secondAttribute="leading" id="fCM-Lp-XrE"/>
                             <constraint firstAttribute="bottom" secondItem="zXk-rP-Avi" secondAttribute="bottom" id="hb1-4X-BQZ"/>
                             <constraint firstItem="cqK-lR-8Pb" firstAttribute="trailing" secondItem="zXk-rP-Avi" secondAttribute="trailing" id="iP3-DL-R6Q"/>
+                            <constraint firstItem="MOD-vw-a1g" firstAttribute="top" secondItem="gwe-3b-dMn" secondAttribute="top" id="uCT-bM-uS6"/>
                             <constraint firstItem="zXk-rP-Avi" firstAttribute="leading" secondItem="cqK-lR-8Pb" secondAttribute="leading" id="vK5-gU-tN9"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dockView" destination="zXk-rP-Avi" id="Psu-9i-45y"/>
                         <outlet property="dockViewHeightConstraint" destination="k0Q-qK-LXE" id="58J-lu-Nfe"/>
+                        <outlet property="emblemView" destination="MOD-vw-a1g" id="uc7-Ep-QAF"/>
                         <outlet property="messageTextField" destination="7WV-mw-tG2" id="2rz-Lb-jJ7"/>
                         <outlet property="sendButton" destination="Fou-k6-orO" id="eic-FA-QNO"/>
                         <outlet property="tableView" destination="SE3-nI-KS2" id="oay-UL-unC"/>
