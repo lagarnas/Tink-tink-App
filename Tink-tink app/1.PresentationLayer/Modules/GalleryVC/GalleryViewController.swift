@@ -33,46 +33,51 @@ class GalleryViewController: UIViewController {
   func setupDepenencies(model: IGalleryModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
   }
+  @IBAction func closeButton(_ sender: UIBarButtonItem) {
+    self.dismiss(animated: true)
+  }
   
 }
 
 extension GalleryViewController: IGalleryModelDelegate {
   func onFetchCompleted(_ galleryModel: GalleryModel) {
     activityIndicator.stopAnimating()
-    self.galleryCollectionView.reloadData()
-    
+    galleryCollectionView.reloadData()
   }
   
   func onFetchFailed(error: Error) {
-    print(error.localizedDescription)
+    activityIndicator.stopAnimating()
+    galleryCollectionView.reloadData()
+    self.alert(title: "Error", message: error.localizedDescription, style: .alert)
   }
 }
 
 extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
     return model.currentCount
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueCell(ImageCollectionViewCell.self, for: indexPath)
     
-    let displayModel = model.galleryOfImages[indexPath.item]
-    cell.configure(galleryDisplayModel: displayModel)
+    if model.galleryOfImages.isEmpty {
+      cell.configure(galleryDisplayModel: nil)
+    } else {
+      let displayModel = model.galleryOfImages[indexPath.item]
+      cell.configure(galleryDisplayModel: displayModel)
+    }
+    
     return cell
     
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print(indexPath.item)
-    let urlImage = model.galleryOfImages[indexPath.item].urlImage
+    let urlImage = model.galleryOfImages[indexPath.item].urlImageData
     
-    guard let resource = URL(string: urlImage) else { return  }
-    do {
-      let data = try Data(contentsOf: resource)
-      delegate?.updateProfile(self, urlImageData: data)
-    } catch {}
-    
+    delegate?.updateProfile(self, urlImageData: urlImage)
     self.dismiss(animated: true)
     
   }

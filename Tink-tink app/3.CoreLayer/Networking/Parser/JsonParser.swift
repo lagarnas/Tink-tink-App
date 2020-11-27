@@ -31,7 +31,7 @@ class JsonParser: IParser {
     
   func parse(data: Data) -> Model? {
     do {      
-      let response = try decoder.decode(Model.self, from: data)      
+      let response = try decoder.decode(Model.self, from: data)
       return response
     } catch let error {
       print(error.localizedDescription)

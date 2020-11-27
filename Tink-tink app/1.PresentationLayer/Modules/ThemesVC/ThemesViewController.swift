@@ -35,8 +35,7 @@ final class ThemesViewController: UIViewController {
     setupUI()
     applyTheme()
   }
-  
-  
+    
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     emblemView.stopAnimation()

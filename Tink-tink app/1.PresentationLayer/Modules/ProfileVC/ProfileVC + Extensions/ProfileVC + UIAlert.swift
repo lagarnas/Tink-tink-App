@@ -10,16 +10,6 @@ import UIKit
 
 extension ProfileViewController {
   
-  func alert(title: String, message: String, style: UIAlertController.Style) {
-    let alertController = UIAlertController(title: title,
-                                            message: message,
-                                            preferredStyle: style)
-    
-    let action = UIAlertAction(title: "OK", style: .default)
-    alertController.addAction(action)
-    self.present(alertController, animated: true, completion: nil)
-  }
-  
   func alertError(title: String, message: String, style: UIAlertController.Style) {
     let alertController = UIAlertController(title: title,
                                             message: message,

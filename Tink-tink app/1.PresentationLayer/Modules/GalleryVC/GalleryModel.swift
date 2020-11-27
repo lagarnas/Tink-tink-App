@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 struct GalleryDisplayModel {
-  let urlImage: String
+  let urlImageData: Data
 }
 
 protocol IGalleryModel {
+  var cellsCount: Int { get }
   var currentCount: Int { get }
   
   var galleryOfImages: [GalleryDisplayModel] { get set }
@@ -28,7 +29,7 @@ protocol IGalleryModelDelegate: class {
 }
 
 class GalleryModel: IGalleryModel {
-  
+
   var galleryOfImages = [GalleryDisplayModel]()
   
   weak var delegate: IGalleryModelDelegate?
@@ -39,7 +40,11 @@ class GalleryModel: IGalleryModel {
   }
   
   var currentCount: Int {
-    galleryOfImages.count
+      galleryOfImages.count
+  }
+  
+  var cellsCount: Int {
+    100
   }
   
   func fetchGallery() {
@@ -49,11 +54,15 @@ class GalleryModel: IGalleryModel {
       case .success(let response):
         print(Thread.current)
         self.galleryOfImages.append(contentsOf: response.hits.getGallery())
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async {
           self.delegate?.onFetchCompleted(self)
         }
+        
       case .failure(let error):
-        self.delegate?.onFetchFailed(error: error)
+        DispatchQueue.main.async {
+          self.delegate?.onFetchFailed(error: error)
+        }
+        
       }
     }
   }
@@ -61,8 +70,15 @@ class GalleryModel: IGalleryModel {
 
 extension Array where Element == Hit {
   func getGallery() -> [GalleryDisplayModel] {
-    self.map { hit -> GalleryDisplayModel in
-      GalleryDisplayModel(urlImage: hit.previewURL)
+    var data = Data()
+    return self.map { hit -> GalleryDisplayModel in
+      if let resource = URL(string: hit.previewURL) {
+        do {
+          print(Thread.current)
+          data = try Data(contentsOf: resource)
+        } catch {}
+      }  
+      return GalleryDisplayModel(urlImageData: data)
     }
   }
 }
