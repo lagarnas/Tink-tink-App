@@ -52,7 +52,6 @@ class GalleryModel: IGalleryModel {
       guard let self = self else { return }
       switch result {
       case .success(let response):
-        print(Thread.current)
         self.galleryOfImages.append(contentsOf: response.hits.getGallery())
         DispatchQueue.main.async {
           self.delegate?.onFetchCompleted(self)
@@ -74,7 +73,6 @@ extension Array where Element == Hit {
     return self.map { hit -> GalleryDisplayModel in
       if let resource = URL(string: hit.previewURL) {
         do {
-          print(Thread.current)
           data = try Data(contentsOf: resource)
         } catch {}
       }  
