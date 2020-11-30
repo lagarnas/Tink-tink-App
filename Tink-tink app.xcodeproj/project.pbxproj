@@ -17,6 +17,8 @@
 		8809DAE7250B486900E4365A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE6250B486900E4365A /* Assets.xcassets */; };
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
 		880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 880F1CC02539FAF00018C52D /* GoogleService-Info.plist */; };
+		88155571257517D00061C788 /* LoaderImagesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155570257517D00061C788 /* LoaderImagesServiceTests.swift */; };
+		8815558B257518F40061C788 /* LoaderImagesServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155587257518ED0061C788 /* LoaderImagesServiceMock.swift */; };
 		882461582574C7F800505754 /* APIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882461572574C7F800505754 /* APIResponseModels.swift */; };
 		883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */; };
 		883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */; };
@@ -79,7 +81,18 @@
 		88B638502562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */; };
 		88BCF75F251C702600CA81A7 /* OSLog + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */; };
 		88F31663256F81390039F3B6 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F31662256F81390039F3B6 /* AnimationController.swift */; };
+		F2F3F7D35CC229CAB2F38256 /* Pods_TinkTinkUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A2B2CD753DD20DD07AB277 /* Pods_TinkTinkUnitTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		88155573257517D00061C788 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8809DAD2250B486500E4365A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8809DAD9250B486500E4365A;
+			remoteInfo = "Tink-tink app";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1140951E44D5D255083898D5 /* Pods_Tink_tink_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tink_tink_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +108,10 @@
 		8809DAE9250B486900E4365A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8809DAEB250B486900E4365A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		880F1CC02539FAF00018C52D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8815556E257517D00061C788 /* TinkTinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkTinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88155570257517D00061C788 /* LoaderImagesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderImagesServiceTests.swift; sourceTree = "<group>"; };
+		88155572257517D00061C788 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88155587257518ED0061C788 /* LoaderImagesServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderImagesServiceMock.swift; sourceTree = "<group>"; };
 		882461572574C7F800505754 /* APIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModels.swift; sourceTree = "<group>"; };
 		883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UITextField + UITextView.swift"; sourceTree = "<group>"; };
 		883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + lifeCycleVC.swift"; sourceTree = "<group>"; };
@@ -152,11 +169,14 @@
 		889CC1FB2523288D00A1812F /* IncomingMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageTableViewCell.xib; sourceTree = "<group>"; };
 		889CC200252328D500A1812F /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		88A152BA25348AF4001E2480 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		88A2B2CD753DD20DD07AB277 /* Pods_TinkTinkUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinkTinkUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B6382F256192C6001BEA7A /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		88B6383525624C2B001BEA7A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		88B6384F2562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
 		88BCF75E251C702600CA81A7 /* OSLog + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog + Extension.swift"; sourceTree = "<group>"; };
 		88F31662256F81390039F3B6 /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		AD1299ACCEF73F87ED0E3268 /* Pods-TinkTinkUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkTinkUnitTests.release.xcconfig"; path = "Target Support Files/Pods-TinkTinkUnitTests/Pods-TinkTinkUnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		C46EF48F2C5AEE6271679588 /* Pods-TinkTinkUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinkTinkUnitTests.debug.xcconfig"; path = "Target Support Files/Pods-TinkTinkUnitTests/Pods-TinkTinkUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tink-tink app.debug.xcconfig"; path = "Target Support Files/Pods-Tink-tink app/Pods-Tink-tink app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +186,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				30904886970EA7F4238CB525 /* Pods_Tink_tink_app.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8815556B257517D00061C788 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2F3F7D35CC229CAB2F38256 /* Pods_TinkTinkUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				8809DADC250B486500E4365A /* Tink-tink app */,
+				8815556F257517D00061C788 /* TinkTinkUnitTests */,
 				8809DADB250B486500E4365A /* Products */,
 				F0700BA301DCE3857F5D0ADE /* Pods */,
 				BF43BE9B424509BA93C410E8 /* Frameworks */,
@@ -209,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				8809DADA250B486500E4365A /* Tink-tink app.app */,
+				8815556E257517D00061C788 /* TinkTinkUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,6 +256,16 @@
 				8809DAEB250B486900E4365A /* Info.plist */,
 			);
 			path = "Tink-tink app";
+			sourceTree = "<group>";
+		};
+		8815556F257517D00061C788 /* TinkTinkUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				88155570257517D00061C788 /* LoaderImagesServiceTests.swift */,
+				88155587257518ED0061C788 /* LoaderImagesServiceMock.swift */,
+				88155572257517D00061C788 /* Info.plist */,
+			);
+			path = TinkTinkUnitTests;
 			sourceTree = "<group>";
 		};
 		883DBB4E2532DE7500FA425C /* ProfileVC + Extensions */ = {
@@ -569,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				1140951E44D5D255083898D5 /* Pods_Tink_tink_app.framework */,
+				88A2B2CD753DD20DD07AB277 /* Pods_TinkTinkUnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -578,6 +619,8 @@
 			children = (
 				F9B1E9D83EC27EEE0CC2190B /* Pods-Tink-tink app.debug.xcconfig */,
 				3B4BA66D6AE2E79B96B0CE6B /* Pods-Tink-tink app.release.xcconfig */,
+				C46EF48F2C5AEE6271679588 /* Pods-TinkTinkUnitTests.debug.xcconfig */,
+				AD1299ACCEF73F87ED0E3268 /* Pods-TinkTinkUnitTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -605,6 +648,26 @@
 			productReference = 8809DADA250B486500E4365A /* Tink-tink app.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8815556D257517D00061C788 /* TinkTinkUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88155577257517D00061C788 /* Build configuration list for PBXNativeTarget "TinkTinkUnitTests" */;
+			buildPhases = (
+				58E3E2A81FA2A104D7BB6FD7 /* [CP] Check Pods Manifest.lock */,
+				8815556A257517D00061C788 /* Sources */,
+				8815556B257517D00061C788 /* Frameworks */,
+				8815556C257517D00061C788 /* Resources */,
+				C4762E6777AA25F4B5C1CD37 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88155574257517D00061C788 /* PBXTargetDependency */,
+			);
+			name = TinkTinkUnitTests;
+			productName = TinkTinkUnitTests;
+			productReference = 8815556E257517D00061C788 /* TinkTinkUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -617,6 +680,10 @@
 				TargetAttributes = {
 					8809DAD9250B486500E4365A = {
 						CreatedOnToolsVersion = 11.7;
+					};
+					8815556D257517D00061C788 = {
+						CreatedOnToolsVersion = 12.1;
+						TestTargetID = 8809DAD9250B486500E4365A;
 					};
 				};
 			};
@@ -634,6 +701,7 @@
 			projectRoot = "";
 			targets = (
 				8809DAD9250B486500E4365A /* Tink-tink app */,
+				8815556D257517D00061C788 /* TinkTinkUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -657,9 +725,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8815556C257517D00061C788 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		58E3E2A81FA2A104D7BB6FD7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TinkTinkUnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		880F1CAD2539F6D80018C52D /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -677,6 +774,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		C4762E6777AA25F4B5C1CD37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TinkTinkUnitTests/Pods-TinkTinkUnitTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TinkTinkUnitTests/Pods-TinkTinkUnitTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TinkTinkUnitTests/Pods-TinkTinkUnitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		C5D29E78A82D6DCFAA9ABE0F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -773,6 +887,7 @@
 				8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */,
 				88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */,
 				88B638502562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift in Sources */,
+				8815558B257518F40061C788 /* LoaderImagesServiceMock.swift in Sources */,
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
 				883F7771255EA17100959C50 /* RequestSender.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,
@@ -787,7 +902,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8815556A257517D00061C788 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88155571257517D00061C788 /* LoaderImagesServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		88155574257517D00061C788 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8809DAD9250B486500E4365A /* Tink-tink app */;
+			targetProxy = 88155573257517D00061C788 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8809DAE8250B486900E4365A /* LaunchScreen.storyboard */ = {
@@ -944,6 +1075,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2HQ4RLS97Y;
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "Tink-tink app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -954,6 +1086,60 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		88155575257517D00061C788 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C46EF48F2C5AEE6271679588 /* Pods-TinkTinkUnitTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9G68P5M492;
+				HEADER_SEARCH_PATHS = (
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources/**",
+					"${SRCROOT}/Pods/Firebase/CoreOnly/Sources/**",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TinkTinkUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lagarnas.TinkTinkUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tink-tink app.app/Tink-tink app";
+			};
+			name = Debug;
+		};
+		88155576257517D00061C788 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD1299ACCEF73F87ED0E3268 /* Pods-TinkTinkUnitTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9G68P5M492;
+				HEADER_SEARCH_PATHS = (
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources/**",
+					"${SRCROOT}/Pods/Firebase/CoreOnly/Sources/**",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TinkTinkUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lagarnas.TinkTinkUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tink-tink app.app/Tink-tink app";
 			};
 			name = Release;
 		};
@@ -974,6 +1160,15 @@
 			buildConfigurations = (
 				8809DAEF250B486900E4365A /* Debug */,
 				8809DAF0250B486900E4365A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88155577257517D00061C788 /* Build configuration list for PBXNativeTarget "TinkTinkUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88155575257517D00061C788 /* Debug */,
+				88155576257517D00061C788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
