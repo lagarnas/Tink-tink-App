@@ -52,7 +52,7 @@ class GalleryModel: IGalleryModel {
       guard let self = self else { return }
       switch result {
       case .success(let response):
-        self.galleryOfImages.append(contentsOf: response.hits.getGallery())
+        self.galleryOfImages.append(contentsOf: response.getGallery())
         DispatchQueue.main.async {
           self.delegate?.onFetchCompleted(self)
         }

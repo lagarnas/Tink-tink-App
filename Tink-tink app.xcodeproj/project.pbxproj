@@ -17,6 +17,7 @@
 		8809DAE7250B486900E4365A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE6250B486900E4365A /* Assets.xcassets */; };
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
 		880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 880F1CC02539FAF00018C52D /* GoogleService-Info.plist */; };
+		882461582574C7F800505754 /* APIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882461572574C7F800505754 /* APIResponseModels.swift */; };
 		883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */; };
 		883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */; };
 		883E54CA252782B300315DAD /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E54C9252782B300315DAD /* ThemesViewController.swift */; };
@@ -94,6 +95,7 @@
 		8809DAE9250B486900E4365A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8809DAEB250B486900E4365A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		880F1CC02539FAF00018C52D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		882461572574C7F800505754 /* APIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModels.swift; sourceTree = "<group>"; };
 		883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UITextField + UITextView.swift"; sourceTree = "<group>"; };
 		883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + lifeCycleVC.swift"; sourceTree = "<group>"; };
 		883E54C9252782B300315DAD /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 		883F775F255E5E6200959C50 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				882461572574C7F800505754 /* APIResponseModels.swift */,
 				883F7782255ED4FE00959C50 /* JsonParser.swift */,
 			);
 			path = Parser;
@@ -608,7 +611,7 @@
 		8809DAD2250B486500E4365A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1170;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = lagarnas;
 				TargetAttributes = {
@@ -744,6 +747,7 @@
 				8853591125249F1400469AD6 /* MiniAvatarView.swift in Sources */,
 				883E54E2252B014A00315DAD /* ThemeService.swift in Sources */,
 				88875A8F2542BCA7004513EE /* CoreDataStorage.swift in Sources */,
+				882461582574C7F800505754 /* APIResponseModels.swift in Sources */,
 				88F31663256F81390039F3B6 /* AnimationController.swift in Sources */,
 				889CC1F7252317D500A1812F /* Date + Extension.swift in Sources */,
 				889CC201252328D500A1812F /* ConversationModel.swift in Sources */,
