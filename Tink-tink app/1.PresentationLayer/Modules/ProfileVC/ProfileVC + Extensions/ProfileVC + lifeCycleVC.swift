@@ -27,11 +27,6 @@ extension ProfileViewController {
     super.viewWillLayoutSubviews()
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    os_log("%@", log: .viewCycle, type: .info, #function)
-  }
-  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     os_log("%@", log: .viewCycle, type: .info, #function)

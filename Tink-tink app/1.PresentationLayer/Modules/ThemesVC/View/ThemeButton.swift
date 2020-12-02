@@ -30,6 +30,16 @@ final class ThemeButton: UIButton {
     layer.borderColor = isSelected ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
   }
   
+//  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    super.touchesBegan(touches, with: event)
+//    print("ThemeButton:", #function)
+//  }
+//  
+//  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    super.touchesEnded(touches, with: event)
+//    print("ThemeButton:", #function)
+//  }
+  
   private func setupButton() {
     layer.borderWidth = 1
     layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)

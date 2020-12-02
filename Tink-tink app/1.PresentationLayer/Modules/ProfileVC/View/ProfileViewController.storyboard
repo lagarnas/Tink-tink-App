@@ -12,31 +12,11 @@
         <!--Profile View Controller-->
         <scene sceneID="3DN-LA-fsX">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="ySx-SM-L9v" customClass="ProfileViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" modalPresentationStyle="overFullScreen" id="ySx-SM-L9v" customClass="ProfileViewController" customModule="Tink_tink_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mvs-x0-am0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-jQ-ouh">
-                                <rect key="frame" x="0.0" y="44" width="375" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="cZb-0q-oF4"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="My Profile" largeTitleDisplayMode="always" id="T1L-rW-LBE">
-                                        <barButtonItem key="leftBarButtonItem" title="Close" id="x3h-yg-dMf">
-                                            <connections>
-                                                <action selector="closeButtonTapped:" destination="ySx-SM-L9v" id="cMc-dg-K53"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="sVD-LD-QJg">
-                                            <connections>
-                                                <action selector="editButtonTapped:" destination="ySx-SM-L9v" id="qlh-AF-eMa"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ik5-Tl-sc2">
                                 <rect key="frame" x="0.0" y="144" width="375" height="668"/>
                                 <subviews>
@@ -154,7 +134,7 @@
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TxL-pl-40p" customClass="AvatarView" customModule="Tink_tink_app" customModuleProvider="target">
                                                 <rect key="frame" x="80" y="0.0" width="215" height="215"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="TxL-pl-40p" secondAttribute="height" id="tON-C5-Oc0"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="160" id="tTC-2B-oIx"/>
@@ -164,12 +144,26 @@
                                                 <rect key="frame" x="169" y="315.66666666666669" width="37" height="37"/>
                                                 <color key="color" systemColor="systemGray4Color"/>
                                             </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEf-0d-VAr">
+                                                <rect key="frame" x="311" y="10" width="48" height="40"/>
+                                                <color key="backgroundColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="cqb-eb-8Sg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editButtonTapped:" destination="ySx-SM-L9v" eventType="touchUpInside" id="VPn-cp-ifh"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="K2T-eT-nQI" firstAttribute="leading" secondItem="9rb-2m-cso" secondAttribute="leading" constant="50" id="1Pl-ky-wfb"/>
                                             <constraint firstAttribute="trailing" secondItem="TxL-pl-40p" secondAttribute="trailing" constant="80" id="5JZ-or-vbb"/>
                                             <constraint firstItem="DYo-Ee-dwX" firstAttribute="top" secondItem="1lX-pJ-REx" secondAttribute="bottom" constant="5" id="5W4-Vp-PUb"/>
+                                            <constraint firstItem="fEf-0d-VAr" firstAttribute="top" secondItem="9rb-2m-cso" secondAttribute="top" constant="10" id="AIv-po-KID"/>
+                                            <constraint firstAttribute="trailing" secondItem="fEf-0d-VAr" secondAttribute="trailing" constant="16" id="AYK-5s-0IP"/>
                                             <constraint firstAttribute="trailing" secondItem="DYo-Ee-dwX" secondAttribute="trailing" constant="16" id="D0q-5v-R9v"/>
                                             <constraint firstItem="1lX-pJ-REx" firstAttribute="top" secondItem="TxL-pl-40p" secondAttribute="bottom" constant="10" id="FgC-6u-vNj"/>
                                             <constraint firstAttribute="trailing" secondItem="1lX-pJ-REx" secondAttribute="trailing" constant="108" id="I0V-I9-bHX"/>
@@ -180,6 +174,7 @@
                                             <constraint firstItem="q3m-dH-Mx0" firstAttribute="centerY" secondItem="9rb-2m-cso" secondAttribute="centerY" id="b10-vr-syP"/>
                                             <constraint firstItem="TxL-pl-40p" firstAttribute="top" secondItem="9rb-2m-cso" secondAttribute="top" id="jis-x4-4mS"/>
                                             <constraint firstItem="1lX-pJ-REx" firstAttribute="leading" secondItem="9rb-2m-cso" secondAttribute="leading" constant="108" id="qkC-s8-OAH"/>
+                                            <constraint firstItem="fEf-0d-VAr" firstAttribute="leading" secondItem="TxL-pl-40p" secondAttribute="trailing" constant="16" id="wZw-aB-eeK"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -197,6 +192,26 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="gUH-56-bxD"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="L3f-CD-gCZ"/>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCq-jQ-ouh">
+                                <rect key="frame" x="0.0" y="44" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="cZb-0q-oF4"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="My Profile" largeTitleDisplayMode="always" id="T1L-rW-LBE">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="x3h-yg-dMf">
+                                            <connections>
+                                                <action selector="closeButtonTapped:" destination="ySx-SM-L9v" id="cMc-dg-K53"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-PI-P6C" customClass="EmblemParticleView" customModule="Tink_tink_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="1" width="375" height="811"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JJi-he-l2R"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -220,7 +235,8 @@
                         <outlet property="bioTextView" destination="JJd-Eo-4v5" id="Ip0-tZ-5fW"/>
                         <outlet property="constraintContentHeight" destination="pI2-US-x3G" id="1y3-Dl-wqu"/>
                         <outlet property="contentView" destination="9rb-2m-cso" id="xuu-7q-Gcg"/>
-                        <outlet property="editButton" destination="sVD-LD-QJg" id="WOg-CI-cUV"/>
+                        <outlet property="editButton" destination="fEf-0d-VAr" id="B5F-m7-HLU"/>
+                        <outlet property="emblemView" destination="Isq-PI-P6C" id="mFz-Bx-PdD"/>
                         <outlet property="nameLabel" destination="kUm-Fj-Bpw" id="Ivt-jV-eHM"/>
                         <outlet property="nameSeparator" destination="XWT-23-zpA" id="8Pg-HL-5UW"/>
                         <outlet property="nameTextField" destination="jRY-cX-n04" id="AA3-1c-Fsc"/>
@@ -233,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3a-gh-MV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-551.25" y="-57.04225352112676"/>
+            <point key="canvasLocation" x="-552.79999999999995" y="-57.635467980295566"/>
         </scene>
     </scenes>
     <resources>
@@ -251,9 +267,6 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

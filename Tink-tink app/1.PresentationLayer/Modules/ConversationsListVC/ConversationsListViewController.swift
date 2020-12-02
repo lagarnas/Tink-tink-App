@@ -17,6 +17,8 @@ final class ConversationsListViewController: UIViewController {
   @IBOutlet weak var settingsIcon: UIBarButtonItem!
   private var searchController = UISearchController(searchResultsController: nil)
   
+  @IBOutlet weak var emblemView: EmblemParticleView!
+  
   //DEPENDENCY
   private var presentationAssembly: IPresentationAssembly!
   var model: IConversationsListModel!
@@ -39,6 +41,12 @@ final class ConversationsListViewController: UIViewController {
     updateTheme()
   }
   
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    print(#function)
+    emblemView.stopAnimation()
+  }
+    
   func setupDepenencies(model: IConversationsListModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
     self.themeModel = themeModel
@@ -92,6 +100,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    emblemView.stopAnimation()
     guard let presentationAssembly = self.presentationAssembly else { return }
     let conversationVC = presentationAssembly.conversationViewController()
     let channel = fetchedResultsController.object(at: indexPath)
@@ -101,6 +110,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    emblemView.stopAnimation()
     navigationItem.hidesSearchBarWhenScrolling = true
   }
   
@@ -134,6 +144,7 @@ extension ConversationsListViewController {
   private func openProfileVC() {
     guard let presentationAssembly = self.presentationAssembly else { return }
     let profileVC = presentationAssembly.profileViewController()
+    profileVC.transitioningDelegate = self
     self.present(profileVC, animated: true)
   }
   
@@ -166,5 +177,21 @@ extension ConversationsListViewController {
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped(tapGestureRecognizer:)))
     avatarView.isUserInteractionEnabled = true
     avatarView.addGestureRecognizer(tapGestureRecognizer)
+  }
+}
+
+extension ConversationsListViewController: UIViewControllerTransitioningDelegate {
+  
+  func animationController(forPresented presented: UIViewController,
+                           presenting: UIViewController,
+                           source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return AnimationController(animationDuration: 2.5,
+                               animationType: .present)
+  }
+  
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    
+    return AnimationController(animationDuration: 2.5,
+                               animationType: .dismiss)
   }
 }

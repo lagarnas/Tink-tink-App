@@ -18,24 +18,19 @@ class ImageCollectionViewCell: UICollectionViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    imageView.image = nil
+    
   }
   
   func configure(galleryDisplayModel: GalleryDisplayModel?) {
-
+    
     guard let galleryDisplayModel = galleryDisplayModel
     else {
       setupPlaceholder()
       return
     }
-    guard let resource = URL(string: galleryDisplayModel.urlImage) else { return }
-    do {
-      deletePlaceholder()
-      let data = try Data(contentsOf: resource)
-      self.imageView.image = UIImage(data: data)
-      
-    } catch {}
     
+    self.imageView.image = UIImage(data: galleryDisplayModel.urlImageData)
+    deletePlaceholder()
   }
   
   private func setupPlaceholder() {

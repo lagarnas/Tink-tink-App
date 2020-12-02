@@ -19,6 +19,8 @@ final class ThemesViewController: UIViewController {
   @IBOutlet private weak var dayLabel: UILabel!
   @IBOutlet private weak var nightLabel: UILabel!
   
+  @IBOutlet weak var emblemView: EmblemParticleView!
+    
   private var themeMode: ThemeMode = .classic
   
   //DEPENDENCY
@@ -33,12 +35,23 @@ final class ThemesViewController: UIViewController {
     setupUI()
     applyTheme()
   }
+    
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    emblemView.stopAnimation()
+  }
   
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    emblemView.stopAnimation()
+  }
+
   func setupDepenencies(model: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
   }
   
   @IBAction private func classicButtonTapped(_ sender: ThemeButton) {
+    emblemView.stopAnimation()
     unSelectAll()
     sender.isSelected = true
     themeMode = .classic
@@ -49,6 +62,7 @@ final class ThemesViewController: UIViewController {
   }
   
   @IBAction private func dayButtonTapped(_ sender: ThemeButton) {
+    emblemView.stopAnimation()
     unSelectAll()
     sender.isSelected = true
     themeMode = .day
@@ -59,6 +73,7 @@ final class ThemesViewController: UIViewController {
   }
   
   @IBAction private func nightButtonTapped(_ sender: ThemeButton) {
+    emblemView.stopAnimation()
     unSelectAll()
     sender.isSelected = true
     themeMode = .night

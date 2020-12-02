@@ -25,53 +25,63 @@
                                     <outlet property="delegate" destination="0me-a7-DvC" id="aUk-Zv-eL0"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zxV-4Y-fvL" customClass="EmblemParticleView" customModule="Tink_tink_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JhH-Ub-Cft"/>
                         <constraints>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="trailing" secondItem="JhH-Ub-Cft" secondAttribute="trailing" id="2UP-y2-ofW"/>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="bottom" secondItem="2QP-wE-iys" secondAttribute="bottom" id="77t-6s-b2B"/>
+                            <constraint firstItem="zxV-4Y-fvL" firstAttribute="trailing" secondItem="JhH-Ub-Cft" secondAttribute="trailing" id="7Eh-dS-Z1v"/>
+                            <constraint firstItem="zxV-4Y-fvL" firstAttribute="top" secondItem="2QP-wE-iys" secondAttribute="top" id="Sww-WZ-lH5"/>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="leading" secondItem="JhH-Ub-Cft" secondAttribute="leading" id="WfN-PA-9aO"/>
                             <constraint firstItem="JN0-8I-qn3" firstAttribute="top" secondItem="2QP-wE-iys" secondAttribute="top" id="fAD-rV-e3q"/>
+                            <constraint firstItem="zxV-4Y-fvL" firstAttribute="leading" secondItem="JhH-Ub-Cft" secondAttribute="leading" id="jx4-t3-1hF"/>
+                            <constraint firstAttribute="bottom" secondItem="zxV-4Y-fvL" secondAttribute="bottom" id="tXj-Ux-zqF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tinkoff chat" id="Szd-t3-0AS">
-                        <barButtonItem key="leftBarButtonItem" image="Settings_group" id="lWv-nV-MH4">
-                            <color key="tintColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.34509803921568627" alpha="0.65360124143835618" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <navigationItem key="navigationItem" title="Tinkoff chat" id="Bg1-N6-GTf">
+                        <barButtonItem key="leftBarButtonItem" image="Settings_group" id="KR7-Jc-HMz">
+                            <color key="tintColor" red="0.3294117647" green="0.3294117647" blue="0.34509803919999998" alpha="0.65360124139999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="settingsTapped:" destination="0me-a7-DvC" id="3yW-fR-hVA"/>
+                                <action selector="settingsTapped:" destination="0me-a7-DvC" id="2pB-4z-utF"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="2020-01-23 14.33.44" id="2xc-gI-HDh">
-                                <view key="customView" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="hle-LC-Dgs">
+                            <barButtonItem title="Item" image="2020-01-23 14.33.44" id="MM2-WX-ATw">
+                                <view key="customView" contentMode="scaleAspectFit" id="YY9-aG-izO">
                                     <rect key="frame" x="315" y="0.0" width="44" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phf-zg-dap" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzY-hn-iCE" customClass="MiniAvatarView" customModule="Tink_tink_app" customModuleProvider="target">
                                             <rect key="frame" x="2" y="2" width="40" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="c8U-No-Dqb"/>
-                                                <constraint firstAttribute="width" constant="40" id="uEo-hC-BRa"/>
+                                                <constraint firstAttribute="width" constant="40" id="jVh-Ff-Fq0"/>
+                                                <constraint firstAttribute="height" constant="40" id="nhT-SA-yXH"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="phf-zg-dap" secondAttribute="bottom" constant="2" id="6Bd-yW-aoS"/>
-                                        <constraint firstItem="phf-zg-dap" firstAttribute="top" secondItem="hle-LC-Dgs" secondAttribute="top" constant="2" id="NXa-MV-NDa"/>
-                                        <constraint firstAttribute="trailing" secondItem="phf-zg-dap" secondAttribute="trailing" constant="2" id="esF-8c-bUG"/>
-                                        <constraint firstItem="phf-zg-dap" firstAttribute="leading" secondItem="hle-LC-Dgs" secondAttribute="leading" constant="2" id="vNV-o7-7Lf"/>
+                                        <constraint firstAttribute="bottom" secondItem="dzY-hn-iCE" secondAttribute="bottom" constant="2" id="LFt-NC-r86"/>
+                                        <constraint firstItem="dzY-hn-iCE" firstAttribute="top" secondItem="YY9-aG-izO" secondAttribute="top" constant="2" id="ROv-RU-IO5"/>
+                                        <constraint firstItem="dzY-hn-iCE" firstAttribute="leading" secondItem="YY9-aG-izO" secondAttribute="leading" constant="2" id="UDM-uu-tQG"/>
+                                        <constraint firstAttribute="trailing" secondItem="dzY-hn-iCE" secondAttribute="trailing" constant="2" id="roq-51-Wwn"/>
                                     </constraints>
                                 </view>
                             </barButtonItem>
-                            <barButtonItem systemItem="add" id="LBF-Cf-8Ed">
+                            <barButtonItem systemItem="add" id="vUR-gp-IV6">
                                 <connections>
-                                    <action selector="addChannelButtonTapped:" destination="0me-a7-DvC" id="V09-QP-Unl"/>
+                                    <action selector="addChannelButtonTapped:" destination="0me-a7-DvC" id="vpS-aA-egT"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="avatarView" destination="phf-zg-dap" id="gGn-Jw-psa"/>
-                        <outlet property="settingsIcon" destination="lWv-nV-MH4" id="bun-Bs-901"/>
+                        <outlet property="avatarView" destination="dzY-hn-iCE" id="z3W-Lg-j7w"/>
+                        <outlet property="emblemView" destination="zxV-4Y-fvL" id="QWG-Ue-P37"/>
+                        <outlet property="settingsIcon" destination="KR7-Jc-HMz" id="HfX-ut-Rrb"/>
                         <outlet property="tableView" destination="JN0-8I-qn3" id="5ua-Yv-SF5"/>
                     </connections>
                 </viewController>
