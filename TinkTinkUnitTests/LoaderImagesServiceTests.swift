@@ -11,26 +11,91 @@ import XCTest
 
 class LoaderImagesServiceTests: XCTestCase {
   
-  func testExample() throws {
+  func testRequestConfig() throws {
     // Arrange
-    let hits = [Hit(previewURL: ""),
+    let testHits = [Hit(previewURL: ""),
                 Hit(previewURL: ""),
                 Hit(previewURL: ""),
                 Hit(previewURL: ""),
                 Hit(previewURL: "")
     ]
     
-    let loaderImageServiceMock = LoaderImagesServiceMock()
-    loaderImageServiceMock.loadImagesStub = { completion in
-      completion(.success(hits))
+    var returnedTestHits = [Hit]()
+    let empty = Empty(totalHits: testHits.count, hits: testHits)
+    let url = URL(string: "https://pixabay.com/api/?q=yellow+flowers&image_type=photo&per_page=100&key=19096059-7cc78a27f3e51a7e4cf696f0d")!
+    
+    let networkDataFetcherMock = NetworkDataFetcherMock()
+    networkDataFetcherMock.loadDataStub = { completion in
+      completion(.success(empty))
     }
     // Act
-    let galleryModel = GalleryModel(loaderImagesService: loaderImageServiceMock)
-    galleryModel.fetchGallery()
+    let loaderImagesService = LoaderImagesService(networkDataFetcher: networkDataFetcherMock)
+    
+    loaderImagesService.loadImages { result in
+      switch result {
+      case .success(let hits):
+        returnedTestHits.append(contentsOf: hits)
+      case .failure(_):
+        break
+      }
+    }
     
     // Asserts
-    XCTAssertEqual(loaderImageServiceMock.callsCount, 1)
-    
+    XCTAssertEqual(returnedTestHits, testHits)
+    XCTAssertEqual(networkDataFetcherMock.callsCount, 1)
+    XCTAssertEqual(networkDataFetcherMock.urlRequest.url, url)
+    XCTAssertEqual(networkDataFetcherMock.urlRequest.httpMethod, "GET")
   }
   
+    func testInvalidRequest() throws {
+  
+      // Arrange
+      let error: NetworkingError = .invalideRequest
+      var returnedError: NetworkingError?
+      let networkDataFetcherMock = NetworkDataFetcherMock()
+      networkDataFetcherMock.loadDataStub = { completion in
+        completion(.failure(error))
+      }
+  
+      //Act
+      let loaderImagesService = LoaderImagesService(networkDataFetcher: networkDataFetcherMock)
+  
+      loaderImagesService.loadImages { result in
+        switch result {
+        case .success(_): break
+        case .failure(let error):
+          returnedError = error
+        }
+      }
+  
+      // Asserts
+      XCTAssertEqual(returnedError, error)
+    }
+  
+  func testInternetConnectionFailed() throws {
+    
+    // Arrange
+    let error: NetworkingError = .internetConnectionFail
+    var returnedError: NetworkingError?
+    
+    let networkDataFetcherMock = NetworkDataFetcherMock()
+    networkDataFetcherMock.loadDataStub = { completion in
+      completion(.failure(error))
+    }
+    
+    //Act
+    let loaderImagesService = LoaderImagesService(networkDataFetcher: networkDataFetcherMock)
+
+    loaderImagesService.loadImages { result in
+      switch result {
+      case .success(_): break
+      case .failure(let error):
+       returnedError = error
+      }
+    }
+    
+    // Asserts
+    XCTAssertEqual(returnedError, error)
+    
+  }
 }

@@ -30,7 +30,7 @@ class RequestSender: IRequestSender {
     
     let task = session.dataTask(with: urlRequest) { (data: Data?, _ , error: Error?) in
       if error != nil {
-        completion(.failure(.failDataTaskURL))
+        completion(.failure(.internetConnectionFail))
         return
       }
       guard let data = data else {
