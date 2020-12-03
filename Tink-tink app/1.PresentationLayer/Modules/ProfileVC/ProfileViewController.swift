@@ -54,7 +54,7 @@ final class ProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.configure()
-    
+    bioTextView.accessibilityIdentifier = "bio"
     os_log("%@", log: .viewCycle, type: .info, #function)
     os_log("%@", log: .frameChanged, type: .info, operationButton.frame as CVarArg)
   }

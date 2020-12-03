@@ -19,6 +19,7 @@
 		880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 880F1CC02539FAF00018C52D /* GoogleService-Info.plist */; };
 		88155571257517D00061C788 /* LoaderImagesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155570257517D00061C788 /* LoaderImagesServiceTests.swift */; };
 		8815558B257518F40061C788 /* NetworkDataFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155587257518ED0061C788 /* NetworkDataFetcherMock.swift */; };
+		881EBFA525789B330064138B /* TinkTinkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EBFA425789B330064138B /* TinkTinkUITests.swift */; };
 		882461582574C7F800505754 /* APIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882461572574C7F800505754 /* APIResponseModels.swift */; };
 		883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */; };
 		883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */; };
@@ -92,6 +93,13 @@
 			remoteGlobalIDString = 8809DAD9250B486500E4365A;
 			remoteInfo = "Tink-tink app";
 		};
+		881EBFA725789B330064138B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8809DAD2250B486500E4365A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8809DAD9250B486500E4365A;
+			remoteInfo = "Tink-tink app";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +120,9 @@
 		88155570257517D00061C788 /* LoaderImagesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderImagesServiceTests.swift; sourceTree = "<group>"; };
 		88155572257517D00061C788 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88155587257518ED0061C788 /* NetworkDataFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcherMock.swift; sourceTree = "<group>"; };
+		881EBFA225789B330064138B /* TinkTinkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkTinkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		881EBFA425789B330064138B /* TinkTinkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkTinkUITests.swift; sourceTree = "<group>"; };
+		881EBFA625789B330064138B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		882461572574C7F800505754 /* APIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModels.swift; sourceTree = "<group>"; };
 		883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + UITextField + UITextView.swift"; sourceTree = "<group>"; };
 		883DBB252531C85B00FA425C /* ProfileVC + lifeCycleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileVC + lifeCycleVC.swift"; sourceTree = "<group>"; };
@@ -197,6 +208,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		881EBF9F25789B320064138B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -228,6 +246,7 @@
 			children = (
 				8809DADC250B486500E4365A /* Tink-tink app */,
 				8815556F257517D00061C788 /* TinkTinkUnitTests */,
+				881EBFA325789B330064138B /* TinkTinkUITests */,
 				8809DADB250B486500E4365A /* Products */,
 				F0700BA301DCE3857F5D0ADE /* Pods */,
 				BF43BE9B424509BA93C410E8 /* Frameworks */,
@@ -239,6 +258,7 @@
 			children = (
 				8809DADA250B486500E4365A /* Tink-tink app.app */,
 				8815556E257517D00061C788 /* TinkTinkUnitTests.xctest */,
+				881EBFA225789B330064138B /* TinkTinkUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,6 +286,15 @@
 				88155572257517D00061C788 /* Info.plist */,
 			);
 			path = TinkTinkUnitTests;
+			sourceTree = "<group>";
+		};
+		881EBFA325789B330064138B /* TinkTinkUITests */ = {
+			isa = PBXGroup;
+			children = (
+				881EBFA425789B330064138B /* TinkTinkUITests.swift */,
+				881EBFA625789B330064138B /* Info.plist */,
+			);
+			path = TinkTinkUITests;
 			sourceTree = "<group>";
 		};
 		883DBB4E2532DE7500FA425C /* ProfileVC + Extensions */ = {
@@ -668,6 +697,24 @@
 			productReference = 8815556E257517D00061C788 /* TinkTinkUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		881EBFA125789B320064138B /* TinkTinkUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 881EBFAB25789B330064138B /* Build configuration list for PBXNativeTarget "TinkTinkUITests" */;
+			buildPhases = (
+				881EBF9E25789B320064138B /* Sources */,
+				881EBF9F25789B320064138B /* Frameworks */,
+				881EBFA025789B320064138B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				881EBFA825789B330064138B /* PBXTargetDependency */,
+			);
+			name = TinkTinkUITests;
+			productName = TinkTinkUITests;
+			productReference = 881EBFA225789B330064138B /* TinkTinkUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -682,6 +729,10 @@
 						CreatedOnToolsVersion = 11.7;
 					};
 					8815556D257517D00061C788 = {
+						CreatedOnToolsVersion = 12.1;
+						TestTargetID = 8809DAD9250B486500E4365A;
+					};
+					881EBFA125789B320064138B = {
 						CreatedOnToolsVersion = 12.1;
 						TestTargetID = 8809DAD9250B486500E4365A;
 					};
@@ -702,6 +753,7 @@
 			targets = (
 				8809DAD9250B486500E4365A /* Tink-tink app */,
 				8815556D257517D00061C788 /* TinkTinkUnitTests */,
+				881EBFA125789B320064138B /* TinkTinkUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -726,6 +778,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8815556C257517D00061C788 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		881EBFA025789B320064138B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -910,6 +969,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		881EBF9E25789B320064138B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				881EBFA525789B330064138B /* TinkTinkUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -917,6 +984,11 @@
 			isa = PBXTargetDependency;
 			target = 8809DAD9250B486500E4365A /* Tink-tink app */;
 			targetProxy = 88155573257517D00061C788 /* PBXContainerItemProxy */;
+		};
+		881EBFA825789B330064138B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8809DAD9250B486500E4365A /* Tink-tink app */;
+			targetProxy = 881EBFA725789B330064138B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1143,6 +1215,46 @@
 			};
 			name = Release;
 		};
+		881EBFA925789B330064138B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9G68P5M492;
+				INFOPLIST_FILE = TinkTinkUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lagarnas.TinkTinkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tink-tink app";
+			};
+			name = Debug;
+		};
+		881EBFAA25789B330064138B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9G68P5M492;
+				INFOPLIST_FILE = TinkTinkUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lagarnas.TinkTinkUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tink-tink app";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1169,6 +1281,15 @@
 			buildConfigurations = (
 				88155575257517D00061C788 /* Debug */,
 				88155576257517D00061C788 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		881EBFAB25789B330064138B /* Build configuration list for PBXNativeTarget "TinkTinkUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				881EBFA925789B330064138B /* Debug */,
+				881EBFAA25789B330064138B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

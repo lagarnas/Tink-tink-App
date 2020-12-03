@@ -62,12 +62,12 @@ extension AnimationController: UIViewControllerAnimatedTransitioning {
                             options: .calculationModeLinear) {
       
       UIView.addKeyframe(withRelativeStartTime: 0,
-                         relativeDuration: 0.5) {
+                         relativeDuration: 0.2) {
         viewToAnimate.transform = scaleDown
       }
                                       
       UIView.addKeyframe(withRelativeStartTime: 2.0 / duration,
-                         relativeDuration: 1.0) {
+                         relativeDuration: 0.2) {
         viewToAnimate.transform = scaleDown.concatenating(moveOut)
         viewToAnimate.alpha = 0
         

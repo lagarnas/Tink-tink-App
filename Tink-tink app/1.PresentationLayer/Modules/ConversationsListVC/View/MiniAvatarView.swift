@@ -31,6 +31,7 @@ class MiniAvatarView: AvatarView {
   }()
   
   override func layoutSubviews() {
+    isAccessibilityElement = true
     addSubview(miniImageView)
     addSubview(miniNameLabel)
     addSubview(miniSecondNameLabel)

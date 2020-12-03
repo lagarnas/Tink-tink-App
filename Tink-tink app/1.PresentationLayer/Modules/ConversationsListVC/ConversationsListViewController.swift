@@ -30,6 +30,7 @@ final class ConversationsListViewController: UIViewController {
   // MARK: - Lifecycle of VC
   override func viewDidLoad() {
     super.viewDidLoad()
+    avatarView.accessibilityIdentifier = "avatar"
     setupTableView()
     setupSearchController()
     loadChannels()
