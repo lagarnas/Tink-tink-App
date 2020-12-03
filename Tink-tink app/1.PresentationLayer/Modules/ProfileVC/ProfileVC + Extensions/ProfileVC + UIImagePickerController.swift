@@ -7,9 +7,10 @@
 //
 
 import UIKit
-// MARK: - Work with image, UINavigationControllerDelegate
+// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
+  // MARK: Public Methods
   func openAlertAction() {
     // создаем экземпляр класса UIAlertController
     let cameraIcon = #imageLiteral(resourceName: "camera")
@@ -72,14 +73,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     dismiss(animated: true)
   }
-}
-
-extension ProfileViewController: GalleryViewControllerDelegate {
-  func updateProfile(_ galleryViewController: GalleryViewController, urlImageData: Data) {
-    avatarView.imageView.image = UIImage(data: urlImageData)
-    updateProfile()
-  }
   
+  // MARK: Private Methods
   private func updateProfile() {
     avatarView.imageView.contentMode = .scaleAspectFill
     avatarView.imageView.clipsToBounds = true
@@ -87,5 +82,13 @@ extension ProfileViewController: GalleryViewControllerDelegate {
     self.profile?.photoChanged = true
     avatarView.hideInitials()
     enabledButtons()
+  }
+}
+
+// MARK: GalleryViewControllerDelegate
+extension ProfileViewController: GalleryViewControllerDelegate {
+  func updateProfile(_ galleryViewController: GalleryViewController, urlImageData: Data) {
+    avatarView.imageView.image = UIImage(data: urlImageData)
+    updateProfile()
   }
 }

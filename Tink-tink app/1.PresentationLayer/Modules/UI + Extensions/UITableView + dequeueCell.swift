@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: Extension UITableView + generic func dequeueCell<T: UITableViewCell>
 extension UITableView {
   
   func dequeueCell<T: UITableViewCell>(_ cellType: T.Type, for indexPath: IndexPath) -> T {

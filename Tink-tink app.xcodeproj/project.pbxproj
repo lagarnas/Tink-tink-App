@@ -18,7 +18,7 @@
 		8809DAEA250B486900E4365A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8809DAE8250B486900E4365A /* LaunchScreen.storyboard */; };
 		880F1CC12539FAF00018C52D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 880F1CC02539FAF00018C52D /* GoogleService-Info.plist */; };
 		88155571257517D00061C788 /* LoaderImagesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155570257517D00061C788 /* LoaderImagesServiceTests.swift */; };
-		8815558B257518F40061C788 /* NetworkDataFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155587257518ED0061C788 /* NetworkDataFetcherMock.swift */; };
+		8815558B257518F40061C788 /* MockNetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88155587257518ED0061C788 /* MockNetworkDataFetcher.swift */; };
 		881EBFA525789B330064138B /* TinkTinkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EBFA425789B330064138B /* TinkTinkUITests.swift */; };
 		882461582574C7F800505754 /* APIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882461572574C7F800505754 /* APIResponseModels.swift */; };
 		883DBB212531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DBB202531C7D300FA425C /* ProfileVC + UITextField + UITextView.swift */; };
@@ -119,7 +119,7 @@
 		8815556E257517D00061C788 /* TinkTinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkTinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88155570257517D00061C788 /* LoaderImagesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderImagesServiceTests.swift; sourceTree = "<group>"; };
 		88155572257517D00061C788 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88155587257518ED0061C788 /* NetworkDataFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcherMock.swift; sourceTree = "<group>"; };
+		88155587257518ED0061C788 /* MockNetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkDataFetcher.swift; sourceTree = "<group>"; };
 		881EBFA225789B330064138B /* TinkTinkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkTinkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		881EBFA425789B330064138B /* TinkTinkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkTinkUITests.swift; sourceTree = "<group>"; };
 		881EBFA625789B330064138B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				88155570257517D00061C788 /* LoaderImagesServiceTests.swift */,
-				88155587257518ED0061C788 /* NetworkDataFetcherMock.swift */,
+				88155587257518ED0061C788 /* MockNetworkDataFetcher.swift */,
 				88155572257517D00061C788 /* Info.plist */,
 			);
 			path = TinkTinkUnitTests;
@@ -946,7 +946,7 @@
 				8853590425245D2A00469AD6 /* OutgoingMessageTableViewCell.swift in Sources */,
 				88921E3C2521C8B00033BD47 /* UITableView + dequeueCell.swift in Sources */,
 				88B638502562519E001BEA7A /* UICollectionViewDelegateFlowLayout.swift in Sources */,
-				8815558B257518F40061C788 /* NetworkDataFetcherMock.swift in Sources */,
+				8815558B257518F40061C788 /* MockNetworkDataFetcher.swift in Sources */,
 				8848400C25210CE00083B204 /* ConversationsListViewController.swift in Sources */,
 				883F7771255EA17100959C50 /* RequestSender.swift in Sources */,
 				883DBB262531C85B00FA425C /* ProfileVC + lifeCycleVC.swift in Sources */,
@@ -1174,7 +1174,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TinkTinkUnitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1201,7 +1201,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TinkTinkUnitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1221,7 +1221,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9G68P5M492;
 				INFOPLIST_FILE = TinkTinkUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1241,7 +1241,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9G68P5M492;
 				INFOPLIST_FILE = TinkTinkUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

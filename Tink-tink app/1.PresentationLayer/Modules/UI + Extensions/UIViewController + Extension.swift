@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: Extension UIViewController + loadFromStoryboard()
 extension UIViewController {
     
     class func loadFromStoryboard<T: UIViewController>() -> T {
@@ -22,6 +23,7 @@ extension UIViewController {
     
 }
 
+// MARK: Extension UIViewController + alert()
 extension UIViewController {
   func alert(title: String, message: String, style: UIAlertController.Style) {
     let alertController = UIAlertController(title: title,

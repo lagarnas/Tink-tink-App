@@ -8,38 +8,52 @@
 
 import UIKit
 
+// MARK: GalleryViewController delegate protocol
 protocol GalleryViewControllerDelegate: class {
   func updateProfile(_ galleryViewController: GalleryViewController, urlImageData: Data)
 }
 
-class GalleryViewController: UIViewController {
-  
+final class GalleryViewController: UIViewController {  
+  // MARK: IBOutlets
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var galleryCollectionView: UICollectionView!
-  
   @IBOutlet weak var emblemView: EmblemParticleView!
-  private var model: IGalleryModel!
   
+  // MARK: Public properties
   weak var delegate: GalleryViewControllerDelegate?
   
+  // MARK: Private properties
+  private var model: IGalleryModel!
+  
+  // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     model.delegate = self
     model.fetchGallery()
+    setupActivityIndicator()
+  }
+  
+  // MARK: Public Methods
+  func setupDepenencies(model: IGalleryModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
+    self.model = model
+  }
+  
+  // MARK: Private Methods
+  private func setupActivityIndicator() {
     activityIndicator.startAnimating()
     activityIndicator.hidesWhenStopped = true
   }
   
-  func setupDepenencies(model: IGalleryModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
-    self.model = model
-  }
+  // MARK: IBActions
   @IBAction func closeButton(_ sender: UIBarButtonItem) {
     self.dismiss(animated: true)
   }
   
 }
 
+// MARK: - IGalleryModelDelegate
 extension GalleryViewController: IGalleryModelDelegate {
+  
   func onFetchCompleted(_ galleryModel: GalleryModel) {
     activityIndicator.stopAnimating()
     galleryCollectionView.reloadData()
@@ -52,6 +66,7 @@ extension GalleryViewController: IGalleryModelDelegate {
   }
 }
 
+// MARK: Collection View Data Source, Delegate
 extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

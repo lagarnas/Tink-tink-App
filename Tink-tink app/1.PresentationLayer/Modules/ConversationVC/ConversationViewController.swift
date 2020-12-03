@@ -10,26 +10,24 @@ import UIKit
 import CoreData
 
 final class ConversationViewController: UIViewController {
-  
+  // MARK: IBOutlets
   @IBOutlet weak var messageTextField: UITextField!
   @IBOutlet private weak var sendButton: UIButton!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var dockViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var dockView: UIView!
-  
   @IBOutlet weak var emblemView: EmblemParticleView!
   
-  private var keyboardHeight: CGFloat = 0
+  // MARK: Public properties
   var channel: Channel_db!
-  
-  //DEPENDENCY
   var model: IConversationModel!
   var themeModel: IThemeModel!
-  
-  // MARK: - FetchedResultsController
   var fetchedResultsController: NSFetchedResultsController<Message_db>!
   
-  // MARK: - Lifecycle of VC
+  // MARK: Private properties
+  private var keyboardHeight: CGFloat = 0
+
+  // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     NotificationCenter.default.addObserver(self,
@@ -43,6 +41,10 @@ final class ConversationViewController: UIViewController {
     loadMessages()
   }
   
+  override func viewWillLayoutSubviews() {
+      self.scrollToBottom()
+  }
+  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     print(#function)
@@ -54,12 +56,13 @@ final class ConversationViewController: UIViewController {
     emblemView.stopAnimation()
   }
   
+  // MARK: Public Methods
   func setupDepenencies(model: IConversationModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
     self.themeModel = themeModel
   }
   
-  // MARK: - Private methods
+  // MARK: Private Methods
   private func loadMessages() {
     guard let model = self.model else { return }
     model.getMessages(channel: channel)
@@ -67,11 +70,7 @@ final class ConversationViewController: UIViewController {
     try? self.fetchedResultsController.performFetch()
     self.fetchedResultsController.delegate = self        
   }
-  
-  override func viewWillLayoutSubviews() {
-      self.scrollToBottom()
-  }
-  
+    
   private func scrollToBottom(){
     emblemView.stopAnimation()
     guard let item = self.fetchedResultsController.fetchedObjects?.count
@@ -82,7 +81,7 @@ final class ConversationViewController: UIViewController {
     }
   }
   
-  // MARK: - @IBActions
+  // MARK: IBActions
   @IBAction private func sendButtonTapped(_ sender: Any) {
     emblemView.stopAnimation()
     self.messageTextField.endEditing(true)
@@ -95,7 +94,7 @@ final class ConversationViewController: UIViewController {
   }
 }
 
-// MARK: - Setup TableView
+// MARK: Private Methods
 extension ConversationViewController {
   private func setupTableView() {
     tableView.rowHeight = UITableView.automaticDimension

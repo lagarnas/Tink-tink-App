@@ -9,13 +9,15 @@
 import Foundation
 import CoreData
 
-struct MessageCellDisplay: Hashable {
+// MARK: MessageCellDisplayModel
+struct MessageCellDisplayModel: Hashable {
     let senderId: String
     var senderName: String
     var content: String
     var created: Date
 }
 
+// MARK: IConversationModel protocol
 protocol IConversationModel {
   func fetchedResultController(channel: Channel_db) -> NSFetchedResultsController<Message_db>
   func insertMessage(channelId: String, message: String)
@@ -24,16 +26,19 @@ protocol IConversationModel {
 }
 
 class ConversationModel: IConversationModel {
-
+  
+  // MARK: Public properties
   let coreDataService: ICoreDataService
   let firebaseService: IFirebaseService
   
+  // MARK: Initializers
   init(coreDataService: ICoreDataService,
        firebaseService: IFirebaseService) {
     self.coreDataService = coreDataService
     self.firebaseService = firebaseService
   }
   
+  // MARK: Public Methods
   func senderId() -> String? {
     firebaseService.senderId
   }

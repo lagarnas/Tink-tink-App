@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: IThemeModel protocol
 protocol IThemeModel {
   var current: Themable { get }
   var currentMode: ThemeMode { get }
@@ -16,6 +17,7 @@ protocol IThemeModel {
 }
 
 class ThemeModel: IThemeModel {
+  // MARK: Public properties
   var current: Themable
   var currentMode: ThemeMode
   let themeService: IThemeService
@@ -31,12 +33,14 @@ class ThemeModel: IThemeModel {
     }
   }
   
+  // MARK: Initializers
   init(themeService: IThemeService) {
     self.themeService = themeService
     self.current = themeService.current
     self.currentMode = themeService.currentMode
   }
   
+  // MARK: Public Methods
   func applyTheme() {
     themeService.applyUIApplicationComponents()
     self.current = themeService.current

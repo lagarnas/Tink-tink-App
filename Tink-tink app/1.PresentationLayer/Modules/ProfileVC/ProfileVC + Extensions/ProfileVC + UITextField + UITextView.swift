@@ -8,14 +8,15 @@
 
 import UIKit
 
+// MARK: UITextFieldDelegate
 extension ProfileViewController: UITextFieldDelegate {
-
+  
   func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     nameTextField = textField
     lastOffset = self.scrollView.contentOffset
     return true
   }
-
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == nameTextField {
       self.nameTextField.resignFirstResponder()
@@ -25,6 +26,7 @@ extension ProfileViewController: UITextFieldDelegate {
   }
 }
 
+// MARK: UITextViewDelegate
 extension ProfileViewController: UITextViewDelegate {
   
   func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
@@ -32,18 +34,18 @@ extension ProfileViewController: UITextViewDelegate {
     lastOffset = self.scrollView.contentOffset
     return true
   }
-
+  
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-      if(text == "\n") {
-          textView.resignFirstResponder()
-          return false
-      }
-      return true
+    if(text == "\n") {
+      textView.resignFirstResponder()
+      return false
+    }
+    return true
   }
 }
 
 extension ProfileViewController {
-  
+  // MARK: Public Methods
   func addNotifications() {
     NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(notification:)), name: UITextView.textDidChangeNotification, object: nil)
@@ -79,7 +81,7 @@ extension ProfileViewController {
       UIView.animate(withDuration: 0.3, animations: {
         self.constraintContentHeight.constant += self.keyboardHeight
       })
-
+      
       // move if keyboard hide input field
       let distanceToBottom = self.scrollView.frame.size.height -
         (textStackView?.frame.origin.y)! -

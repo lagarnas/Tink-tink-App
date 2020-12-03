@@ -24,7 +24,7 @@ class LoaderImagesServiceTests: XCTestCase {
     let empty = Empty(totalHits: testHits.count, hits: testHits)
     let url = URL(string: "https://pixabay.com/api/?q=yellow+flowers&image_type=photo&per_page=100&key=19096059-7cc78a27f3e51a7e4cf696f0d")!
     
-    let networkDataFetcherMock = NetworkDataFetcherMock()
+    let networkDataFetcherMock = MockNetworkDataFetcher()
     networkDataFetcherMock.loadDataStub = { completion in
       completion(.success(empty))
     }
@@ -52,7 +52,7 @@ class LoaderImagesServiceTests: XCTestCase {
       // Arrange
       let error: NetworkingError = .invalideRequest
       var returnedError: NetworkingError?
-      let networkDataFetcherMock = NetworkDataFetcherMock()
+      let networkDataFetcherMock = MockNetworkDataFetcher()
       networkDataFetcherMock.loadDataStub = { completion in
         completion(.failure(error))
       }
@@ -78,7 +78,7 @@ class LoaderImagesServiceTests: XCTestCase {
     let error: NetworkingError = .internetConnectionFail
     var returnedError: NetworkingError?
     
-    let networkDataFetcherMock = NetworkDataFetcherMock()
+    let networkDataFetcherMock = MockNetworkDataFetcher()
     networkDataFetcherMock.loadDataStub = { completion in
       completion(.failure(error))
     }

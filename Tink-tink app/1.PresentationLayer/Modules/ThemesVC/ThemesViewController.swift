@@ -10,25 +10,23 @@ import UIKit
 import os.log
 
 final class ThemesViewController: UIViewController {
-  
+  // MARK: IBOutlets
   @IBOutlet private weak var classicButton: ThemeButton!
   @IBOutlet private weak var dayButton: ThemeButton!
   @IBOutlet private weak var nightButton: ThemeButton!
-  
   @IBOutlet private weak var classicLabel: UILabel!
   @IBOutlet private weak var dayLabel: UILabel!
   @IBOutlet private weak var nightLabel: UILabel!
-  
   @IBOutlet weak var emblemView: EmblemParticleView!
-    
-  private var themeMode: ThemeMode = .classic
   
-  //DEPENDENCY
-  private var model: IThemeModel!
-  
-  // MARK: Closure
+  // MARK: Public properties
   var didChangeTheme: (() -> Void)?
   
+  // MARK: Private properties
+  private var themeMode: ThemeMode = .classic
+  private var model: IThemeModel!
+
+  // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavigation()
@@ -45,11 +43,13 @@ final class ThemesViewController: UIViewController {
     super.touchesEnded(touches, with: event)
     emblemView.stopAnimation()
   }
-
+  
+  // MARK: Public Methods
   func setupDepenencies(model: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
   }
   
+  // MARK: IBActions
   @IBAction private func classicButtonTapped(_ sender: ThemeButton) {
     emblemView.stopAnimation()
     unSelectAll()
@@ -83,11 +83,13 @@ final class ThemesViewController: UIViewController {
     didChangeTheme?()
   }
   
+  // MARK: Deinit
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
 
+// MARK: Private Methods
 extension ThemesViewController {
   
   private func unSelectAll() {

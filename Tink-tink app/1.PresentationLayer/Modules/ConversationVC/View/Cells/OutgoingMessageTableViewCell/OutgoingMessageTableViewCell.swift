@@ -9,12 +9,14 @@
 import UIKit
 
 final class OutgoingMessageTableViewCell: UITableViewCell {
-  
+  // MARK: IBOutlets
   @IBOutlet private weak var bubbleView: UIView!
   @IBOutlet private weak var messageLabel: UILabel!
   
+  // MARK: Public properties
   var themeModel: IThemeModel?
   
+  // MARK: Lifecycle
   override func layoutSubviews() {
     super.layoutSubviews()
     self.backgroundColor = .clear

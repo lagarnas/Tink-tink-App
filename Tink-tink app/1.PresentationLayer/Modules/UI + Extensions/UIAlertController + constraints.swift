@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: Extension UIAlertController + constraints
 extension UIAlertController {
   func pruneNegativeWidthConstraints() {
     for subView in self.view.subviews {
@@ -18,6 +19,7 @@ extension UIAlertController {
   }
 }
 
+// MARK: Extension UIAlertAction + titleTextColor
 extension UIAlertAction {
 
     var titleTextColor: UIColor? {

@@ -9,7 +9,7 @@
 import UIKit
 import os.log
 
-// MARK: Lifecycle of VC
+// MARK: Lifecycle
 extension ProfileViewController {
   
   override func loadView() {

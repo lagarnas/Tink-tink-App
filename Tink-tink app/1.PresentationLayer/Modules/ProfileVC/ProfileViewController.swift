@@ -16,7 +16,7 @@ enum ProfileSavingType {
 
 final class ProfileViewController: UIViewController {
   
-  // MARK: - @IBOutlets
+  // MARK: IBOutlets
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var bioLabel: UILabel!
@@ -34,23 +34,23 @@ final class ProfileViewController: UIViewController {
   @IBOutlet weak var nameSeparator: UIView!
   @IBOutlet weak var bioSeparator: UIView!
   @IBOutlet weak var editButton: UIButton!
-  
   @IBOutlet weak var emblemView: EmblemParticleView!
   
+  // MARK: Public properties
   var lastOffset: CGPoint!
   var keyboardHeight: CGFloat!
   var GCDButtonIsClick = false
   var savingType: ProfileSavingType = .gcd
   
-  private var isAnimate: Bool = false
-  
-  //DEPENDENCY
   var presentationAssembly: IPresentationAssembly!
   var profile: Profile!
   var model: IProfileModel!
   var themeModel: IThemeModel!
   
-  // MARK: - Lifecycle of VC
+  // MARK: Private properties
+  private var isAnimate: Bool = false
+  
+  // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     self.configure()
@@ -67,6 +67,7 @@ final class ProfileViewController: UIViewController {
     editButton.layer.borderColor = UIColor.black.cgColor
   }
   
+  // MARK: Public Methods
   func setupDepenencies(model: IProfileModel?,
                         themeModel: IThemeModel?,
                         presentationAssembly: IPresentationAssembly?) {
@@ -75,7 +76,7 @@ final class ProfileViewController: UIViewController {
     self.presentationAssembly = presentationAssembly
   }
   
-  // MARK: - Configure
+  // MARK: Private Methods
   private func configure() {
     profile = Profile(userName: nameTextField.text ?? "", userBio: bioTextView.text, userData: avatarView.imageView.image?.pngData() ?? Data())
     
@@ -101,22 +102,6 @@ final class ProfileViewController: UIViewController {
       case .failure(let error):
         print(error.localizedDescription)
       }
-    }
-  }
-  
-  // MARK: - IBActions
-  @IBAction private func editButtonTapped(_ sender: UIButton) {
-    
-    if isAnimate {
-      unEnabledUIElements()
-      unEnabledButtons()
-      stopAnimate()
-      
-    } else {
-      enabledUIElements()
-      enabledButtons()
-      shake(button: sender)
-      nameTextField.becomeFirstResponder()
     }
   }
   
@@ -166,11 +151,26 @@ final class ProfileViewController: UIViewController {
     isAnimate = false
   }
   
+  // MARK: IBActions
+  @IBAction private func editButtonTapped(_ sender: UIButton) {
+    
+    if isAnimate {
+      unEnabledUIElements()
+      unEnabledButtons()
+      stopAnimate()
+      
+    } else {
+      enabledUIElements()
+      enabledButtons()
+      shake(button: sender)
+      nameTextField.becomeFirstResponder()
+    }
+  }
+  
   @IBAction private func setImageButtonTapped(_ sender: UIButton) {
     openAlertAction()
   }
   
-  // MARK: - operationButtonTapped()
   @IBAction func operationButtonTapped(_ sender: UIButton) {
     unEnabledButtons()
     activityIndicator.startAnimating()
@@ -188,7 +188,6 @@ final class ProfileViewController: UIViewController {
     }
   }
   
-  // MARK: - GCDButtonTapped()
   @objc func GCDButtonTapped() {
     GCDButtonIsClick = true
     activityIndicator.startAnimating()
@@ -209,16 +208,17 @@ final class ProfileViewController: UIViewController {
     }
   }
   
-  // MARK: - closeButtonTapped()
   @IBAction private func closeButtonTapped(_ sender: UIBarButtonItem) {
     dismiss(animated: true)
   }
   
+  // MARK: Deinit
   deinit {
     os_log("%@", log: .retainCycle, type: .info, self)
   }
 }
 
+// MARK: CAAnimationDelegate
 extension ProfileViewController: CAAnimationDelegate {
   func animationDidStart(_ anim: CAAnimation) {
     isAnimate = true

@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class NetworkDataFetcherMock: INetworkDataFetcher {
+final class MockNetworkDataFetcher: INetworkDataFetcher {
   
   var callsCount = 0
   var urlRequest: URLRequest!
@@ -20,5 +20,4 @@ final class NetworkDataFetcherMock: INetworkDataFetcher {
     urlRequest = config.request.urlRequest!
     loadDataStub(completion)
   }
-  
 }

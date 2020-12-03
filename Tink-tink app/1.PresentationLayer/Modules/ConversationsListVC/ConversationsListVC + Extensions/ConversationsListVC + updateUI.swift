@@ -9,7 +9,7 @@
 import UIKit
 
 extension ConversationsListViewController {
-  
+  // MARK: Public Methods
   func showChannelAlert() {
     let alertController = UIAlertController(title: "New channel", message: nil, preferredStyle: .alert)
     

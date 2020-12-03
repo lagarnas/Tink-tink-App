@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import CoreData
 
+// MARK: ChannelCellDisplayModel
 struct ChannelCellDisplayModel {
   var identifier: String
   var name: String
@@ -17,6 +18,7 @@ struct ChannelCellDisplayModel {
   var lastActivity: Date?
 }
 
+// MARK: IConversationsListModel protocol
 protocol IConversationsListModel {
   func fetchedResultController() -> NSFetchedResultsController<Channel_db>
   func retriveProfile(completion: @escaping (Result<Profile, Error>) -> Void)
@@ -28,10 +30,12 @@ protocol IConversationsListModel {
 
 class ConversationsListModel: IConversationsListModel {
   
+  // MARK: Public properties
   let coreDataService: ICoreDataService
   let profileSaveService: IProfileService
   let firebaseService: IFirebaseService
   
+  // MARK: Initializers
   init(coreDataService: ICoreDataService,
        profileSaveService: IProfileService,
        firebaseService: IFirebaseService) {
@@ -41,6 +45,7 @@ class ConversationsListModel: IConversationsListModel {
     self.firebaseService = firebaseService
   }
   
+  // MARK: Public Methods
   func fetchedResultController() -> NSFetchedResultsController<Channel_db> {
     return coreDataService.setupChannelsFetchedResultsController()
   }

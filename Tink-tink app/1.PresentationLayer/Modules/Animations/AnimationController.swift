@@ -10,21 +10,24 @@ import UIKit
 
 class AnimationController: NSObject {
   
-  private let animationDuration: Double
-  private let animationType: AnimationType
-
+  // MARK: Public properties
   enum AnimationType {
     case present
     case dismiss
   }
+  
+  // MARK: Private properties
+  private let animationDuration: Double
+  private let animationType: AnimationType
       
-  // MARK: - Init
+  // MARK: - Initializers
   init(animationDuration: Double, animationType: AnimationType) {
     self.animationDuration = animationDuration
     self.animationType = animationType
   }
 }
 
+// MARK: - UIViewControllerAnimatedTransitioning
 extension AnimationController: UIViewControllerAnimatedTransitioning {
   
   func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {

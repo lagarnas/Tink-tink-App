@@ -10,9 +10,11 @@ import UIKit
 
 final class ThemeButton: UIButton {
   
+  // MARK: Private properties
   private let bubble = UIView()
   private let secondBubble = UIView()
   
+  // MARK: Initializers
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupButton()
@@ -23,6 +25,7 @@ final class ThemeButton: UIButton {
     setupButton()
   }
   
+  // MARK: Lifecycle
   override func layoutSubviews() {
     super.layoutSubviews()
     
@@ -30,16 +33,26 @@ final class ThemeButton: UIButton {
     layer.borderColor = isSelected ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
   }
   
-//  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//    super.touchesBegan(touches, with: event)
-//    print("ThemeButton:", #function)
-//  }
-//  
-//  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//    super.touchesEnded(touches, with: event)
-//    print("ThemeButton:", #function)
-//  }
+  // MARK: Public Methods
+  func shake() {
+    let shake = CABasicAnimation(keyPath: "position")
+    shake.duration = 0.1
+    shake.repeatCount = 2
+    shake.autoreverses = true
+    
+    let fromPoint = CGPoint(x: center.x - 8, y: center.y)
+    let fromValue = NSValue(cgPoint: fromPoint)
+    
+    let toPoint = CGPoint(x: center.x + 8, y: center.y)
+    let toValue = NSValue(cgPoint: toPoint)
+    
+    shake.fromValue = fromValue
+    shake.toValue = toValue
+    
+    layer.add(shake, forKey: "position")
+  }
   
+  // MARK: Private Methods
   private func setupButton() {
     layer.borderWidth = 1
     layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
@@ -106,23 +119,5 @@ final class ThemeButton: UIButton {
                                                            views: views)
     constraints += hBubbleConstraint
     NSLayoutConstraint.activate(constraints)
-  }
-  
-  func shake() {
-    let shake = CABasicAnimation(keyPath: "position")
-    shake.duration = 0.1
-    shake.repeatCount = 2
-    shake.autoreverses = true
-    
-    let fromPoint = CGPoint(x: center.x - 8, y: center.y)
-    let fromValue = NSValue(cgPoint: fromPoint)
-    
-    let toPoint = CGPoint(x: center.x + 8, y: center.y)
-    let toValue = NSValue(cgPoint: toPoint)
-    
-    shake.fromValue = fromValue
-    shake.toValue = toValue
-    
-    layer.add(shake, forKey: "position")
   }
 }

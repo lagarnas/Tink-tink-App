@@ -8,7 +8,7 @@
 
 import Foundation
 extension ProfileViewController {
-  
+  // MARK: Public Methods
   func configUI() {
     activityIndicator.stopAnimating()
     activityIndicator.hidesWhenStopped = true

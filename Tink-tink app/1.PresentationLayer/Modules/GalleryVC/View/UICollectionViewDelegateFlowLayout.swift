@@ -8,9 +8,11 @@
 
 import UIKit
 
+// MARK: Private properties
 private let itemsPerRow: CGFloat = 3
 private let sectionInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView,
@@ -43,6 +45,7 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
+// MARK: Extension UICollectionView + generic func dequeueCell<T: UICollectionViewCell>
 extension UICollectionView {
   func dequeueCell<Cell: UICollectionViewCell>(_ cellType: Cell.Type, for indexPath: IndexPath) -> Cell {
     guard let cell = dequeueReusableCell(withReuseIdentifier: Cell.reuseIdentifier, for: indexPath) as? Cell else {
