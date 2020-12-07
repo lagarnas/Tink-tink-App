@@ -4,18 +4,16 @@
 target 'Tink-tink app' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  
   # Pods for Tink-tink app
-
-pod 'Firebase/Firestore'
-pod 'SwiftLint'
-
-target 'TinkTinkUnitTests' do
-      inherit! :search_paths
-      pod 'Firebase'
-    end
+  
+  pod 'Firebase/Firestore'
+  pod 'SwiftLint'
 end
 
+target 'TinkTinkUnitTests' do
+  pod 'Firebase/Firestore'
+end
 
 
 post_install do |installer|
