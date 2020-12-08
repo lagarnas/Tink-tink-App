@@ -43,7 +43,6 @@ final class ConversationsListViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    print(#function)
     emblemView.stopAnimation()
   }
   
