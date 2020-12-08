@@ -12,7 +12,7 @@ target 'Tink-tink app' do
 end
 
 target 'TinkTinkUnitTests' do
-  pod 'Firebase/Firestore'
+  inherit! :search_paths
 end
 
 
