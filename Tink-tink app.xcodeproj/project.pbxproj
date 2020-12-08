@@ -163,6 +163,7 @@
 		88535909252475D800469AD6 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		8853591025249F1400469AD6 /* MiniAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniAvatarView.swift; sourceTree = "<group>"; };
 		886DD88C256D9A010025559B /* EmblemParticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmblemParticleView.swift; sourceTree = "<group>"; };
+		887B73D3257FD24500D9DA87 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		88875A8E2542BCA7004513EE /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		88875A932543113B004513EE /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		88875A9725432380004513EE /* ObjectsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsExtensions.swift; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 				883F76B125594B2200959C50 /* 3.CoreLayer */,
 				883F76D42559567C00959C50 /* Support files */,
 				8809DAEB250B486900E4365A /* Info.plist */,
+				887B73D3257FD24500D9DA87 /* Config.xcconfig */,
 			);
 			path = "Tink-tink app";
 			sourceTree = "<group>";
@@ -988,6 +990,7 @@
 /* Begin XCBuildConfiguration section */
 		8809DAEC250B486900E4365A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 887B73D3257FD24500D9DA87 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1049,6 +1052,7 @@
 		};
 		8809DAED250B486900E4365A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 887B73D3257FD24500D9DA87 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
