@@ -40,6 +40,11 @@ fastlane build_and_test
 fastlane discord_check
 ```
 
+### set_image
+```
+fastlane set_image
+```
+
 
 ----
 

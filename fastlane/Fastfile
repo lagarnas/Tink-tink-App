@@ -41,7 +41,7 @@ lane :discord_check do
     webhook_url: $DISCORD_WEBHOOK_URL,
     title: "Tinkoff app",
     description: "Success build for testing and running tests",
-    image_url: ENV['DISCORD_IMAGE_URL'],
+    image_url: $DISCORD_IMAGE_URL,
     fields:[
       {
         name:"Created by:", 
@@ -51,6 +51,9 @@ lane :discord_check do
   )
 end
 
+lane :set_image do
+   puts "set image_url"
+end
 
   error do |lane, exception|
     discord_notifier(
