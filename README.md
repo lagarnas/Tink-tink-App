@@ -1,6 +1,6 @@
 # Tink-tink app
 
-[![Build Status](https://travis-ci.com/lagarnas/Tink-tink-App.svg?branch=master)](https://travis-ci.com/lagarnas/Tink-tink-App)
+[![Build Status](https://travis-ci.com/lagarnas/Tink-tink-App.svg?branch=homework14)](https://travis-ci.com/lagarnas/Tink-tink-App)
 
 - Chat mobile application
 - Xcode project setup with custom configurations
