@@ -2,7 +2,6 @@ setup_travis
   lane :build_for_testing do
     cocoapods
     scan(
-      clean: "true",
       build_for_testing: "true"
     )
   end
