@@ -265,7 +265,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods
+  cocoapods (= 1.10.0)
   fastlane
   fastlane-plugin-discord
   fastlane-plugin-discord_notifier
