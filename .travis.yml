@@ -7,5 +7,7 @@ before_install:
   - gem install bundler
 install:
   - bundle install
+  - bundle exec fastlane add_plugin discord
+  - bundle exec fastlane add_plugin discord_notifier
 script:
-  - fastlane build_and_test
+  - fastlane discord_check
