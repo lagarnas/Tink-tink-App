@@ -10,4 +10,4 @@ install:
   - bundle exec fastlane add_plugin discord
   - bundle exec fastlane add_plugin discord_notifier
 script:
-  - bundle exec fastlane discord_check
+  - bundle exec fastlane build_and_test
