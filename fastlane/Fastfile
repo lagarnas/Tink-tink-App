@@ -1,6 +1,7 @@
 setup_travis
   lane :build_for_testing do
     cocoapods
+    swiftlint
     scan(
       build_for_testing: "true"
     )
