@@ -3,7 +3,6 @@ branches:
   only:
   - homework14
 before_install:
-  - gem install cocoapods
   - gem install bundler
 install:
   - bundle install
