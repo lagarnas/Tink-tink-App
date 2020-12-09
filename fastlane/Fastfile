@@ -1,4 +1,9 @@
 setup_travis
+
+  lane :clean do
+    clear_derived_data
+  end
+
   lane :build_for_testing do
     cocoapods
     swiftlint
@@ -14,6 +19,7 @@ setup_travis
   end
 
   lane :build_and_test do 
+    clean
     build_for_testing
     testing
     discord_notifier(
@@ -29,3 +35,18 @@ setup_travis
       ]
     )
   end
+
+  error do |lane, exception|
+    discord_notifier(
+      webhook_url: ENV['DISCORD_WEBHOOK_URL'],
+      title: "Tinkoff app",
+      description: "Fail build for testing and running tests :(",
+      image_url: ENV['DISCORD_IMAGE_URL'],
+      fields:[
+        {
+          name:"Created by:", 
+          value:"Anastasia Leonteva"
+        }
+      ]
+    )
+   end
