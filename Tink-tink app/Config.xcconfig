@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  Tink-tink app
+//
+//  Created by Анастасия Леонтьева on 08.12.2020.
+//  Copyright © 2020 lagarnas. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+API_KEY = 19096059-7cc78a27f3e51a7e4cf696f0d
+API_HOST = pixabay.com

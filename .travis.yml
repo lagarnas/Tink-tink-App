@@ -1,0 +1,13 @@
+language: swift
+osx_image: xcode12
+branches:
+  only:
+  - homework14
+before_install:
+  - gem install bundler
+install:
+  - bundle install
+  - bundle exec fastlane add_plugin discord
+  - bundle exec fastlane add_plugin discord_notifier
+script:
+  - bundle exec fastlane build_and_test

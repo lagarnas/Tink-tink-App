@@ -1,0 +1,67 @@
+setup_travis
+
+  lane :clean do
+    clear_derived_data
+  end
+
+  lane :build_for_testing do
+    cocoapods
+    swiftlint
+    scan(
+      build_for_testing: "true"
+    )
+  end
+
+  lane :testing do
+    scan(
+      test_without_building: "true"
+    )
+  end
+
+  lane :build_and_test do 
+    clean
+    build_for_testing
+    testing
+    discord_notifier(
+      webhook_url: ENV['DISCORD_WEBHOOK_URL'],
+      title: "Tinkoff app",
+      description: "Success build for testing and running tests",
+      image_url: ENV['DISCORD_IMAGE_URL'],
+      fields:[
+        {
+          name:"Created by:", 
+          value:"Anastasia Leonteva"
+        }
+      ]
+    )
+  end
+
+lane :discord_check do 
+  discord_notifier(
+    webhook_url: ENV['DISCORD_WEBHOOK_URL'],
+    title: "Tinkoff app",
+    description: "Success build for testing and running tests",
+    image_url: ENV['DISCORD_IMAGE_URL'],
+    fields:[
+      {
+        name:"Created by:", 
+        value:"Anastasia Leonteva"
+      }
+    ]
+  )
+end
+
+  error do |lane, exception|
+    discord_notifier(
+      webhook_url: ENV['DISCORD_WEBHOOK_URL'],
+      title: "Tinkoff app",
+      description: "Fail build for testing and running tests :(",
+      image_url: ENV['DISCORD_IMAGE_URL'],
+      fields:[
+        {
+          name:"Created by:", 
+          value:"Anastasia Leonteva"
+        }
+      ]
+    )
+   end

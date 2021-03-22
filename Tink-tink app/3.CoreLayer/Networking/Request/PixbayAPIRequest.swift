@@ -9,45 +9,45 @@
 import Foundation
 
 struct API {
-  static let scheme = "https"
-  static let host = "pixabay.com"
-  static let path = "/api/"
-  
-  static let apiKey = "19096059-7cc78a27f3e51a7e4cf696f0d"
-  
-  enum QueryItemName: String {
-    case imageType = "image_type"
-    case q = "q"
-    case key = "key"
-    case perPage = "per_page"
-  }
+    static let scheme = "https"
+    static let host = Bundle.main.object(forInfoDictionaryKey: "API_HOST") as? String
+    static let path = "/api/"
+    
+    static let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
+    
+    enum QueryItemName: String {
+        case imageType = "image_type"
+        case q = "q"
+        case key = "key"
+        case perPage = "per_page"
+    }
 }
 
 protocol IPixbayAPIRequest {
-  var urlRequest: URLRequest? { get }
+    var urlRequest: URLRequest? { get }
 }
 
 class PixbayAPIRequest: IPixbayAPIRequest {
-  
-  var urlRequest: URLRequest? {
-    let url = urlPath([URLQueryItem(name: API.QueryItemName.q.rawValue,
-                                    value: "yellow+flowers"),
-                       URLQueryItem(name: API.QueryItemName.imageType.rawValue,
-                                    value: "photo"),
-                       URLQueryItem(name: API.QueryItemName.perPage.rawValue,
-                                    value: "100")])
-    guard let urlPath = url else { return nil }
-    return URLRequest(url: urlPath)
     
-  }
-  
-  private func urlPath( _ queryItems: [URLQueryItem]) -> URL? {
-    var urlComponents = URLComponents()
-    urlComponents.scheme = API.scheme
-    urlComponents.host = API.host
-    urlComponents.path = API.path
-    urlComponents.queryItems = queryItems + [URLQueryItem(name: API.QueryItemName.key.rawValue, value: API.apiKey)]
+    var urlRequest: URLRequest? {
+        let url = urlPath([URLQueryItem(name: API.QueryItemName.q.rawValue,
+                                        value: "yellow+flowers"),
+                           URLQueryItem(name: API.QueryItemName.imageType.rawValue,
+                                        value: "photo"),
+                           URLQueryItem(name: API.QueryItemName.perPage.rawValue,
+                                        value: "100")])
+        guard let urlPath = url else { return nil }
+        return URLRequest(url: urlPath)
+        
+    }
     
-    return urlComponents.url
-  }
+    private func urlPath( _ queryItems: [URLQueryItem]) -> URL? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = API.scheme
+        urlComponents.host = API.host
+        urlComponents.path = API.path
+        urlComponents.queryItems = queryItems + [URLQueryItem(name: API.QueryItemName.key.rawValue, value: API.apiKey)]
+        
+        return urlComponents.url
+    }
 }
