@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: Themable protocol
 protocol Themable {
   var accent: UIColor { get }
   var tintColor: UIColor { get }
@@ -20,6 +21,7 @@ protocol Themable {
   var outgoingMessageColor: UIColor { get }
 }
 
+// MARK: ClassicTheme
 struct ClassicTheme: Themable {
   var onlineIndicator: UIColor = .systemGreen
   var tintColor: UIColor = .black
@@ -32,6 +34,7 @@ struct ClassicTheme: Themable {
   var minorTextColor: UIColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.601375214)
 }
 
+// MARK: DayTheme
 struct DayTheme: Themable {
   var onlineIndicator: UIColor = #colorLiteral(red: 0.262745098, green: 0.537254902, blue: 0.9764705882, alpha: 1)
   var tintColor: UIColor = .systemBlue
@@ -44,6 +47,7 @@ struct DayTheme: Themable {
   var minorTextColor: UIColor = #colorLiteral(red: 0.2352941176, green: 0.2352941176, blue: 0.262745098, alpha: 0.601375214)
 }
 
+// MARK: NightTheme
 struct NightTheme: Themable {
   var tintColor: UIColor = .white
   var onlineIndicator: UIColor = .systemGreen

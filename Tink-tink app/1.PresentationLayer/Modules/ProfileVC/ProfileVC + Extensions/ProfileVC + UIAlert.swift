@@ -9,7 +9,7 @@
 import UIKit
 
 extension ProfileViewController {
-  
+  // MARK: Public Methods
   func alertError(title: String, message: String, style: UIAlertController.Style) {
     let alertController = UIAlertController(title: title,
                                             message: message,

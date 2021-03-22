@@ -10,7 +10,12 @@ target 'Tink-tink app' do
 pod 'Firebase/Firestore'
 pod 'SwiftLint'
 
+target 'TinkTinkUnitTests' do
+      inherit! :search_paths
+      pod 'Firebase'
+    end
 end
+
 
 
 post_install do |installer|

@@ -9,18 +9,16 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
-  
+  // MARK: IBOutlets
   @IBOutlet weak var imageView: UIImageView!
   
-  override class func awakeFromNib() {
-    super.awakeFromNib()
-  }
-  
+  // MARK: Lifecycle
   override func prepareForReuse() {
     super.prepareForReuse()
-    
+    setupPlaceholder()
   }
   
+  // MARK: Public Methods
   func configure(galleryDisplayModel: GalleryDisplayModel?) {
     
     guard let galleryDisplayModel = galleryDisplayModel
@@ -33,6 +31,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     deletePlaceholder()
   }
   
+  // MARK: Private Methods
   private func setupPlaceholder() {
     imageView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
     imageView.contentMode = .center

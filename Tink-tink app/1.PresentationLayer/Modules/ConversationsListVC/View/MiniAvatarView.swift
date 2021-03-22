@@ -9,7 +9,7 @@
 import UIKit
 
 class MiniAvatarView: AvatarView {
-  
+  // MARK: Public properties
   var miniNameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 14.0)
@@ -30,13 +30,16 @@ class MiniAvatarView: AvatarView {
     return imageView
   }()
   
+  // MARK: Lifecycle
   override func layoutSubviews() {
+    isAccessibilityElement = true
     addSubview(miniImageView)
     addSubview(miniNameLabel)
     addSubview(miniSecondNameLabel)
     setupConstraints()
   }
   
+  // MARK: Override methods
   override func hideInitials() {
     miniNameLabel.isHidden = true
     miniSecondNameLabel.isHidden = true

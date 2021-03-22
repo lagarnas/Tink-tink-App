@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 final class AvatarImageView: UIImageView {
-  
+  // MARK: Lifecycle
   override func layoutSubviews() {
       super.layoutSubviews()
     self.backgroundColor = #colorLiteral(red: 0.8941176471, green: 0.9098039216, blue: 0.168627451, alpha: 1)

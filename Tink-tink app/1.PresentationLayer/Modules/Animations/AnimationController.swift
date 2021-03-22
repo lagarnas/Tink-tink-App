@@ -10,21 +10,24 @@ import UIKit
 
 class AnimationController: NSObject {
   
-  private let animationDuration: Double
-  private let animationType: AnimationType
-
+  // MARK: Public properties
   enum AnimationType {
     case present
     case dismiss
   }
+  
+  // MARK: Private properties
+  private let animationDuration: Double
+  private let animationType: AnimationType
       
-  // MARK: - Init
+  // MARK: - Initializers
   init(animationDuration: Double, animationType: AnimationType) {
     self.animationDuration = animationDuration
     self.animationType = animationType
   }
 }
 
+// MARK: - UIViewControllerAnimatedTransitioning
 extension AnimationController: UIViewControllerAnimatedTransitioning {
   
   func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -62,12 +65,12 @@ extension AnimationController: UIViewControllerAnimatedTransitioning {
                             options: .calculationModeLinear) {
       
       UIView.addKeyframe(withRelativeStartTime: 0,
-                         relativeDuration: 0.5) {
+                         relativeDuration: 0.2) {
         viewToAnimate.transform = scaleDown
       }
                                       
       UIView.addKeyframe(withRelativeStartTime: 2.0 / duration,
-                         relativeDuration: 1.0) {
+                         relativeDuration: 0.2) {
         viewToAnimate.transform = scaleDown.concatenating(moveOut)
         viewToAnimate.alpha = 0
         

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// MARK: IPresentationAssembly protocol
 protocol IPresentationAssembly {
   
   func entryPoint() -> UINavigationController
@@ -20,8 +21,10 @@ protocol IPresentationAssembly {
 
 class PresentationAssembly: IPresentationAssembly {
   
+  // MARK: Public properties
   let serviceAssembly: IServiceAssembly
   
+  // MARK: Initializers
   init(serviceAssembly: IServiceAssembly) {
     self.serviceAssembly = serviceAssembly
   }

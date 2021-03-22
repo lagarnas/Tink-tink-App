@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
+// MARK: NSFetchedResultsControllerDelegate
 extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

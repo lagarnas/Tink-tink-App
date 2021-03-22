@@ -10,6 +10,7 @@ import UIKit
 
 class AvatarView: UIView {
   
+  // MARK: Public properties
   let nameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 100.0)
@@ -29,11 +30,7 @@ class AvatarView: UIView {
     return imageView
   }()
   
-  func hideInitials() {
-    nameLabel.isHidden = true
-    secondNameLabel.isHidden = true
-  }
-  
+  // MARK: Lifecycle
   override func layoutSubviews() {
     addSubview(imageView)
     addSubview(nameLabel)
@@ -42,8 +39,13 @@ class AvatarView: UIView {
     setupConstraints()
   }
   
+  // MARK: Public Methods
+  func hideInitials() {
+    nameLabel.isHidden = true
+    secondNameLabel.isHidden = true
+  }
+  
   func setupConstraints() {
-
     imageView.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     secondNameLabel.translatesAutoresizingMaskIntoConstraints = false

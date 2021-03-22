@@ -14,16 +14,17 @@ protocol ConfigurableView {
 }
 
 final class ConversationTableViewCell: UITableViewCell {
-  
+  // MARK: IBOutlets
   @IBOutlet private weak var avatarView: MiniAvatarView!
   @IBOutlet private weak var nameLabel: UILabel!
   @IBOutlet private weak var previewMessageLabel: UILabel!
   @IBOutlet private weak var dateLabel: UILabel!
   @IBOutlet private weak var onlineIndicatorView: UIView!
   @IBOutlet weak var forwardIcon: UIImageView!
-  
+  // MARK: Public properties
   var themeModel: IThemeModel?
   
+  // MARK: Lifecycle
   override func prepareForReuse() {
     super.prepareForReuse()
     self.backgroundColor = .clear
@@ -37,7 +38,7 @@ final class ConversationTableViewCell: UITableViewCell {
     setupOnlineIndicator()
     updateTheme()
   }
-  
+  // MARK: Private Methods
   private func updateTheme() {
     nameLabel.textColor = themeModel?.current.mainTextColor
     previewMessageLabel.textColor = themeModel?.current.minorTextColor
@@ -46,7 +47,6 @@ final class ConversationTableViewCell: UITableViewCell {
     onlineIndicatorView.backgroundColor = themeModel?.current.onlineIndicator
   }
   
-  // MARK: Functions
   private func setupOnlineIndicator() {
     onlineIndicatorView.clipsToBounds = true
     onlineIndicatorView.layer.cornerRadius = onlineIndicatorView.frame.width / 2
@@ -69,7 +69,7 @@ final class ConversationTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView Protocol
 extension ConversationTableViewCell: ConfigurableView {
   typealias ConfigurtionModel = Channel_db
-  
+  // MARK: Public Methods
   func configure(model: Channel_db) {
     previewMessageLabel.text = model.lastMessage
     previewMessageLabel.font = model.lastMessage == "" ? UIFont.italicSystemFont(ofSize: 13) : UIFont.systemFont(ofSize: 13)

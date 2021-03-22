@@ -9,50 +9,54 @@
 import Foundation
 import UIKit
 
+// MARK: GalleryDisplayModel
 struct GalleryDisplayModel {
   let urlImageData: Data
 }
 
+// MARK: IGalleryModel protocol
 protocol IGalleryModel {
   var cellsCount: Int { get }
   var currentCount: Int { get }
-  
   var galleryOfImages: [GalleryDisplayModel] { get set }
   var delegate: IGalleryModelDelegate? { get set }
   
   func fetchGallery()
 }
 
+// MARK: IGalleryModelDelegate protocol
 protocol IGalleryModelDelegate: class {
   func onFetchCompleted(_ galleryModel: GalleryModel)
   func onFetchFailed(error: Error)
 }
 
 class GalleryModel: IGalleryModel {
-
+  
+  // MARK: Public properties
   var galleryOfImages = [GalleryDisplayModel]()
-  
-  weak var delegate: IGalleryModelDelegate?
   let loaderImagesService: ILoaderImagesService
-  
-  init(loaderImagesService: ILoaderImagesService) {
-    self.loaderImagesService = loaderImagesService
-  }
+  weak var delegate: IGalleryModelDelegate?
   
   var currentCount: Int {
-      galleryOfImages.count
+    galleryOfImages.count
   }
   
   var cellsCount: Int {
     100
   }
   
+  // MARK: Initializers
+  init(loaderImagesService: ILoaderImagesService) {
+    self.loaderImagesService = loaderImagesService
+  }
+  
+  // MARK: Public Methods
   func fetchGallery() {
     loaderImagesService.loadImages { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success(let response):
-        self.galleryOfImages.append(contentsOf: response.hits.getGallery())
+        self.galleryOfImages.append(contentsOf: response.getGallery())
         DispatchQueue.main.async {
           self.delegate?.onFetchCompleted(self)
         }
@@ -61,12 +65,12 @@ class GalleryModel: IGalleryModel {
         DispatchQueue.main.async {
           self.delegate?.onFetchFailed(error: error)
         }
-        
       }
     }
   }
 }
 
+// MARK: Extension Array
 extension Array where Element == Hit {
   func getGallery() -> [GalleryDisplayModel] {
     var data = Data()

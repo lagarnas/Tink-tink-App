@@ -11,25 +11,25 @@ import os.log
 import CoreData
 
 final class ConversationsListViewController: UIViewController {
-  
+  // MARK: IBOutlets
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var avatarView: MiniAvatarView!
   @IBOutlet weak var settingsIcon: UIBarButtonItem!
-  private var searchController = UISearchController(searchResultsController: nil)
-  
   @IBOutlet weak var emblemView: EmblemParticleView!
   
-  //DEPENDENCY
-  private var presentationAssembly: IPresentationAssembly!
+  // MARK: Public properties
   var model: IConversationsListModel!
   var themeModel: IThemeModel!
-  
-  // MARK: - FetchedResultsController
   var fetchedResultsController: NSFetchedResultsController<Channel_db>!
   
-  // MARK: - Lifecycle of VC
+  // MARK: Private properties
+  private var searchController = UISearchController(searchResultsController: nil)
+  private var presentationAssembly: IPresentationAssembly!
+  
+  // MARK: Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    avatarView.accessibilityIdentifier = "avatar"
     setupTableView()
     setupSearchController()
     loadChannels()
@@ -46,7 +46,8 @@ final class ConversationsListViewController: UIViewController {
     print(#function)
     emblemView.stopAnimation()
   }
-    
+  
+  // MARK: Public Methods
   func setupDepenencies(model: IConversationsListModel, themeModel: IThemeModel?, presentationAssembly: IPresentationAssembly?) {
     self.model = model
     self.themeModel = themeModel
@@ -62,7 +63,7 @@ final class ConversationsListViewController: UIViewController {
     self.fetchedResultsController.delegate = self
   }
   
-  // MARK: - @IBActions
+  // MARK: IBActions
   @IBAction private func addChannelButtonTapped(_ sender: Any) {
     showChannelAlert()
   }
@@ -82,7 +83,7 @@ final class ConversationsListViewController: UIViewController {
   }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: UITableViewDelegate, UITableViewDataSource
 extension ConversationsListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,7 +128,7 @@ extension ConversationsListViewController: UITableViewDelegate, UITableViewDataS
   }
 }
 
-// MARK: - Functions
+// MARK: Private Methods
 extension ConversationsListViewController {
   
   @objc
@@ -180,6 +181,7 @@ extension ConversationsListViewController {
   }
 }
 
+// MARK: UIViewControllerTransitioningDelegate
 extension ConversationsListViewController: UIViewControllerTransitioningDelegate {
   
   func animationController(forPresented presented: UIViewController,

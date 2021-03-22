@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MyWindow: UIWindow {
-  
+  // MARK: Public properties
   var didStartAnimate: ((_ point: CGPoint) -> Void)?
   var didStopAnimate: (() -> Void)?
       
@@ -33,8 +33,7 @@ class MyWindow: UIWindow {
 }
 
 class EmblemParticleView: UIView {
-  
-  // main emitter layer
+  // MARK: CAEmitterLayer
   var emitter: CAEmitterLayer!
   
   override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -52,6 +51,7 @@ class EmblemParticleView: UIView {
         return view
   }
     
+  // MARK: Lifecycle
   override func layoutSubviews() {
     super.layoutSubviews()
     emitter = CAEmitterLayer()
@@ -62,18 +62,12 @@ class EmblemParticleView: UIView {
     layer.addSublayer(emitter)
   }
   
-  func startAnimation(point: CGPoint) {
-      self.emitter.emitterPosition = point
-      self.emitter.beginTime = CACurrentMediaTime()
-      self.emitter.emitterCells = [self.makeEmblemCell()]
-  }
-  
+  // MARK: Public Methods
   func startAnimation() {
     let window = self.window as? MyWindow
     window?.didStartAnimate = { [weak self] in
       guard let self = self else {
         return
-        
       }
       self.emitter.emitterPosition = $0
       self.emitter.beginTime = CACurrentMediaTime()
@@ -81,7 +75,24 @@ class EmblemParticleView: UIView {
     }
   }
   
-  func makeEmblemCell() -> CAEmitterCell {
+  func stopAnimation() {
+    let window = self.window as? MyWindow
+    window?.didStopAnimate = { [weak self] in
+      self?.emitter?.birthRate = 0
+      self?.emitter?.removeFromSuperlayer()
+    }
+    self.emitter?.birthRate = 0
+    self.emitter?.removeFromSuperlayer()
+  }
+  
+  // MARK: Private Methods
+  private func startAnimation(point: CGPoint) {
+      self.emitter.emitterPosition = point
+      self.emitter.beginTime = CACurrentMediaTime()
+      self.emitter.emitterCells = [self.makeEmblemCell()]
+  }
+  
+  private func makeEmblemCell() -> CAEmitterCell {
     let cell = CAEmitterCell()
     cell.contents = UIImage(named: "emblem")?.cgImage
     cell.scale = 0.03
@@ -99,16 +110,7 @@ class EmblemParticleView: UIView {
     return cell
   }
   
-  func stopAnimation() {
-    let window = self.window as? MyWindow
-    window?.didStopAnimate = { [weak self] in
-      self?.emitter?.birthRate = 0
-      self?.emitter?.removeFromSuperlayer()
-    }
-    self.emitter?.birthRate = 0
-    self.emitter?.removeFromSuperlayer()
-  }
-  
+  // MARK: Deinit
   deinit {
     emitter?.removeFromSuperlayer()
   }
